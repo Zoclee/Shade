@@ -4,7 +4,7 @@
 
 ## About
 
-SPIR-V is a platform-independent intermediate language, designed by [Khronos](http://www.khronos.org), for representing graphical-shader stages and compute kernels for multiple APIs. The full [SPIR-V specification](http://www.khronos.org/registry/spir-v/) is available for download from the [Khronos](http://www.khronos.org) website.
+[SPIR-V](http://www.khronos.org/registry/spir-v/) is a platform-independent intermediate language, designed by [Khronos](http://www.khronos.org), for representing graphical-shader stages and compute kernels for multiple APIs. The full [SPIR-V](http://www.khronos.org/registry/spir-v/) specification is available for download from the [Khronos](http://www.khronos.org) website.
 
 The primary goal of [{Zoclee}™ Shade](http://www.zoclee.com/shade), is to provide a convenient platform for testing and debugging SPIR-V binaries. Please note however that [{Zoclee}™ Shade](http://www.zoclee.com/shade) is currently work in progress.
 
@@ -18,4 +18,4 @@ Not yet available
 
 ## License
 
-{Zoclee}™ Shade is released under the Apache Version 2.0 license. Please see the LICENSE file for more information about the licensing.
+[{Zoclee}™ Shade](http://www.zoclee.com/shade) is released under the Apache Version 2.0 license. Please see the LICENSE file for more information about the licensing.
