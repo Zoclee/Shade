@@ -4,11 +4,13 @@
 
 ## About
 
-SPIR-V is a platform-independent intermediate language specification, published by Khronos, for representing graphical-shader stages and compute kernels for multiple APIs.
+SPIR-V is a platform-independent intermediate language specification, published by Khronos, for representing graphical-shader stages and compute kernels for multiple APIs. The full SPIR-V specification is available for download from the [Khronos](http://www.khronos.org/registry/spir-v/) website.
 
-The primary goal {Zoclee}™ Shade, is to provide a convenient platform for testing and debugging SPIR-V binaries. {Zoclee}™ Shade is currently work in progress.
+The primary goal {Zoclee}™ Shade, is to provide a convenient platform for testing and debugging SPIR-V binaries.
 
-The full SPIR-V specification is available for download from the [Khronos website](www.khronos.org/registry/spir-v/).
+Please not that {Zoclee}™ Shade is currently work in progress.
+
+
 
 ## Install
 
