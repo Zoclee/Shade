@@ -1,5 +1,4 @@
 # {Zoclee}™ Shade
-...taking vectors to colours your way.
 
 [{Zoclee}™ Shade](http://www.zoclee.com/shade) is a virtual machine used for the testing and debugging of SPIR-V binaries. 
 
