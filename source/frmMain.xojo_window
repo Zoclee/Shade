@@ -57,56 +57,6 @@ Begin Window frmMain
       Visible         =   True
       Width           =   80
    End
-   Begin Listbox lstErrors
-      AutoDeactivate  =   True
-      AutoHideScrollbars=   True
-      Bold            =   False
-      Border          =   True
-      ColumnCount     =   1
-      ColumnsResizable=   False
-      ColumnWidths    =   ""
-      DataField       =   ""
-      DataSource      =   ""
-      DefaultRowHeight=   -1
-      Enabled         =   True
-      EnableDrag      =   False
-      EnableDragReorder=   False
-      GridLinesHorizontal=   0
-      GridLinesVertical=   0
-      HasHeading      =   False
-      HeadingIndex    =   -1
-      Height          =   102
-      HelpTag         =   ""
-      Hierarchical    =   False
-      Index           =   -2147483648
-      InitialParent   =   ""
-      InitialValue    =   ""
-      Italic          =   False
-      Left            =   20
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   True
-      LockTop         =   False
-      RequiresSelection=   False
-      Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollBarVertical=   True
-      SelectionType   =   0
-      TabIndex        =   1
-      TabPanelIndex   =   0
-      TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   278
-      Underline       =   False
-      UseFocusRing    =   True
-      Visible         =   True
-      Width           =   560
-      _ScrollOffset   =   0
-      _ScrollWidth    =   -1
-   End
    Begin Listbox lstInfo
       AutoDeactivate  =   True
       AutoHideScrollbars=   True
@@ -157,6 +107,56 @@ Begin Window frmMain
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
+   Begin Listbox lstErrors
+      AutoDeactivate  =   True
+      AutoHideScrollbars=   True
+      Bold            =   False
+      Border          =   True
+      ColumnCount     =   1
+      ColumnsResizable=   False
+      ColumnWidths    =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      DefaultRowHeight=   -1
+      Enabled         =   True
+      EnableDrag      =   False
+      EnableDragReorder=   False
+      GridLinesHorizontal=   0
+      GridLinesVertical=   0
+      HasHeading      =   False
+      HeadingIndex    =   -1
+      Height          =   102
+      HelpTag         =   ""
+      Hierarchical    =   False
+      Index           =   -2147483648
+      InitialParent   =   ""
+      InitialValue    =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   False
+      RequiresSelection=   False
+      Scope           =   0
+      ScrollbarHorizontal=   False
+      ScrollBarVertical=   True
+      SelectionType   =   0
+      TabIndex        =   1
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   278
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   560
+      _ScrollOffset   =   0
+      _ScrollWidth    =   -1
+   End
 End
 #tag EndWindow
 
@@ -173,63 +173,96 @@ End
 #tag Events cmdOpen
 	#tag Event
 		Sub Action()
+		  Dim f As FolderItem
+		  Dim dlg As new OpenDialog
 		  Dim m As MemoryBlock
 		  Dim i As Integer
+		  Dim readStream As BinaryStream
+		  Dim allType As New FileType
+		  Dim spirvType As New FileType
 		  
-		  lstErrors.DeleteAllRows
-		  lstInfo.DeleteAllRows
+		  // configure file types
 		  
-		  m = SPIRVTestModule1()
+		  allType.Name = "All files"
+		  allType.Extensions = ".*"
 		  
-		  App.VM.LoadModule(m)
+		  spirvType.Name = "SPIR-V Binary Modules"
+		  spirvType.MacType = "SPIRV"
+		  spirvType.MacCreator = "spirv"
+		  spirvType.Extensions = ".spirv"
 		  
-		  // display errors
+		  dlg.Filter = spirvType + allType
 		  
-		  if App.VM.Errors.Ubound >= 0 then
-		    i = 0
-		    while i <= App.VM.Errors.Ubound
-		      lstErrors.AddRow App.VM.Errors(i)
-		      i = i + 1
-		    wend
+		  ' select file
+		  
+		  f = dlg.ShowModal()
+		  
+		  if f <> nil then
+		    
+		    lstErrors.DeleteAllRows
+		    lstInfo.DeleteAllRows
+		    
+		    ' read file into memoryblock
+		    
+		    readStream = BinaryStream.Open(f)
+		    readStream.LittleEndian = True
+		    
+		    m = new MemoryBlock(f.Length)
+		    m = readStream.Read(f.Length)
+		    
+		    readStream.Close
+		    
+		    App.VM.LoadModule(m)
+		    
+		    // display errors
+		    
+		    if App.VM.Errors.Ubound >= 0 then
+		      i = 0
+		      while i <= App.VM.Errors.Ubound
+		        lstErrors.AddRow App.VM.Errors(i)
+		        i = i + 1
+		      wend
+		    end if
+		    
+		    // display info
+		    
+		    lstInfo.AddRow "SPIR-V Version Number"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Version)
+		    
+		    lstInfo.AddRow "Generator Magic Number"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.GeneratorMagicNumber)
+		    
+		    lstInfo.AddRow "Bound"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Bound)
+		    
+		    lstInfo.AddRow "Opcodes"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.OpcodeCount)
+		    
+		    lstInfo.AddRow "Source Language"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeSourceLanguage(App.VM.SourceLanguage)
+		    
+		    lstInfo.AddRow "Source Version"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.SourceVersion)
+		    
+		    lstInfo.AddRow "Entry Points"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.EntryPoints.Ubound + 1)
+		    
+		    lstInfo.AddRow "Addressing Model"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeAddressingModel(App.VM.AddressingModel)
+		    
+		    lstInfo.AddRow "Memory Model"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeMemoryModel(App.VM.MemoryModel)
+		    
+		    lstInfo.AddRow "Names"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Names.Keys.Ubound + 1)
+		    
+		    lstInfo.AddRow "Decorations"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Decorations.Ubound + 1)
+		    
+		    lstInfo.AddRow "Types"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Types.Keys.Ubound + 1)
+		    
 		  end if
-		  
-		  // display info
-		  
-		  lstInfo.AddRow "SPIR-V Version Number"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Version)
-		  
-		  lstInfo.AddRow "Generator Magic Number"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.GeneratorMagicNumber)
-		  
-		  lstInfo.AddRow "Bound"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Bound)
-		  
-		  lstInfo.AddRow "Opcodes"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.OpcodeCount)
-		  
-		  lstInfo.AddRow "Source Language"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeSourceLanguage(App.VM.SourceLanguage)
-		  
-		  lstInfo.AddRow "Source Version"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.SourceVersion)
-		  
-		  lstInfo.AddRow "Entry Points"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.EntryPoints.Ubound + 1)
-		  
-		  lstInfo.AddRow "Addressing Model"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeAddressingModel(App.VM.AddressingModel)
-		  
-		  lstInfo.AddRow "Memory Model"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeMemoryModel(App.VM.MemoryModel)
-		  
-		  lstInfo.AddRow "Names"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Names.Keys.Ubound + 1)
-		  
-		  lstInfo.AddRow "Decorations"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Decorations.Ubound + 1)
-		  
-		  lstInfo.AddRow "Types"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Types.Keys.Ubound + 1)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

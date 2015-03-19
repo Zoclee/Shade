@@ -27,7 +27,6 @@ Protected Class SPIRVVirtualMachine
 		Sub LoadModule(m As MemoryBlock)
 		  Dim ip As UInt32
 		  Dim moduleUB As Integer
-		  Dim tmpUInt32 As UInt32
 		  Dim tempIP As UInt32
 		  Dim upperBound As UInt32
 		  Dim ep As ZocleeShade.SPIRVEntryPoint
