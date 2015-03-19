@@ -79,9 +79,7 @@ Protected Module ZocleeShade
 		  ' 10 All type declarations, constant instructions and global variable declarations
 		  ' 11 All function definitions using OpFunction or OpFunctionParameter, ending with OpFunctionEnd
 		  
-		  Dim bin As new MemoryBlock(604)
-		  
-		  bin = new MemoryBlock(604)
+		  Dim bin As new MemoryBlock(716)
 		  
 		  bin.UInt32Value(0) = &h07230203 ' magic number
 		  bin.UInt32Value(4) = 99 ' version number (99 = pre-relase, 100 = first public version)
@@ -246,7 +244,7 @@ Protected Module ZocleeShade
 		  bin.UInt16Value(388) = 20 ' OpTypePointer
 		  bin.UInt16Value(390) = 4 ' Word Count
 		  bin.UInt32Value(392) = 3 ' result id
-		  bin.UInt32Value(396) = 0 ' storage class = UniformConstant
+		  bin.UInt32Value(396) = 0 ' storage class
 		  bin.UInt32Value(400) = 2 ' type id
 		  
 		  ' 5: TypeVoid
@@ -265,7 +263,7 @@ Protected Module ZocleeShade
 		  bin.UInt16Value(428) = 20 ' OpTypePointer
 		  bin.UInt16Value(430) = 4 ' Word Count
 		  bin.UInt32Value(432) = 7 ' result id
-		  bin.UInt32Value(436) = 4 ' storage class = WorkgroupLocal
+		  bin.UInt32Value(436) = 4 ' storage class
 		  bin.UInt32Value(440) = 6 ' type id
 		  
 		  ' 8: TypeFunction 5 7(ptr) 7(ptr) 7(ptr)
@@ -273,16 +271,16 @@ Protected Module ZocleeShade
 		  bin.UInt16Value(446) = 3 + 3 ' Count
 		  bin.UInt32Value(448) = 8 ' result id
 		  bin.UInt32Value(452) = 5 ' return type id
-		  bin.UInt32Value(456) = 7 ' parameter 0 type = ptr
-		  bin.UInt32Value(460) = 7 ' parameter 1 type = ptr
-		  bin.UInt32Value(464) = 7 ' parameter 2 type = ptr
+		  bin.UInt32Value(456) = 7 ' parameter 0 type 
+		  bin.UInt32Value(460) = 7 ' parameter 1 type 
+		  bin.UInt32Value(464) = 7 ' parameter 2 type 
 		  
 		  ' 4(LocalInvocationId): 3(ptr) Variable UniformConstant
 		  bin.UInt16Value(468) = 38 ' OpVariable
 		  bin.UInt16Value(470) = 4 + 0 ' Word Count
-		  bin.UInt32Value(472) = 3 ' result type id = ptr
+		  bin.UInt32Value(472) = 3 ' result type id
 		  bin.UInt32Value(476) = 4 ' result id
-		  bin.UInt16Value(480) = 0 ' storage class = UniformConstant
+		  bin.UInt16Value(480) = 0 ' storage class
 		  
 		  ' 9(add): 5 Function NoControl 8
 		  bin.UInt16Value(484) = 40 ' OpFunction
@@ -339,13 +337,56 @@ Protected Module ZocleeShade
 		  bin.UInt32Value(600) = 15 ' index id
 		  
 		  ' 17: 6(int) Load 16(arrayidx)
+		  bin.UInt16Value(604) = 46 ' OpLoad
+		  bin.UInt16Value(606) = 4 + 0 ' Word Count
+		  bin.UInt32Value(608) = 6 ' result type id
+		  bin.UInt32Value(612) = 17 ' result id
+		  bin.UInt32Value(616) = 16 ' pointer id
+		  
 		  ' 18(arrayidx1): 7(ptr) InBoundsAccessChain 11(in2) 15(call)
+		  bin.UInt16Value(620) = 94 ' OpInBoundsAccessChain
+		  bin.UInt16Value(622) = 4 + 1 ' Word Count
+		  bin.UInt32Value(624) = 7 ' result type id
+		  bin.UInt32Value(628) = 18 ' result id
+		  bin.UInt32Value(632) = 11 ' base id
+		  bin.UInt32Value(636) = 15 ' index id
+		  
 		  ' 19: 6(int) Load 18(arrayidx1)
+		  bin.UInt16Value(640) = 46 ' OpLoad
+		  bin.UInt16Value(642) = 4 + 0 ' Word Count
+		  bin.UInt32Value(644) = 6 ' result type id
+		  bin.UInt32Value(648) = 19 ' result id
+		  bin.UInt32Value(652) = 18 ' pointer id
+		  
 		  ' 20(add): 6(int) IAdd 19 17
+		  bin.UInt16Value(656) = 122 ' OpIAdd
+		  bin.UInt16Value(658) = 5 ' Word Count
+		  bin.UInt32Value(660) = 6 ' result type id
+		  bin.UInt32Value(664) = 20 ' result id
+		  bin.UInt32Value(668) = 19 ' operand id 1
+		  bin.UInt32Value(672) = 17 ' operand id 2
+		  
 		  ' 21(arrayidx2): 7(ptr) InBoundsAccessChain 12(out) 15(call)
-		  ' Store 22 21(arrayidx2) 20
+		  bin.UInt16Value(676) = 94 ' OpInBoundsAccessChain
+		  bin.UInt16Value(678) = 4 + 1 ' Word Count
+		  bin.UInt32Value(682) = 7 ' result type id
+		  bin.UInt32Value(684) = 21 ' result id
+		  bin.UInt32Value(688) = 12 ' base id
+		  bin.UInt32Value(692) = 15 ' index id
+		  
+		  ' Store 22 21(arrayidx2) 20 ???? <<< CHECK THIS OPCODE
+		  bin.UInt16Value(696) = 47 ' OpStore
+		  bin.UInt16Value(698) = 3 + 0 ' Word Count
+		  bin.UInt32Value(700) = 22 ' pointer id
+		  bin.UInt32Value(704) = 21 ' object id
+		  
 		  ' Return
+		  bin.UInt16Value(708) = 213 ' OpReturn
+		  bin.UInt16Value(710) = 1 ' Word Count
+		  
 		  ' FunctionEnd
+		  bin.UInt16Value(712) = 42 ' OpFunctionEnd
+		  bin.UInt16Value(714) = 1 ' Word Count
 		  
 		  return bin
 		  

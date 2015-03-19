@@ -207,9 +207,6 @@ End
 		  lstInfo.AddRow "Opcodes"
 		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.OpcodeCount)
 		  
-		  lstInfo.AddRow "Unknown Opcodes"
-		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.UnknownOpcodes)
-		  
 		  lstInfo.AddRow "Source Language"
 		  lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeSourceLanguage(App.VM.SourceLanguage)
 		  

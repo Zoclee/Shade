@@ -137,7 +137,7 @@ Protected Class SPIRVVirtualMachine
 		        case 54 // ***** OpName ***************************************************
 		          Names.Value(m.UInt32Value(ip + 4)) = m.CString(ip + 8)
 		          if (m.UInt32Value(ip + 4) >= Bound) then
-		            Errors.Append ("[" + Str(ip + 2) + "] ERROR: Target ID out of bounds.")
+		            Errors.Append ("ERROR [" + Str(ip + 2) + "]: Target ID out of bounds.")
 		          end if
 		          
 		        case else
@@ -148,13 +148,17 @@ Protected Class SPIRVVirtualMachine
 		        mOpcodeCount = mOpcodeCount + 1
 		        
 		        if m.UInt16Value(ip + 2) = 0 then
-		          Errors.Append ("[" + Str(ip + 2) + "] ERROR: Invalid zero word count.")
+		          Errors.Append ("ERROR [" + Str(ip + 2) + "]: Word count of zero.")
 		          ip = moduleUB + 1
 		        else
 		          ip = ip + (m.UInt16Value(ip + 2) * 4)
 		        end if
 		        
 		      wend
+		      
+		      if UnknownOpcodes > 0 then
+		        Errors.Append "ERROR: " + Str(UnknownOpcodes) + " unknown opcodes."
+		      end if
 		      
 		    end if
 		    
