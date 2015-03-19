@@ -271,9 +271,9 @@ Protected Module ZocleeShade
 		  bin.UInt16Value(446) = 3 + 3 ' Count
 		  bin.UInt32Value(448) = 8 ' result id
 		  bin.UInt32Value(452) = 5 ' return type id
-		  bin.UInt32Value(456) = 7 ' parameter 0 type 
-		  bin.UInt32Value(460) = 7 ' parameter 1 type 
-		  bin.UInt32Value(464) = 7 ' parameter 2 type 
+		  bin.UInt32Value(456) = 7 ' parameter 0 type
+		  bin.UInt32Value(460) = 7 ' parameter 1 type
+		  bin.UInt32Value(464) = 7 ' parameter 2 type
 		  
 		  ' 4(LocalInvocationId): 3(ptr) Variable UniformConstant
 		  bin.UInt16Value(468) = 38 ' OpVariable
@@ -387,6 +387,12 @@ Protected Module ZocleeShade
 		  ' FunctionEnd
 		  bin.UInt16Value(712) = 42 ' OpFunctionEnd
 		  bin.UInt16Value(714) = 1 ' Word Count
+		  
+		  Dim f As FolderItem = App.ExecutableFile.Parent.Child("test_001.spirv")
+		  Dim stream As BinaryStream
+		  stream = BinaryStream.Create(f, True) // Overwrite if exists
+		  stream.Write bin
+		  stream.Close
 		  
 		  return bin
 		  
