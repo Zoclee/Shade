@@ -16,7 +16,7 @@ Begin Window frmMain
    MaxHeight       =   32000
    MaximizeButton  =   True
    MaxWidth        =   32000
-   MenuBar         =   1232599039
+   MenuBar         =   1556432895
    MenuBarVisible  =   True
    MinHeight       =   400
    MinimizeButton  =   True
@@ -26,37 +26,6 @@ Begin Window frmMain
    Title           =   "{Zoclee}™ Shade"
    Visible         =   True
    Width           =   600
-   Begin PushButton cmdOpen
-      AutoDeactivate  =   True
-      Bold            =   False
-      ButtonStyle     =   "0"
-      Cancel          =   False
-      Caption         =   "Open"
-      Default         =   False
-      Enabled         =   True
-      Height          =   22
-      HelpTag         =   ""
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      Scope           =   0
-      TabIndex        =   0
-      TabPanelIndex   =   0
-      TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   20
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
    Begin Listbox lstInfo
       AutoDeactivate  =   True
       AutoHideScrollbars=   True
@@ -75,7 +44,7 @@ Begin Window frmMain
       GridLinesVertical=   0
       HasHeading      =   False
       HeadingIndex    =   -1
-      Height          =   212
+      Height          =   246
       HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
@@ -99,11 +68,11 @@ Begin Window frmMain
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   54
+      Top             =   20
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
-      Width           =   301
+      Width           =   273
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
@@ -175,14 +144,14 @@ Begin Window frmMain
       GridLinesVertical=   0
       HasHeading      =   True
       HeadingIndex    =   -1
-      Height          =   212
+      Height          =   246
       HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   "Offset	Result ID	Instruction Text"
       Italic          =   False
-      Left            =   333
+      Left            =   305
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
@@ -199,13 +168,26 @@ Begin Window frmMain
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   54
+      Top             =   20
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
-      Width           =   247
+      Width           =   275
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
+   End
+   Begin MainToolbar toolMain
+      Enabled         =   True
+      Height          =   32
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   0
+      LockedInPosition=   False
+      Scope           =   0
+      TabPanelIndex   =   0
+      Top             =   0
+      Visible         =   True
+      Width           =   100
    End
 End
 #tag EndWindow
@@ -220,11 +202,18 @@ End
 	#tag EndEvent
 
 
-#tag EndWindowCode
+	#tag MenuHandler
+		Function mnuAbout() As Boolean Handles mnuAbout.Action
+			frmAbout.ShowModal()
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
 
-#tag Events cmdOpen
-	#tag Event
-		Sub Action()
+
+	#tag Method, Flags = &h0
+		Sub actionOpen()
 		  Dim f As FolderItem
 		  Dim dlg As new OpenDialog
 		  Dim m As MemoryBlock
@@ -332,6 +321,22 @@ End
 		    wend
 		    
 		  end if
+		End Sub
+	#tag EndMethod
+
+
+#tag EndWindowCode
+
+#tag Events toolMain
+	#tag Event
+		Sub Action(item As ToolItem)
+		  select case item.Name
+		    
+		  case "toolOpen"
+		    actionOpen
+		    
+		  end select
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
