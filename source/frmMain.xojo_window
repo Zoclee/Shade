@@ -75,7 +75,7 @@ Begin Window frmMain
       GridLinesVertical=   0
       HasHeading      =   False
       HeadingIndex    =   -1
-      Height          =   124
+      Height          =   102
       HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
@@ -99,7 +99,7 @@ Begin Window frmMain
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   256
+      Top             =   278
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -125,7 +125,7 @@ Begin Window frmMain
       GridLinesVertical=   0
       HasHeading      =   False
       HeadingIndex    =   -1
-      Height          =   190
+      Height          =   212
       HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
@@ -186,7 +186,7 @@ End
 		  // display errors
 		  
 		  if App.VM.Errors.Ubound >= 0 then
-		    i = 0 
+		    i = 0
 		    while i <= App.VM.Errors.Ubound
 		      lstErrors.AddRow App.VM.Errors(i)
 		      i = i + 1
@@ -203,6 +203,9 @@ End
 		  
 		  lstInfo.AddRow "Bound"
 		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Bound)
+		  
+		  lstInfo.AddRow "Opcodes"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.OpcodeCount)
 		  
 		  lstInfo.AddRow "Unknown Opcodes"
 		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.UnknownOpcodes)

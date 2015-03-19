@@ -9,7 +9,7 @@ Protected Module ZocleeShade
 		    result = "Logical"
 		  case 1
 		    result = "Physical32"
-		  case 2 
+		  case 2
 		    result = "Physical64"
 		  case else
 		    result = "Unknown"
@@ -29,7 +29,7 @@ Protected Module ZocleeShade
 		    result = "Simple"
 		  case 1
 		    result = "GLSL450"
-		  case 2 
+		  case 2
 		    result = "OpenCL1.2"
 		  case 3
 		    result = "OpenCL2.0"
@@ -90,7 +90,7 @@ Protected Module ZocleeShade
 		  bin.UInt32Value(16) = 0 ' reserved for instruction schema
 		  
 		  ' Source OpenCL 120
-		  bin.UInt16Value(16) = 1 ' OpSource 
+		  bin.UInt16Value(16) = 1 ' OpSource
 		  bin.UInt16Value(18) = 3 ' Word Count
 		  bin.UInt32Value(20) = 3 ' OpenCL
 		  bin.UInt32Value(24) = 120 ' Version
@@ -239,7 +239,7 @@ Protected Module ZocleeShade
 		  bin.UInt16Value(372) = 12 ' OpTypeVector
 		  bin.UInt16Value(374) = 4 ' Word Count
 		  bin.UInt32Value(376) = 2 ' result id
-		  bin.UInt32Value(380) = 1 ' component type id 
+		  bin.UInt32Value(380) = 1 ' component type id
 		  bin.UInt32Value(384) = 3 ' component count
 		  
 		  ' 3: TypePointer UniformConstant 2(ivec3)
@@ -288,15 +288,15 @@ Protected Module ZocleeShade
 		  bin.UInt16Value(484) = 40 ' OpFunction
 		  bin.UInt16Value(486) = 5 ' Word Count
 		  bin.UInt32Value(488) = 5 ' result type id = void
-		  bin.UInt32Value(492) = 9 ' result id 
+		  bin.UInt32Value(492) = 9 ' result id
 		  bin.UInt32Value(496) = 0 ' function control mask
 		  bin.UInt32Value(500) = 8 ' function type id
 		  
 		  ' 10(in1): 7(ptr) FunctionParameter
 		  bin.UInt16Value(504) = 41 ' OpFunctionParameter
 		  bin.UInt16Value(506) = 3 ' Word Count
-		  bin.UInt32Value(508) = 7 ' result type id 
-		  bin.UInt32Value(512) = 10 ' result id 
+		  bin.UInt32Value(508) = 7 ' result type id
+		  bin.UInt32Value(512) = 10 ' result id
 		  
 		  ' 11(in2): 7(ptr) FunctionParameter
 		  bin.UInt16Value(516) = 41 ' OpFunctionParameter

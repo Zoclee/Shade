@@ -10,6 +10,7 @@ Protected Class SPIRVVirtualMachine
 		  GeneratorMagicNumber = 0
 		  MemoryModel = 0 // Simple
 		  Names = new Dictionary()
+		  mOpcodeCount = 0
 		  SourceLanguage = 0 // Unknown
 		  SourceVersion = 0
 		  Types = new Dictionary()
@@ -144,6 +145,8 @@ Protected Class SPIRVVirtualMachine
 		          
 		        end select
 		        
+		        mOpcodeCount = mOpcodeCount + 1
+		        
 		        if m.UInt16Value(ip + 2) = 0 then
 		          Errors.Append ("[" + Str(ip + 2) + "] ERROR: Invalid zero word count.")
 		          ip = moduleUB + 1
@@ -188,9 +191,22 @@ Protected Class SPIRVVirtualMachine
 		MemoryModel As UInt32
 	#tag EndProperty
 
+	#tag Property, Flags = &h21
+		Private mOpcodeCount As UInt32
+	#tag EndProperty
+
 	#tag Property, Flags = &h0
 		Names As Dictionary
 	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mOpcodeCount
+			End Get
+		#tag EndGetter
+		OpcodeCount As UInt32
+	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0
 		SourceLanguage As UInt32
