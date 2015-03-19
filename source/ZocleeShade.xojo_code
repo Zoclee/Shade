@@ -400,6 +400,20 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 
+	#tag Enum, Name = SPIRVOpcodeTypeEnum, Type = Integer, Flags = &h0
+		Unknown
+		  Decorate
+		  EntryPoint
+		  MemoryModel
+		  Name
+		  TypeFunction
+		  TypeInt
+		  TypePointer
+		  TypeVector
+		  TypeVoid
+		Source
+	#tag EndEnum
+
 	#tag Enum, Name = SPIRVTypeEnum, Type = Integer, Flags = &h0
 		Array_
 		  Boolean

@@ -9,6 +9,7 @@ Class=SPIRVEntryPoint;ZocleeShade/SPIRVEntryPoint.xojo_code;&h3EBB3FFF;&h41215FF
 Class=SPIRVVirtualMachine;ZocleeShade/SPIRVVirtualMachine.xojo_code;&h5ACAD7FF;&h41215FFF;false
 Class=SPIRVDecoration;ZocleeShade/SPIRVDecoration.xojo_code;&h5601D7FF;&h41215FFF;false
 Class=SPIRVType;ZocleeShade/SPIRVType.xojo_code;&h67125FFF;&h41215FFF;false
+Class=SPIRVOpcode;ZocleeShade/SPIRVOpcode.xojo_code;&h61D14FFF;&h41215FFF;false
 DefaultWindow=frmMain
 MajorVersion=0
 MinorVersion=1
