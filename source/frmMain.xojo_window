@@ -64,7 +64,7 @@ Begin Window frmMain
       Border          =   True
       ColumnCount     =   2
       ColumnsResizable=   False
-      ColumnWidths    =   "30%, 70%"
+      ColumnWidths    =   "60%,40%"
       DataField       =   ""
       DataSource      =   ""
       DefaultRowHeight=   -1
@@ -86,7 +86,7 @@ Begin Window frmMain
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   True
+      LockRight       =   False
       LockTop         =   True
       RequiresSelection=   False
       Scope           =   0
@@ -103,7 +103,7 @@ Begin Window frmMain
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
-      Width           =   560
+      Width           =   301
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
@@ -157,6 +157,56 @@ Begin Window frmMain
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
+   Begin Listbox lstInstructions
+      AutoDeactivate  =   True
+      AutoHideScrollbars=   True
+      Bold            =   False
+      Border          =   True
+      ColumnCount     =   3
+      ColumnsResizable=   False
+      ColumnWidths    =   "70,70"
+      DataField       =   ""
+      DataSource      =   ""
+      DefaultRowHeight=   -1
+      Enabled         =   True
+      EnableDrag      =   False
+      EnableDragReorder=   False
+      GridLinesHorizontal=   0
+      GridLinesVertical=   0
+      HasHeading      =   True
+      HeadingIndex    =   -1
+      Height          =   212
+      HelpTag         =   ""
+      Hierarchical    =   False
+      Index           =   -2147483648
+      InitialParent   =   ""
+      InitialValue    =   "Offset	Result ID	Instruction Text"
+      Italic          =   False
+      Left            =   333
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
+      RequiresSelection=   False
+      Scope           =   0
+      ScrollbarHorizontal=   False
+      ScrollBarVertical=   True
+      SelectionType   =   0
+      TabIndex        =   3
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   54
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   247
+      _ScrollOffset   =   0
+      _ScrollWidth    =   -1
+   End
 End
 #tag EndWindow
 
@@ -164,6 +214,8 @@ End
 	#tag Event
 		Sub Open()
 		  Me.Title = "{Zoclee}™ Shade v" + Str(App.MajorVersion) + "." + Str(App.MinorVersion)+ "." + Str(App.BugVersion)
+		  Me.Maximize
+		  
 		End Sub
 	#tag EndEvent
 
@@ -201,6 +253,7 @@ End
 		    
 		    lstErrors.DeleteAllRows
 		    lstInfo.DeleteAllRows
+		    lstInstructions.DeleteAllRows
 		    
 		    ' read file into memoryblock
 		    
@@ -261,6 +314,19 @@ End
 		    
 		    lstInfo.AddRow "Types"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Types.Keys.Ubound + 1)
+		    
+		    // display instructions
+		    
+		    i = 0
+		    while i <= App.VM.Opcodes.Ubound
+		      lstInstructions.AddRow Str(App.VM.Opcodes(i).Offset)
+		      if App.VM.Opcodes(i).ResultID > 0 then
+		        lstInstructions.Cell(lstInstructions.LastIndex, 1) = Str(App.VM.Opcodes(i).ResultID)
+		      end if
+		      lstInstructions.Cell(lstInstructions.LastIndex, 2) = App.VM.Opcodes(i).InstructionText
+		      lstInstructions.RowTag(lstInstructions.LastIndex) = App.VM.Opcodes(i)
+		      i = i + 1
+		    wend
 		    
 		  end if
 		End Sub
