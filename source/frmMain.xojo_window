@@ -163,7 +163,7 @@ Begin Window frmMain
       Bold            =   False
       Border          =   True
       ColumnCount     =   3
-      ColumnsResizable=   False
+      ColumnsResizable=   True
       ColumnWidths    =   "70,70"
       DataField       =   ""
       DataSource      =   ""
@@ -317,11 +317,14 @@ End
 		    
 		    // display instructions
 		    
+		    lstInstructions.ColumnAlignment(0) = Listbox.AlignRight
+		    lstInstructions.ColumnAlignment(1) = Listbox.AlignRight
+		    
 		    i = 0
 		    while i <= App.VM.Opcodes.Ubound
 		      lstInstructions.AddRow Str(App.VM.Opcodes(i).Offset)
 		      if App.VM.Opcodes(i).ResultID > 0 then
-		        lstInstructions.Cell(lstInstructions.LastIndex, 1) = Str(App.VM.Opcodes(i).ResultID)
+		        lstInstructions.Cell(lstInstructions.LastIndex, 1) = Str(App.VM.Opcodes(i).ResultID) + ":"
 		      end if
 		      lstInstructions.Cell(lstInstructions.LastIndex, 2) = App.VM.Opcodes(i).InstructionText
 		      lstInstructions.RowTag(lstInstructions.LastIndex) = App.VM.Opcodes(i)

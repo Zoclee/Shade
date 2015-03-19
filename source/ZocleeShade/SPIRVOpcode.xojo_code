@@ -1,7 +1,8 @@
 #tag Class
 Protected Class SPIRVOpcode
 	#tag Method, Flags = &h0
-		Sub Constructor(initType As SPIRVOpcodeTypeEnum)
+		Sub Constructor(initVM As ZocleeShade.SPIRVVirtualMachine, initType As SPIRVOpcodeTypeEnum)
+		  VM = initVM
 		  Type = initType
 		  
 		End Sub
@@ -11,11 +12,20 @@ Protected Class SPIRVOpcode
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  Dim result As String
+			  Dim result() As String
 			  
-			  result = "Unknown"
+			  select case Type
+			    
+			  case SPIRVOpcodeTypeEnum.Decorate
+			    result.Append "Decorate "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    
+			  case else
+			    result.Append "Unknown"
+			    
+			  end select
 			  
-			  return result
+			  return Join(result, "")
 			End Get
 		#tag EndGetter
 		InstructionText As String
@@ -28,7 +38,30 @@ Protected Class SPIRVOpcode
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  return 0
+			  Dim result As UInt32
+			  
+			  result = 0
+			  
+			  select case Type
+			    
+			  case SPIRVOpcodeTypeEnum.TypeFunction
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.TypeInt
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.TypePointer
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.TypeVector
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.TypeVoid
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  end select
+			  
+			  return result
 			  
 			End Get
 		#tag EndGetter
@@ -37,11 +70,15 @@ Protected Class SPIRVOpcode
 			  break
 			End Set
 		#tag EndSetter
-		ResultID As UInt64
+		ResultID As UInt32
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0
 		Type As SPIRVOpcodeTypeEnum
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		VM As ZocleeShade.SPIRVVirtualMachine
 	#tag EndProperty
 
 
@@ -57,6 +94,7 @@ Protected Class SPIRVOpcode
 			Name="InstructionText"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -88,6 +126,20 @@ Protected Class SPIRVOpcode
 			Name="Type"
 			Group="Behavior"
 			Type="SPIRVOpcodeTypeEnum"
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - Unknown"
+				"1 - Decorate"
+				"2 - EntryPoint"
+				"3 - MemoryModel"
+				"4 - Name"
+				"5 - TypeFunction"
+				"6 - TypeInt"
+				"7 - TypePointer"
+				"8 - TypeVector"
+				"9 - TypeVoid"
+				"10 - Source"
+			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

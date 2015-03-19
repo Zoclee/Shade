@@ -24,7 +24,7 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub LoadModule(m As MemoryBlock)
+		Sub LoadModule(binary As MemoryBlock)
 		  Dim ip As UInt32
 		  Dim moduleUB As Integer
 		  Dim tempIP As UInt32
@@ -37,119 +37,121 @@ Protected Class SPIRVVirtualMachine
 		  
 		  Clear()
 		  
-		  if m <> nil then
+		  if binary <> nil then
+		    
+		    ModuleBinary = binary
 		    
 		    // test magic number
 		    
-		    if m.UInt32Value(0) <> &h07230203 then
+		    if ModuleBinary.UInt32Value(0) <> &h07230203 then
 		      
 		      Errors.Append "Invalid magic number."
 		      
 		    else
 		      
-		      Version = m.UInt32Value(4)
-		      GeneratorMagicNumber = m.UInt32Value(8)
-		      Bound = m.UInt32Value(12)
-		      moduleUB = m.Size - 1
+		      Version = ModuleBinary.UInt32Value(4)
+		      GeneratorMagicNumber = ModuleBinary.UInt32Value(8)
+		      Bound = ModuleBinary.UInt32Value(12)
+		      moduleUB = ModuleBinary.Size - 1
 		      
 		      //  instructions
 		      
 		      ip = 16
 		      while ip < moduleUB
 		        
-		        select case m.UInt16Value(ip)
+		        select case ModuleBinary.UInt16Value(ip)
 		          
 		        case 1 // ***** OpSource ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(SPIRVOpcodeTypeEnum.Source)
-		          SourceLanguage = m.UInt32Value(ip + 4)
-		          SourceVersion = m.UInt32Value(ip + 8)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Source)
+		          SourceLanguage = ModuleBinary.UInt32Value(ip + 4)
+		          SourceVersion = ModuleBinary.UInt32Value(ip + 8)
 		          
 		        case 5 // ***** OpMemoryModel ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(SPIRVOpcodeTypeEnum.MemoryModel)
-		          AddressingModel = m.UInt32Value(ip + 4)
-		          MemoryModel = m.UInt32Value(ip + 8)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.MemoryModel)
+		          AddressingModel = ModuleBinary.UInt32Value(ip + 4)
+		          MemoryModel = ModuleBinary.UInt32Value(ip + 8)
 		          
 		        case 6 // ***** OpEntryPoint ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(SPIRVOpcodeTypeEnum.EntryPoint)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.EntryPoint)
 		          ep = new ZocleeShade.SPIRVEntryPoint
-		          ep.ExecutionModel = m.UInt32Value(ip + 4)
-		          ep.EntryPointID = m.UInt32Value(ip + 8)
+		          ep.ExecutionModel = ModuleBinary.UInt32Value(ip + 4)
+		          ep.EntryPointID = ModuleBinary.UInt32Value(ip + 8)
 		          EntryPoints.Append ep
 		          
 		        case 8 // ***** OpTypeVoid ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(SPIRVOpcodeTypeEnum.TypeVoid)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeVoid)
 		          typ = new ZocleeShade.SPIRVType
 		          typ.Type = SPIRVTypeEnum.Void
-		          Types.Value(m.UInt32Value(ip + 4)) = typ
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 10 // ***** OpTypeInt ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(SPIRVOpcodeTypeEnum.TypeInt)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeInt)
 		          typ = new ZocleeShade.SPIRVType
 		          typ.Type = SPIRVTypeEnum.Integer
-		          typ.Width = m.UInt32Value(ip + 8)
-		          if m.UInt32Value(ip + 12) = 0 then
+		          typ.Width = ModuleBinary.UInt32Value(ip + 8)
+		          if ModuleBinary.UInt32Value(ip + 12) = 0 then
 		            typ.Signed = false
 		          else
 		            typ.Signed = true
 		          end if
-		          Types.Value(m.UInt32Value(ip + 4)) = typ
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 12 // ***** OpTypeVector ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(SPIRVOpcodeTypeEnum.TypeVector)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeVector)
 		          typ = new ZocleeShade.SPIRVType
 		          typ.Type = SPIRVTypeEnum.Vector
-		          typ.ComponentTypeID = m.UInt32Value(ip + 8)
-		          typ.ComponentCount = m.UInt32Value(ip + 8)
-		          Types.Value(m.UInt32Value(ip + 4)) = typ
+		          typ.ComponentTypeID = ModuleBinary.UInt32Value(ip + 8)
+		          typ.ComponentCount = ModuleBinary.UInt32Value(ip + 8)
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 20 // ***** OpTypePointer ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(SPIRVOpcodeTypeEnum.TypePointer)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypePointer)
 		          typ = new ZocleeShade.SPIRVType
 		          typ.Type = SPIRVTypeEnum.Pointer
-		          typ.StorageClass = m.UInt32Value(ip + 8)
-		          typ.TypeID = m.UInt32Value(ip + 12)
-		          Types.Value(m.UInt32Value(ip + 4)) = typ
+		          typ.StorageClass = ModuleBinary.UInt32Value(ip + 8)
+		          typ.TypeID = ModuleBinary.UInt32Value(ip + 12)
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 21 // ***** OpTypeFunction ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(SPIRVOpcodeTypeEnum.TypeFunction)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeFunction)
 		          typ = new ZocleeShade.SPIRVType
 		          typ.Type = SPIRVTypeEnum.Function_
-		          typ.ReturnTypeID = m.UInt32Value(ip + 8)
+		          typ.ReturnTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          tempIP = ip + 12
-		          upperBound = ip + (m.UInt16Value(ip + 2) * 4)
+		          upperBound = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
 		          while tempIP < upperBound
-		            typ.ParmTypeID.Append m.UInt32Value(tempIP)
+		            typ.ParmTypeID.Append ModuleBinary.UInt32Value(tempIP)
 		            tempIP = tempIP + 4
 		          wend
-		          Types.Value(m.UInt32Value(ip + 4)) = typ
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 50 // ***** OpDecorate ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(SPIRVOpcodeTypeEnum.Decorate)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Decorate)
 		          dec = new ZocleeShade.SPIRVDecoration
-		          dec.TargetID = m.UInt32Value(ip + 4)
-		          dec.Decoration = m.UInt32Value(ip + 8)
+		          dec.TargetID = ModuleBinary.UInt32Value(ip + 4)
+		          dec.Decoration = ModuleBinary.UInt32Value(ip + 8)
 		          select case dec.Decoration
 		            ' Stream, Location, Component, Index, Binding, DescriptorSet, Offset, Alignment, XfbBuffer, Stride,
 		            ' Built-In, FuncParamAttr, FP Rouding Mode, FP Fast Math Mode, Linkage Type, SpecId
 		          case 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44
 		            tempIP = ip + 12
-		            upperBound = ip + (m.UInt16Value(ip + 2) * 4)
+		            upperBound = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
 		            while tempIP < upperBound
-		              dec.ExtraOperands.Append m.UInt32Value(tempIP)
+		              dec.ExtraOperands.Append ModuleBinary.UInt32Value(tempIP)
 		              tempIP = tempIP + 4
 		            wend
 		          end select
 		          Decorations.Append dec
 		          
 		        case 54 // ***** OpName ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(SPIRVOpcodeTypeEnum.Name)
-		          Names.Value(m.UInt32Value(ip + 4)) = m.CString(ip + 8)
-		          if (m.UInt32Value(ip + 4) >= Bound) then
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Name)
+		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
+		          if (ModuleBinary.UInt32Value(ip + 4) >= Bound) then
 		            Errors.Append ("ERROR [" + Str(ip + 2) + "]: Target ID out of bounds.")
 		          end if
 		          
 		        case else
-		          op = new ZocleeShade.SPIRVOpcode(SPIRVOpcodeTypeEnum.Unknown)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          unknown = unknown + 1
 		          
 		        end select
@@ -159,11 +161,11 @@ Protected Class SPIRVVirtualMachine
 		        op.Offset = ip
 		        Opcodes.Append op
 		        
-		        if m.UInt16Value(ip + 2) = 0 then
+		        if ModuleBinary.UInt16Value(ip + 2) = 0 then
 		          Errors.Append ("ERROR [" + Str(ip + 2) + "]: Word count of zero.")
 		          ip = moduleUB + 1
 		        else
-		          ip = ip + (m.UInt16Value(ip + 2) * 4)
+		          ip = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
 		        end if
 		        
 		      wend
@@ -205,6 +207,10 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Property, Flags = &h0
 		MemoryModel As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		ModuleBinary As MemoryBlock
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
