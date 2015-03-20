@@ -16,8 +16,9 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
+			    // ***** OpDecorate *************************************************
+			    
 			  case SPIRVOpcodeTypeEnum.Decorate
-			    // todo, extra decoration operands
 			    result.Append "Decorate "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
 			    if VM.Names.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
@@ -67,6 +68,15 @@ Protected Class SPIRVOpcode
 			    case 44 // SpecId
 			      break
 			    end select
+			    
+			    // ***** OpName *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.Name
+			    result.Append "Name "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append " """
+			    result.Append VM.ModuleBinary.CString(Offset + 8)
+			    result.Append """"
 			    
 			  case else
 			    result.Append "Unknown"
