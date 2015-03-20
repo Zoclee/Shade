@@ -248,6 +248,13 @@ Protected Class SPIRVVirtualMachine
 		        
 		      end select
 		      
+		      ' ***** OpName ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.Name
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Target ID out of bounds.")
+		      end if
+		      
 		    case else
 		      Errors.Append ("ERROR [" + Str(Opcodes(i).Offset) + "]: Unknown opcode type.")
 		    end select
