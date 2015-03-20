@@ -223,6 +223,38 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeFuncParamAttr(value As UInt32) As String
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "Zext"
+		  case 1
+		    result = "Sext"
+		  case 2
+		    result = "ByVal"
+		  case 3
+		    result = "Sret"
+		  case 4
+		    result = "NoAlias"
+		  case 5
+		    result = "NoCapture"
+		  case 6
+		    result = "SVM"
+		  case 7
+		    result = "NoWrite"
+		  case 8
+		    result = "NoReadWrite"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeMemoryModel(value As UInt32) As String
 		  Dim result As String
 		  

@@ -48,7 +48,8 @@ Protected Class SPIRVOpcode
 			      result.Append " "
 			      result.Append SPIRVDescribeBuiltIn(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 40 // FuncParamAttr
-			      break
+			      result.Append " "
+			      result.Append SPIRVDescribeFuncParamAttr(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 41 // FP Rounding Mode
 			      break
 			    case 42 // FP Fast Math Mode
