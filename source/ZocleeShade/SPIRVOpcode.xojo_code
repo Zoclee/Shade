@@ -39,7 +39,8 @@ Protected Class SPIRVOpcode
 			    case 35 // Offset
 			      break
 			    case 36 // Alignment
-			      break
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 37 // XfbBuffer
 			      break
 			    case 38 // Stride
