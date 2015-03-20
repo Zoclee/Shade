@@ -268,6 +268,9 @@ End
 		    
 		    // display info
 		    
+		    lstInfo.AddRow "Errors"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Errors.Ubound + 1)
+		    
 		    lstInfo.AddRow "SPIR-V Version Number"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Version)
 		    
