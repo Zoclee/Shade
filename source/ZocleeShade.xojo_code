@@ -223,6 +223,34 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeExecutionModel(value As UInt32) As String
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "Vertex"
+		  case 1
+		    result = "TessellationControl"
+		  case 2
+		    result = "TessellationEvaluation"
+		  case 3
+		    result = "Geometry"
+		  case 4
+		    result = "Fragment"
+		  case 5
+		    result = "GLCompute"
+		  case 6
+		    result = "Kernel"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeFPFastMathMode(value As UInt32) As String
 		  Dim result As String
 		  

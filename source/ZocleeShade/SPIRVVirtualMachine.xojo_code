@@ -261,6 +261,22 @@ Protected Class SPIRVVirtualMachine
 		        
 		      end select
 		      
+		      ' ***** OpEntryPoint ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.EntryPoint
+		      if wordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) > 6 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Execution Model enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Entry Point ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      
 		      ' ***** OpName ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.Name
@@ -277,7 +293,7 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if 
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Source Language enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Source Language enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
 		        op.HasErrors = True
 		      end if
 		      

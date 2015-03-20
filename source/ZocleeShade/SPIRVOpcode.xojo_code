@@ -75,6 +75,15 @@ Protected Class SPIRVOpcode
 			      break
 			    end select
 			    
+			    // ***** OpEntryPoint *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.EntryPoint
+			    result.Append "EntryPoint "
+			    result.Append SPIRVDescribeExecutionModel(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    
+			    
 			    // ***** OpName *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.Name
