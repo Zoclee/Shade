@@ -10,12 +10,11 @@ Protected Class SPIRVVirtualMachine
 		  GeneratorMagicNumber = 0
 		  MemoryModel = 0 // Simple
 		  Names = new Dictionary()
-		  REdim Opcodes(-1)
+		  Redim Opcodes(-1)
 		  SourceLanguage = 0 // Unknown
 		  SourceVersion = 0
 		  Types = new Dictionary()
 		  Version = 99
-		  
 		  
 		  
 		  
@@ -182,10 +181,73 @@ Protected Class SPIRVVirtualMachine
 	#tag Method, Flags = &h21
 		Private Sub validateOpcodes()
 		  Dim i As UInt32
+		  Dim op As ZocleeShade.SPIRVOpcode
+		  Dim wordCount As Integer
 		  
 		  i = 0
 		  while i <= Opcodes.Ubound
-		    select case Opcodes(i).Type
+		    
+		    op = Opcodes(i)
+		    wordCount = ModuleBinary.UInt16Value(op.Offset + 2)
+		    
+		    select case op.Type
+		      
+		      ' ***** OpDecorate ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.Decorate
+		      
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Target ID out of bounds.")
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) > 44 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Decoration enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		      end if
+		      
+		      select case ModuleBinary.UInt32Value(op.Offset + 8)
+		      case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26
+		        if wordCount <> 3 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        end if
+		      case 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 44
+		        if wordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        end if 
+		      case 39 // Built-In
+		        if wordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        end if
+		        if ModuleBinary.UInt32Value(op.Offset + 12) > 41 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Built-In enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		        end if
+		      case 40 // Function Parameter Attribute
+		        if wordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        end if
+		        if ModuleBinary.UInt32Value(op.Offset + 12) > 8 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Function Parameter Attribute enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		        end if
+		      case 41 // FP Rounding Mode
+		        if wordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        end if
+		        if ModuleBinary.UInt32Value(op.Offset + 12) > 3 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown FP Rounding Mode enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		        end if
+		      case 42 // FP Fast Math Mode
+		        if wordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        end if
+		        break // todo
+		      case 43 // Linkage Type
+		        if wordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        end if
+		        if ModuleBinary.UInt32Value(op.Offset + 12) > 1 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Linkage Type enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		        end if
+		        
+		      end select
+		      
 		    case else
 		      Errors.Append ("ERROR [" + Str(Opcodes(i).Offset) + "]: Unknown opcode type.")
 		    end select
