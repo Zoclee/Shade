@@ -5,9 +5,15 @@ Protected Class SPIRVOpcode
 		  VM = initVM
 		  Type = initType
 		  
+		  HasErrors = False
+		  
 		End Sub
 	#tag EndMethod
 
+
+	#tag Property, Flags = &h0
+		HasErrors As Boolean
+	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter

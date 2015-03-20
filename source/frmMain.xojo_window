@@ -221,7 +221,7 @@ End
 		  Dim readStream As BinaryStream
 		  Dim allType As New FileType
 		  Dim spirvType As New FileType
-		  
+		  Dim op As ZocleeShade.SPIRVOpcode
 		  // configure file types
 		  
 		  allType.Name = "All files"
@@ -314,12 +314,13 @@ End
 		    
 		    i = 0
 		    while i <= App.VM.Opcodes.Ubound
-		      lstInstructions.AddRow Str(App.VM.Opcodes(i).Offset)
-		      if App.VM.Opcodes(i).ResultID > 0 then
-		        lstInstructions.Cell(lstInstructions.LastIndex, 1) = Str(App.VM.Opcodes(i).ResultID) + ":"
+		      op = App.VM.Opcodes(i)
+		      lstInstructions.AddRow Str(op.Offset)
+		      if op.ResultID > 0 then
+		        lstInstructions.Cell(lstInstructions.LastIndex, 1) = Str(op.ResultID) + ":"
 		      end if
-		      lstInstructions.Cell(lstInstructions.LastIndex, 2) = App.VM.Opcodes(i).InstructionText
-		      lstInstructions.RowTag(lstInstructions.LastIndex) = App.VM.Opcodes(i)
+		      lstInstructions.Cell(lstInstructions.LastIndex, 2) = op.InstructionText
+		      lstInstructions.RowTag(lstInstructions.LastIndex) = op
 		      i = i + 1
 		    wend
 		    
@@ -365,6 +366,20 @@ End
 		    
 		  end if
 		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events lstInstructions
+	#tag Event
+		Function CellTextPaint(g As Graphics, row As Integer, column As Integer, x as Integer, y as Integer) As Boolean
+		  Dim op As ZocleeShade.SPIRVOpcode
+		  
+		  op = Me.RowTag(row)
+		  
+		  if op.HasErrors then
+		    g.ForeColor = &ccc0000
+		  end if
+		  
+		End Function
 	#tag EndEvent
 #tag EndEvents
 #tag Events toolMain
