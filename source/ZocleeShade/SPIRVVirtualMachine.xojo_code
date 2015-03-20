@@ -33,7 +33,6 @@ Protected Class SPIRVVirtualMachine
 		  Dim dec As ZocleeShade.SPIRVDecoration
 		  Dim typ As ZocleeShade.SPIRVType
 		  Dim op As ZocleeShade.SPIRVOpcode
-		  Dim unknown As Integer
 		  
 		  Clear()
 		  
@@ -153,7 +152,8 @@ Protected Class SPIRVVirtualMachine
 		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
-		          unknown = unknown + 1
+		          
+		          Errors.Append ("ERROR [" + Str(ip) + "]: Unknown opcode.")
 		          
 		        end select
 		        
@@ -170,10 +170,6 @@ Protected Class SPIRVVirtualMachine
 		        end if
 		        
 		      wend
-		      
-		      if unknown > 0 then
-		        Errors.Append "ERROR: " + Str(unknown) + " unknown opcodes."
-		      end if
 		      
 		      validateOpcodes()
 		      

@@ -44,7 +44,7 @@ Begin Window frmMain
       GridLinesVertical=   0
       HasHeading      =   False
       HeadingIndex    =   -1
-      Height          =   246
+      Height          =   199
       HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
@@ -94,7 +94,7 @@ Begin Window frmMain
       GridLinesVertical=   0
       HasHeading      =   False
       HeadingIndex    =   -1
-      Height          =   102
+      Height          =   149
       HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
@@ -118,7 +118,7 @@ Begin Window frmMain
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   278
+      Top             =   231
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -144,7 +144,7 @@ Begin Window frmMain
       GridLinesVertical=   0
       HasHeading      =   True
       HeadingIndex    =   -1
-      Height          =   246
+      Height          =   199
       HelpTag         =   ""
       Hierarchical    =   False
       Index           =   -2147483648
@@ -277,9 +277,6 @@ End
 		    lstInfo.AddRow "Bound"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Bound)
 		    
-		    lstInfo.AddRow "Opcodes"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Opcodes.Ubound + 1)
-		    
 		    lstInfo.AddRow "Source Language"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeSourceLanguage(App.VM.SourceLanguage)
 		    
@@ -294,6 +291,9 @@ End
 		    
 		    lstInfo.AddRow "Memory Model"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeMemoryModel(App.VM.MemoryModel)
+		    
+		    lstInfo.AddRow "Opcodes"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Opcodes.Ubound + 1)
 		    
 		    lstInfo.AddRow "Names"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Names.Keys.Ubound + 1)
