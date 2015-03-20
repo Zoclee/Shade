@@ -21,6 +21,104 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeBuiltIn(value As UInt32) As String
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "Position"
+		  case 1
+		    result = "PointSize"
+		  case 2
+		    result = "ClipVertex"
+		  case 3
+		    result = "ClipDistance"
+		  case 4
+		    result = "CullDistance"
+		  case 5
+		    result = "VertexId"
+		  case 6
+		    result = "InstanceId"
+		  case 7
+		    result = "PrimitiveId"
+		  case 8
+		    result = "InvocationId"
+		  case 9
+		    result = "Layer"
+		  case 10
+		    result = "ViewportIndex"
+		  case 11
+		    result = "TessLevelOuter"
+		  case 12
+		    result = "TessLevelInner"
+		  case 13
+		    result = "TessCoord"
+		  case 14
+		    result = "PatchVertices"
+		  case 15
+		    result = "FragCoord"
+		  case 16
+		    result = "PointCoord"
+		  case 17
+		    result = "FrontFacing"
+		  case 18
+		    result = "SampleId"
+		  case 19
+		    result = "SamplePosition"
+		  case 20
+		    result = "SampleMask"
+		  case 21
+		    result = "FragColor"
+		  case 22
+		    result = "FragDepth"
+		  case 23
+		    result = "HelperInvocation"
+		  case 24
+		    result = "NumWorkgroups"
+		  case 25
+		    result = "WorkgroupSize"
+		  case 26
+		    result = "WorkgroupId"
+		  case 27
+		    result = "LocalInvocationId"
+		  case 28
+		    result = "GlobalInvocationId"
+		  case 29
+		    result = "LocalInvocationIndex"
+		  case 30
+		    result = "WorkDim"
+		  case 31
+		    result = "GlobalSize"
+		  case 32
+		    result = "EnqueuedWorkgroupSize"
+		  case 33
+		    result = "GlobalOffset"
+		  case 34
+		    result = "GlobalLinearId"
+		  case 35
+		    result = "WorkgroupLinearId"
+		  case 36
+		    result = "SubgroupSize"
+		  case 37
+		    result = "SubgroupMaxSize"
+		  case 38
+		    result = "NumSubgroups"
+		  case 39
+		    result = "NumEnqueuedSubgroups"
+		  case 40
+		    result = "SubgroupId"
+		  case 41
+		    result = "SubgroupLocalInvocationId"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeDecoration(value As UInt32) As String
 		  Dim result As String
 		  

@@ -23,9 +23,44 @@ Protected Class SPIRVOpcode
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
 			    result.Append " "
 			    result.Append SPIRVDescribeDecoration(VM.ModuleBinary.UInt32Value(Offset + 8))
-			    if VM.ModuleBinary.UInt16Value(Offset + 2) > 3 then
-			      break 
-			    end if
+			    select case VM.ModuleBinary.UInt32Value(Offset + 8)
+			    case 29 // Stream
+			      break
+			    case 30 // Location
+			      break
+			    case 31 // Component
+			      break
+			    case 32 // Index
+			      break
+			    case 33 // Binding
+			      break
+			    case 34 // DescriptorSet
+			      break
+			    case 35 // Offset
+			      break
+			    case 36 // Alignment
+			      break
+			    case 37 // XfbBuffer
+			      break
+			    case 38 // Stride
+			      break
+			    case 39 // Built-In
+			      result.Append " "
+			      result.Append SPIRVDescribeBuiltIn(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    case 40 // FuncParamAttr
+			      break
+			    case 41 // FP Rounding Mode
+			      break
+			    case 42 // FP Fast Math Mode
+			      break
+			    case 43 // Linkage Type
+			      break
+			    case 44 // SpecId
+			      break
+			    end select
+			    'if VM.ModuleBinary.UInt16Value(Offset + 2) > 3 then
+			    'break
+			    'end if
 			  case else
 			    result.Append "Unknown"
 			    
