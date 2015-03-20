@@ -127,7 +127,6 @@ Protected Class SPIRVVirtualMachine
 		          
 		        case 50 // ***** OpDecorate ***************************************************
 		          
-		          // TODO: Check that IDs within bounds
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Decorate)
 		          dec = new ZocleeShade.SPIRVDecoration
 		          dec.TargetID = ModuleBinary.UInt32Value(ip + 4)
@@ -149,7 +148,7 @@ Protected Class SPIRVVirtualMachine
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Name)
 		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
 		          if (ModuleBinary.UInt32Value(ip + 4) >= Bound) then
-		            Errors.Append ("ERROR [" + Str(ip + 2) + "]: Target ID out of bounds.")
+		            Errors.Append ("ERROR [" + Str(ip) + "]: Target ID out of bounds.")
 		          end if
 		          
 		        case else
@@ -164,7 +163,7 @@ Protected Class SPIRVVirtualMachine
 		        Opcodes.Append op
 		        
 		        if ModuleBinary.UInt16Value(ip + 2) = 0 then
-		          Errors.Append ("ERROR [" + Str(ip + 2) + "]: Word count of zero.")
+		          Errors.Append ("ERROR [" + Str(ip) + "]: Word count of zero.")
 		          ip = moduleUB + 1
 		        else
 		          ip = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
@@ -176,9 +175,27 @@ Protected Class SPIRVVirtualMachine
 		        Errors.Append "ERROR: " + Str(unknown) + " unknown opcodes."
 		      end if
 		      
+		      validateOpcodes()
+		      
 		    end if
 		    
 		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub validateOpcodes()
+		  Dim i As UInt32
+		  
+		  i = 0
+		  while i <= Opcodes.Ubound
+		    select case Opcodes(i).Type
+		    case else
+		      Errors.Append ("ERROR [" + Str(Opcodes(i).Offset) + "]: Unknown opcode type.")
+		    end select
+		    
+		    i = i + 1
+		  wend
 		End Sub
 	#tag EndMethod
 
