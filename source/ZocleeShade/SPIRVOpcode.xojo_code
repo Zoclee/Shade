@@ -83,6 +83,13 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpMemoryModel *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.MemoryModel
+			    result.Append "MemoryModel "
+			    result.Append SPIRVDescribeAddressingModel(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append " "
+			    result.Append SPIRVDescribeMemoryModel(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
 			    // ***** OpName *************************************************
 			    

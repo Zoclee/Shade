@@ -277,6 +277,22 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      
+		      ' ***** OpMemoryModel ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.MemoryModel
+		      if wordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) > 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Addressing Model enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) > 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Memory Model enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		        op.HasErrors = True
+		      end if
+		      
 		      ' ***** OpName ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.Name
