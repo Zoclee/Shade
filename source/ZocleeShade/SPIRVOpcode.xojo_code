@@ -17,9 +17,15 @@ Protected Class SPIRVOpcode
 			  select case Type
 			    
 			  case SPIRVOpcodeTypeEnum.Decorate
+			    // todo, extra decoration operands
+			    // todo names
 			    result.Append "Decorate "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
-			    
+			    result.Append " "
+			    result.Append SPIRVDescribeDecoration(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    if VM.ModuleBinary.UInt16Value(Offset + 2) > 3 then
+			      break 
+			    end if
 			  case else
 			    result.Append "Unknown"
 			    

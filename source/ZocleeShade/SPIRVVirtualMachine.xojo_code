@@ -126,6 +126,8 @@ Protected Class SPIRVVirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 50 // ***** OpDecorate ***************************************************
+		          
+		          // TODO: Check that IDs within bounds
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Decorate)
 		          dec = new ZocleeShade.SPIRVDecoration
 		          dec.TargetID = ModuleBinary.UInt32Value(ip + 4)

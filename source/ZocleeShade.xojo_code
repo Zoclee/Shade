@@ -21,6 +21,110 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeDecoration(value As UInt32) As String
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "PrecisionLow"
+		  case 1
+		    result = "PrecisionMedium"
+		  case 2
+		    result = "PrecisionHigh"
+		  case 3
+		    result = "Block"
+		  case 4
+		    result = "BufferBlock"
+		  case 5
+		    result = "RowMajor"
+		  case 6
+		    result = "ColMajor"
+		  case 7
+		    result = "GLSLShared"
+		  case 8
+		    result = "GLSLStd140"
+		  case 9
+		    result = "GLSLStd430"
+		  case 10
+		    result = "GLSLPacked"
+		  case 11
+		    result = "Smooth"
+		  case 12
+		    result = "Noperspective"
+		  case 13
+		    result = "Flat"
+		  case 14
+		    result = "Patch"
+		  case 15
+		    result = "Centroid"
+		  case 16
+		    result = "Sample"
+		  case 17
+		    result = "Invariant"
+		  case 18
+		    result = "Restrict"
+		  case 19
+		    result = "Aliased"
+		  case 20
+		    result = "Volatile"
+		  case 21
+		    result = "Constant"
+		  case 22
+		    result = "Coherent"
+		  case 23
+		    result = "Nonwritable"
+		  case 24
+		    result = "Nonreadable"
+		  case 25
+		    result = "Uniform"
+		  case 26
+		    result = "NoStaticUse"
+		  case 27
+		    result = "CPacked"
+		  case 28
+		    result = "FPSaturatedConversion"
+		  case 29
+		    result = "Stream"
+		  case 30
+		    result = "Location"
+		  case 31
+		    result = "Component"
+		  case 32
+		    result = "Index"
+		  case 33
+		    result = "Binding"
+		  case 34
+		    result = "DescriptorSet"
+		  case 35
+		    result = "Offset"
+		  case 36
+		    result = "Alignment"
+		  case 37
+		    result = "XfbBuffer"
+		  case 38
+		    result = "Stride"
+		  case 39
+		    result = "Built-In"
+		  case 40
+		    result = "FuncParamAttr"
+		  case 41
+		    result = "FP Rounding Mode"
+		  case 42
+		    result = "FP Fast Math Mode"
+		  case 43
+		    result = "Linkage Type"
+		  case 44
+		    result = "SpecId"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeMemoryModel(value As UInt32) As String
 		  Dim result As String
 		  
