@@ -215,7 +215,7 @@ Protected Class SPIRVVirtualMachine
 		        if wordCount <> 4 then
 		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		          op.HasErrors = True
-		        end if 
+		        end if
 		      case 39 // Built-In
 		        if wordCount <> 4 then
 		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
@@ -266,6 +266,18 @@ Protected Class SPIRVVirtualMachine
 		    case SPIRVOpcodeTypeEnum.Name
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Target ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpSource ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.Source
+		      if wordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if 
+		      if ModuleBinary.UInt32Value(op.Offset + 4) > 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Source Language enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
 		        op.HasErrors = True
 		      end if
 		      

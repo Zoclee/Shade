@@ -84,6 +84,15 @@ Protected Class SPIRVOpcode
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
 			    result.Append """"
 			    
+			    // ***** OpSource *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.Source
+			    result.Append "Source "
+			    result.Append SPIRVDescribeSourceLanguage(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    
+			    
 			  case else
 			    result.Append "Unknown"
 			    
@@ -147,6 +156,11 @@ Protected Class SPIRVOpcode
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="HasErrors"
+			Group="Behavior"
+			Type="Boolean"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true

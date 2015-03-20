@@ -347,6 +347,8 @@ Protected Module ZocleeShade
 		  Dim result As String
 		  
 		  select case value
+		  case 0
+		    result = "Unknown"
 		  case 1
 		    result = "ESSL"
 		  case 2
