@@ -330,6 +330,43 @@ End
 
 #tag EndWindowCode
 
+#tag Events lstErrors
+	#tag Event
+		Sub Change()
+		  Dim tmpStr As String
+		  Dim pos As Integer
+		  Dim offset As UInt32
+		  Dim i As Integer
+		  Dim op As ZocleeShade.SPIRVOpcode
+		  Dim found As Boolean
+		  
+		  if lstErrors.ListIndex >= 0 then
+		    
+		    tmpStr = lstErrors.List(lstErrors.ListIndex)
+		    if Left(tmpStr, 7) = "ERROR [" then
+		      pos = Instr(7, tmpStr, "]")
+		      if pos > 0 then
+		        offset = Val(Trim(Mid(tmpStr, 8, pos - 8)))
+		        
+		        i = 0
+		        found = false
+		        while (i < lstInstructions.ListCount) and not found
+		          op = lstInstructions.RowTag(i)
+		          if op.Offset = offset then
+		            lstInstructions.ListIndex = i
+		            found = true
+		          else
+		            i = i + 1
+		          end if
+		        wend
+		        
+		      end if
+		    end if
+		    
+		  end if
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events toolMain
 	#tag Event
 		Sub Action(item As ToolItem)
