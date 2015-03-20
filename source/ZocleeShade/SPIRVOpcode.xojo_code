@@ -18,9 +18,13 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.Decorate
 			    // todo, extra decoration operands
-			    // todo names
 			    result.Append "Decorate "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    if VM.Names.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
+			      result.Append "("
+			      result.Append VM.Names.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
+			      result.Append ")"
+			    end if
 			    result.Append " "
 			    result.Append SPIRVDescribeDecoration(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    select case VM.ModuleBinary.UInt32Value(Offset + 8)
@@ -52,17 +56,18 @@ Protected Class SPIRVOpcode
 			      result.Append " "
 			      result.Append SPIRVDescribeFuncParamAttr(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 41 // FP Rounding Mode
-			      break
+			      result.Append " "
+			      result.Append SPIRVDescribeFPRoundingMode(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 42 // FP Fast Math Mode
-			      break
+			      result.Append " "
+			      result.Append SPIRVDescribeFPFastMathMode(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 43 // Linkage Type
-			      break
+			      result.Append " "
+			      result.Append SPIRVDescribeLinkageType(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 44 // SpecId
 			      break
 			    end select
-			    'if VM.ModuleBinary.UInt16Value(Offset + 2) > 3 then
-			    'break
-			    'end if
+			    
 			  case else
 			    result.Append "Unknown"
 			    

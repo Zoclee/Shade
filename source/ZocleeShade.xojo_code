@@ -223,6 +223,52 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeFPFastMathMode(value As UInt32) As String
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "NotNaN"
+		  case 2
+		    result = "NotInf"
+		  case 4
+		    result = "NSZ"
+		  case 8
+		    result = "AllowRecip"
+		  case 16
+		    result = "Fast"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SPIRVDescribeFPRoundingMode(value As UInt32) As String
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "RTE"
+		  case 1
+		    result = "RTZ"
+		  case 2
+		    result = "RTP"
+		  case 3
+		    result = "RTN"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeFuncParamAttr(value As UInt32) As String
 		  Dim result As String
 		  
@@ -245,6 +291,24 @@ Protected Module ZocleeShade
 		    result = "NoWrite"
 		  case 8
 		    result = "NoReadWrite"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SPIRVDescribeLinkageType(value As UInt32) As String
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "Export"
+		  case 1
+		    result = "Import"
 		  case else
 		    result = "Unknown"
 		  end select
