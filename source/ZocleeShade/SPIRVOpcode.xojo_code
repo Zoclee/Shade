@@ -108,6 +108,16 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** TypeInt *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.TypeInt
+			    result.Append "TypeInt "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    if VM.ModuleBinary.UInt32Value(Offset + 12) = 0 then
+			      result.Append " Unsigned"
+			    else
+			      result.Append " Signed"
+			    end if
 			    
 			  case else
 			    result.Append "Unknown"

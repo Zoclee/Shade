@@ -377,15 +377,6 @@ End
 		  
 		  if op.HasErrors then
 		    g.ForeColor = &caa0000
-		  else
-		    
-		    select case op.Type
-		    case SPIRVOpcodeTypeEnum.TypeFunction, SPIRVOpcodeTypeEnum.TypeInt, _
-		      SPIRVOpcodeTypeEnum.TypePointer, SPIRVOpcodeTypeEnum.TypeVector, _
-		      SPIRVOpcodeTypeEnum.TypeVoid
-		      g.ForeColor = &c6e00c3
-		    end select
-		    
 		  end if
 		  
 		End Function
