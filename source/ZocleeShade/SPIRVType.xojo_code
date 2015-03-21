@@ -33,6 +33,15 @@ Protected Class SPIRVType
 			    end if
 			    result.Append Str(Width)
 			    
+			  case SPIRVTypeEnum.Pointer
+			    if (TypeID <> ResultID) and VM.Types.HasKey(TypeID) then
+			      typ = VM.Types.Value(TypeID)
+			      result.Append "Ptr:"
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    
 			  case SPIRVTypeEnum.Vector
 			    if (ComponentTypeID <> ResultID) and VM.Types.HasKey(ComponentTypeID) then
 			      typ = VM.Types.Value(ComponentTypeID)
@@ -44,6 +53,9 @@ Protected Class SPIRVType
 			    else
 			      result.Append "Unknown"
 			    end if
+			    
+			  case SPIRVTypeEnum.Void
+			    result.Append "Void"
 			    
 			  case else
 			    break

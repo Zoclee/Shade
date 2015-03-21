@@ -181,6 +181,9 @@ Protected Class SPIRVVirtualMachine
 	#tag Method, Flags = &h21
 		Private Sub validateOpcodes()
 		  Dim i As UInt32
+		  Dim j As UInt32
+		  Dim k As Integer
+		  Dim ub As UInt32
 		  Dim op As ZocleeShade.SPIRVOpcode
 		  Dim wordCount As Integer
 		  
@@ -313,6 +316,41 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      
+		      ' ***** OpTypeFunction ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.TypeFunction
+		      if wordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Return Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 8)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Return Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      ub = op.Offset + (wordCount * 4)
+		      j = op.Offset + 12
+		      k = 0
+		      while j < ub
+		        if ModuleBinary.UInt32Value(j) >= Bound then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Parameter " + Str(k) + "  Type ID out of bounds.")
+		          op.HasErrors = True
+		        end if
+		        if not Types.HasKey(ModuleBinary.UInt32Value(j)) then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Parameter " + Str(k) + "  Type  ID not declared.")
+		          op.HasErrors = True
+		        end if
+		        j = j + 4
+		        k = k + 1
+		      wend
+		      
 		      ' ***** OpTypeInt ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.TypeInt
@@ -352,6 +390,10 @@ Protected Class SPIRVVirtualMachine
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Circular Type  ID reference.")
 		        op.HasErrors = True
 		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 12)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
 		      
 		      ' ***** OpTypeVector ***********************************************************************************
 		      
@@ -373,7 +415,7 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 8)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Component Type  ID not found.")
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Component Type  ID not declared.")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 12) < 2 then

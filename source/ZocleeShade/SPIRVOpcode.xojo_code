@@ -20,6 +20,8 @@ Protected Class SPIRVOpcode
 			Get
 			  Dim result() As String
 			  Dim typ As ZocleeShade.SPIRVType
+			  Dim i As UInt32
+			  Dim ub As UInt32
 			  
 			  select case Type
 			    
@@ -108,6 +110,35 @@ Protected Class SPIRVOpcode
 			    result.Append SPIRVDescribeSourceLanguage(VM.ModuleBinary.UInt32Value(Offset + 4))
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    
+			    // ***** OpTypeFunction *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.TypeFunction
+			    result.Append "TypeFunction "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append "("
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 8)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 8))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append ")"
+			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    i = Offset + 12
+			    while i < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      result.Append "("
+			      if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(i)) then
+			        typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(i))
+			        result.Append typ.InstructionText
+			      else
+			        result.Append "Unknown"
+			      end if
+			      result.Append ")"
+			      i = i + 4
+			    wend
 			    
 			    // ***** OpTypeInt *************************************************
 			    
