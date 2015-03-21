@@ -775,7 +775,8 @@ Protected Module ZocleeShade
 		  TypePointer
 		  TypeVector
 		  TypeVoid
-		Source
+		  Source
+		Variable
 	#tag EndEnum
 
 	#tag Enum, Name = SPIRVTypeEnum, Type = Integer, Flags = &h0

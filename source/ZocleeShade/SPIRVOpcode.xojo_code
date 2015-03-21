@@ -188,6 +188,22 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.TypeVoid
 			    result.Append "TypeVoid"
 			    
+			    // ***** OpVariable *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.Variable
+			    result.Append "Variable "
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append " "
+			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    if VM.ModuleBinary.UInt16Value(Offset + 2) > 4 then
+			      break // todo: optional initializer
+			    end if
+			    
 			  case else
 			    result.Append "Unknown"
 			    
@@ -226,6 +242,9 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.TypeVoid
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.Variable
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  end select
 			  

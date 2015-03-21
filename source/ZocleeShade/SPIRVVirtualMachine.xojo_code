@@ -123,6 +123,9 @@ Protected Class SPIRVVirtualMachine
 		          wend
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
+		        case 38 // ***** OpVariable ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Variable)
+		          
 		        case 50 // ***** OpDecorate ***************************************************
 		          
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Decorate)
@@ -145,9 +148,7 @@ Protected Class SPIRVVirtualMachine
 		        case 54 // ***** OpName ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Name)
 		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
-		          if (ModuleBinary.UInt32Value(ip + 4) >= Bound) then
-		            Errors.Append ("ERROR [" + Str(ip) + "]: Target ID out of bounds.")
-		          end if
+		          
 		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
@@ -310,7 +311,7 @@ Protected Class SPIRVVirtualMachine
 		      if wordCount <> 3 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
-		      end if 
+		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 4 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Source Language enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
 		        op.HasErrors = True
@@ -432,6 +433,30 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpVariable ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.Variable
+		      if wordCount < 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 10 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Storage Class enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
 		        op.HasErrors = True
 		      end if
 		      
