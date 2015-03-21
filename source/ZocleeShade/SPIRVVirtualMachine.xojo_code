@@ -78,13 +78,13 @@ Protected Class SPIRVVirtualMachine
 		          
 		        case 8 // ***** OpTypeVoid ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeVoid)
-		          typ = new ZocleeShade.SPIRVType
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Void
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 10 // ***** OpTypeInt ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeInt)
-		          typ = new ZocleeShade.SPIRVType
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Integer
 		          typ.Width = ModuleBinary.UInt32Value(ip + 8)
 		          if ModuleBinary.UInt32Value(ip + 12) = 0 then
@@ -96,15 +96,15 @@ Protected Class SPIRVVirtualMachine
 		          
 		        case 12 // ***** OpTypeVector ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeVector)
-		          typ = new ZocleeShade.SPIRVType
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Vector
 		          typ.ComponentTypeID = ModuleBinary.UInt32Value(ip + 8)
-		          typ.ComponentCount = ModuleBinary.UInt32Value(ip + 8)
+		          typ.ComponentCount = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 20 // ***** OpTypePointer ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypePointer)
-		          typ = new ZocleeShade.SPIRVType
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Pointer
 		          typ.StorageClass = ModuleBinary.UInt32Value(ip + 8)
 		          typ.TypeID = ModuleBinary.UInt32Value(ip + 12)
@@ -112,7 +112,7 @@ Protected Class SPIRVVirtualMachine
 		          
 		        case 21 // ***** OpTypeFunction ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeFunction)
-		          typ = new ZocleeShade.SPIRVType
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Function_
 		          typ.ReturnTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          tempIP = ip + 12
@@ -333,6 +333,26 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      
+		      ' ***** OpTypePointer ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.TypePointer
+		      if wordCount <> 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) > 10 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Storage Class enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 12) = ModuleBinary.UInt32Value(op.Offset + 4) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Circular Type  ID reference.")
+		        op.HasErrors = True
+		      end if
+		      
 		      ' ***** OpTypeVector ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.TypeVector
@@ -342,6 +362,14 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Component Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) = ModuleBinary.UInt32Value(op.Offset + 4) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Circular Component Type  ID reference.")
 		        op.HasErrors = True
 		      end if
 		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 8)) then

@@ -1,5 +1,14 @@
 #tag Class
 Protected Class SPIRVType
+	#tag Method, Flags = &h0
+		Sub Constructor(initVM As ZocleeShade.SPIRVVirtualMachine, initResultID As UInt32)
+		  VM = initVM
+		  ResultID = initResultID
+		  
+		End Sub
+	#tag EndMethod
+
+
 	#tag Property, Flags = &h0
 		ComponentCount As UInt32
 	#tag EndProperty
@@ -12,6 +21,7 @@ Protected Class SPIRVType
 		#tag Getter
 			Get
 			  Dim result() As String
+			  Dim typ As ZocleeShade.SPIRVType
 			  
 			  select case Type
 			    
@@ -23,8 +33,21 @@ Protected Class SPIRVType
 			    end if
 			    result.Append Str(Width)
 			    
+			  case SPIRVTypeEnum.Vector
+			    if (ComponentTypeID <> ResultID) and VM.Types.HasKey(ComponentTypeID) then
+			      typ = VM.Types.Value(ComponentTypeID)
+			      result.Append typ.InstructionText
+			      result.Append "Vector"
+			      result.Append "["
+			      result.Append Str(ComponentCount)
+			      result.Append "]"
+			    else
+			      result.Append "Unknown"
+			    end if
+			    
 			  case else
 			    break
+			    result.Append "Unknown"
 			    
 			  end select
 			  
@@ -36,6 +59,10 @@ Protected Class SPIRVType
 
 	#tag Property, Flags = &h0
 		ParmTypeID() As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		ResultID As UInt32
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -56,6 +83,10 @@ Protected Class SPIRVType
 
 	#tag Property, Flags = &h0
 		TypeID As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		VM As ZocleeShade.SPIRVVirtualMachine
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

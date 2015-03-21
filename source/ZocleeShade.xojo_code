@@ -393,6 +393,42 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeStorageClass(value As UInt32) As String
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "UniformConstant"
+		  case 1
+		    result = "Input"
+		  case 2
+		    result = "Uniform"
+		  case 3
+		    result = "Output"
+		  case 4
+		    result = "WorkgroupLocal"
+		  case 5
+		    result = "WorkgroupGlobal"
+		  case 6
+		    result = "PrivateGlobal"
+		  case 7
+		    result = "Function"
+		  case 8
+		    result = "Generic"
+		  case 9
+		    result = "Private"
+		  case 10
+		    result = "AtomicCounter"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVTestModule1() As MemoryBlock
 		  ' Flow:
 		  ' 1 Optional OpSource instruction

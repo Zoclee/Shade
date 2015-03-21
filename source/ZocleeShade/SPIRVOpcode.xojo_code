@@ -120,6 +120,22 @@ Protected Class SPIRVOpcode
 			      result.Append " Signed"
 			    end if
 			    
+			    // ***** OpTypePointer *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.TypePointer
+			    result.Append "TypePointer "
+			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append "("
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 12)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 12))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append ")"
+			    
 			    // ***** OpTypeVector *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.TypeVector
@@ -130,7 +146,7 @@ Protected Class SPIRVOpcode
 			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 8))
 			      result.Append typ.InstructionText
 			    else
-			      result.Append "Unknown Type"
+			      result.Append "Unknown"
 			    end if
 			    result.Append ")"
 			    result.Append " "
