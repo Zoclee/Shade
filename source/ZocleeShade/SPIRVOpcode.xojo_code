@@ -152,6 +152,11 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
+			    // ***** OpTypeVoid *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.TypeVoid
+			    result.Append "TypeVoid"
+			    
 			  case else
 			    result.Append "Unknown"
 			    

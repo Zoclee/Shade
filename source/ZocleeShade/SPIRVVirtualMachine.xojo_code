@@ -381,6 +381,18 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      
+		      ' ***** OpTypeVoid ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.TypeVoid
+		      if wordCount <> 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      
 		    case else
 		      Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unknown opcode type.")
 		      op.HasErrors = True
