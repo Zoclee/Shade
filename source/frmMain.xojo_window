@@ -307,6 +307,9 @@ End
 		    lstInfo.AddRow "Types"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Types.Keys.Ubound + 1)
 		    
+		    lstInfo.AddRow "Functions"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Functions.Keys.Ubound + 1)
+		    
 		    // display instructions
 		    
 		    lstInstructions.ColumnAlignment(0) = Listbox.AlignRight

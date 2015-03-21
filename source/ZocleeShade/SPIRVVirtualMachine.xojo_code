@@ -7,6 +7,7 @@ Protected Class SPIRVVirtualMachine
 		  Redim Decorations(-1)
 		  Redim EntryPoints(-1)
 		  Redim Errors(-1)
+		  Functions = new Dictionary()
 		  GeneratorMagicNumber = 0
 		  MemoryModel = 0 // Simple
 		  Names = new Dictionary()
@@ -126,6 +127,10 @@ Protected Class SPIRVVirtualMachine
 		        case 38 // ***** OpVariable ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Variable)
 		          
+		        case 40 // ***** OpFunction ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Function_)
+		          Functions.Value(ModuleBinary.UInt32Value(ip + 8)) = op
+		          
 		        case 50 // ***** OpDecorate ***************************************************
 		          
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Decorate)
@@ -148,7 +153,6 @@ Protected Class SPIRVVirtualMachine
 		        case 54 // ***** OpName ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Name)
 		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
-		          
 		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
@@ -187,6 +191,7 @@ Protected Class SPIRVVirtualMachine
 		  Dim ub As UInt32
 		  Dim op As ZocleeShade.SPIRVOpcode
 		  Dim wordCount As Integer
+		  Dim typ As ZocleeShade.SPIRVType
 		  
 		  i = 0
 		  while i <= Opcodes.Ubound
@@ -279,6 +284,45 @@ Protected Class SPIRVVirtualMachine
 		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Entry Point ID out of bounds.")
 		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpFunction ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.Function_
+		      if wordCount <> 5 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 15 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Function Control Mask value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 16) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Function Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 16)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Function Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 16)) then
+		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 16))
+		        if typ.ReturnTypeID <> ModuleBinary.UInt32Value(op.Offset + 4) then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID does not match Return Type ID in function declaration.")
+		          op.HasErrors = True
+		        end if
 		      end if
 		      
 		      ' ***** OpMemoryModel ***********************************************************************************
@@ -490,6 +534,10 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Property, Flags = &h0
 		Errors() As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Functions As Dictionary
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

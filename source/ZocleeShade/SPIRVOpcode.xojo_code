@@ -86,6 +86,23 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpFunction *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.Function_
+			    result.Append "Function "
+			    result.Append SPIRVDescribeFunctionControlMask(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append "("
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 16)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 16))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append ")"
+			    
+			    
 			    // ***** OpMemoryModel *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.MemoryModel
@@ -227,6 +244,9 @@ Protected Class SPIRVOpcode
 			  result = 0
 			  
 			  select case Type
+			    
+			  case SPIRVOpcodeTypeEnum.Function_
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  case SPIRVOpcodeTypeEnum.TypeFunction
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)

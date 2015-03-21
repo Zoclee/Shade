@@ -22,8 +22,32 @@ Protected Class SPIRVType
 			Get
 			  Dim result() As String
 			  Dim typ As ZocleeShade.SPIRVType
+			  Dim i As UInt32
 			  
 			  select case Type
+			    
+			  case SPIRVTypeEnum.Function_
+			    if (ReturnTypeID <> ResultID) and VM.Types.HasKey(ReturnTypeID) then
+			      typ = VM.Types.Value(ReturnTypeID)
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append " func("
+			    i = 0 
+			    while i <= ParmTypeID.Ubound
+			      if i > 0 then
+			        result.Append ", " 
+			      end if
+			      if (ParmTypeID(i) <> ResultID) and VM.Types.HasKey(ParmTypeID(i)) then
+			        typ = VM.Types.Value(ParmTypeID(i))
+			        result.Append typ.InstructionText
+			      else
+			        result.Append "Unknown"
+			      end if
+			      i = i + 1
+			    wend
+			    result.Append ")"
 			    
 			  case SPIRVTypeEnum.Integer
 			    if Signed then
@@ -113,6 +137,11 @@ Protected Class SPIRVType
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="InstructionText"
+			Group="Behavior"
+			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"

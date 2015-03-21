@@ -329,6 +329,30 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeFunctionControlMask(value As UInt32) As String
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "NoControl"
+		  case 1
+		    result = "InLine"
+		  case 2
+		    result = "DontInline"
+		  case 4
+		    result = "Pure"
+		  case 8
+		    result = "Const"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeLinkageType(value As UInt32) As String
 		  Dim result As String
 		  
@@ -768,6 +792,7 @@ Protected Module ZocleeShade
 		Unknown
 		  Decorate
 		  EntryPoint
+		  Function_
 		  MemoryModel
 		  Name
 		  TypeFunction
