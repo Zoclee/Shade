@@ -790,18 +790,18 @@ Protected Module ZocleeShade
 
 	#tag Enum, Name = SPIRVOpcodeTypeEnum, Type = Integer, Flags = &h0
 		Unknown
-		  Decorate
-		  EntryPoint
-		  Function_
-		  MemoryModel
-		  Name
-		  TypeFunction
-		  TypeInt
-		  TypePointer
-		  TypeVector
-		  TypeVoid
-		  Source
-		Variable
+		  OpDecorate
+		  OpEntryPoint
+		  OpFunction
+		  OpMemoryModel
+		  OpName
+		  OpTypeFunction
+		  OpTypeInt
+		  OpTypePointer
+		  OpTypeVector
+		  OpTypeVoid
+		  OpSource
+		OpVariable
 	#tag EndEnum
 
 	#tag Enum, Name = SPIRVTypeEnum, Type = Integer, Flags = &h0

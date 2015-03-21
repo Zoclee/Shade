@@ -27,7 +27,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpDecorate *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.Decorate
+			  case SPIRVOpcodeTypeEnum.OpDecorate
 			    result.Append "Decorate "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
 			    if VM.Names.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
@@ -80,7 +80,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpEntryPoint *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.EntryPoint
+			  case SPIRVOpcodeTypeEnum.OpEntryPoint
 			    result.Append "EntryPoint "
 			    result.Append SPIRVDescribeExecutionModel(VM.ModuleBinary.UInt32Value(Offset + 4))
 			    result.Append " "
@@ -88,7 +88,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFunction *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.Function_
+			  case SPIRVOpcodeTypeEnum.OpFunction
 			    result.Append "Function "
 			    result.Append SPIRVDescribeFunctionControlMask(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    result.Append " "
@@ -105,7 +105,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpMemoryModel *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.MemoryModel
+			  case SPIRVOpcodeTypeEnum.OpMemoryModel
 			    result.Append "MemoryModel "
 			    result.Append SPIRVDescribeAddressingModel(VM.ModuleBinary.UInt32Value(Offset + 4))
 			    result.Append " "
@@ -113,7 +113,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpName *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.Name
+			  case SPIRVOpcodeTypeEnum.OpName
 			    result.Append "Name "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
 			    result.Append " """
@@ -122,7 +122,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSource *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.Source
+			  case SPIRVOpcodeTypeEnum.OpSource
 			    result.Append "Source "
 			    result.Append SPIRVDescribeSourceLanguage(VM.ModuleBinary.UInt32Value(Offset + 4))
 			    result.Append " "
@@ -130,7 +130,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeFunction *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.TypeFunction
+			  case SPIRVOpcodeTypeEnum.OpTypeFunction
 			    result.Append "TypeFunction "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    result.Append "("
@@ -159,7 +159,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeInt *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.TypeInt
+			  case SPIRVOpcodeTypeEnum.OpTypeInt
 			    result.Append "TypeInt "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    if VM.ModuleBinary.UInt32Value(Offset + 12) = 0 then
@@ -170,7 +170,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypePointer *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.TypePointer
+			  case SPIRVOpcodeTypeEnum.OpTypePointer
 			    result.Append "TypePointer "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    result.Append " "
@@ -186,7 +186,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeVector *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.TypeVector
+			  case SPIRVOpcodeTypeEnum.OpTypeVector
 			    result.Append "TypeVector "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    result.Append "("
@@ -202,12 +202,12 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeVoid *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.TypeVoid
+			  case SPIRVOpcodeTypeEnum.OpTypeVoid
 			    result.Append "TypeVoid"
 			    
 			    // ***** OpVariable *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.Variable
+			  case SPIRVOpcodeTypeEnum.OpVariable
 			    result.Append "Variable "
 			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
 			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -245,25 +245,25 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
-			  case SPIRVOpcodeTypeEnum.Function_
+			  case SPIRVOpcodeTypeEnum.OpFunction
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
-			  case SPIRVOpcodeTypeEnum.TypeFunction
+			  case SPIRVOpcodeTypeEnum.OpTypeFunction
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
-			  case SPIRVOpcodeTypeEnum.TypeInt
+			  case SPIRVOpcodeTypeEnum.OpTypeInt
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
-			  case SPIRVOpcodeTypeEnum.TypePointer
+			  case SPIRVOpcodeTypeEnum.OpTypePointer
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
-			  case SPIRVOpcodeTypeEnum.TypeVector
+			  case SPIRVOpcodeTypeEnum.OpTypeVector
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
-			  case SPIRVOpcodeTypeEnum.TypeVoid
+			  case SPIRVOpcodeTypeEnum.OpTypeVoid
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
-			  case SPIRVOpcodeTypeEnum.Variable
+			  case SPIRVOpcodeTypeEnum.OpVariable
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  end select
@@ -343,14 +343,16 @@ Protected Class SPIRVOpcode
 				"0 - Unknown"
 				"1 - Decorate"
 				"2 - EntryPoint"
-				"3 - MemoryModel"
-				"4 - Name"
-				"5 - TypeFunction"
-				"6 - TypeInt"
-				"7 - TypePointer"
-				"8 - TypeVector"
-				"9 - TypeVoid"
-				"10 - Source"
+				"3 - Function_"
+				"4 - MemoryModel"
+				"5 - Name"
+				"6 - TypeFunction"
+				"7 - TypeInt"
+				"8 - TypePointer"
+				"9 - TypeVector"
+				"10 - TypeVoid"
+				"11 - Source"
+				"12 - Variable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
