@@ -333,6 +333,26 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      
+		      ' ***** OpTypeVector ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.TypeVector
+		      if wordCount <> 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 8)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Component Type  ID not found.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 12) < 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid Component Count.")
+		        op.HasErrors = True
+		      end if
+		      
 		    case else
 		      Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unknown opcode type.")
 		      op.HasErrors = True

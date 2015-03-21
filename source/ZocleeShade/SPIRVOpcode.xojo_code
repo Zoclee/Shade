@@ -19,6 +19,7 @@ Protected Class SPIRVOpcode
 		#tag Getter
 			Get
 			  Dim result() As String
+			  Dim typ As ZocleeShade.SPIRVType
 			  
 			  select case Type
 			    
@@ -108,7 +109,7 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
-			    // ***** TypeInt *************************************************
+			    // ***** OpTypeInt *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.TypeInt
 			    result.Append "TypeInt "
@@ -118,6 +119,22 @@ Protected Class SPIRVOpcode
 			    else
 			      result.Append " Signed"
 			    end if
+			    
+			    // ***** OpTypeVector *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.TypeVector
+			    result.Append "TypeVector "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append "("
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 8)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 8))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown Type"
+			    end if
+			    result.Append ")"
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
 			  case else
 			    result.Append "Unknown"
