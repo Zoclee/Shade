@@ -381,6 +381,13 @@ End
 		  
 		End Function
 	#tag EndEvent
+	#tag Event
+		Sub Open()
+		  Me.ColumnSortDirection(0)=0
+		  Me.ColumnSortDirection(1)=0
+		  Me.ColumnSortDirection(2)=0
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events toolMain
 	#tag Event
