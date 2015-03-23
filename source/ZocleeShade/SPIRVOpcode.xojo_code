@@ -116,6 +116,11 @@ Protected Class SPIRVOpcode
 			    end if
 			    result.Append ")"
 			    
+			    // ***** OpLabel *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpLabel
+			    result.Append "Label "
+			    
 			    // ***** OpMemoryModel *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpMemoryModel

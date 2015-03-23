@@ -157,6 +157,9 @@ Protected Class SPIRVVirtualMachine
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpName)
 		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
 		          
+		        case 208 // ***** OpLabel ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLabel)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -168,6 +171,8 @@ Protected Class SPIRVVirtualMachine
 		        
 		        op.Offset = ip
 		        Opcodes.Append op
+		        
+		        // todo: check for unique result id
 		        
 		        if ModuleBinary.UInt16Value(ip + 2) = 0 then
 		          Errors.Append ("ERROR [" + Str(ip) + "]: Word count of zero.")
@@ -344,6 +349,18 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpLabel ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpLabel
+		      if wordCount <> 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
 		        op.HasErrors = True
 		      end if
