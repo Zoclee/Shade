@@ -102,6 +102,19 @@ Protected Class SPIRVOpcode
 			    end if
 			    result.Append ")"
 			    
+			    // ***** OpFunctionParameter *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
+			    result.Append "FunctionParameter "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append "("
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append ")"
 			    
 			    // ***** OpMemoryModel *************************************************
 			    
@@ -248,6 +261,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpFunction
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFunction
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
@@ -341,18 +357,18 @@ Protected Class SPIRVOpcode
 			EditorType="Enum"
 			#tag EnumValues
 				"0 - Unknown"
-				"1 - Decorate"
-				"2 - EntryPoint"
-				"3 - Function_"
-				"4 - MemoryModel"
-				"5 - Name"
-				"6 - TypeFunction"
-				"7 - TypeInt"
-				"8 - TypePointer"
-				"9 - TypeVector"
-				"10 - TypeVoid"
-				"11 - Source"
-				"12 - Variable"
+				"1 - OpDecorate"
+				"2 - OpEntryPoint"
+				"3 - OpFunction"
+				"4 - OpMemoryModel"
+				"5 - OpName"
+				"6 - OpTypeFunction"
+				"7 - OpTypeInt"
+				"8 - OpTypePointer"
+				"9 - OpTypeVector"
+				"10 - OpTypeVoid"
+				"11 - OpSource"
+				"12 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

@@ -793,6 +793,7 @@ Protected Module ZocleeShade
 		  OpDecorate
 		  OpEntryPoint
 		  OpFunction
+		  OpFunctionParameter
 		  OpMemoryModel
 		  OpName
 		  OpTypeFunction
