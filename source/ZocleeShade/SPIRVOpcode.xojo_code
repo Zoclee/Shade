@@ -25,6 +25,28 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
+			    // ***** OpCompositeExtract *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
+			    result.Append "OpCompositeExtract "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append "("
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append ") "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    i = Offset + 16
+			    while i < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpDecorate *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpDecorate
@@ -102,6 +124,39 @@ Protected Class SPIRVOpcode
 			    end if
 			    result.Append ")"
 			    
+			    // ***** OpFunctionParameter *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
+			    result.Append "FunctionParameter "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append "("
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append ")"
+			    
+			    // ***** OpLabel *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpLabel
+			    result.Append "Label"
+			    
+			    // ***** OpLoad *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpLoad
+			    result.Append "Load "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append "("
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append ") "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
 			    // ***** OpMemoryModel *************************************************
 			    
@@ -245,7 +300,16 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
+			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpFunction
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
+			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
+			  case SPIRVOpcodeTypeEnum.OpLoad
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFunction
@@ -341,18 +405,20 @@ Protected Class SPIRVOpcode
 			EditorType="Enum"
 			#tag EnumValues
 				"0 - Unknown"
-				"1 - Decorate"
-				"2 - EntryPoint"
-				"3 - Function_"
-				"4 - MemoryModel"
-				"5 - Name"
-				"6 - TypeFunction"
-				"7 - TypeInt"
-				"8 - TypePointer"
-				"9 - TypeVector"
-				"10 - TypeVoid"
-				"11 - Source"
-				"12 - Variable"
+				"1 - OpDecorate"
+				"2 - OpEntryPoint"
+				"3 - OpFunction"
+				"4 - OpFunctionParameter"
+				"5 - OpLabel"
+				"6 - OpMemoryModel"
+				"7 - OpName"
+				"8 - OpTypeFunction"
+				"9 - OpTypeInt"
+				"10 - OpTypePointer"
+				"11 - OpTypeVector"
+				"12 - OpTypeVoid"
+				"13 - OpSource"
+				"14 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

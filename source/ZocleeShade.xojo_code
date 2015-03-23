@@ -790,9 +790,13 @@ Protected Module ZocleeShade
 
 	#tag Enum, Name = SPIRVOpcodeTypeEnum, Type = Integer, Flags = &h0
 		Unknown
+		  OpCompositeExtract
 		  OpDecorate
 		  OpEntryPoint
 		  OpFunction
+		  OpFunctionParameter
+		  OpLabel
+		  OpLoad
 		  OpMemoryModel
 		  OpName
 		  OpTypeFunction

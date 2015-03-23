@@ -254,6 +254,8 @@ End
 		    
 		    readStream.Close
 		    
+		    //m = SPIRVTestModule1()
+		    
 		    App.VM.LoadModule(m)
 		    
 		    // display errors
@@ -380,6 +382,8 @@ End
 		  
 		  if op.HasErrors then
 		    g.ForeColor = &caa0000
+		  elseif App.VM.Types.HasKey(op.ResultID) then
+		    g.ForeColor = &c007700
 		  end if
 		  
 		End Function

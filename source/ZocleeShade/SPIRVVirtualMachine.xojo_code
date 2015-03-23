@@ -11,6 +11,7 @@ Protected Class SPIRVVirtualMachine
 		  GeneratorMagicNumber = 0
 		  MemoryModel = 0 // Simple
 		  Names = new Dictionary()
+		  OpcodeLookup = new Dictionary()
 		  Redim Opcodes(-1)
 		  SourceLanguage = 0 // Unknown
 		  SourceVersion = 0
@@ -131,6 +132,12 @@ Protected Class SPIRVVirtualMachine
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunction)
 		          Functions.Value(ModuleBinary.UInt32Value(ip + 8)) = op
 		          
+		        case 41 // ***** OpFunctionParameter ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionParameter)
+		          
+		        case 46 // ***** OpLoad ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoad)
+		          
 		        case 50 // ***** OpDecorate ***************************************************
 		          
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDecorate)
@@ -154,6 +161,12 @@ Protected Class SPIRVVirtualMachine
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpName)
 		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
 		          
+		        case 62 // ***** OpCompositeExtract ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeExtract)
+		          
+		        case 208 // ***** OpLabel ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLabel)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -161,10 +174,20 @@ Protected Class SPIRVVirtualMachine
 		          
 		        end select
 		        
-		        ' store opcode
+		        // store opcode
 		        
 		        op.Offset = ip
 		        Opcodes.Append op
+		        
+		        // check for duplicate result id, and store in lookup table if necessary
+		        
+		        if op.ResultID > 0 then
+		          if OpcodeLookup.HasKey(op.ResultID) then
+		            Errors.Append ("ERROR [" + Str(ip) + "]: Duplicate result ID.")
+		          else
+		            OpcodeLookup.Value(op.ResultID) = op
+		          end if
+		        end if
 		        
 		        if ModuleBinary.UInt16Value(ip + 2) = 0 then
 		          Errors.Append ("ERROR [" + Str(ip) + "]: Word count of zero.")
@@ -200,6 +223,31 @@ Protected Class SPIRVVirtualMachine
 		    wordCount = ModuleBinary.UInt16Value(op.Offset + 2)
 		    
 		    select case op.Type
+		      
+		      ' ***** OpCompositeExtract ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpCompositeExtract
+		      if wordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not OpcodeLookup.HasKey(ModuleBinary.UInt32Value(op.Offset + 12)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Composite  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      // todo: validate that result type id is the same type as the object selected by the last provided index
 		      
 		      ' ***** OpDecorate ***********************************************************************************
 		      
@@ -323,6 +371,62 @@ Protected Class SPIRVVirtualMachine
 		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID does not match Return Type ID in function declaration.")
 		          op.HasErrors = True
 		        end if
+		      end if
+		      
+		      ' ***** OpFunctionParameter ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpFunctionParameter
+		      if wordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpLabel ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpLabel
+		      if wordCount <> 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpLoad ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpLoad
+		      if wordCount < 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 12) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Pointer ID out of bounds.")
+		        op.HasErrors = True
 		      end if
 		      
 		      ' ***** OpMemoryModel ***********************************************************************************
@@ -554,6 +658,10 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Property, Flags = &h0
 		Names As Dictionary
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private OpcodeLookup As Dictionary
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
