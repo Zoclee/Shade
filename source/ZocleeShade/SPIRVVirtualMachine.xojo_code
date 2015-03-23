@@ -33,6 +33,8 @@ Protected Class SPIRVVirtualMachine
 		  Dim dec As ZocleeShade.SPIRVDecoration
 		  Dim typ As ZocleeShade.SPIRVType
 		  Dim op As ZocleeShade.SPIRVOpcode
+		  Dim duplicateID As Boolean
+		  Dim i As Integer
 		  
 		  Clear()
 		  
@@ -170,12 +172,25 @@ Protected Class SPIRVVirtualMachine
 		          
 		        end select
 		        
-		        ' store opcode
+		        ' set opcode offset
 		        
 		        op.Offset = ip
-		        Opcodes.Append op
 		        
-		        // todo: check for unique result id
+		        // check for unique result id
+		        duplicateID = false
+		        i = 0
+		        while (i <= Opcodes.Ubound) and not duplicateID
+		          if (Opcodes(i).ResultID > 0) and (Opcodes(i).ResultID = op.ResultID) then
+		            Errors.Append ("ERROR [" + Str(ip) + "]: Duplicate result ID.")
+		            duplicateID = true
+		          else
+		            i = i + 1
+		          end if
+		        wend
+		        
+		        // store opcode
+		        
+		        Opcodes.Append op
 		        
 		        if ModuleBinary.UInt16Value(ip + 2) = 0 then
 		          Errors.Append ("ERROR [" + Str(ip) + "]: Word count of zero.")
