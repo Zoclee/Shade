@@ -61,30 +61,30 @@ Protected Class SPIRVVirtualMachine
 		        select case ModuleBinary.UInt16Value(ip)
 		          
 		        case 1 // ***** OpSource ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Source)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSource)
 		          SourceLanguage = ModuleBinary.UInt32Value(ip + 4)
 		          SourceVersion = ModuleBinary.UInt32Value(ip + 8)
 		          
 		        case 5 // ***** OpMemoryModel ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.MemoryModel)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemoryModel)
 		          AddressingModel = ModuleBinary.UInt32Value(ip + 4)
 		          MemoryModel = ModuleBinary.UInt32Value(ip + 8)
 		          
 		        case 6 // ***** OpEntryPoint ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.EntryPoint)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEntryPoint)
 		          ep = new ZocleeShade.SPIRVEntryPoint
 		          ep.ExecutionModel = ModuleBinary.UInt32Value(ip + 4)
 		          ep.EntryPointID = ModuleBinary.UInt32Value(ip + 8)
 		          EntryPoints.Append ep
 		          
 		        case 8 // ***** OpTypeVoid ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeVoid)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeVoid)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Void
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 10 // ***** OpTypeInt ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeInt)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeInt)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Integer
 		          typ.Width = ModuleBinary.UInt32Value(ip + 8)
@@ -96,7 +96,7 @@ Protected Class SPIRVVirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 12 // ***** OpTypeVector ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeVector)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeVector)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Vector
 		          typ.ComponentTypeID = ModuleBinary.UInt32Value(ip + 8)
@@ -104,7 +104,7 @@ Protected Class SPIRVVirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 20 // ***** OpTypePointer ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypePointer)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypePointer)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Pointer
 		          typ.StorageClass = ModuleBinary.UInt32Value(ip + 8)
@@ -112,7 +112,7 @@ Protected Class SPIRVVirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 21 // ***** OpTypeFunction ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.TypeFunction)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeFunction)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Function_
 		          typ.ReturnTypeID = ModuleBinary.UInt32Value(ip + 8)
@@ -125,15 +125,15 @@ Protected Class SPIRVVirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 38 // ***** OpVariable ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Variable)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVariable)
 		          
 		        case 40 // ***** OpFunction ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Function_)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunction)
 		          Functions.Value(ModuleBinary.UInt32Value(ip + 8)) = op
 		          
 		        case 50 // ***** OpDecorate ***************************************************
 		          
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Decorate)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDecorate)
 		          dec = new ZocleeShade.SPIRVDecoration
 		          dec.TargetID = ModuleBinary.UInt32Value(ip + 4)
 		          dec.Decoration = ModuleBinary.UInt32Value(ip + 8)
@@ -151,7 +151,7 @@ Protected Class SPIRVVirtualMachine
 		          Decorations.Append dec
 		          
 		        case 54 // ***** OpName ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Name)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpName)
 		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
 		          
 		        case else
@@ -203,7 +203,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpDecorate ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.Decorate
+		    case SPIRVOpcodeTypeEnum.OpDecorate
 		      
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Target ID out of bounds.")
@@ -272,7 +272,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpEntryPoint ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.EntryPoint
+		    case SPIRVOpcodeTypeEnum.OpEntryPoint
 		      if wordCount <> 3 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
@@ -288,7 +288,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpFunction ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.Function_
+		    case SPIRVOpcodeTypeEnum.OpFunction
 		      if wordCount <> 5 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
@@ -327,7 +327,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpMemoryModel ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.MemoryModel
+		    case SPIRVOpcodeTypeEnum.OpMemoryModel
 		      if wordCount <> 3 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
@@ -343,7 +343,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpName ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.Name
+		    case SPIRVOpcodeTypeEnum.OpName
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Target ID out of bounds.")
 		        op.HasErrors = True
@@ -351,7 +351,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpSource ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.Source
+		    case SPIRVOpcodeTypeEnum.OpSource
 		      if wordCount <> 3 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
@@ -363,7 +363,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpTypeFunction ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.TypeFunction
+		    case SPIRVOpcodeTypeEnum.OpTypeFunction
 		      if wordCount < 3 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
@@ -398,7 +398,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpTypeInt ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.TypeInt
+		    case SPIRVOpcodeTypeEnum.OpTypeInt
 		      if wordCount <> 4 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
@@ -418,7 +418,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpTypePointer ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.TypePointer
+		    case SPIRVOpcodeTypeEnum.OpTypePointer
 		      if wordCount <> 4 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
@@ -442,7 +442,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpTypeVector ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.TypeVector
+		    case SPIRVOpcodeTypeEnum.OpTypeVector
 		      if wordCount <> 4 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
@@ -470,7 +470,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpTypeVoid ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.TypeVoid
+		    case SPIRVOpcodeTypeEnum.OpTypeVoid
 		      if wordCount <> 2 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
@@ -482,7 +482,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      ' ***** OpVariable ***********************************************************************************
 		      
-		    case SPIRVOpcodeTypeEnum.Variable
+		    case SPIRVOpcodeTypeEnum.OpVariable
 		      if wordCount < 4 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
