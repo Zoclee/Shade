@@ -254,6 +254,8 @@ End
 		    
 		    readStream.Close
 		    
+		    //m = SPIRVTestModule1()
+		    
 		    App.VM.LoadModule(m)
 		    
 		    // display errors

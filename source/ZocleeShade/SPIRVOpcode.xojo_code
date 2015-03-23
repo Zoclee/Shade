@@ -25,6 +25,28 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
+			    // ***** OpCompositeExtract *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
+			    result.Append "OpCompositeExtract "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append "("
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append ") "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    i = Offset + 16
+			    while i < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpDecorate *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpDecorate
@@ -277,6 +299,9 @@ Protected Class SPIRVOpcode
 			  result = 0
 			  
 			  select case Type
+			    
+			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  case SPIRVOpcodeTypeEnum.OpFunction
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
