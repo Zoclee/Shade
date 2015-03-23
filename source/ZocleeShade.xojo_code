@@ -757,7 +757,7 @@ Protected Module ZocleeShade
 		  ' 21(arrayidx2): 7(ptr) InBoundsAccessChain 12(out) 15(call)
 		  bin.UInt16Value(676) = 94 ' OpInBoundsAccessChain
 		  bin.UInt16Value(678) = 4 + 1 ' Word Count
-		  bin.UInt32Value(682) = 7 ' result type id
+		  bin.UInt32Value(680) = 7 ' result type id
 		  bin.UInt32Value(684) = 21 ' result id
 		  bin.UInt32Value(688) = 12 ' base id
 		  bin.UInt32Value(692) = 15 ' index id

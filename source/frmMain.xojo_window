@@ -254,7 +254,8 @@ End
 		    
 		    readStream.Close
 		    
-		    //m = SPIRVTestModule1()
+		    ' this line is used for testing
+		    'm = SPIRVTestModule1()
 		    
 		    App.VM.LoadModule(m)
 		    
