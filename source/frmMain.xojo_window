@@ -381,7 +381,7 @@ End
 		  if op.HasErrors then
 		    g.ForeColor = &caa0000
 		  elseif App.VM.Types.HasKey(op.ResultID) then
-		    g.ForeColor = &c005500
+		    g.ForeColor = &c007700
 		  end if
 		  
 		End Function

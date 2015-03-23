@@ -119,7 +119,22 @@ Protected Class SPIRVOpcode
 			    // ***** OpLabel *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpLabel
-			    result.Append "Label "
+			    result.Append "Label"
+			    
+			    // ***** OpLoad *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpLoad
+			    result.Append "Load "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append "("
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append ") "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
 			    // ***** OpMemoryModel *************************************************
 			    
@@ -269,6 +284,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpLoad
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFunction
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
@@ -365,15 +383,17 @@ Protected Class SPIRVOpcode
 				"1 - OpDecorate"
 				"2 - OpEntryPoint"
 				"3 - OpFunction"
-				"4 - OpMemoryModel"
-				"5 - OpName"
-				"6 - OpTypeFunction"
-				"7 - OpTypeInt"
-				"8 - OpTypePointer"
-				"9 - OpTypeVector"
-				"10 - OpTypeVoid"
-				"11 - OpSource"
-				"12 - OpVariable"
+				"4 - OpFunctionParameter"
+				"5 - OpLabel"
+				"6 - OpMemoryModel"
+				"7 - OpName"
+				"8 - OpTypeFunction"
+				"9 - OpTypeInt"
+				"10 - OpTypePointer"
+				"11 - OpTypeVector"
+				"12 - OpTypeVoid"
+				"13 - OpSource"
+				"14 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

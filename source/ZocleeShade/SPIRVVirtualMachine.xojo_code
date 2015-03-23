@@ -134,6 +134,9 @@ Protected Class SPIRVVirtualMachine
 		        case 41 // ***** OpFunctionParameter ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionParameter)
 		          
+		        case 46 // ***** OpLoad ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoad)
+		          
 		        case 50 // ***** OpDecorate ***************************************************
 		          
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDecorate)
@@ -362,6 +365,30 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpLoad ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpLoad
+		      if wordCount < 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 12) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Pointer ID out of bounds.")
 		        op.HasErrors = True
 		      end if
 		      
