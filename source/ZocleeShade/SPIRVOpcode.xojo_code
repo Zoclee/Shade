@@ -1,5 +1,25 @@
 #tag Class
 Protected Class SPIRVOpcode
+	#tag Method, Flags = &h21
+		Private Function compose_type(binOffset As UInt32) As String
+		  Dim result() As String
+		  Dim typ As ZocleeShade.SPIRVType
+		  
+		  result.Append Str(VM.ModuleBinary.UInt32Value(binOffset))
+		  result.Append "("
+		  if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(binOffset)) then
+		    typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(binOffset))
+		    result.Append typ.InstructionText
+		  else
+		    result.Append "Unknown"
+		  end if
+		  result.Append ") "
+		  
+		  return Join(result, "")
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub Constructor(initVM As ZocleeShade.SPIRVVirtualMachine, initType As SPIRVOpcodeTypeEnum)
 		  VM = initVM
@@ -29,15 +49,8 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
 			    result.Append "OpCompositeExtract "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
-			    result.Append "("
-			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
-			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
-			      result.Append typ.InstructionText
-			    else
-			      result.Append "Unknown"
-			    end if
-			    result.Append ") "
+			    result.Append compose_type(Offset + 4)
+			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
 			    i = Offset + 16
@@ -114,43 +127,20 @@ Protected Class SPIRVOpcode
 			    result.Append "Function "
 			    result.Append SPIRVDescribeFunctionControlMask(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    result.Append " "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
-			    result.Append "("
-			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 16)) then
-			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 16))
-			      result.Append typ.InstructionText
-			    else
-			      result.Append "Unknown"
-			    end if
-			    result.Append ")"
+			    result.Append compose_type(Offset + 16)
 			    
 			    // ***** OpFunctionParameter *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
 			    result.Append "FunctionParameter "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
-			    result.Append "("
-			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
-			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
-			      result.Append typ.InstructionText
-			    else
-			      result.Append "Unknown"
-			    end if
-			    result.Append ")"
+			    result.Append compose_type(Offset + 4)
 			    
 			    // ***** OpInBoundsAccessChain *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
 			    result.Append "InBoundsAccessChain "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
-			    result.Append "("
-			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
-			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
-			      result.Append typ.InstructionText
-			    else
-			      result.Append "Unknown"
-			    end if
-			    result.Append ") "
+			    result.Append compose_type(Offset + 4)
+			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
 			    i = Offset + 16
@@ -169,15 +159,8 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpLoad
 			    result.Append "Load "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
-			    result.Append "("
-			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
-			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
-			      result.Append typ.InstructionText
-			    else
-			      result.Append "Unknown"
-			    end if
-			    result.Append ") "
+			    result.Append compose_type(Offset + 4)
+			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
 			    // ***** OpMemoryModel *************************************************
@@ -209,15 +192,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFunction
 			    result.Append "TypeFunction "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
-			    result.Append "("
-			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 8)) then
-			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 8))
-			      result.Append typ.InstructionText
-			    else
-			      result.Append "Unknown"
-			    end if
-			    result.Append ")"
+			    result.Append compose_type(Offset + 8)
 			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
 			    i = Offset + 12
 			    while i < ub
@@ -251,29 +226,13 @@ Protected Class SPIRVOpcode
 			    result.Append "TypePointer "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    result.Append " "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
-			    result.Append "("
-			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 12)) then
-			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 12))
-			      result.Append typ.InstructionText
-			    else
-			      result.Append "Unknown"
-			    end if
-			    result.Append ")"
+			    result.Append compose_type(Offset + 12)
 			    
 			    // ***** OpTypeVector *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeVector
 			    result.Append "TypeVector "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
-			    result.Append "("
-			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 8)) then
-			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 8))
-			      result.Append typ.InstructionText
-			    else
-			      result.Append "Unknown"
-			    end if
-			    result.Append ")"
+			    result.Append compose_type(Offset + 8)
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
@@ -286,12 +245,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpVariable
 			    result.Append "Variable "
-			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
-			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
-			      result.Append typ.InstructionText
-			    else
-			      result.Append "Unknown"
-			    end if
+			    result.Append compose_type(Offset + 4)
 			    result.Append " "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    if VM.ModuleBinary.UInt16Value(Offset + 2) > 4 then
