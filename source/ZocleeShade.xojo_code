@@ -795,6 +795,7 @@ Protected Module ZocleeShade
 		  OpEntryPoint
 		  OpFunction
 		  OpFunctionParameter
+		  OpInBoundsAccessChain
 		  OpLabel
 		  OpLoad
 		  OpMemoryModel

@@ -138,6 +138,28 @@ Protected Class SPIRVOpcode
 			    end if
 			    result.Append ")"
 			    
+			    // ***** OpInBoundsAccessChain *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
+			    result.Append "InBoundsAccessChain "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append "("
+			    if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
+			      typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append ") "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    i = Offset + 16
+			    while i < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpLabel *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpLabel
@@ -309,6 +331,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpLoad
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -405,20 +430,22 @@ Protected Class SPIRVOpcode
 			EditorType="Enum"
 			#tag EnumValues
 				"0 - Unknown"
-				"1 - OpDecorate"
-				"2 - OpEntryPoint"
-				"3 - OpFunction"
-				"4 - OpFunctionParameter"
-				"5 - OpLabel"
-				"6 - OpMemoryModel"
-				"7 - OpName"
-				"8 - OpTypeFunction"
-				"9 - OpTypeInt"
-				"10 - OpTypePointer"
-				"11 - OpTypeVector"
-				"12 - OpTypeVoid"
-				"13 - OpSource"
-				"14 - OpVariable"
+				"1 - OpCompositeExtract"
+				"2 - OpDecorate"
+				"3 - OpEntryPoint"
+				"4 - OpFunction"
+				"5 - OpFunctionParameter"
+				"6 - OpLabel"
+				"7 - OpLoad"
+				"8 - OpMemoryModel"
+				"9 - OpName"
+				"10 - OpTypeFunction"
+				"11 - OpTypeInt"
+				"12 - OpTypePointer"
+				"13 - OpTypeVector"
+				"14 - OpTypeVoid"
+				"15 - OpSource"
+				"16 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
