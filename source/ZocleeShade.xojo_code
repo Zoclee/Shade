@@ -807,6 +807,7 @@ Protected Module ZocleeShade
 		  OpTypeVector
 		  OpTypeVoid
 		  OpSource
+		  OpStore
 		OpVariable
 	#tag EndEnum
 

@@ -138,6 +138,9 @@ Protected Class SPIRVVirtualMachine
 		        case 46 // ***** OpLoad ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoad)
 		          
+		        case 47 // ***** OpStore ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpStore)
+		          
 		        case 50 // ***** OpDecorate ***************************************************
 		          
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDecorate)

@@ -198,6 +198,21 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpStore *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpStore
+			    result.Append "Store "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    i = Offset + 12
+			    while i < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpTypeFunction *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFunction
