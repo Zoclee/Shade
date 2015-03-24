@@ -129,6 +129,11 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_type(Offset + 16)
 			    
+			    // ***** OpFunctionEnd *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFunctionEnd
+			    result.Append "FunctionEnd"
+			    
 			    // ***** OpFunctionParameter *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFunctionParameter

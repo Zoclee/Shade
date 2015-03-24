@@ -135,6 +135,9 @@ Protected Class SPIRVVirtualMachine
 		        case 41 // ***** OpFunctionParameter ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionParameter)
 		          
+		        case 42 // ***** OpFunctionEnd ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionEnd)
+		          
 		        case 46 // ***** OpLoad ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoad)
 		          
@@ -383,6 +386,14 @@ Protected Class SPIRVVirtualMachine
 		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID does not match Return Type ID in function declaration.")
 		          op.HasErrors = True
 		        end if
+		      end if
+		      
+		      ' ***** OpFunctionEnd ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpFunctionEnd
+		      if wordCount <> 1 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
 		      end if
 		      
 		      ' ***** OpFunctionParameter ***********************************************************************************
