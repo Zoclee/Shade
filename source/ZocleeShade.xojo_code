@@ -484,14 +484,14 @@ Protected Module ZocleeShade
 		  ' EntryPoint Kernel 9
 		  bin.UInt16Value(32) = 6 ' OpEntryPoint
 		  bin.UInt16Value(34) = 3 ' Word Count
-		  bin.UInt32Value(36) = 6 ' Kernel
-		  bin.UInt32Value(40) = 9 ' entry point <id>
+		  bin.UInt32Value(36) = 6 ' execution model (Kernel)
+		  bin.UInt32Value(40) = 9 ' entry point id
 		  
 		  ' MemoryModel Physical64 OpenCL1.2
 		  bin.UInt16Value(44) = 5 ' OpMemoryModel
 		  bin.UInt16Value(46) = 3 ' Word Count
-		  bin.UInt32Value(48) = 2 ' 2 - Physical64
-		  bin.UInt32Value(52) = 2 ' 2 - OpenCL1.2
+		  bin.UInt32Value(48) = 2 ' addressing model (Physical64)
+		  bin.UInt32Value(52) = 2 ' memory model (OpenCL1.2)
 		  
 		  ' Name 4 "LocalInvocationId"
 		  bin.UInt16Value(56) = 54 ' OpName
@@ -802,7 +802,7 @@ Protected Module ZocleeShade
 		  ' 10 All type declarations, constant instructions and global variable declarations
 		  ' 11 All function definitions using OpFunction or OpFunctionParameter, ending with OpFunctionEnd
 		  
-		  Dim bin As new MemoryBlock(32)
+		  Dim bin As new MemoryBlock(80)
 		  
 		  bin.UInt32Value(0) = &h07230203 ' magic number
 		  bin.UInt32Value(4) = 99 ' version number (99 = pre-relase, 100 = first public version)
@@ -816,9 +816,24 @@ Protected Module ZocleeShade
 		  bin.UInt32Value(24) = 2 ' GLSL
 		  bin.UInt32Value(28) = 450 ' Version
 		  
-		  '1: ExtInstImport "GLSL.std.450"
-		  'MemoryModel Logical GLSL450
-		  'EntryPoint Fragment 4
+		  ' 1: ExtInstImport "GLSL.std.450"
+		  bin.UInt16Value(32) = 4 ' OpExtInstImport
+		  bin.UInt16Value(34) = 2 + 4 ' Word Count
+		  bin.UInt32Value(36) = 1 ' result id
+		  bin.CString(40) = "GLSL.std.450" + Chr(0) + Chr(0) + Chr(0) + Chr(0) ' name
+		  
+		  ' MemoryModel Logical GLSL450
+		  bin.UInt16Value(56) = 5 ' OpMemoryModel
+		  bin.UInt16Value(58) = 3 ' Word Count
+		  bin.UInt32Value(60) = 0 ' addressing model (Logical)
+		  bin.UInt32Value(64) = 1 ' memory model (GLSL450)
+		  
+		  ' EntryPoint Fragment 4
+		  bin.UInt16Value(68) = 6 ' OpEntryPoint
+		  bin.UInt16Value(70) = 3 ' Word Count
+		  bin.UInt32Value(72) = 4 ' execution model (Fragment)
+		  bin.UInt32Value(76) = 4 ' entry point id
+		  
 		  'Name 4 "main"
 		  'Name 10 "scale"
 		  'Name 16 "cond"
