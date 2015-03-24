@@ -467,314 +467,314 @@ Protected Module ZocleeShade
 		  ' 10 All type declarations, constant instructions and global variable declarations
 		  ' 11 All function definitions using OpFunction or OpFunctionParameter, ending with OpFunctionEnd
 		  
-		  Dim bin As new MemoryBlock(716)
+		  Dim bin As new MemoryBlock(720)
 		  
 		  bin.UInt32Value(0) = &h07230203 ' magic number
 		  bin.UInt32Value(4) = 99 ' version number (99 = pre-relase, 100 = first public version)
-		  bin.UInt32Value(8) = &h0000001B ' 27: generator magic number
+		  bin.UInt32Value(8) = &h00000000 ' 0: generator magic number
 		  bin.UInt32Value(12) = 23 ' bound
 		  bin.UInt32Value(16) = 0 ' reserved for instruction schema
 		  
 		  ' Source OpenCL 120
-		  bin.UInt16Value(16) = 1 ' OpSource
-		  bin.UInt16Value(18) = 3 ' Word Count
-		  bin.UInt32Value(20) = 3 ' OpenCL
-		  bin.UInt32Value(24) = 120 ' Version
+		  bin.UInt16Value(20) = 1 ' OpSource
+		  bin.UInt16Value(22) = 3 ' Word Count
+		  bin.UInt32Value(24) = 3 ' OpenCL
+		  bin.UInt32Value(28) = 120 ' Version
 		  
 		  ' EntryPoint Kernel 9
-		  bin.UInt16Value(28) = 6 ' OpEntryPoint
-		  bin.UInt16Value(30) = 3 ' Word Count
-		  bin.UInt32Value(32) = 6 ' Kernel
-		  bin.UInt32Value(36) = 9 ' entry point <id>
+		  bin.UInt16Value(32) = 6 ' OpEntryPoint
+		  bin.UInt16Value(34) = 3 ' Word Count
+		  bin.UInt32Value(36) = 6 ' Kernel
+		  bin.UInt32Value(40) = 9 ' entry point <id>
 		  
 		  ' MemoryModel Physical64 OpenCL1.2
-		  bin.UInt16Value(40) = 5 ' OpMemoryModel
-		  bin.UInt16Value(42) = 3 ' Word Count
-		  bin.UInt32Value(44) = 2 ' 2 - Physical64
-		  bin.UInt32Value(48) = 2 ' 2 - OpenCL1.2
+		  bin.UInt16Value(44) = 5 ' OpMemoryModel
+		  bin.UInt16Value(46) = 3 ' Word Count
+		  bin.UInt32Value(48) = 2 ' 2 - Physical64
+		  bin.UInt32Value(52) = 2 ' 2 - OpenCL1.2
 		  
 		  ' Name 4 "LocalInvocationId"
-		  bin.UInt16Value(52) = 54 ' OpName
-		  bin.UInt16Value(54) = 2 + 5 ' Word Count
-		  bin.UInt32Value(56) = 4 ' target id
-		  bin.CString(60) = "LocalInvocationId" + Chr(0) + Chr(0) + Chr(0) ' Name
+		  bin.UInt16Value(56) = 54 ' OpName
+		  bin.UInt16Value(58) = 2 + 5 ' Word Count
+		  bin.UInt32Value(60) = 4 ' target id
+		  bin.CString(64) = "LocalInvocationId" + Chr(0) + Chr(0) + Chr(0) ' Name
 		  
 		  ' Name 9 "add"
-		  bin.UInt16Value(80) = 54 ' OpName
-		  bin.UInt16Value(82) = 2 + 1 ' Word Count
-		  bin.UInt32Value(84) = 9 ' target id
-		  bin.CString(88) = "add" + Chr(0) ' Name
+		  bin.UInt16Value(84) = 54 ' OpName
+		  bin.UInt16Value(86) = 2 + 1 ' Word Count
+		  bin.UInt32Value(88) = 9 ' target id
+		  bin.CString(92) = "add" + Chr(0) ' Name
 		  
 		  ' Name 10 "in1"
-		  bin.UInt16Value(92) = 54 ' OpName
-		  bin.UInt16Value(94) = 2 + 1 ' Word Count
-		  bin.UInt32Value(96) = 10 ' target id
-		  bin.CString(100) = "in1" + Chr(0) ' Name
+		  bin.UInt16Value(96) = 54 ' OpName
+		  bin.UInt16Value(98) = 2 + 1 ' Word Count
+		  bin.UInt32Value(100) = 10 ' target id
+		  bin.CString(104) = "in1" + Chr(0) ' Name
 		  
 		  ' Name 11 "in2"
-		  bin.UInt16Value(104) = 54 ' OpName
-		  bin.UInt16Value(106) = 2 + 1 ' Word Count
-		  bin.UInt32Value(108) = 11 ' target id
-		  bin.CString(112) = "in2" + Chr(0) ' Name
+		  bin.UInt16Value(108) = 54 ' OpName
+		  bin.UInt16Value(110) = 2 + 1 ' Word Count
+		  bin.UInt32Value(112) = 11 ' target id
+		  bin.CString(116) = "in2" + Chr(0) ' Name
 		  
 		  ' Name 12 "out"
-		  bin.UInt16Value(116) = 54 ' OpName
-		  bin.UInt16Value(118) = 2 + 1 ' Word Count
-		  bin.UInt32Value(120) = 12 ' target id
-		  bin.CString(124) = "out" + Chr(0) ' Name
+		  bin.UInt16Value(120) = 54 ' OpName
+		  bin.UInt16Value(122) = 2 + 1 ' Word Count
+		  bin.UInt32Value(124) = 12 ' target id
+		  bin.CString(128) = "out" + Chr(0) ' Name
 		  
 		  ' Name 13 "entry"
-		  bin.UInt16Value(128) = 54 ' OpName
-		  bin.UInt16Value(130) = 2 + 2 ' Word Count
-		  bin.UInt32Value(132) = 13 ' target id
-		  bin.CString(136) = "entry" + Chr(0) + Chr(0) + Chr(0) ' Name
+		  bin.UInt16Value(132) = 54 ' OpName
+		  bin.UInt16Value(134) = 2 + 2 ' Word Count
+		  bin.UInt32Value(136) = 13 ' target id
+		  bin.CString(140) = "entry" + Chr(0) + Chr(0) + Chr(0) ' Name
 		  
 		  ' Name 15 "call"
-		  bin.UInt16Value(144) = 54 ' OpName
-		  bin.UInt16Value(146) = 2 + 2 ' Word Count
-		  bin.UInt32Value(148) = 15 ' target id
-		  bin.CString(152) = "call" + Chr(0) + Chr(0) + Chr(0) + Chr(0) ' Name
+		  bin.UInt16Value(148) = 54 ' OpName
+		  bin.UInt16Value(150) = 2 + 2 ' Word Count
+		  bin.UInt32Value(152) = 15 ' target id
+		  bin.CString(156) = "call" + Chr(0) + Chr(0) + Chr(0) + Chr(0) ' Name
 		  
 		  ' Name 16 "arrayidx"
-		  bin.UInt16Value(160) = 54 ' OpName
-		  bin.UInt16Value(162) = 2 + 3 ' Word Count
-		  bin.UInt32Value(164) = 16 ' target id
-		  bin.CString(168) = "arrayidx" + Chr(0) + Chr(0) + Chr(0) + Chr(0) ' Name
+		  bin.UInt16Value(164) = 54 ' OpName
+		  bin.UInt16Value(166) = 2 + 3 ' Word Count
+		  bin.UInt32Value(168) = 16 ' target id
+		  bin.CString(172) = "arrayidx" + Chr(0) + Chr(0) + Chr(0) + Chr(0) ' Name
 		  
 		  ' Name 18 "arrayidx1"
-		  bin.UInt16Value(180) = 54 ' OpName
-		  bin.UInt16Value(182) = 2 + 3 ' Word Count
-		  bin.UInt32Value(184) = 18 ' target id
-		  bin.CString(188) = "arrayidx1" + Chr(0) + Chr(0) + Chr(0) ' Name
+		  bin.UInt16Value(184) = 54 ' OpName
+		  bin.UInt16Value(186) = 2 + 3 ' Word Count
+		  bin.UInt32Value(188) = 18 ' target id
+		  bin.CString(192) = "arrayidx1" + Chr(0) + Chr(0) + Chr(0) ' Name
 		  
 		  ' Name 20 "add"
-		  bin.UInt16Value(200) = 54 ' OpName
-		  bin.UInt16Value(202) = 2 + 1 ' Word Count
-		  bin.UInt32Value(204) = 20 ' target id
-		  bin.CString(208) = "add" + Chr(0) ' Name
+		  bin.UInt16Value(204) = 54 ' OpName
+		  bin.UInt16Value(206) = 2 + 1 ' Word Count
+		  bin.UInt32Value(208) = 20 ' target id
+		  bin.CString(212) = "add" + Chr(0) ' Name
 		  
 		  ' Name 21 "arrayidx2"
-		  bin.UInt16Value(212) = 54 ' OpName
-		  bin.UInt16Value(214) = 2 + 3 ' Word Count
-		  bin.UInt32Value(216) = 21 ' target id
-		  bin.CString(220) = "arrayidx2" + Chr(0) + Chr(0) + Chr(0) ' Name
+		  bin.UInt16Value(216) = 54 ' OpName
+		  bin.UInt16Value(218) = 2 + 3 ' Word Count
+		  bin.UInt32Value(220) = 21 ' target id
+		  bin.CString(224) = "arrayidx2" + Chr(0) + Chr(0) + Chr(0) ' Name
 		  
 		  ' Decorate 4(LocalInvocationId) Constant
-		  bin.UInt16Value(232) = 50 ' OpDecorate
-		  bin.UInt16Value(234) = 3 + 0 ' Word Count
-		  bin.UInt32Value(236) = 4 ' target id
-		  bin.UInt32Value(240) = 21 ' Constant
+		  bin.UInt16Value(236) = 50 ' OpDecorate
+		  bin.UInt16Value(238) = 3 + 0 ' Word Count
+		  bin.UInt32Value(240) = 4 ' target id
+		  bin.UInt32Value(244) = 21 ' Constant
 		  
 		  'Decorate 4(LocalInvocationId) Built-In LocalInvocationId
-		  bin.UInt16Value(244) = 50 ' OpDecorate
-		  bin.UInt16Value(246) = 3 + 1 ' Word Count
-		  bin.UInt32Value(248) = 4 ' target id
-		  bin.UInt32Value(252) = 39 ' Built-In
-		  bin.UInt32Value(256) = 27 ' LocalInvocationId
+		  bin.UInt16Value(248) = 50 ' OpDecorate
+		  bin.UInt16Value(250) = 3 + 1 ' Word Count
+		  bin.UInt32Value(252) = 4 ' target id
+		  bin.UInt32Value(256) = 39 ' Built-In
+		  bin.UInt32Value(260) = 27 ' LocalInvocationId
 		  
 		  ' Decorate 10(in1) FuncParamAttr 5
-		  bin.UInt16Value(260) = 50 ' OpDecorate
-		  bin.UInt16Value(262) = 3 + 1 ' Word Count
-		  bin.UInt32Value(264) = 10 ' target id
-		  bin.UInt32Value(268) = 40 ' FuncParamAttr
-		  bin.UInt32Value(272) = 5 ' NoCapture
+		  bin.UInt16Value(264) = 50 ' OpDecorate
+		  bin.UInt16Value(266) = 3 + 1 ' Word Count
+		  bin.UInt32Value(268) = 10 ' target id
+		  bin.UInt32Value(272) = 40 ' FuncParamAttr
+		  bin.UInt32Value(276) = 5 ' NoCapture
 		  
 		  ' Decorate 11(in2) FuncParamAttr 5
-		  bin.UInt16Value(276) = 50 ' OpDecorate
-		  bin.UInt16Value(278) = 3 + 1 ' Word Count
-		  bin.UInt32Value(280) = 11 ' target id
-		  bin.UInt32Value(284) = 40 ' FuncParamAttr
-		  bin.UInt32Value(288) = 5 ' NoCapture
+		  bin.UInt16Value(280) = 50 ' OpDecorate
+		  bin.UInt16Value(282) = 3 + 1 ' Word Count
+		  bin.UInt32Value(284) = 11 ' target id
+		  bin.UInt32Value(288) = 40 ' FuncParamAttr
+		  bin.UInt32Value(292) = 5 ' NoCapture
 		  
 		  ' Decorate 12(out) FuncParamAttr 5
-		  bin.UInt16Value(292) = 50 ' OpDecorate
-		  bin.UInt16Value(294) = 3 + 1 ' Word Count
-		  bin.UInt32Value(296) = 12 ' target id
-		  bin.UInt32Value(300) = 40 ' FuncParamAttr
-		  bin.UInt32Value(304) = 5 ' NoCapture
+		  bin.UInt16Value(296) = 50 ' OpDecorate
+		  bin.UInt16Value(298) = 3 + 1 ' Word Count
+		  bin.UInt32Value(300) = 12 ' target id
+		  bin.UInt32Value(304) = 40 ' FuncParamAttr
+		  bin.UInt32Value(308) = 5 ' NoCapture
 		  
 		  ' Decorate 17 Alignment 4
-		  bin.UInt16Value(308) = 50 ' OpDecorate
-		  bin.UInt16Value(310) = 3 + 1 ' Word Count
-		  bin.UInt32Value(312) = 17 ' target id
-		  bin.UInt32Value(316) = 36 ' Alignment (TBD: This can probably be removed.)
-		  bin.UInt32Value(320) = 4 ' ? Not specified in SPIR-V specification
+		  bin.UInt16Value(312) = 50 ' OpDecorate
+		  bin.UInt16Value(314) = 3 + 1 ' Word Count
+		  bin.UInt32Value(316) = 17 ' target id
+		  bin.UInt32Value(320) = 36 ' Alignment (TBD: This can probably be removed.)
+		  bin.UInt32Value(324) = 4 ' ? Not specified in SPIR-V specification
 		  
 		  ' Decorate 19 Alignment 4
-		  bin.UInt16Value(324) = 50 ' OpDecorate
-		  bin.UInt16Value(326) = 3 + 1 ' Word Count
-		  bin.UInt32Value(328) = 19 ' target id
-		  bin.UInt32Value(332) = 36 ' Alignment (TBD: This can probably be removed.)
-		  bin.UInt32Value(336) = 4 ' ? Not specified in SPIR-V specification
+		  bin.UInt16Value(328) = 50 ' OpDecorate
+		  bin.UInt16Value(330) = 3 + 1 ' Word Count
+		  bin.UInt32Value(332) = 19 ' target id
+		  bin.UInt32Value(336) = 36 ' Alignment (TBD: This can probably be removed.)
+		  bin.UInt32Value(340) = 4 ' ? Not specified in SPIR-V specification
 		  
 		  ' Decorate 22 Alignment 4
-		  bin.UInt16Value(340) = 50 ' OpDecorate
-		  bin.UInt16Value(342) = 3 + 1 ' Word Count
-		  bin.UInt32Value(344) = 22 ' target id
-		  bin.UInt32Value(348) = 36 ' Alignment (TBD: This can probably be removed.)
-		  bin.UInt32Value(352) = 4 ' ? Not specified in SPIR-V specification
+		  bin.UInt16Value(344) = 50 ' OpDecorate
+		  bin.UInt16Value(346) = 3 + 1 ' Word Count
+		  bin.UInt32Value(348) = 22 ' target id
+		  bin.UInt32Value(352) = 36 ' Alignment (TBD: This can probably be removed.)
+		  bin.UInt32Value(356) = 4 ' ? Not specified in SPIR-V specification
 		  
 		  ' 1: TypeInt 64 0
-		  bin.UInt16Value(356) = 10 ' OpTypeInt
-		  bin.UInt16Value(358) = 4 ' Word Count
-		  bin.UInt32Value(360) = 1 ' result id
-		  bin.UInt32Value(364) = 64 ' width
-		  bin.UInt32Value(368) = 0 ' signedness (0 = unsigned, 1= signed)
+		  bin.UInt16Value(360) = 10 ' OpTypeInt
+		  bin.UInt16Value(362) = 4 ' Word Count
+		  bin.UInt32Value(364) = 1 ' result id
+		  bin.UInt32Value(368) = 64 ' width
+		  bin.UInt32Value(372) = 0 ' signedness (0 = unsigned, 1= signed)
 		  
 		  ' 2: TypeVector 1(int) 3
-		  bin.UInt16Value(372) = 12 ' OpTypeVector
-		  bin.UInt16Value(374) = 4 ' Word Count
-		  bin.UInt32Value(376) = 2 ' result id
-		  bin.UInt32Value(380) = 1 ' component type id
-		  bin.UInt32Value(384) = 3 ' component count
+		  bin.UInt16Value(376) = 12 ' OpTypeVector
+		  bin.UInt16Value(378) = 4 ' Word Count
+		  bin.UInt32Value(380) = 2 ' result id
+		  bin.UInt32Value(384) = 1 ' component type id
+		  bin.UInt32Value(388) = 3 ' component count
 		  
 		  ' 3: TypePointer UniformConstant 2(ivec3)
-		  bin.UInt16Value(388) = 20 ' OpTypePointer
-		  bin.UInt16Value(390) = 4 ' Word Count
-		  bin.UInt32Value(392) = 3 ' result id
-		  bin.UInt32Value(396) = 0 ' storage class
-		  bin.UInt32Value(400) = 2 ' type id
+		  bin.UInt16Value(392) = 20 ' OpTypePointer
+		  bin.UInt16Value(394) = 4 ' Word Count
+		  bin.UInt32Value(396) = 3 ' result id
+		  bin.UInt32Value(400) = 0 ' storage class
+		  bin.UInt32Value(404) = 2 ' type id
 		  
 		  ' 5: TypeVoid
-		  bin.UInt16Value(404) = 8 ' OpTypeVoid
-		  bin.UInt16Value(406) = 2 ' Word Count
-		  bin.UInt32Value(408) = 5 ' result id
+		  bin.UInt16Value(408) = 8 ' OpTypeVoid
+		  bin.UInt16Value(410) = 2 ' Word Count
+		  bin.UInt32Value(412) = 5 ' result id
 		  
 		  ' 6: TypeInt 32 0
-		  bin.UInt16Value(412) = 10 ' OpTypeInt
-		  bin.UInt16Value(414) = 4 ' Word Count
-		  bin.UInt32Value(416) = 6 ' result id
-		  bin.UInt32Value(420) = 32 ' width
-		  bin.UInt32Value(424) = 0 ' signedness (0 = unsigned, 1= signed)
+		  bin.UInt16Value(416) = 10 ' OpTypeInt
+		  bin.UInt16Value(418) = 4 ' Word Count
+		  bin.UInt32Value(420) = 6 ' result id
+		  bin.UInt32Value(424) = 32 ' width
+		  bin.UInt32Value(428) = 0 ' signedness (0 = unsigned, 1= signed)
 		  
 		  ' 7: TypePointer WorkgroupGlobal 6(int)
-		  bin.UInt16Value(428) = 20 ' OpTypePointer
-		  bin.UInt16Value(430) = 4 ' Word Count
-		  bin.UInt32Value(432) = 7 ' result id
-		  bin.UInt32Value(436) = 4 ' storage class
-		  bin.UInt32Value(440) = 6 ' type id
+		  bin.UInt16Value(432) = 20 ' OpTypePointer
+		  bin.UInt16Value(434) = 4 ' Word Count
+		  bin.UInt32Value(436) = 7 ' result id
+		  bin.UInt32Value(440) = 4 ' storage class
+		  bin.UInt32Value(444) = 6 ' type id
 		  
 		  ' 8: TypeFunction 5 7(ptr) 7(ptr) 7(ptr)
-		  bin.UInt16Value(444) = 21 ' OpTypeFunction
-		  bin.UInt16Value(446) = 3 + 3 ' Count
-		  bin.UInt32Value(448) = 8 ' result id
-		  bin.UInt32Value(452) = 5 ' return type id
-		  bin.UInt32Value(456) = 7 ' parameter 0 type
-		  bin.UInt32Value(460) = 7 ' parameter 1 type
-		  bin.UInt32Value(464) = 7 ' parameter 2 type
+		  bin.UInt16Value(448) = 21 ' OpTypeFunction
+		  bin.UInt16Value(450) = 3 + 3 ' Count
+		  bin.UInt32Value(452) = 8 ' result id
+		  bin.UInt32Value(456) = 5 ' return type id
+		  bin.UInt32Value(460) = 7 ' parameter 0 type
+		  bin.UInt32Value(464) = 7 ' parameter 1 type
+		  bin.UInt32Value(468) = 7 ' parameter 2 type
 		  
 		  ' 4(LocalInvocationId): 3(ptr) Variable UniformConstant
-		  bin.UInt16Value(468) = 38 ' OpVariable
-		  bin.UInt16Value(470) = 4 + 0 ' Word Count
-		  bin.UInt32Value(472) = 3 ' result type id
-		  bin.UInt32Value(476) = 4 ' result id
-		  bin.UInt16Value(480) = 0 ' storage class
+		  bin.UInt16Value(472) = 38 ' OpVariable
+		  bin.UInt16Value(474) = 4 + 0 ' Word Count
+		  bin.UInt32Value(476) = 3 ' result type id
+		  bin.UInt32Value(480) = 4 ' result id
+		  bin.UInt16Value(484) = 0 ' storage class
 		  
 		  ' 9(add): 5 Function NoControl 8
-		  bin.UInt16Value(484) = 40 ' OpFunction
-		  bin.UInt16Value(486) = 5 ' Word Count
-		  bin.UInt32Value(488) = 5 ' result type id = void
-		  bin.UInt32Value(492) = 9 ' result id
-		  bin.UInt32Value(496) = 0 ' function control mask
-		  bin.UInt32Value(500) = 8 ' function type id
+		  bin.UInt16Value(488) = 40 ' OpFunction
+		  bin.UInt16Value(490) = 5 ' Word Count
+		  bin.UInt32Value(492) = 5 ' result type id = void
+		  bin.UInt32Value(496) = 9 ' result id
+		  bin.UInt32Value(500) = 0 ' function control mask
+		  bin.UInt32Value(504) = 8 ' function type id
 		  
 		  ' 10(in1): 7(ptr) FunctionParameter
-		  bin.UInt16Value(504) = 41 ' OpFunctionParameter
-		  bin.UInt16Value(506) = 3 ' Word Count
-		  bin.UInt32Value(508) = 7 ' result type id
-		  bin.UInt32Value(512) = 10 ' result id
+		  bin.UInt16Value(508) = 41 ' OpFunctionParameter
+		  bin.UInt16Value(510) = 3 ' Word Count
+		  bin.UInt32Value(512) = 7 ' result type id
+		  bin.UInt32Value(516) = 10 ' result id
 		  
 		  ' 11(in2): 7(ptr) FunctionParameter
-		  bin.UInt16Value(516) = 41 ' OpFunctionParameter
-		  bin.UInt16Value(518) = 3 ' Word Count
-		  bin.UInt32Value(520) = 7 ' result type id
-		  bin.UInt32Value(524) = 11 ' result id
+		  bin.UInt16Value(520) = 41 ' OpFunctionParameter
+		  bin.UInt16Value(522) = 3 ' Word Count
+		  bin.UInt32Value(524) = 7 ' result type id
+		  bin.UInt32Value(528) = 11 ' result id
 		  
 		  ' 12(out): 7(ptr) FunctionParameter
-		  bin.UInt16Value(528) = 41 ' OpFunctionParameter
-		  bin.UInt16Value(530) = 3 ' Word Count
-		  bin.UInt32Value(532) = 7 ' result type id
-		  bin.UInt32Value(536) = 12 ' result id
+		  bin.UInt16Value(532) = 41 ' OpFunctionParameter
+		  bin.UInt16Value(534) = 3 ' Word Count
+		  bin.UInt32Value(536) = 7 ' result type id
+		  bin.UInt32Value(540) = 12 ' result id
 		  
 		  ' 13(entry): Label
-		  bin.UInt16Value(540) = 208 ' OpFunctionParameter
-		  bin.UInt16Value(542) = 2 ' Word Count
-		  bin.UInt32Value(544) = 13 ' result id
+		  bin.UInt16Value(544) = 208 ' OpFunctionParameter
+		  bin.UInt16Value(546) = 2 ' Word Count
+		  bin.UInt32Value(548) = 13 ' result id
 		  
 		  ' 14: 2(ivec3) Load 4(LocalInvocationId)
-		  bin.UInt16Value(548) = 46 ' OpLoad
-		  bin.UInt16Value(550) = 4 + 0 ' Word Count
-		  bin.UInt32Value(552) = 2 ' result type id
-		  bin.UInt32Value(556) = 14 ' result id
-		  bin.UInt32Value(560) = 4 ' pointer id
+		  bin.UInt16Value(552) = 46 ' OpLoad
+		  bin.UInt16Value(554) = 4 + 0 ' Word Count
+		  bin.UInt32Value(556) = 2 ' result type id
+		  bin.UInt32Value(560) = 14 ' result id
+		  bin.UInt32Value(564) = 4 ' pointer id
 		  
 		  ' 15(call): 1(int) CompositeExtract 14 0
-		  bin.UInt16Value(564) = 62 ' OpCompositeExtract
-		  bin.UInt16Value(566) = 4 + 1 ' Word Count
-		  bin.UInt32Value(568) = 1 ' result type id
-		  bin.UInt32Value(572) = 15 ' result id
-		  bin.UInt32Value(576) = 14 ' composite id
-		  bin.UInt32Value(580) = 0 ' index
+		  bin.UInt16Value(568) = 62 ' OpCompositeExtract
+		  bin.UInt16Value(570) = 4 + 1 ' Word Count
+		  bin.UInt32Value(572) = 1 ' result type id
+		  bin.UInt32Value(576) = 15 ' result id
+		  bin.UInt32Value(580) = 14 ' composite id
+		  bin.UInt32Value(584) = 0 ' index
 		  
 		  ' 16(arrayidx): 7(ptr) InBoundsAccessChain 10(in1) 15(call)
-		  bin.UInt16Value(584) = 94 ' OpInBoundsAccessChain
-		  bin.UInt16Value(586) = 4 + 1 ' Word Count
-		  bin.UInt32Value(588) = 7 ' result type id
-		  bin.UInt32Value(592) = 16 ' result id
-		  bin.UInt32Value(596) = 10 ' base id
-		  bin.UInt32Value(600) = 15 ' index id
+		  bin.UInt16Value(588) = 94 ' OpInBoundsAccessChain
+		  bin.UInt16Value(590) = 4 + 1 ' Word Count
+		  bin.UInt32Value(592) = 7 ' result type id
+		  bin.UInt32Value(596) = 16 ' result id
+		  bin.UInt32Value(600) = 10 ' base id
+		  bin.UInt32Value(604) = 15 ' index id
 		  
 		  ' 17: 6(int) Load 16(arrayidx)
-		  bin.UInt16Value(604) = 46 ' OpLoad
-		  bin.UInt16Value(606) = 4 + 0 ' Word Count
-		  bin.UInt32Value(608) = 6 ' result type id
-		  bin.UInt32Value(612) = 17 ' result id
-		  bin.UInt32Value(616) = 16 ' pointer id
+		  bin.UInt16Value(608) = 46 ' OpLoad
+		  bin.UInt16Value(610) = 4 + 0 ' Word Count
+		  bin.UInt32Value(612) = 6 ' result type id
+		  bin.UInt32Value(616) = 17 ' result id
+		  bin.UInt32Value(620) = 16 ' pointer id
 		  
 		  ' 18(arrayidx1): 7(ptr) InBoundsAccessChain 11(in2) 15(call)
-		  bin.UInt16Value(620) = 94 ' OpInBoundsAccessChain
-		  bin.UInt16Value(622) = 4 + 1 ' Word Count
-		  bin.UInt32Value(624) = 7 ' result type id
-		  bin.UInt32Value(628) = 18 ' result id
-		  bin.UInt32Value(632) = 11 ' base id
-		  bin.UInt32Value(636) = 15 ' index id
+		  bin.UInt16Value(624) = 94 ' OpInBoundsAccessChain
+		  bin.UInt16Value(626) = 4 + 1 ' Word Count
+		  bin.UInt32Value(628) = 7 ' result type id
+		  bin.UInt32Value(632) = 18 ' result id
+		  bin.UInt32Value(636) = 11 ' base id
+		  bin.UInt32Value(640) = 15 ' index id
 		  
 		  ' 19: 6(int) Load 18(arrayidx1)
-		  bin.UInt16Value(640) = 46 ' OpLoad
-		  bin.UInt16Value(642) = 4 + 0 ' Word Count
-		  bin.UInt32Value(644) = 6 ' result type id
-		  bin.UInt32Value(648) = 19 ' result id
-		  bin.UInt32Value(652) = 18 ' pointer id
+		  bin.UInt16Value(644) = 46 ' OpLoad
+		  bin.UInt16Value(646) = 4 + 0 ' Word Count
+		  bin.UInt32Value(648) = 6 ' result type id
+		  bin.UInt32Value(652) = 19 ' result id
+		  bin.UInt32Value(656) = 18 ' pointer id
 		  
 		  ' 20(add): 6(int) IAdd 19 17
-		  bin.UInt16Value(656) = 122 ' OpIAdd
-		  bin.UInt16Value(658) = 5 ' Word Count
-		  bin.UInt32Value(660) = 6 ' result type id
-		  bin.UInt32Value(664) = 20 ' result id
-		  bin.UInt32Value(668) = 19 ' operand id 1
-		  bin.UInt32Value(672) = 17 ' operand id 2
+		  bin.UInt16Value(660) = 122 ' OpIAdd
+		  bin.UInt16Value(662) = 5 ' Word Count
+		  bin.UInt32Value(664) = 6 ' result type id
+		  bin.UInt32Value(668) = 20 ' result id
+		  bin.UInt32Value(672) = 19 ' operand id 1
+		  bin.UInt32Value(676) = 17 ' operand id 2
 		  
 		  ' 21(arrayidx2): 7(ptr) InBoundsAccessChain 12(out) 15(call)
-		  bin.UInt16Value(676) = 94 ' OpInBoundsAccessChain
-		  bin.UInt16Value(678) = 4 + 1 ' Word Count
-		  bin.UInt32Value(680) = 7 ' result type id
-		  bin.UInt32Value(684) = 21 ' result id
-		  bin.UInt32Value(688) = 12 ' base id
-		  bin.UInt32Value(692) = 15 ' index id
+		  bin.UInt16Value(680) = 94 ' OpInBoundsAccessChain
+		  bin.UInt16Value(682) = 4 + 1 ' Word Count
+		  bin.UInt32Value(684) = 7 ' result type id
+		  bin.UInt32Value(688) = 21 ' result id
+		  bin.UInt32Value(692) = 12 ' base id
+		  bin.UInt32Value(696) = 15 ' index id
 		  
 		  ' Store 22 21(arrayidx2) 20 ???? <<< CHECK THIS OPCODE
-		  bin.UInt16Value(696) = 47 ' OpStore
-		  bin.UInt16Value(698) = 3 + 0 ' Word Count
-		  bin.UInt32Value(700) = 22 ' pointer id
-		  bin.UInt32Value(704) = 21 ' object id
+		  bin.UInt16Value(700) = 47 ' OpStore
+		  bin.UInt16Value(702) = 3 + 0 ' Word Count
+		  bin.UInt32Value(704) = 22 ' pointer id
+		  bin.UInt32Value(708) = 21 ' object id
 		  
 		  ' Return
-		  bin.UInt16Value(708) = 213 ' OpReturn
-		  bin.UInt16Value(710) = 1 ' Word Count
+		  bin.UInt16Value(712) = 213 ' OpReturn
+		  bin.UInt16Value(714) = 1 ' Word Count
 		  
 		  ' FunctionEnd
-		  bin.UInt16Value(712) = 42 ' OpFunctionEnd
-		  bin.UInt16Value(714) = 1 ' Word Count
+		  bin.UInt16Value(716) = 42 ' OpFunctionEnd
+		  bin.UInt16Value(718) = 1 ' Word Count
 		  
 		  Dim f As FolderItem = App.ExecutableFile.Parent.Child("test_001.spirv")
 		  Dim stream As BinaryStream

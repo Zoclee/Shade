@@ -56,7 +56,7 @@ Protected Class SPIRVVirtualMachine
 		      
 		      //  instructions
 		      
-		      ip = 16
+		      ip = 20
 		      while ip < moduleUB
 		        
 		        select case ModuleBinary.UInt16Value(ip)
@@ -204,7 +204,16 @@ Protected Class SPIRVVirtualMachine
 		          end if
 		        end if
 		        
-		        if ModuleBinary.UInt16Value(ip + 2) = 0 then
+		        if (ip + 2) >= ModuleBinary.Size then
+		          Errors.Append ("ERROR [" + Str(ip) + "]: IP out of bounds.")
+		          ip = moduleUB + 1
+		          if Opcodes.Ubound >= 0 then
+		            if OpcodeLookup.HasKey(Opcodes(Opcodes.Ubound).ResultID) then
+		              OpcodeLookup.Remove(Opcodes(Opcodes.Ubound).ResultID)
+		            end if
+		            Opcodes.Remove(Opcodes.Ubound)
+		          end if
+		        elseif ModuleBinary.UInt16Value(ip + 2) = 0 then
 		          Errors.Append ("ERROR [" + Str(ip) + "]: Word count of zero.")
 		          ip = moduleUB + 1
 		        else

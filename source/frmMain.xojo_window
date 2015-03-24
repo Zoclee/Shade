@@ -222,6 +222,7 @@ End
 		  Dim allType As New FileType
 		  Dim spirvType As New FileType
 		  Dim op As ZocleeShade.SPIRVOpcode
+		  
 		  // configure file types
 		  
 		  allType.Name = "All files"
