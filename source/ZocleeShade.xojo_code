@@ -802,7 +802,7 @@ Protected Module ZocleeShade
 		  ' 10 All type declarations, constant instructions and global variable declarations
 		  ' 11 All function definitions using OpFunction or OpFunctionParameter, ending with OpFunctionEnd
 		  
-		  Dim bin As new MemoryBlock(80)
+		  Dim bin As new MemoryBlock(128)
 		  
 		  bin.UInt32Value(0) = &h07230203 ' magic number
 		  bin.UInt32Value(4) = 99 ' version number (99 = pre-relase, 100 = first public version)
@@ -820,7 +820,7 @@ Protected Module ZocleeShade
 		  bin.UInt16Value(32) = 4 ' OpExtInstImport
 		  bin.UInt16Value(34) = 2 + 4 ' Word Count
 		  bin.UInt32Value(36) = 1 ' result id
-		  bin.CString(40) = "GLSL.std.450" + Chr(0) + Chr(0) + Chr(0) + Chr(0) ' name
+		  bin.CString(40) = "GLSL.std.450" ' name
 		  
 		  ' MemoryModel Logical GLSL450
 		  bin.UInt16Value(56) = 5 ' OpMemoryModel
@@ -834,9 +834,26 @@ Protected Module ZocleeShade
 		  bin.UInt32Value(72) = 4 ' execution model (Fragment)
 		  bin.UInt32Value(76) = 4 ' entry point id
 		  
-		  'Name 4 "main"
-		  'Name 10 "scale"
+		  ' Name 4 "main"
+		  bin.UInt16Value(80) = 54 ' OpName
+		  bin.UInt16Value(82) = 2 + 2 ' Word Count
+		  bin.UInt32Value(84) = 9 ' target id
+		  bin.CString(88) = "main" ' Name
+		  
+		  ' Name 10 "scale"
+		  bin.UInt16Value(96) = 54 ' OpName
+		  bin.UInt16Value(98) = 2 + 2 ' Word Count
+		  bin.UInt32Value(100) = 10 ' target id
+		  bin.CString(104) = "scale" ' Name
+		  
 		  'Name 16 "cond"
+		  bin.UInt16Value(112) = 54 ' OpName
+		  bin.UInt16Value(114) = 2 + 2 ' Word Count
+		  bin.UInt32Value(116) = 16 ' target id
+		  bin.CString(120) = "cond" ' Name
+		  
+		  
+		  
 		  'Name 21 "color"
 		  'Name 23 "color1"
 		  'Name 29 "S"
