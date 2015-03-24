@@ -70,7 +70,7 @@ Protected Class SPIRVType
 			    if (ComponentTypeID <> ResultID) and VM.Types.HasKey(ComponentTypeID) then
 			      typ = VM.Types.Value(ComponentTypeID)
 			      result.Append typ.InstructionText
-			      result.Append "Vector"
+			      result.Append "Vec"
 			      result.Append "["
 			      result.Append Str(ComponentCount)
 			      result.Append "]"

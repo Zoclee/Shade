@@ -13,7 +13,7 @@ Protected Class SPIRVOpcode
 		  else
 		    result.Append "Unknown"
 		  end if
-		  result.Append ") "
+		  result.Append ")"
 		  
 		  return Join(result, "")
 		  
@@ -48,9 +48,7 @@ Protected Class SPIRVOpcode
 			    // ***** OpCompositeExtract *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
-			    result.Append "OpCompositeExtract "
-			    result.Append compose_type(Offset + 4)
-			    result.Append " "
+			    result.Append "CompositeExtract "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
 			    i = Offset + 16
@@ -137,15 +135,12 @@ Protected Class SPIRVOpcode
 			    // ***** OpFunctionParameter *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
-			    result.Append "FunctionParameter "
-			    result.Append compose_type(Offset + 4)
+			    result.Append "FunctionParameter"
 			    
 			    // ***** OpIAdd *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpIAdd
 			    result.Append "IAdd "
-			    result.Append compose_type(Offset + 4)
-			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
@@ -154,8 +149,6 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
 			    result.Append "InBoundsAccessChain "
-			    result.Append compose_type(Offset + 4)
-			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
 			    i = Offset + 16
@@ -174,8 +167,6 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpLoad
 			    result.Append "Load "
-			    result.Append compose_type(Offset + 4)
-			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
 			    // ***** OpMemoryModel *************************************************
@@ -280,8 +271,6 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpVariable
 			    result.Append "Variable "
-			    result.Append compose_type(Offset + 4)
-			    result.Append " "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    if VM.ModuleBinary.UInt16Value(Offset + 2) > 4 then
 			      break // todo: optional initializer
@@ -297,6 +286,10 @@ Protected Class SPIRVOpcode
 		#tag EndGetter
 		InstructionText As String
 	#tag EndComputedProperty
+
+	#tag Property, Flags = &h21
+		Private mResultType As String
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		Offset As UInt32
@@ -359,6 +352,31 @@ Protected Class SPIRVOpcode
 			End Set
 		#tag EndSetter
 		ResultID As UInt32
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Dim result As String
+			  
+			  result = ""
+			  
+			  select case Type
+			    
+			  case SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpFunction, _
+			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
+			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpLoad, _
+			    SPIRVOpcodeTypeEnum.OpVariable
+			    
+			    result = compose_type(Offset + 4)
+			    
+			  end select
+			  
+			  return result
+			  
+			End Get
+		#tag EndGetter
+		ResultType As String
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0

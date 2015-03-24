@@ -131,9 +131,9 @@ Begin Window frmMain
       AutoHideScrollbars=   True
       Bold            =   False
       Border          =   True
-      ColumnCount     =   3
+      ColumnCount     =   4
       ColumnsResizable=   True
-      ColumnWidths    =   "70,70"
+      ColumnWidths    =   "60,60,120"
       DataField       =   ""
       DataSource      =   ""
       DefaultRowHeight=   -1
@@ -149,7 +149,7 @@ Begin Window frmMain
       Hierarchical    =   False
       Index           =   -2147483648
       InitialParent   =   ""
-      InitialValue    =   "Offset	Result ID	Instruction Text"
+      InitialValue    =   "Offset	Result ID	Result Type	Instruction"
       Italic          =   False
       Left            =   305
       LockBottom      =   True
@@ -325,7 +325,8 @@ End
 		      if op.ResultID > 0 then
 		        lstInstructions.Cell(lstInstructions.LastIndex, 1) = Str(op.ResultID) + ":"
 		      end if
-		      lstInstructions.Cell(lstInstructions.LastIndex, 2) = op.InstructionText
+		      lstInstructions.Cell(lstInstructions.LastIndex, 2) = op.ResultType
+		      lstInstructions.Cell(lstInstructions.LastIndex, 3) = op.InstructionText
 		      lstInstructions.RowTag(lstInstructions.LastIndex) = op
 		      i = i + 1
 		    wend
@@ -394,6 +395,7 @@ End
 		  Me.ColumnSortDirection(0)=0
 		  Me.ColumnSortDirection(1)=0
 		  Me.ColumnSortDirection(2)=0
+		  Me.ColumnSortDirection(3)=0
 		End Sub
 	#tag EndEvent
 #tag EndEvents
