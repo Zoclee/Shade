@@ -34,10 +34,10 @@ Protected Class SPIRVType
 			      result.Append "Unknown"
 			    end if
 			    result.Append " func("
-			    i = 0 
+			    i = 0
 			    while i <= ParmTypeID.Ubound
 			      if i > 0 then
-			        result.Append ", " 
+			        result.Append ", "
 			      end if
 			      if (ParmTypeID(i) <> ResultID) and VM.Types.HasKey(ParmTypeID(i)) then
 			        typ = VM.Types.Value(ParmTypeID(i))
@@ -142,6 +142,7 @@ Protected Class SPIRVType
 			Name="InstructionText"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"

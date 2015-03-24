@@ -806,6 +806,7 @@ Protected Module ZocleeShade
 		  OpTypePointer
 		  OpTypeVector
 		  OpTypeVoid
+		  OpReturn
 		  OpSource
 		  OpStore
 		OpVariable

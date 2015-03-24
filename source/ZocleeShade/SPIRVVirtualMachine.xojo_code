@@ -176,6 +176,9 @@ Protected Class SPIRVVirtualMachine
 		        case 208 // ***** OpLabel ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLabel)
 		          
+		        case 213 // ***** OpReturn ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReturn)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -523,6 +526,14 @@ Protected Class SPIRVVirtualMachine
 		    case SPIRVOpcodeTypeEnum.OpName
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Target ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpReturn ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpReturn
+		      if wordCount <> 1 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      

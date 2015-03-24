@@ -190,6 +190,11 @@ Protected Class SPIRVOpcode
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
 			    result.Append """"
 			    
+			    // ***** OpReturn *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpReturn
+			    result.Append "Return"
+			    
 			    // ***** OpSource *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSource
@@ -417,18 +422,20 @@ Protected Class SPIRVOpcode
 				"3 - OpEntryPoint"
 				"4 - OpFunction"
 				"5 - OpFunctionParameter"
-				"6 - OpInBoundsAccessChain"
-				"7 - OpLabel"
-				"8 - OpLoad"
-				"9 - OpMemoryModel"
-				"10 - OpName"
-				"11 - OpTypeFunction"
-				"12 - OpTypeInt"
-				"13 - OpTypePointer"
-				"14 - OpTypeVector"
-				"15 - OpTypeVoid"
-				"16 - OpSource"
-				"17 - OpVariable"
+				"6 - OpIAdd"
+				"7 - OpInBoundsAccessChain"
+				"8 - OpLabel"
+				"9 - OpLoad"
+				"10 - OpMemoryModel"
+				"11 - OpName"
+				"12 - OpTypeFunction"
+				"13 - OpTypeInt"
+				"14 - OpTypePointer"
+				"15 - OpTypeVector"
+				"16 - OpTypeVoid"
+				"17 - OpSource"
+				"18 - OpStore"
+				"19 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
