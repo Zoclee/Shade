@@ -167,6 +167,9 @@ Protected Class SPIRVVirtualMachine
 		        case 94 // ***** OpInBoundsAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpInBoundsAccessChain)
 		          
+		        case 122 // ***** OpIAdd ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
+		          
 		        case 208 // ***** OpLabel ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLabel)
 		          
@@ -393,6 +396,42 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpIAdd ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpIAdd
+		      if wordCount <> 5 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 12) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Operand 1 ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not OpcodeLookup.HasKey(ModuleBinary.UInt32Value(op.Offset + 12)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Operand ID not found.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 16) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Operand 1 ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not OpcodeLookup.HasKey(ModuleBinary.UInt32Value(op.Offset + 16)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Operand ID not found.")
 		        op.HasErrors = True
 		      end if
 		      

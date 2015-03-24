@@ -135,6 +135,16 @@ Protected Class SPIRVOpcode
 			    result.Append "FunctionParameter "
 			    result.Append compose_type(Offset + 4)
 			    
+			    // ***** OpIAdd *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpIAdd
+			    result.Append "IAdd "
+			    result.Append compose_type(Offset + 4)
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    
 			    // ***** OpInBoundsAccessChain *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
@@ -285,6 +295,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpIAdd
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -389,17 +402,18 @@ Protected Class SPIRVOpcode
 				"3 - OpEntryPoint"
 				"4 - OpFunction"
 				"5 - OpFunctionParameter"
-				"6 - OpLabel"
-				"7 - OpLoad"
-				"8 - OpMemoryModel"
-				"9 - OpName"
-				"10 - OpTypeFunction"
-				"11 - OpTypeInt"
-				"12 - OpTypePointer"
-				"13 - OpTypeVector"
-				"14 - OpTypeVoid"
-				"15 - OpSource"
-				"16 - OpVariable"
+				"6 - OpInBoundsAccessChain"
+				"7 - OpLabel"
+				"8 - OpLoad"
+				"9 - OpMemoryModel"
+				"10 - OpName"
+				"11 - OpTypeFunction"
+				"12 - OpTypeInt"
+				"13 - OpTypePointer"
+				"14 - OpTypeVector"
+				"15 - OpTypeVoid"
+				"16 - OpSource"
+				"17 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
