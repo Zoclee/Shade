@@ -1,6 +1,22 @@
 #tag Class
 Protected Class SPIRVOpcode
 	#tag Method, Flags = &h21
+		Private Function compose_id(binOffset As UInt32) As String
+		  Dim result() As String
+		  
+		  result.Append Str(VM.ModuleBinary.UInt32Value(binOffset))
+		  if VM.Names.HasKey(VM.ModuleBinary.UInt32Value(binOffset)) then
+		    result.Append "("
+		    result.Append VM.Names.Value(VM.ModuleBinary.UInt32Value(binOffset))
+		    result.Append ")"
+		  end if
+		  
+		  return Join(result, "")
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Function compose_type(binOffset As UInt32) As String
 		  Dim result() As String
 		  Dim typ As ZocleeShade.SPIRVType
@@ -49,7 +65,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
 			    result.Append "CompositeExtract "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append compose_id(Offset + 12)
 			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
 			    i = Offset + 16
 			    while i < ub
@@ -62,12 +78,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpDecorate
 			    result.Append "Decorate "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
-			    if VM.Names.HasKey(VM.ModuleBinary.UInt32Value(Offset + 4)) then
-			      result.Append "("
-			      result.Append VM.Names.Value(VM.ModuleBinary.UInt32Value(Offset + 4))
-			      result.Append ")"
-			    end if
+			    result.Append compose_id(Offset + 4)
 			    result.Append " "
 			    result.Append SPIRVDescribeDecoration(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    select case VM.ModuleBinary.UInt32Value(Offset + 8)
@@ -117,7 +128,7 @@ Protected Class SPIRVOpcode
 			    result.Append "EntryPoint "
 			    result.Append SPIRVDescribeExecutionModel(VM.ModuleBinary.UInt32Value(Offset + 4))
 			    result.Append " "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append compose_id(Offset + 8)
 			    
 			    // ***** OpFunction *************************************************
 			    
@@ -141,20 +152,20 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpIAdd
 			    result.Append "IAdd "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append compose_id(Offset + 12)
 			    result.Append " "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append compose_id(Offset + 16)
 			    
 			    // ***** OpInBoundsAccessChain *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
 			    result.Append "InBoundsAccessChain "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append compose_id(Offset + 12)
 			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
 			    i = Offset + 16
 			    while i < ub
 			      result.Append " "
-			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      result.Append compose_id(i)
 			      i = i + 4
 			    wend
 			    
@@ -167,7 +178,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpLoad
 			    result.Append "Load "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpMemoryModel *************************************************
 			    
@@ -203,9 +214,9 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpStore
 			    result.Append "Store "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append compose_id(Offset + 4)
 			    result.Append " "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append compose_id(Offset + 8)
 			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
 			    i = Offset + 12
 			    while i < ub
@@ -421,6 +432,11 @@ Protected Class SPIRVOpcode
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="ResultType"
+			Group="Behavior"
+			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
@@ -444,21 +460,23 @@ Protected Class SPIRVOpcode
 				"2 - OpDecorate"
 				"3 - OpEntryPoint"
 				"4 - OpFunction"
-				"5 - OpFunctionParameter"
-				"6 - OpIAdd"
-				"7 - OpInBoundsAccessChain"
-				"8 - OpLabel"
-				"9 - OpLoad"
-				"10 - OpMemoryModel"
-				"11 - OpName"
-				"12 - OpTypeFunction"
-				"13 - OpTypeInt"
-				"14 - OpTypePointer"
-				"15 - OpTypeVector"
-				"16 - OpTypeVoid"
-				"17 - OpSource"
-				"18 - OpStore"
-				"19 - OpVariable"
+				"5 - OpFunctionEnd"
+				"6 - OpFunctionParameter"
+				"7 - OpIAdd"
+				"8 - OpInBoundsAccessChain"
+				"9 - OpLabel"
+				"10 - OpLoad"
+				"11 - OpMemoryModel"
+				"12 - OpName"
+				"13 - OpTypeFunction"
+				"14 - OpTypeInt"
+				"15 - OpTypePointer"
+				"16 - OpTypeVector"
+				"17 - OpTypeVoid"
+				"18 - OpReturn"
+				"19 - OpSource"
+				"20 - OpStore"
+				"21 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
