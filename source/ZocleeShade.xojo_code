@@ -802,7 +802,7 @@ Protected Module ZocleeShade
 		  ' 10 All type declarations, constant instructions and global variable declarations
 		  ' 11 All function definitions using OpFunction or OpFunctionParameter, ending with OpFunctionEnd
 		  
-		  Dim bin As new MemoryBlock(128)
+		  Dim bin As new MemoryBlock(160)
 		  
 		  bin.UInt32Value(0) = &h07230203 ' magic number
 		  bin.UInt32Value(4) = 99 ' version number (99 = pre-relase, 100 = first public version)
@@ -852,10 +852,19 @@ Protected Module ZocleeShade
 		  bin.UInt32Value(116) = 16 ' target id
 		  bin.CString(120) = "cond" ' Name
 		  
-		  
-		  
 		  'Name 21 "color"
+		  bin.UInt16Value(128) = 54 ' OpName
+		  bin.UInt16Value(130) = 2 + 2 ' Word Count
+		  bin.UInt32Value(132) = 21 ' target id
+		  bin.CString(136) = "color" ' Name
+		  
 		  'Name 23 "color1"
+		  bin.UInt16Value(144) = 54 ' OpName
+		  bin.UInt16Value(146) = 2 + 2 ' Word Count
+		  bin.UInt32Value(148) = 21 ' target id
+		  bin.CString(152) = "color1" ' Name
+		  
+		  
 		  'Name 29 "S"
 		  'MemberName 29(S) 0 "b"
 		  'MemberName 29(S) 1 "v"
