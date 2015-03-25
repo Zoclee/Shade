@@ -802,7 +802,7 @@ Protected Module ZocleeShade
 		  ' 10 All type declarations, constant instructions and global variable declarations
 		  ' 11 All function definitions using OpFunction or OpFunctionParameter, ending with OpFunctionEnd
 		  
-		  Dim bin As new MemoryBlock(160)
+		  Dim bin As new MemoryBlock(280)
 		  
 		  bin.UInt32Value(0) = &h07230203 ' magic number
 		  bin.UInt32Value(4) = 99 ' version number (99 = pre-relase, 100 = first public version)
@@ -846,33 +846,75 @@ Protected Module ZocleeShade
 		  bin.UInt32Value(100) = 10 ' target id
 		  bin.CString(104) = "scale" ' Name
 		  
-		  'Name 16 "cond"
+		  ' Name 16 "cond"
 		  bin.UInt16Value(112) = 54 ' OpName
 		  bin.UInt16Value(114) = 2 + 2 ' Word Count
 		  bin.UInt32Value(116) = 16 ' target id
 		  bin.CString(120) = "cond" ' Name
 		  
-		  'Name 21 "color"
+		  ' Name 21 "color"
 		  bin.UInt16Value(128) = 54 ' OpName
 		  bin.UInt16Value(130) = 2 + 2 ' Word Count
 		  bin.UInt32Value(132) = 21 ' target id
 		  bin.CString(136) = "color" ' Name
 		  
-		  'Name 23 "color1"
+		  ' Name 23 "color1"
 		  bin.UInt16Value(144) = 54 ' OpName
 		  bin.UInt16Value(146) = 2 + 2 ' Word Count
-		  bin.UInt32Value(148) = 21 ' target id
+		  bin.UInt32Value(148) = 23 ' target id
 		  bin.CString(152) = "color1" ' Name
 		  
+		  ' Name 29 "S"
+		  bin.UInt16Value(160) = 54 ' OpName
+		  bin.UInt16Value(162) = 2 + 1 ' Word Count
+		  bin.UInt32Value(164) = 29 ' target id
+		  bin.CString(168) = "S" ' Name
 		  
-		  'Name 29 "S"
-		  'MemberName 29(S) 0 "b"
-		  'MemberName 29(S) 1 "v"
-		  'MemberName 29(S) 2 "i"
-		  'Name 31 "s"
-		  'Name 39 "color2"
-		  'Name 45 "i"
-		  'Name 53 "multiplier"
+		  ' MemberName 29(S) 0 "b"
+		  bin.UInt16Value(172) = 55 ' OpMemberName
+		  bin.UInt16Value(174) = 3 + 1 ' Word Count
+		  bin.UInt32Value(176) = 29 ' type id
+		  bin.UInt32Value(180) = 0 ' member
+		  bin.CString(184) = "b" ' member
+		  
+		  ' MemberName 29(S) 1 "v"
+		  bin.UInt16Value(188) = 55 ' OpMemberName
+		  bin.UInt16Value(190) = 3 + 1 ' Word Count
+		  bin.UInt32Value(192) = 29 ' type id
+		  bin.UInt32Value(196) = 1 ' member
+		  bin.CString(200) = "v" ' member
+		  
+		  ' MemberName 29(S) 2 "i"
+		  bin.UInt16Value(204) = 55 ' OpMemberName
+		  bin.UInt16Value(206) = 3 + 1 ' Word Count
+		  bin.UInt32Value(208) = 29 ' type id
+		  bin.UInt32Value(212) = 2 ' member
+		  bin.CString(216) = "i" ' member
+		  
+		  ' Name 31 "s"
+		  bin.UInt16Value(220) = 54 ' OpName
+		  bin.UInt16Value(222) = 2 + 1 ' Word Count
+		  bin.UInt32Value(224) = 31 ' target id
+		  bin.CString(228) = "s" ' Name
+		  
+		  ' Name 39 "color2"
+		  bin.UInt16Value(232) = 54 ' OpName
+		  bin.UInt16Value(234) = 2 + 2 ' Word Count
+		  bin.UInt32Value(236) = 39 ' target id
+		  bin.CString(240) = "color2" ' Name
+		  
+		  ' Name 45 "i"
+		  bin.UInt16Value(248) = 54 ' OpName
+		  bin.UInt16Value(250) = 2 + 1 ' Word Count
+		  bin.UInt32Value(252) = 45 ' target id
+		  bin.CString(256) = "i" ' Name
+		  
+		  ' Name 53 "multiplier"
+		  bin.UInt16Value(260) = 54 ' OpName
+		  bin.UInt16Value(262) = 2 + 3 ' Word Count
+		  bin.UInt32Value(264) = 45 ' target id
+		  bin.CString(268) = "multiplier" ' Name
+		  
 		  'Decorate 23(color1) Smooth
 		  'Decorate 39(color2) Noperspective
 		  '2: TypeVoid
