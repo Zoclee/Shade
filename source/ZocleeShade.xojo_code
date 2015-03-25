@@ -673,7 +673,7 @@ Protected Module ZocleeShade
 		  ' 9(add): 5 Function NoControl 8
 		  bin.UInt16Value(488) = 40 ' OpFunction
 		  bin.UInt16Value(490) = 5 ' word count
-		  bin.UInt32Value(492) = 5 ' result type id = void
+		  bin.UInt32Value(492) = 5 ' result type id
 		  bin.UInt32Value(496) = 9 ' result id
 		  bin.UInt32Value(500) = 0 ' function control mask
 		  bin.UInt32Value(504) = 8 ' function type id
@@ -802,7 +802,7 @@ Protected Module ZocleeShade
 		  ' 10 All type declarations, constant instructions and global variable declarations
 		  ' 11 All function definitions using OpFunction or OpFunctionParameter, ending with OpFunctionEnd
 		  
-		  Dim bin As new MemoryBlock(548)
+		  Dim bin As new MemoryBlock(804)
 		  
 		  bin.UInt32Value(0) = &h07230203 ' magic number
 		  bin.UInt32Value(4) = 99 ' version number (99 = pre-relase, 100 = first public version)
@@ -1035,24 +1035,121 @@ Protected Module ZocleeShade
 		  bin.UInt16Value(534) = 4 ' word count
 		  bin.UInt32Value(536) = 25 ' result id
 		  bin.UInt32Value(540) = 32 ' width
-		  bin.UInt32Value(544) = 0 ' signedness (0 = unsigned, 1= signed)
+		  bin.UInt32Value(544) = 0 ' signedness (0=unsigned, 1=signed)
 		  
-		  '26: 25(int) Constant 5
-		  '27: TypeArray 8(fvec4) 26
-		  '28: TypeInt 32 1
-		  '29(S): TypeStruct 14(bool) 27 28(int)
-		  '30: TypePointer UniformConstant 29(S)
-		  '31(s): 30(ptr) Variable UniformConstant
-		  '32: 28(int) Constant 1
-		  '33: 28(int) Constant 2
-		  '34: TypePointer UniformConstant 8(fvec4)
-		  '39(color2): 22(ptr) Variable Input
-		  '44: TypePointer Function 28(int)
-		  '46: 28(int) Constant 0
-		  '50: 28(int) Constant 4
-		  '53(multiplier): 34(ptr) Variable UniformConstant
-		  '4(main): 2 Function NoControl 3
-		  '5: Label
+		  ' 26: 25(int) Constant 5
+		  bin.UInt16Value(548) = 29 ' OpConstant
+		  bin.UInt16Value(550) = 3 + 1 ' word count
+		  bin.UInt32Value(552) = 25 ' result type id
+		  bin.UInt32Value(556) = 26 ' result id
+		  bin.UInt32Value(560) = 5 ' value
+		  
+		  ' 27: TypeArray 8(fvec4) 26
+		  bin.UInt16Value(564) = 16 ' OpConstant
+		  bin.UInt16Value(566) = 4 ' word count
+		  bin.UInt32Value(568) = 27 ' result id
+		  bin.UInt32Value(572) = 8 ' element type id
+		  bin.UInt32Value(576) = 26 ' length
+		  
+		  ' 28: TypeInt 32 1
+		  bin.UInt16Value(580) = 10 ' OpTypeInt
+		  bin.UInt16Value(582) = 4 ' word count
+		  bin.UInt32Value(584) = 28 ' result id
+		  bin.UInt32Value(588) = 32 ' width
+		  bin.UInt32Value(592) = 1 ' signedness (0=unsigned, 1=signed)
+		  
+		  ' 29(S): TypeStruct 14(bool) 27 28(int)
+		  bin.UInt16Value(596) = 18 ' OpTypeStruct
+		  bin.UInt16Value(598) = 2 + 3 ' word count
+		  bin.UInt32Value(600) = 29 ' result id
+		  bin.UInt32Value(604) = 14 ' member 0 type id
+		  bin.UInt32Value(608) = 27 ' member 1 type id
+		  bin.UInt32Value(612) = 28 ' member 2 type id
+		  
+		  ' 30: TypePointer UniformConstant 29(S)
+		  bin.UInt16Value(616) = 20 ' OpTypePointer
+		  bin.UInt16Value(618) = 4 ' word count
+		  bin.UInt32Value(620) = 30 ' result id
+		  bin.UInt32Value(624) = 0 ' storage class (UniformConstant)
+		  bin.UInt32Value(628) = 29 ' type id
+		  
+		  ' 31(s): 30(ptr) Variable UniformConstant
+		  bin.UInt16Value(632) = 38 ' OpVariable
+		  bin.UInt16Value(634) = 4 + 0 ' word count
+		  bin.UInt32Value(636) = 30 ' result type id
+		  bin.UInt32Value(640) = 31 ' result id
+		  bin.UInt16Value(644) = 0 ' storage class (UniformConstant)
+		  
+		  ' 32: 28(int) Constant 1
+		  bin.UInt16Value(648) = 29 ' OpConstant
+		  bin.UInt16Value(650) = 3 + 1 ' word count
+		  bin.UInt32Value(652) = 28 ' result type id
+		  bin.UInt32Value(656) = 32 ' result id
+		  bin.UInt32Value(660) = 1 ' value
+		  
+		  ' 33: 28(int) Constant 2
+		  bin.UInt16Value(664) = 29 ' OpConstant
+		  bin.UInt16Value(666) = 3 + 1 ' word count
+		  bin.UInt32Value(668) = 28 ' result type id
+		  bin.UInt32Value(672) = 33 ' result id
+		  bin.UInt32Value(676) = 2 ' value
+		  
+		  ' 34: TypePointer UniformConstant 8(fvec4)
+		  bin.UInt16Value(680) = 20 ' OpTypePointer
+		  bin.UInt16Value(682) = 4 ' word count
+		  bin.UInt32Value(684) = 34 ' result id
+		  bin.UInt32Value(688) = 0 ' storage class (UniformConstant)
+		  bin.UInt32Value(692) = 8 ' type id
+		  
+		  ' 39(color2): 22(ptr) Variable Input
+		  bin.UInt16Value(696) = 38 ' OpVariable
+		  bin.UInt16Value(698) = 4 + 0 ' word count
+		  bin.UInt32Value(700) = 22 ' result type id
+		  bin.UInt32Value(704) = 39 ' result id
+		  bin.UInt16Value(708) = 1 ' storage class (Input)
+		  
+		  ' 44: TypePointer Function 28(int)
+		  bin.UInt16Value(712) = 20 ' OpTypePointer
+		  bin.UInt16Value(714) = 4 ' word count
+		  bin.UInt32Value(716) = 44 ' result id
+		  bin.UInt32Value(720) = 7 ' storage class (Function)
+		  bin.UInt32Value(724) = 28 ' type id
+		  
+		  ' 46: 28(int) Constant 0
+		  bin.UInt16Value(728) = 29 ' OpConstant
+		  bin.UInt16Value(730) = 3 + 1 ' word count
+		  bin.UInt32Value(732) = 28 ' result type id
+		  bin.UInt32Value(736) = 46 ' result id
+		  bin.UInt32Value(740) = 0 ' value
+		  
+		  ' 50: 28(int) Constant 4
+		  bin.UInt16Value(744) = 29 ' OpConstant
+		  bin.UInt16Value(746) = 3 + 1 ' word count
+		  bin.UInt32Value(748) = 28 ' result type id
+		  bin.UInt32Value(752) = 50 ' result id
+		  bin.UInt32Value(756) = 4 ' value
+		  
+		  ' 53(multiplier): 34(ptr) Variable UniformConstant
+		  bin.UInt16Value(760) = 38 ' OpVariable
+		  bin.UInt16Value(762) = 4 + 0 ' word count
+		  bin.UInt32Value(764) = 34 ' result type id
+		  bin.UInt32Value(768) = 53 ' result id
+		  bin.UInt16Value(772) = 0 ' storage class (UniformConstant)
+		  
+		  ' 4(main): 2 Function NoControl 3
+		  bin.UInt16Value(776) = 40 ' OpFunction
+		  bin.UInt16Value(778) = 5 ' word count
+		  bin.UInt32Value(780) = 2 ' result type id
+		  bin.UInt32Value(784) = 4 ' result id
+		  bin.UInt32Value(788) = 0 ' function control mask
+		  bin.UInt32Value(792) = 3 ' function type id
+		  
+		  ' 5: Label
+		  bin.UInt16Value(796) = 208 ' OpFunctionParameter
+		  bin.UInt16Value(798) = 2 ' word count
+		  bin.UInt32Value(800) = 5 ' result id
+		  
+		  
 		  '10(scale): 9(ptr) Variable Function
 		  '45(i): 44(ptr) Variable Function
 		  'Store 10(scale) 13
