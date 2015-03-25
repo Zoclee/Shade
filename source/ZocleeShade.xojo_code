@@ -802,7 +802,7 @@ Protected Module ZocleeShade
 		  ' 10 All type declarations, constant instructions and global variable declarations
 		  ' 11 All function definitions using OpFunction or OpFunctionParameter, ending with OpFunctionEnd
 		  
-		  Dim bin As new MemoryBlock(368)
+		  Dim bin As new MemoryBlock(548)
 		  
 		  bin.UInt32Value(0) = &h07230203 ' magic number
 		  bin.UInt32Value(4) = 99 ' version number (99 = pre-relase, 100 = first public version)
@@ -959,20 +959,84 @@ Protected Module ZocleeShade
 		  bin.UInt32Value(360) = 7 ' storage class (Function)
 		  bin.UInt32Value(364) = 8 ' type id
 		  
+		  ' 11: 7(float) Constant 1065353216
+		  bin.UInt16Value(368) = 29 ' OpConstant
+		  bin.UInt16Value(370) = 3 + 1 ' word count
+		  bin.UInt32Value(372) = 7 ' result type id
+		  bin.UInt32Value(376) = 11 ' result id
+		  bin.UInt32Value(380) = 1065353216 ' value
 		  
+		  ' 12: 7(float) Constant 1073741824
+		  bin.UInt16Value(384) = 29 ' OpConstant
+		  bin.UInt16Value(386) = 3 + 1 ' word count
+		  bin.UInt32Value(388) = 7 ' result type id
+		  bin.UInt32Value(392) = 11 ' result id
+		  bin.UInt32Value(396) = 1073741824 ' value
 		  
+		  ' 13: 8(fvec4) ConstantComposite 11 11 12 11
+		  bin.UInt16Value(400) = 30 ' OpConstantComposite
+		  bin.UInt16Value(402) = 3 + 4 ' word count
+		  bin.UInt32Value(404) = 8 ' return type id
+		  bin.UInt32Value(408) = 13 ' result id
+		  bin.UInt32Value(412) = 11 ' constituent id 1
+		  bin.UInt32Value(416) = 11 ' constituent id 2
+		  bin.UInt32Value(420) = 12 ' constituent id 3
+		  bin.UInt32Value(424) = 11 ' constituent id 4
 		  
-		  '11: 7(float) Constant 1065353216
-		  '12: 7(float) Constant 1073741824
-		  '13: 8(fvec4) ConstantComposite 11 11 12 11
-		  '14: TypeBool
-		  '15: TypePointer UniformConstant 14(bool)
-		  '16(cond): 15(ptr) Variable UniformConstant
-		  '20: TypePointer Output 8(fvec4)
-		  '21(color): 20(ptr) Variable Output
-		  '22: TypePointer Input 8(fvec4)
-		  '23(color1): 22(ptr) Variable Input
+		  ' 14: TypeBool
+		  bin.UInt16Value(428) = 9 ' OpConstantComposite
+		  bin.UInt16Value(430) = 2 ' word count
+		  bin.UInt32Value(432) = 14 ' result id
+		  
+		  ' 15: TypePointer UniformConstant 14(bool)
+		  bin.UInt16Value(436) = 20 ' OpTypePointer
+		  bin.UInt16Value(438) = 4 ' word count
+		  bin.UInt32Value(440) = 15 ' result id
+		  bin.UInt32Value(444) = 0 ' storage class (UniformConstant)
+		  bin.UInt32Value(448) = 14 ' type id
+		  
+		  ' 16(cond): 15(ptr) Variable UniformConstant
+		  bin.UInt16Value(452) = 38 ' OpVariable
+		  bin.UInt16Value(454) = 4 + 0 ' word count
+		  bin.UInt32Value(456) = 15 ' result type id
+		  bin.UInt32Value(460) = 16 ' result id
+		  bin.UInt16Value(464) = 0 ' storage class (UniformConstant)
+		  
+		  ' 20: TypePointer Output 8(fvec4)
+		  bin.UInt16Value(468) = 20 ' OpTypePointer
+		  bin.UInt16Value(470) = 4 ' word count
+		  bin.UInt32Value(472) = 20 ' result id
+		  bin.UInt32Value(476) = 3 ' storage class (Output)
+		  bin.UInt32Value(480) = 8 ' type id
+		  
+		  ' 21(color): 20(ptr) Variable Output
+		  bin.UInt16Value(484) = 38 ' OpVariable
+		  bin.UInt16Value(486) = 4 + 0 ' word count
+		  bin.UInt32Value(488) = 20 ' result type id
+		  bin.UInt32Value(492) = 21 ' result id
+		  bin.UInt16Value(496) = 3 ' storage class (Output)
+		  
+		  ' 22: TypePointer Input 8(fvec4)
+		  bin.UInt16Value(500) = 20 ' OpTypePointer
+		  bin.UInt16Value(502) = 4 ' word count
+		  bin.UInt32Value(504) = 22 ' result id
+		  bin.UInt32Value(508) = 1 ' storage class (Input)
+		  bin.UInt32Value(512) = 8 ' type id
+		  
+		  ' 23(color1): 22(ptr) Variable Input
+		  bin.UInt16Value(516) = 38 ' OpVariable
+		  bin.UInt16Value(518) = 4 + 0 ' word count
+		  bin.UInt32Value(520) = 22 ' result type id
+		  bin.UInt32Value(524) = 23 ' result id
+		  bin.UInt16Value(528) = 1 ' storage class (Input)
+		  
 		  '25: TypeInt 32 0
+		  bin.UInt16Value(532) = 10 ' OpTypeInt
+		  bin.UInt16Value(534) = 4 ' word count
+		  bin.UInt32Value(536) = 25 ' result id
+		  bin.UInt32Value(540) = 32 ' width
+		  bin.UInt32Value(544) = 0 ' signedness (0 = unsigned, 1= signed)
+		  
 		  '26: 25(int) Constant 5
 		  '27: TypeArray 8(fvec4) 26
 		  '28: TypeInt 32 1

@@ -257,7 +257,7 @@ End
 		    
 		    ' this line is used for testing
 		    'm = SPIRVTestModule1()
-		    m = SPIRVTestModule2()
+		    'm = SPIRVTestModule2()
 		    
 		    App.VM.LoadModule(m)
 		    
