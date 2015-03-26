@@ -330,6 +330,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpLabel
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
 			  case SPIRVOpcodeTypeEnum.OpLoad
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -435,6 +438,7 @@ Protected Class SPIRVOpcode
 			Name="ResultType"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
