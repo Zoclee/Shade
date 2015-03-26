@@ -18,9 +18,6 @@ Protected Class SPIRVVirtualMachine
 		  Types = new Dictionary()
 		  Version = 99
 		  
-		  
-		  
-		  
 		End Sub
 	#tag EndMethod
 
@@ -134,6 +131,9 @@ Protected Class SPIRVVirtualMachine
 		            tempIP = tempIP + 4
 		          wend
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
+		        case 29 // ***** OpConstant ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstant)
 		          
 		        case 38 // ***** OpVariable ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVariable)
@@ -285,6 +285,26 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      // todo: validate that result type id is the same type as the object selected by the last provided index
+		      
+		      ' ***** OpConstant ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpConstant
+		      if wordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
 		      
 		      ' ***** OpDecorate ***********************************************************************************
 		      

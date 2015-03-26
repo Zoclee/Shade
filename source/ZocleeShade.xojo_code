@@ -970,7 +970,7 @@ Protected Module ZocleeShade
 		  bin.UInt16Value(384) = 29 ' OpConstant
 		  bin.UInt16Value(386) = 3 + 1 ' word count
 		  bin.UInt32Value(388) = 7 ' result type id
-		  bin.UInt32Value(392) = 11 ' result id
+		  bin.UInt32Value(392) = 12 ' result id
 		  bin.UInt32Value(396) = 1073741824 ' value
 		  
 		  ' 13: 8(fvec4) ConstantComposite 11 11 12 11
@@ -1429,6 +1429,7 @@ Protected Module ZocleeShade
 	#tag Enum, Name = SPIRVOpcodeTypeEnum, Type = Integer, Flags = &h0
 		Unknown
 		  OpCompositeExtract
+		  OpConstant
 		  OpDecorate
 		  OpEntryPoint
 		  OpExtInstImport
