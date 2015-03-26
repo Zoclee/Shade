@@ -66,6 +66,9 @@ Protected Class SPIRVVirtualMachine
 		          SourceLanguage = ModuleBinary.UInt32Value(ip + 4)
 		          SourceVersion = ModuleBinary.UInt32Value(ip + 8)
 		          
+		        case 4 // ***** OpExtInstImport ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtInstImport)
+		          
 		        case 5 // ***** OpMemoryModel ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemoryModel)
 		          AddressingModel = ModuleBinary.UInt32Value(ip + 4)
@@ -358,6 +361,18 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      
+		      ' ***** OpExtInstImport ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpExtInstImport
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid name.")
+		        op.HasErrors = True
+		      end if
+		      
 		      ' ***** OpFunction ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpFunction
@@ -546,6 +561,10 @@ Protected Class SPIRVVirtualMachine
 		    case SPIRVOpcodeTypeEnum.OpName
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Target ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid name.")
 		        op.HasErrors = True
 		      end if
 		      

@@ -130,6 +130,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 8)
 			    
+			    // ***** OpExtInstImport *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpExtInstImport
+			    result.Append "ExtInstImport """
+			    result.Append VM.ModuleBinary.CString(Offset + 8)
+			    result.Append """"
+			    
+			    
 			    // ***** OpFunction *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFunction
@@ -317,6 +325,9 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
+			  case SPIRVOpcodeTypeEnum.OpExtInstImport
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpFunction
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)

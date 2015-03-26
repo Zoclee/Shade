@@ -1431,6 +1431,7 @@ Protected Module ZocleeShade
 		  OpCompositeExtract
 		  OpDecorate
 		  OpEntryPoint
+		  OpExtInstImport
 		  OpFunction
 		  OpFunctionEnd
 		  OpFunctionParameter
