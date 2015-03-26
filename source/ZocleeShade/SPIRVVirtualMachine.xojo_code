@@ -4,6 +4,7 @@ Protected Class SPIRVVirtualMachine
 		Sub Clear()
 		  AddressingModel = 2 // Phyical64
 		  Bound = 0
+		  Constants = new Dictionary()
 		  Redim Decorations(-1)
 		  Redim EntryPoints(-1)
 		  Redim Errors(-1)
@@ -31,6 +32,7 @@ Protected Class SPIRVVirtualMachine
 		  Dim dec As ZocleeShade.SPIRVDecoration
 		  Dim typ As ZocleeShade.SPIRVType
 		  Dim op As ZocleeShade.SPIRVOpcode
+		  Dim cnst As ZocleeShade.SPIRVConstant
 		  
 		  Clear()
 		  
@@ -134,6 +136,11 @@ Protected Class SPIRVVirtualMachine
 		          
 		        case 29 // ***** OpConstant ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstant)
+		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
+		          cnst.ReturnTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          cnst.Value = Str(ModuleBinary.UInt32Value(ip + 12))
+		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 38 // ***** OpVariable ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVariable)
@@ -815,6 +822,10 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Property, Flags = &h0
 		Bound As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Constants As Dictionary
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

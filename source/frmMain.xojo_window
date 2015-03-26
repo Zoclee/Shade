@@ -312,6 +312,9 @@ End
 		    lstInfo.AddRow "Types"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Types.Keys.Ubound + 1)
 		    
+		    lstInfo.AddRow "Constants"
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Constants.Keys.Ubound + 1)
+		    
 		    lstInfo.AddRow "Functions"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Functions.Keys.Ubound + 1)
 		    
@@ -388,6 +391,8 @@ End
 		    g.ForeColor = &caa0000
 		  elseif App.VM.Types.HasKey(op.ResultID) then
 		    g.ForeColor = &c007700
+		  elseif App.VM.Constants.HasKey(op.ResultID) then
+		    g.ForeColor = &c6b2b83
 		  end if
 		  
 		End Function
