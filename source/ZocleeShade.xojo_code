@@ -802,7 +802,7 @@ Protected Module ZocleeShade
 		  ' 10 All type declarations, constant instructions and global variable declarations
 		  ' 11 All function definitions using OpFunction or OpFunctionParameter, ending with OpFunctionEnd
 		  
-		  Dim bin As new MemoryBlock(804)
+		  Dim bin As new MemoryBlock(900)
 		  
 		  bin.UInt32Value(0) = &h07230203 ' magic number
 		  bin.UInt32Value(4) = 99 ' version number (99 = pre-relase, 100 = first public version)
@@ -1149,14 +1149,51 @@ Protected Module ZocleeShade
 		  bin.UInt16Value(798) = 2 ' word count
 		  bin.UInt32Value(800) = 5 ' result id
 		  
+		  ' 10(scale): 9(ptr) Variable Function
+		  bin.UInt16Value(804) = 38 ' OpVariable
+		  bin.UInt16Value(806) = 4 + 0 ' word count
+		  bin.UInt32Value(808) = 9 ' result type id
+		  bin.UInt32Value(812) = 10 ' result id
+		  bin.UInt16Value(816) = 7 ' storage class (Function)
 		  
-		  '10(scale): 9(ptr) Variable Function
-		  '45(i): 44(ptr) Variable Function
-		  'Store 10(scale) 13
-		  '17: 14(bool) Load 16(cond)
-		  'SelectionMerge 19 NoControl
-		  'BranchConditional 17 18 38
-		  '18: Label
+		  ' 45(i): 44(ptr) Variable Function
+		  bin.UInt16Value(820) = 38 ' OpVariable
+		  bin.UInt16Value(822) = 4 + 0 ' word count
+		  bin.UInt32Value(824) = 44 ' result type id
+		  bin.UInt32Value(828) = 45 ' result id
+		  bin.UInt16Value(832) = 7 ' storage class (Function)
+		  
+		  ' Store 10(scale) 13
+		  bin.UInt16Value(836) = 47 ' OpStore
+		  bin.UInt16Value(838) = 3 + 0 ' word count
+		  bin.UInt32Value(840) = 10 ' pointer id
+		  bin.UInt32Value(844) = 13 ' object id
+		  
+		  ' 17: 14(bool) Load 16(cond)
+		  bin.UInt16Value(848) = 46 ' OpLoad
+		  bin.UInt16Value(850) = 4 + 0 ' word count
+		  bin.UInt32Value(852) = 14 ' result type id
+		  bin.UInt32Value(856) = 17 ' result id
+		  bin.UInt32Value(860) = 16 ' pointer id
+		  
+		  ' SelectionMerge 19 NoControl
+		  bin.UInt16Value(864) = 207 ' OpSelectionMerge
+		  bin.UInt16Value(866) = 3 ' word count
+		  bin.UInt32Value(868) = 19 ' label id
+		  bin.UInt32Value(872) = 0 ' selection control (NoControl)
+		  
+		  ' BranchConditional 17 18 38
+		  bin.UInt16Value(876) = 210 ' OpSelectionMerge
+		  bin.UInt16Value(878) = 4 + 0 ' word count
+		  bin.UInt32Value(880) = 17 ' condition id
+		  bin.UInt32Value(884) = 18 ' true label
+		  bin.UInt32Value(888) = 38 ' false label
+		  
+		  ' 18: Label
+		  bin.UInt16Value(892) = 208 ' OpFunctionParameter
+		  bin.UInt16Value(894) = 2 ' word count
+		  bin.UInt32Value(896) = 18 ' result id
+		  
 		  '24: 8(fvec4) Load 23(color1)
 		  '35: 34(ptr) AccessChain 31(s) 32 33
 		  '36: 8(fvec4) Load 35
