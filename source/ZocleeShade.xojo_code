@@ -1442,6 +1442,7 @@ Protected Module ZocleeShade
 		  OpMemberName
 		  OpMemoryModel
 		  OpName
+		  OpTypeFloat
 		  OpTypeFunction
 		  OpTypeInt
 		  OpTypeVector

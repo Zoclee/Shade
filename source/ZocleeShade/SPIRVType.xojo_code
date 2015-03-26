@@ -26,6 +26,10 @@ Protected Class SPIRVType
 			  
 			  select case Type
 			    
+			  case SPIRVTypeEnum.Float
+			    result.Append "Float"
+			    result.Append Str(Width)
+			    
 			  case SPIRVTypeEnum.Function_
 			    if (ReturnTypeID <> ResultID) and VM.Types.HasKey(ReturnTypeID) then
 			      typ = VM.Types.Value(ReturnTypeID)

@@ -99,6 +99,13 @@ Protected Class SPIRVVirtualMachine
 		          end if
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
+		        case 11 // ***** OpTypeFloat ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeFloat)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.Float
+		          typ.Width = ModuleBinary.UInt32Value(ip + 8)
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
 		        case 12 // ***** OpTypeVector ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeVector)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
@@ -608,6 +615,22 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 4 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Source Language enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpTypeFloat ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTypeFloat
+		      if wordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) <= 0 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid width.")
 		        op.HasErrors = True
 		      end if
 		      

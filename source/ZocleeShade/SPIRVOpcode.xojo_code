@@ -244,6 +244,12 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpTypeFloat *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeFloat
+			    result.Append "TypeFloat "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    
 			    // ***** OpTypeFunction *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFunction
@@ -357,6 +363,9 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpLoad
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeFloat
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFunction
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
