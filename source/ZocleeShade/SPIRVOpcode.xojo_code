@@ -188,6 +188,17 @@ Protected Class SPIRVOpcode
 			    result.Append "Load "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpMemberName *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpMemberName
+			    result.Append "MemberName "
+			    result.Append compose_type(Offset + 4)
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append " """
+			    result.Append VM.ModuleBinary.CString(Offset + 12)
+			    result.Append """"
+			    
 			    // ***** OpMemoryModel *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpMemoryModel

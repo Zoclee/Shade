@@ -170,6 +170,9 @@ Protected Class SPIRVVirtualMachine
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpName)
 		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
 		          
+		        case 55 // ***** OpMemberName ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemberName)
+		          
 		        case 62 // ***** OpCompositeExtract ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeExtract)
 		          
@@ -364,6 +367,10 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpExtInstImport ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpExtInstImport
+		      if wordCount < 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
 		        op.HasErrors = True
@@ -537,6 +544,22 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 12) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Pointer ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpMemberName ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpMemberName
+		      if wordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if Trim(ModuleBinary.CString(op.Offset + 12)) = "" then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid name.")
 		        op.HasErrors = True
 		      end if
 		      

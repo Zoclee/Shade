@@ -1439,12 +1439,13 @@ Protected Module ZocleeShade
 		  OpInBoundsAccessChain
 		  OpLabel
 		  OpLoad
+		  OpMemberName
 		  OpMemoryModel
 		  OpName
 		  OpTypeFunction
 		  OpTypeInt
-		  OpTypePointer
 		  OpTypeVector
+		  OpTypePointer
 		  OpTypeVoid
 		  OpReturn
 		  OpSource
