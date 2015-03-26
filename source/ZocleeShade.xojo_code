@@ -802,7 +802,7 @@ Protected Module ZocleeShade
 		  ' 10 All type declarations, constant instructions and global variable declarations
 		  ' 11 All function definitions using OpFunction or OpFunctionParameter, ending with OpFunctionEnd
 		  
-		  Dim bin As new MemoryBlock(900)
+		  Dim bin As new MemoryBlock(1362)
 		  
 		  bin.UInt32Value(0) = &h07230203 ' magic number
 		  bin.UInt32Value(4) = 99 ' version number (99 = pre-relase, 100 = first public version)
@@ -1145,7 +1145,7 @@ Protected Module ZocleeShade
 		  bin.UInt32Value(792) = 3 ' function type id
 		  
 		  ' 5: Label
-		  bin.UInt16Value(796) = 208 ' OpFunctionParameter
+		  bin.UInt16Value(796) = 208 ' OpLabel
 		  bin.UInt16Value(798) = 2 ' word count
 		  bin.UInt32Value(800) = 5 ' result id
 		  
@@ -1190,45 +1190,229 @@ Protected Module ZocleeShade
 		  bin.UInt32Value(888) = 38 ' false label
 		  
 		  ' 18: Label
-		  bin.UInt16Value(892) = 208 ' OpFunctionParameter
+		  bin.UInt16Value(892) = 208 ' OpLabel
 		  bin.UInt16Value(894) = 2 ' word count
 		  bin.UInt32Value(896) = 18 ' result id
 		  
-		  '24: 8(fvec4) Load 23(color1)
-		  '35: 34(ptr) AccessChain 31(s) 32 33
-		  '36: 8(fvec4) Load 35
-		  '37: 8(fvec4) FAdd 24 36
-		  'Store 21(color) 37
-		  'Branch 19
-		  '38: Label
-		  '40: 8(fvec4) Load 39(color2)
-		  '41: 8(fvec4) ExtInst 1(GLSL.std.450) 28(sqrt) 40
-		  '42: 8(fvec4) Load 10(scale)
-		  '43: 8(fvec4) FMul 41 42
-		  'Store 21(color) 43
-		  'Branch 19
-		  '19: Label
-		  'Store 45(i) 46
-		  'Branch 47
-		  '47: Label
-		  '49: 28(int) Load 45(i)
-		  '51: 14(bool) SLessThan 49 50
-		  'LoopMerge 48 NoControl
-		  'BranchConditional 51 52 48
-		  '52: Label
-		  '54: 8(fvec4) Load 53(multiplier)
-		  '55: 8(fvec4) Load 21(color)
-		  '56: 8(fvec4) FMul 55 54
-		  'Store 21(color) 56
-		  '57: 28(int) Load 45(i)
-		  '58: 28(int) IAdd 57 32
-		  'Store 45(i) 58
-		  'Branch 47
-		  '48: Label
-		  'Branch 6
-		  '6: Label
-		  'Return
-		  'FunctionEnd
+		  ' 24: 8(fvec4) Load 23(color1)
+		  bin.UInt16Value(900) = 46 ' OpLoad
+		  bin.UInt16Value(902) = 4 + 0 ' word count
+		  bin.UInt32Value(904) = 8 ' result type id
+		  bin.UInt32Value(908) = 24 ' result id
+		  bin.UInt32Value(912) = 23 ' pointer id
+		  
+		  ' 35: 34(ptr) AccessChain 31(s) 32 33
+		  bin.UInt16Value(916) = 93 ' OpAccessChain
+		  bin.UInt16Value(918) = 4 + 2 ' word count
+		  bin.UInt32Value(920) = 34 ' result type id
+		  bin.UInt32Value(924) = 35 ' result id
+		  bin.UInt32Value(928) = 31 ' base id
+		  bin.UInt32Value(932) = 32 ' index 0 id
+		  bin.UInt32Value(936) = 33 ' index 1 id
+		  
+		  ' 36: 8(fvec4) Load 35
+		  bin.UInt16Value(940) = 46 ' OpLoad
+		  bin.UInt16Value(942) = 4 + 0 ' word count
+		  bin.UInt32Value(944) = 8 ' result type id
+		  bin.UInt32Value(948) = 36 ' result id
+		  bin.UInt32Value(952) = 35 ' pointer id
+		  
+		  ' 37: 8(fvec4) FAdd 24 36
+		  bin.UInt16Value(956) = 123 ' OpFAdd
+		  bin.UInt16Value(958) = 5 ' word count
+		  bin.UInt32Value(960) = 8 ' result type id
+		  bin.UInt32Value(964) = 37 ' result id
+		  bin.UInt32Value(968) = 24 ' operand 1 id
+		  bin.UInt32Value(972) = 36 ' operand 2 id
+		  
+		  ' Store 21(color) 37
+		  bin.UInt16Value(976) = 47 ' OpStore
+		  bin.UInt16Value(978) = 3 + 0 ' word count
+		  bin.UInt32Value(980) = 21 ' pointer id
+		  bin.UInt32Value(984) = 37 ' object id
+		  
+		  ' Branch 19
+		  bin.UInt16Value(988) = 209 ' OpBranch
+		  bin.UInt16Value(990) = 2 ' word count
+		  bin.UInt32Value(992) = 19 ' target label id
+		  
+		  ' 38: Label
+		  bin.UInt16Value(996) = 208 ' OpLabel
+		  bin.UInt16Value(998) = 2 ' word count
+		  bin.UInt32Value(1000) = 38 ' result id
+		  
+		  ' 40: 8(fvec4) Load 39(color2)
+		  bin.UInt16Value(1004) = 46 ' OpLoad
+		  bin.UInt16Value(1006) = 4 + 0 ' word count
+		  bin.UInt32Value(1008) = 8 ' result type id
+		  bin.UInt32Value(1012) = 40 ' result id
+		  bin.UInt32Value(1016) = 39 ' pointer id
+		  
+		  ' 41: 8(fvec4) ExtInst 1(GLSL.std.450) 28(sqrt) 40
+		  bin.UInt16Value(1020) = 44 ' OpExtInst
+		  bin.UInt16Value(1022) = 5 + 1 ' word count
+		  bin.UInt32Value(1024) = 8 ' result type id
+		  bin.UInt32Value(1028) = 41 ' result id
+		  bin.UInt32Value(1032) = 1 ' set id
+		  bin.UInt32Value(1036) = 28 ' instruction (sqrt)
+		  bin.UInt32Value(1040) = 40 ' operand 1 id
+		  
+		  ' 42: 8(fvec4) Load 10(scale)
+		  bin.UInt16Value(1044) = 46 ' OpLoad
+		  bin.UInt16Value(1046) = 4 + 0 ' word count
+		  bin.UInt32Value(1048) = 8 ' result type id
+		  bin.UInt32Value(1052) = 42 ' result id
+		  bin.UInt32Value(1056) = 10 ' pointer id
+		  
+		  ' 43: 8(fvec4) FMul 41 42
+		  bin.UInt16Value(1060) = 127 ' OpFMul
+		  bin.UInt16Value(1062) = 5 ' word count
+		  bin.UInt32Value(1064) = 8 ' result type id
+		  bin.UInt32Value(1068) = 43 ' result id
+		  bin.UInt32Value(1072) = 41 ' operand 1 id
+		  bin.UInt32Value(1076) = 42 ' operand 2 id
+		  
+		  ' Store 21(color) 43
+		  bin.UInt16Value(1080) = 47 ' OpStore
+		  bin.UInt16Value(1082) = 3 + 0 ' word count
+		  bin.UInt32Value(1084) = 21 ' pointer id
+		  bin.UInt32Value(1088) = 43 ' object id
+		  
+		  ' Branch 19
+		  bin.UInt16Value(1092) = 209 ' OpBranch
+		  bin.UInt16Value(1094) = 2 ' word count
+		  bin.UInt32Value(1096) = 19 ' target label id
+		  
+		  ' 19: Label
+		  bin.UInt16Value(1100) = 208 ' OpLabel
+		  bin.UInt16Value(1102) = 2 ' word count
+		  bin.UInt32Value(1104) = 19 ' result id
+		  
+		  ' Store 45(i) 46
+		  bin.UInt16Value(1108) = 47 ' OpStore
+		  bin.UInt16Value(1110) = 3 + 0 ' word count
+		  bin.UInt32Value(1112) = 45 ' pointer id
+		  bin.UInt32Value(1116) = 46 ' object id
+		  
+		  ' Branch 47
+		  bin.UInt16Value(1120) = 209 ' OpBranch
+		  bin.UInt16Value(1122) = 2 ' word count
+		  bin.UInt32Value(1124) = 47 ' target label id
+		  
+		  ' 47: Label
+		  bin.UInt16Value(1128) = 208 ' OpLabel
+		  bin.UInt16Value(1130) = 2 ' word count
+		  bin.UInt32Value(1132) = 47 ' result id
+		  
+		  ' 49: 28(int) Load 45(i)
+		  bin.UInt16Value(1136) = 46 ' OpLoad
+		  bin.UInt16Value(1138) = 4 + 0 ' word count
+		  bin.UInt32Value(1140) = 28 ' result type id
+		  bin.UInt32Value(1144) = 49 ' result id
+		  bin.UInt32Value(1148) = 45 ' pointer id
+		  
+		  ' 51: 14(bool) SLessThan 49 50
+		  bin.UInt16Value(1152) = 160 ' OpSLessThan
+		  bin.UInt16Value(1154) = 5 ' word count
+		  bin.UInt32Value(1156) = 14 ' result type id
+		  bin.UInt32Value(1160) = 51 ' result id
+		  bin.UInt32Value(1164) = 49 ' operand 1 id
+		  bin.UInt32Value(1168) = 50 ' operand 2 id
+		  
+		  ' LoopMerge 48 NoControl
+		  bin.UInt16Value(1172) = 206 ' OpLoopMerge
+		  bin.UInt16Value(1174) = 3 ' word count
+		  bin.UInt32Value(1176) = 48 ' label id
+		  bin.UInt32Value(1180) = 0 ' loop control (NoControl)
+		  
+		  ' BranchConditional 51 52 48
+		  bin.UInt16Value(1184) = 210 ' OpBranchConditional
+		  bin.UInt16Value(1186) = 4 + 0 ' word count
+		  bin.UInt32Value(1188) = 51 ' condition id
+		  bin.UInt32Value(1192) = 52 ' true label id
+		  bin.UInt32Value(1196) = 48 ' false label id
+		  
+		  ' 52: Label
+		  bin.UInt16Value(1200) = 208 ' OpLabel
+		  bin.UInt16Value(1202) = 2 ' word count
+		  bin.UInt32Value(1204) = 52 ' result id
+		  
+		  ' 54: 8(fvec4) Load 53(multiplier)
+		  bin.UInt16Value(1208) = 46 ' OpLoad
+		  bin.UInt16Value(1210) = 4 + 0 ' word count
+		  bin.UInt32Value(1212) = 8 ' result type id
+		  bin.UInt32Value(1216) = 54 ' result id
+		  bin.UInt32Value(1220) = 53 ' pointer id
+		  
+		  ' 55: 8(fvec4) Load 21(color)
+		  bin.UInt16Value(1224) = 46 ' OpLoad
+		  bin.UInt16Value(1226) = 4 + 0 ' word count
+		  bin.UInt32Value(1228) = 8 ' result type id
+		  bin.UInt32Value(1232) = 55 ' result id
+		  bin.UInt32Value(1236) = 21 ' pointer id
+		  
+		  ' 56: 8(fvec4) FMul 55 54
+		  bin.UInt16Value(1240) = 127 ' OpFMul
+		  bin.UInt16Value(1242) = 5 ' word count
+		  bin.UInt32Value(1244) = 8 ' result type id
+		  bin.UInt32Value(1248) = 56 ' result id
+		  bin.UInt32Value(1252) = 55 ' operand 1 id
+		  bin.UInt32Value(1256) = 54 ' operand 2 id
+		  
+		  ' Store 21(color) 56
+		  bin.UInt16Value(1260) = 47 ' OpStore
+		  bin.UInt16Value(1262) = 3 + 0 ' word count
+		  bin.UInt32Value(1264) = 21 ' pointer id
+		  bin.UInt32Value(1268) = 56 ' object id
+		  
+		  ' 57: 28(int) Load 45(i)
+		  bin.UInt16Value(1272) = 46 ' OpLoad
+		  bin.UInt16Value(1274) = 4 + 0 ' word count
+		  bin.UInt32Value(1276) = 28 ' result type id
+		  bin.UInt32Value(1280) = 57 ' result id
+		  bin.UInt32Value(1284) = 45 ' pointer id
+		  
+		  ' 58: 28(int) IAdd 57 32
+		  bin.UInt16Value(1288) = 122 ' OpIAdd
+		  bin.UInt16Value(1290) = 5 ' word count
+		  bin.UInt32Value(1292) = 28 ' result type id
+		  bin.UInt32Value(1296) = 58 ' result id
+		  bin.UInt32Value(1300) = 57 ' operand id 1
+		  bin.UInt32Value(1304) = 32 ' operand id 2
+		  
+		  ' Store 45(i) 58
+		  bin.UInt16Value(1308) = 47 ' OpStore
+		  bin.UInt16Value(1310) = 3 + 0 ' word count
+		  bin.UInt32Value(1312) = 45 ' pointer id
+		  bin.UInt32Value(1316) = 58 ' object id
+		  
+		  ' Branch 47
+		  bin.UInt16Value(1320) = 209 ' OpBranch
+		  bin.UInt16Value(1322) = 2 ' word count
+		  bin.UInt32Value(1324) = 47 ' target label id
+		  
+		  ' 48: Label
+		  bin.UInt16Value(1328) = 208 ' OpLabel
+		  bin.UInt16Value(1330) = 2 ' word count
+		  bin.UInt32Value(1332) = 48 ' result id
+		  
+		  ' Branch 6
+		  bin.UInt16Value(1336) = 209 ' OpBranch
+		  bin.UInt16Value(1338) = 2 ' word count
+		  bin.UInt32Value(1340) = 6 ' target label id
+		  
+		  ' 6: Label
+		  bin.UInt16Value(1344) = 208 ' OpLabel
+		  bin.UInt16Value(1346) = 2 ' word count
+		  bin.UInt32Value(1348) = 6 ' result id
+		  
+		  ' Return
+		  bin.UInt16Value(1352) = 213 ' OpReturn
+		  bin.UInt16Value(1354) = 1 ' word count
+		  
+		  ' FunctionEnd
+		  bin.UInt16Value(1356) = 42 ' OpFunctionEnd
+		  bin.UInt16Value(1358) = 1 ' word count
 		  
 		  Dim f As FolderItem = App.ExecutableFile.Parent.Child("test_002.spirv")
 		  Dim stream As BinaryStream

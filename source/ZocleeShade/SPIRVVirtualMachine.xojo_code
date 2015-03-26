@@ -449,7 +449,7 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      if not OpcodeLookup.HasKey(ModuleBinary.UInt32Value(op.Offset + 12)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Operand ID not found.")
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Operand 1 ID not found.")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 16) >= Bound then
@@ -457,7 +457,7 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      if not OpcodeLookup.HasKey(ModuleBinary.UInt32Value(op.Offset + 16)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Operand ID not found.")
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Operand 2 ID not found.")
 		        op.HasErrors = True
 		      end if
 		      
