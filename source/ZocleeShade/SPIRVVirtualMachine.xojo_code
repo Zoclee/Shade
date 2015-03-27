@@ -314,22 +314,10 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpBranchConditional ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpBranchConditional
-		      if op.WordCount < 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if (ModuleBinary.UInt32Value(op.Offset + 4) <= 0) or (ModuleBinary.UInt32Value(op.Offset + 4) >= Bound) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Condition ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if (ModuleBinary.UInt32Value(op.Offset + 8) <= 0) or (ModuleBinary.UInt32Value(op.Offset + 8) >= Bound) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: True Label ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if (ModuleBinary.UInt32Value(op.Offset + 12) <= 0) or (ModuleBinary.UInt32Value(op.Offset + 12) >= Bound) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: False Label ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountMinimum(op, 4)
+		      validate_IdInRange(op, ModuleBinary.UInt32Value(op.Offset + 4), "ERROR [" + Str(op.Offset) + "]: Condition ID out of bounds.")
+		      validate_IdInRange(op, ModuleBinary.UInt32Value(op.Offset + 8), "ERROR [" + Str(op.Offset) + "]: True Label ID out of bounds.")
+		      validate_IdInRange(op, ModuleBinary.UInt32Value(op.Offset + 12), "ERROR [" + Str(op.Offset) + "]: False Label ID out of bounds.")
 		      
 		      ' ***** OpCompositeExtract ***********************************************************************************
 		      
@@ -1018,6 +1006,26 @@ Protected Class SPIRVVirtualMachine
 		    
 		    i = i + 1
 		  wend
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub validate_IdInRange(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsg As String)
+		  if (id <= 0) or (id >= Bound) then
+		    Errors.Append errMsg
+		    op.HasErrors = True
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub validate_WordCountMinimum(op As ZocleeShade.SPIRVOpcode, min As UInt32)
+		  if op.WordCount < min then
+		    Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
+		    op.HasErrors = True
+		  end if
+		  
 		End Sub
 	#tag EndMethod
 
