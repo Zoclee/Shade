@@ -256,7 +256,7 @@ End
 		    
 		    readStream.Close
 		    
-		    ' this line is used for testing
+		    ' these lines are used for testing
 		    'm = SPIRVTestModule1()
 		    'm = SPIRVTestModule2()
 		    

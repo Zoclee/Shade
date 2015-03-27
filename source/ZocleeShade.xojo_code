@@ -912,7 +912,7 @@ Protected Module ZocleeShade
 		  ' Name 53 "multiplier"
 		  bin.UInt16Value(260) = 54 ' OpName
 		  bin.UInt16Value(262) = 2 + 3 ' word count
-		  bin.UInt32Value(264) = 45 ' target id
+		  bin.UInt32Value(264) = 53 ' target id
 		  bin.CString(268) = "multiplier" ' Name
 		  
 		  ' Decorate 23(color1) Smooth
