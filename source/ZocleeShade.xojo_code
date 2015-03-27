@@ -395,6 +395,26 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeSelectionControl(value As UInt32) As String
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "NoControl"
+		  case 1
+		    result = "Flatten"
+		  case 2
+		    result = "DontFlatten"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeSourceLanguage(value As UInt32) As String
 		  Dim result As String
 		  
@@ -1454,6 +1474,7 @@ Protected Module ZocleeShade
 		  OpTypeVector
 		  OpTypeVoid
 		  OpReturn
+		  OpSelectionMerge
 		  OpSource
 		  OpStore
 		OpVariable

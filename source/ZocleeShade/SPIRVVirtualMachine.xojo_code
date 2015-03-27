@@ -235,6 +235,9 @@ Protected Class SPIRVVirtualMachine
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
+		        case 207 // ***** OpSelectionMerge ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSelectionMerge)
+		          
 		        case 208 // ***** OpLabel ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLabel)
 		          
@@ -704,6 +707,22 @@ Protected Class SPIRVVirtualMachine
 		    case SPIRVOpcodeTypeEnum.OpReturn
 		      if wordCount <> 1 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpSelectionMerge ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSelectionMerge
+		      if wordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Label ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Selection Control enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
 		        op.HasErrors = True
 		      end if
 		      

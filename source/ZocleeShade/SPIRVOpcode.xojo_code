@@ -239,6 +239,14 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpReturn
 			    result.Append "Return"
 			    
+			    // ***** OpSelectionMerge *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSelectionMerge
+			    result.Append "SelectionMerge "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append " "
+			    result.Append SPIRVDescribeSelectionControl(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    
 			    // ***** OpSource *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSource
@@ -574,17 +582,19 @@ Protected Class SPIRVOpcode
 				"14 - OpMemberName"
 				"15 - OpMemoryModel"
 				"16 - OpName"
-				"17 - OpTypeBool"
-				"18 - OpTypeFloat"
-				"19 - OpTypeFunction"
-				"20 - OpTypeInt"
-				"21 - OpTypeVector"
+				"17 - OpTypeArray"
+				"18 - OpTypeBool"
+				"19 - OpTypeFloat"
+				"20 - OpTypeFunction"
+				"21 - OpTypeInt"
 				"22 - OpTypePointer"
-				"23 - OpTypeVoid"
-				"24 - OpReturn"
-				"25 - OpSource"
-				"26 - OpStore"
-				"27 - OpVariable"
+				"23 - OpTypeStruct"
+				"24 - OpTypeVector"
+				"25 - OpTypeVoid"
+				"26 - OpReturn"
+				"27 - OpSource"
+				"28 - OpStore"
+				"29 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
