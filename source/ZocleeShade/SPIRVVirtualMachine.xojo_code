@@ -541,57 +541,29 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeArray ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeArray
-		      if op.WordCount <> 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Element Type ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountEqual(op, 4)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Element Type ID out of bounds.", "Element Type ID not declared.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) = ModuleBinary.UInt32Value(op.Offset + 4) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Circular Element Type  ID reference.")
-		        op.HasErrors = True
-		      end if
-		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 8)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Element Type  ID not declared.")
-		        op.HasErrors = True
+		        logError op, "Circular Element Type  ID reference."
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 12) < 1 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid length.")
-		        op.HasErrors = True
+		        logError op, "Invalid length."
 		      end if
 		      
 		      ' ***** OpTypeBool ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeBool
-		      if op.WordCount <> 2 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountEqual(op, 2)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpTypeFloat ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeFloat
-		      if op.WordCount <> 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountEqual(op, 3)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if ModuleBinary.UInt32Value(op.Offset + 8) <= 0 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid width.")
-		        op.HasErrors = True
+		        logError op, "Invalid width."
 		      end if
 		      
 		      ' ***** OpTypeFunction ***********************************************************************************
