@@ -330,24 +330,24 @@ Protected Class SPIRVVirtualMachine
 		      
 		    case SPIRVOpcodeTypeEnum.OpCompositeExtract
 		      validate_WordCountMinimum(op, 4)
-		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type  ID not declared.")
-		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Result ID out of bounds.")
-		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Composite  ID out of bounds.", "Composite  ID not declared.")
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Composite ID out of bounds.", "Composite ID not declared.")
 		      // todo: validate that result type id is the same type as the object selected by the last provided index
 		      
 		      ' ***** OpConstant ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpConstant
 		      validate_WordCountMinimum(op, 3)
-		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type  ID not declared.")
-		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Result ID out of bounds.")
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      
 		      ' ***** OpConstantComposite ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpConstantComposite
 		      validate_WordCountMinimum(op, 3)
-		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type  ID not declared.")
-		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Result ID out of bounds.")
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      ub = op.Offset + (op.WordCount * 4)
 		      j = op.Offset + 12
 		      k = 0
@@ -360,7 +360,7 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpDecorate ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpDecorate
-		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target  ID out of bounds.", "Target  ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not declared.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 44 then
 		        logError op, "Invalid Decoration enumeration value."
 		      end if
@@ -398,71 +398,35 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpEntryPoint ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpEntryPoint
-		      if op.WordCount <> 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountEqual(op, 3)
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 6 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Execution Model enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
-		        op.HasErrors = True
+		        logError op, "Execution Model enumeration value."
 		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Entry Point ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Entry Point ID out of bounds.", "Entry Point ID not declared.")
 		      
 		      ' ***** OpExtInstImport ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpExtInstImport
-		      if op.WordCount < 2 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountMinimum(op, 2)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid name.")
-		        op.HasErrors = True
+		        logError op, "Invalid name."
 		      end if
 		      
 		      ' ***** OpFunction ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpFunction
-		      if op.WordCount <> 5 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      if ModuleBinary.UInt32Value(op.Offset + 12) > 15 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Function Control Mask value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
-		        op.HasErrors = True
+		        logError op, "Invalid Function Control Mask value."
 		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 16) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Function Type ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 16)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Function Type  ID not declared.")
-		        op.HasErrors = True
-		      end if
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 16), "Function Type ID out of bounds.", "Function TypeID not declared.")
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 16)) then
 		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 16))
 		        if typ.ReturnTypeID <> ModuleBinary.UInt32Value(op.Offset + 4) then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID does not match Return Type ID in function declaration.")
-		          op.HasErrors = True
+		          logError op, "Result Type ID does not match Return Type ID in function declaration."
 		        end if
 		      end if
 		      
@@ -949,9 +913,9 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub validate_ResultId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String)
+		Private Sub validate_ResultId(op As ZocleeShade.SPIRVOpcode, id As UInt32)
 		  if (id <= 0) or (id >= Bound) then
-		    logError op, errMsgOutOfBounds
+		    logError op, "Result ID out of bounds."
 		  end if
 		  
 		  
