@@ -569,34 +569,14 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeFunction ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeFunction
-		      if op.WordCount < 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Return Type ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 8)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Return Type  ID not declared.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountMinimum(op, 3)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Return Type ID out of bounds.", "Return Type ID not declared.")
 		      ub = op.Offset + (op.WordCount * 4)
 		      j = op.Offset + 12
 		      k = 0
 		      while j < ub
-		        if ModuleBinary.UInt32Value(j) >= Bound then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Parameter " + Str(k) + "  Type ID out of bounds.")
-		          op.HasErrors = True
-		        end if
-		        if not Types.HasKey(ModuleBinary.UInt32Value(j)) then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Parameter " + Str(k) + "  Type  ID not declared.")
-		          op.HasErrors = True
-		        end if
+		        validate_typeId(op, ModuleBinary.UInt32Value(j), "Parameter " + Str(k) + " Type ID out of bounds.", "Parameter " + Str(k) + " Type ID not declared.")
 		        j = j + 4
 		        k = k + 1
 		      wend
@@ -604,70 +584,38 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeInt ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeInt
-		      if op.WordCount <> 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountEqual(op, 4)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if ModuleBinary.UInt32Value(op.Offset + 8) <= 0 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid width.")
-		        op.HasErrors = True
+		        logError op, "Invalid width."
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 12) > 1 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid sign value.")
-		        op.HasErrors = True
+		        logError op, "Invalid sign value."
 		      end if
 		      
 		      ' ***** OpTypePointer ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypePointer
-		      if op.WordCount <> 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountEqual(op, 4)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 10 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Storage Class enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
-		        op.HasErrors = True
+		        logError op, "Invalid Storage Class enumeration value."
 		      end if
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 12), "Type ID out of bounds.", "Type ID not declared.")
 		      if ModuleBinary.UInt32Value(op.Offset + 12) = ModuleBinary.UInt32Value(op.Offset + 4) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Circular Type  ID reference.")
-		        op.HasErrors = True
-		      end if
-		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 12)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Type  ID not declared.")
-		        op.HasErrors = True
+		        logError op, "Circular Type  ID reference."
 		      end if
 		      
 		      ' ***** OpTypeStruct ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeStruct
-		      if op.WordCount < 2 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountMinimum(op, 2)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      ub = op.Offset + (op.WordCount * 4)
 		      j = op.Offset + 8
 		      k = 0
 		      while j < ub
-		        if ModuleBinary.UInt32Value(j) >= Bound then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Member " + Str(k) + "  Type ID out of bounds.")
-		          op.HasErrors = True
-		        end if
-		        if not Types.HasKey(ModuleBinary.UInt32Value(j)) then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Member " + Str(k) + "  Type  ID not declared.")
-		          op.HasErrors = True
-		        end if
+		        validate_typeId(op, ModuleBinary.UInt32Value(j), "Member " + Str(k) + " Type ID out of bounds.", "Member " + Str(k) + " Type ID not declared.")
 		        j = j + 4
 		        k = k + 1
 		      wend
@@ -675,70 +623,34 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeVector ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeVector
-		      if op.WordCount <> 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Component Type ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountEqual(op, 4)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Component Type ID out of bounds.", "Component Type ID not declared.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) = ModuleBinary.UInt32Value(op.Offset + 4) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Circular Component Type  ID reference.")
-		        op.HasErrors = True
-		      end if
-		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 8)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Component Type  ID not declared.")
-		        op.HasErrors = True
+		        logError op, "Circular Component Type  ID reference."
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 12) < 2 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid Component Count.")
-		        op.HasErrors = True
+		        logError op, "Invalid Component Count."
 		      end if
 		      
 		      ' ***** OpTypeVoid ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeVoid
-		      if op.WordCount <> 2 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountEqual(op, 2)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpVariable ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpVariable
-		      if op.WordCount < 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if ModuleBinary.UInt32Value(op.Offset + 12) > 10 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Storage Class enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
-		        op.HasErrors = True
+		        logError op, "Invalid Storage Class enumeration value."
 		      end if
 		      
 		    case else
-		      Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unknown opcode type.")
-		      op.HasErrors = True
+		      logError op, "Unknown opcode type."
 		      
 		    end select
 		    
