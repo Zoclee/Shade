@@ -61,6 +61,23 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
+			    // ***** OpBranchConditional *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpBranchConditional
+			    result.Append "BranchConditional "
+			    result.Append Str(VM.ModuleBinary.UInt16Value(Offset + 4))
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt16Value(Offset + 8))
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt16Value(Offset + 12))
+			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    i = Offset + 16
+			    while i < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpCompositeExtract *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract

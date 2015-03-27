@@ -241,6 +241,9 @@ Protected Class SPIRVVirtualMachine
 		        case 208 // ***** OpLabel ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLabel)
 		          
+		        case 210 // ***** OpBranchConditional ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBranchConditional)
+		          
 		        case 213 // ***** OpReturn ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReturn)
 		          
@@ -307,6 +310,26 @@ Protected Class SPIRVVirtualMachine
 		    op = Opcodes(i)
 		    
 		    select case op.Type
+		      
+		      ' ***** OpBranchConditional ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpBranchConditional
+		      if op.WordCount < 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if (ModuleBinary.UInt32Value(op.Offset + 4) <= 0) or (ModuleBinary.UInt32Value(op.Offset + 4) >= Bound) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Condition ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if (ModuleBinary.UInt32Value(op.Offset + 8) <= 0) or (ModuleBinary.UInt32Value(op.Offset + 8) >= Bound) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: True Label ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if (ModuleBinary.UInt32Value(op.Offset + 12) <= 0) or (ModuleBinary.UInt32Value(op.Offset + 12) >= Bound) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: False Label ID out of bounds.")
+		        op.HasErrors = True
+		      end if
 		      
 		      ' ***** OpCompositeExtract ***********************************************************************************
 		      
