@@ -72,7 +72,7 @@ Begin Window frmMain
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
-      Width           =   273
+      Width           =   241
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
@@ -133,7 +133,7 @@ Begin Window frmMain
       Border          =   True
       ColumnCount     =   4
       ColumnsResizable=   True
-      ColumnWidths    =   "60,60,120"
+      ColumnWidths    =   "50,110,120"
       DataField       =   ""
       DataSource      =   ""
       DefaultRowHeight=   -1
@@ -151,7 +151,7 @@ Begin Window frmMain
       InitialParent   =   ""
       InitialValue    =   "Offset	Result ID	Result Type	Instruction"
       Italic          =   False
-      Left            =   305
+      Left            =   273
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
@@ -172,7 +172,7 @@ Begin Window frmMain
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
-      Width           =   275
+      Width           =   307
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
@@ -222,6 +222,7 @@ End
 		  Dim allType As New FileType
 		  Dim spirvType As New FileType
 		  Dim op As ZocleeShade.SPIRVOpcode
+		  Dim tmpStr As String
 		  
 		  // configure file types
 		  
@@ -328,7 +329,14 @@ End
 		      op = App.VM.Opcodes(i)
 		      lstInstructions.AddRow Str(op.Offset)
 		      if op.ResultID > 0 then
-		        lstInstructions.Cell(lstInstructions.LastIndex, 1) = Str(op.ResultID) + ":"
+		        tmpStr = Str(op.ResultID)
+		        if App.VM.Names.HasKey(op.ResultID) then
+		          tmpStr = tmpStr + "("
+		          tmpStr = tmpStr + App.VM.Names.Value(op.ResultID)
+		          tmpStr = tmpStr + ")"
+		        end if
+		        tmpStr = tmpStr + ":"
+		        lstInstructions.Cell(lstInstructions.LastIndex, 1) = tmpStr
 		      end if
 		      lstInstructions.Cell(lstInstructions.LastIndex, 2) = op.ResultType
 		      lstInstructions.Cell(lstInstructions.LastIndex, 3) = op.InstructionText
