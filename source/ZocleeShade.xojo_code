@@ -762,11 +762,11 @@ Protected Module ZocleeShade
 		  bin.UInt32Value(692) = 12 ' base id
 		  bin.UInt32Value(696) = 15 ' index id
 		  
-		  ' Store 22 21(arrayidx2) 20 ???? <<< CHECK THIS OPCODE
+		  ' Store 21(arrayidx2) 20
 		  bin.UInt16Value(700) = 47 ' OpStore
 		  bin.UInt16Value(702) = 3 + 0 ' word count
-		  bin.UInt32Value(704) = 22 ' pointer id
-		  bin.UInt32Value(708) = 21 ' object id
+		  bin.UInt32Value(704) = 21 ' pointer id
+		  bin.UInt32Value(708) = 20 ' object id
 		  
 		  ' Return
 		  bin.UInt16Value(712) = 213 ' OpReturn
