@@ -1430,6 +1430,7 @@ Protected Module ZocleeShade
 		Unknown
 		  OpCompositeExtract
 		  OpConstant
+		  OpConstantComposite
 		  OpDecorate
 		  OpEntryPoint
 		  OpExtInstImport

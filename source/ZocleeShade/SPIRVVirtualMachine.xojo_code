@@ -27,7 +27,7 @@ Protected Class SPIRVVirtualMachine
 		  Dim ip As UInt32
 		  Dim moduleUB As Integer
 		  Dim tempIP As UInt32
-		  Dim upperBound As UInt32
+		  Dim ub As UInt32
 		  Dim ep As ZocleeShade.SPIRVEntryPoint
 		  Dim dec As ZocleeShade.SPIRVDecoration
 		  Dim typ As ZocleeShade.SPIRVType
@@ -127,8 +127,8 @@ Protected Class SPIRVVirtualMachine
 		          typ.Type = SPIRVTypeEnum.Function_
 		          typ.ReturnTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          tempIP = ip + 12
-		          upperBound = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
-		          while tempIP < upperBound
+		          ub = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
+		          while tempIP < ub
 		            typ.ParmTypeID.Append ModuleBinary.UInt32Value(tempIP)
 		            tempIP = tempIP + 4
 		          wend
@@ -140,6 +140,19 @@ Protected Class SPIRVVirtualMachine
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ReturnTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          cnst.Value = Str(ModuleBinary.UInt32Value(ip + 12))
+		          Constants.Value(cnst.ResultID) = cnst
+		          
+		        case 30 // ***** OpConstantComposite ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantComposite)
+		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
+		          cnst.ReturnTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          tempIP = ip + 12
+		          ub = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
+		          while tempIP < ub
+		            cnst.Constituents.Append ModuleBinary.UInt32Value(tempIP)
+		            tempIP = tempIP + 4
+		          wend
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 38 // ***** OpVariable ***************************************************
@@ -172,8 +185,8 @@ Protected Class SPIRVVirtualMachine
 		            ' Built-In, FuncParamAttr, FP Rouding Mode, FP Fast Math Mode, Linkage Type, SpecId
 		          case 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44
 		            tempIP = ip + 12
-		            upperBound = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
-		            while tempIP < upperBound
+		            ub = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
+		            while tempIP < ub
 		              dec.ExtraOperands.Append ModuleBinary.UInt32Value(tempIP)
 		              tempIP = tempIP + 4
 		            wend
@@ -312,6 +325,41 @@ Protected Class SPIRVVirtualMachine
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
 		        op.HasErrors = True
 		      end if
+		      
+		      ' ***** OpConstantComposite ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpConstantComposite
+		      if wordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      ub = op.Offset + (wordCount * 4)
+		      j = op.Offset + 12
+		      k = 0
+		      while j < ub
+		        if ModuleBinary.UInt32Value(j) >= Bound then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Parameter " + Str(k) + "  Constituent ID out of bounds.")
+		          op.HasErrors = True
+		        end if
+		        if not Types.HasKey(ModuleBinary.UInt32Value(j)) then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Parameter " + Str(k) + "  Constituent  ID not declared.")
+		          op.HasErrors = True
+		        end if
+		        j = j + 4
+		        k = k + 1
+		      wend
 		      
 		      ' ***** OpDecorate ***********************************************************************************
 		      

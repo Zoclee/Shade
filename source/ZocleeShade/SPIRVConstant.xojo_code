@@ -1,6 +1,10 @@
 #tag Class
 Protected Class SPIRVConstant
 	#tag Property, Flags = &h0
+		Constituents() As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		ResultID As UInt32
 	#tag EndProperty
 
@@ -50,7 +54,8 @@ Protected Class SPIRVConstant
 		#tag ViewProperty
 			Name="Value"
 			Group="Behavior"
-			Type="Integer"
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

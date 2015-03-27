@@ -80,6 +80,18 @@ Protected Class SPIRVOpcode
 			    result.Append "Constant "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
+			    // ***** OpConstantComposite *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpConstantComposite
+			    result.Append "ConstantComposite "
+			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    i = Offset + 12
+			    while i < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpDecorate *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpDecorate
@@ -417,7 +429,8 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
-			  case SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpFunction, _
+			  case SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
+			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpFunction, _
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpVariable
@@ -501,26 +514,30 @@ Protected Class SPIRVOpcode
 			#tag EnumValues
 				"0 - Unknown"
 				"1 - OpCompositeExtract"
-				"2 - OpDecorate"
-				"3 - OpEntryPoint"
-				"4 - OpFunction"
-				"5 - OpFunctionEnd"
-				"6 - OpFunctionParameter"
-				"7 - OpIAdd"
-				"8 - OpInBoundsAccessChain"
-				"9 - OpLabel"
-				"10 - OpLoad"
-				"11 - OpMemoryModel"
-				"12 - OpName"
-				"13 - OpTypeFunction"
-				"14 - OpTypeInt"
-				"15 - OpTypePointer"
-				"16 - OpTypeVector"
-				"17 - OpTypeVoid"
-				"18 - OpReturn"
-				"19 - OpSource"
-				"20 - OpStore"
-				"21 - OpVariable"
+				"2 - OpConstant"
+				"3 - OpDecorate"
+				"4 - OpEntryPoint"
+				"5 - OpExtInstImport"
+				"6 - OpFunction"
+				"7 - OpFunctionEnd"
+				"8 - OpFunctionParameter"
+				"9 - OpIAdd"
+				"10 - OpInBoundsAccessChain"
+				"11 - OpLabel"
+				"12 - OpLoad"
+				"13 - OpMemberName"
+				"14 - OpMemoryModel"
+				"15 - OpName"
+				"16 - OpTypeFloat"
+				"17 - OpTypeFunction"
+				"18 - OpTypeInt"
+				"19 - OpTypeVector"
+				"20 - OpTypePointer"
+				"21 - OpTypeVoid"
+				"22 - OpReturn"
+				"23 - OpSource"
+				"24 - OpStore"
+				"25 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
