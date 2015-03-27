@@ -1449,8 +1449,9 @@ Protected Module ZocleeShade
 		  OpTypeFloat
 		  OpTypeFunction
 		  OpTypeInt
-		  OpTypeVector
 		  OpTypePointer
+		  OpTypeStruct
+		  OpTypeVector
 		  OpTypeVoid
 		  OpReturn
 		  OpSource

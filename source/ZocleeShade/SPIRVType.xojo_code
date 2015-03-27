@@ -30,10 +30,33 @@ Protected Class SPIRVType
 			  
 			  select case Type
 			    
+			    ' ***** Array ***********************************************************************************
+			    
+			  case SPIRVTypeEnum.Array_
+			    if VM.Types.HasKey(ElementTypeID) then
+			      typ = VM.Types.Value(ElementTypeID)
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append "["
+			    result.Append Str(Length)
+			    result.Append "]"
+			    
 			    ' ***** Bool ***********************************************************************************
 			    
 			  case SPIRVTypeEnum.Boolean
 			    result.Append "Bool"
+			    
+			    ' ***** Enum ***********************************************************************************
+			    
+			  case SPIRVTypeEnum.Integer
+			    if Signed then
+			      result.Append "Int"
+			    else
+			      result.Append "UInt"
+			    end if
+			    result.Append Str(Width)
 			    
 			    ' ***** Float ***********************************************************************************
 			    
@@ -66,15 +89,7 @@ Protected Class SPIRVType
 			    wend
 			    result.Append ")"
 			    
-			    ' ***** Enum ***********************************************************************************
-			    
-			  case SPIRVTypeEnum.Integer
-			    if Signed then
-			      result.Append "Int"
-			    else
-			      result.Append "UInt"
-			    end if
-			    result.Append Str(Width)
+			    ' ***** Pointer ***********************************************************************************
 			    
 			  case SPIRVTypeEnum.Pointer
 			    if (TypeID <> ResultID) and VM.Types.HasKey(TypeID) then
@@ -83,6 +98,15 @@ Protected Class SPIRVType
 			      result.Append typ.InstructionText
 			    else
 			      result.Append "Unknown"
+			    end if
+			    
+			    ' ***** Struct ***********************************************************************************
+			    
+			  case SPIRVTypeEnum.Struct
+			    if App.VM.Names.HasKey(ResultID)  then
+			      result.Append App.VM.Names.Value(ResultID)
+			    else
+			      result.Append "struct"
 			    end if
 			    
 			    ' ***** Vector ***********************************************************************************
@@ -118,6 +142,10 @@ Protected Class SPIRVType
 
 	#tag Property, Flags = &h0
 		Length As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		MemberTypeID() As UInt32
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

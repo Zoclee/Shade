@@ -321,6 +321,26 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_type(Offset + 12)
 			    
+			    // ***** OpTypeStruct *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeStruct
+			    result.Append "TypeStruct "
+			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    i = Offset + 8
+			    while i < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      result.Append "("
+			      if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(i)) then
+			        typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(i))
+			        result.Append typ.InstructionText
+			      else
+			        result.Append "Unknown"
+			      end if
+			      result.Append ")"
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpTypeVector *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeVector
@@ -417,6 +437,9 @@ Protected Class SPIRVOpcode
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypePointer
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeStruct
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeVector

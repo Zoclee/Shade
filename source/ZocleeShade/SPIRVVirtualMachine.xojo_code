@@ -127,6 +127,18 @@ Protected Class SPIRVVirtualMachine
 		          typ.Length = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
+		        case 18 // ***** OpTypeStruct ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeStruct)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.Struct
+		          tempIP = ip + 8
+		          ub = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
+		          while tempIP < ub
+		            typ.MemberTypeID.Append ModuleBinary.UInt32Value(tempIP)
+		            tempIP = tempIP + 4
+		          wend
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
 		        case 20 // ***** OpTypePointer ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypePointer)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
@@ -841,6 +853,33 @@ Protected Class SPIRVVirtualMachine
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Type  ID not declared.")
 		        op.HasErrors = True
 		      end if
+		      
+		      ' ***** OpTypeStruct ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTypeStruct
+		      if wordCount < 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      ub = op.Offset + (wordCount * 4)
+		      j = op.Offset + 8
+		      k = 0
+		      while j < ub
+		        if ModuleBinary.UInt32Value(j) >= Bound then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Member " + Str(k) + "  Type ID out of bounds.")
+		          op.HasErrors = True
+		        end if
+		        if not Types.HasKey(ModuleBinary.UInt32Value(j)) then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Member " + Str(k) + "  Type  ID not declared.")
+		          op.HasErrors = True
+		        end if
+		        j = j + 4
+		        k = k + 1
+		      wend
 		      
 		      ' ***** OpTypeVector ***********************************************************************************
 		      
