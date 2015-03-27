@@ -119,6 +119,14 @@ Protected Class SPIRVVirtualMachine
 		          typ.ComponentCount = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
+		        case 16 // ***** OpTypeArray ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeArray)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.Array_
+		          typ.ElementTypeID = ModuleBinary.UInt32Value(ip + 8)
+		          typ.Length = ModuleBinary.UInt32Value(ip + 12)
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
 		        case 20 // ***** OpTypePointer ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypePointer)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
@@ -696,6 +704,34 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 4 then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Source Language enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 4)) + ".")
+		        op.HasErrors = True
+		      end if
+		      
+		      ' ***** OpTypeArray ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTypeArray
+		      if wordCount <> 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Element Type ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) = ModuleBinary.UInt32Value(op.Offset + 4) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Circular Element Type  ID reference.")
+		        op.HasErrors = True
+		      end if
+		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 8)) then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Element Type  ID not declared.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 12) < 1 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid length.")
 		        op.HasErrors = True
 		      end if
 		      

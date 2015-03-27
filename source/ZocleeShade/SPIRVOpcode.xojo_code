@@ -262,6 +262,14 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpTypeArray *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeArray
+			    result.Append "TypeArray "
+			    result.Append compose_type(Offset + 8)
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    
 			    // ***** OpTypeBool *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeBool
@@ -392,6 +400,9 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpLoad
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeArray
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeBool
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
@@ -540,16 +551,17 @@ Protected Class SPIRVOpcode
 				"14 - OpMemberName"
 				"15 - OpMemoryModel"
 				"16 - OpName"
-				"17 - OpTypeFloat"
-				"18 - OpTypeFunction"
-				"19 - OpTypeInt"
-				"20 - OpTypeVector"
-				"21 - OpTypePointer"
-				"22 - OpTypeVoid"
-				"23 - OpReturn"
-				"24 - OpSource"
-				"25 - OpStore"
-				"26 - OpVariable"
+				"17 - OpTypeBool"
+				"18 - OpTypeFloat"
+				"19 - OpTypeFunction"
+				"20 - OpTypeInt"
+				"21 - OpTypeVector"
+				"22 - OpTypePointer"
+				"23 - OpTypeVoid"
+				"24 - OpReturn"
+				"25 - OpSource"
+				"26 - OpStore"
+				"27 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

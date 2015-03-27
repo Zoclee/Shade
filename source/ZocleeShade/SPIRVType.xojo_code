@@ -17,6 +17,10 @@ Protected Class SPIRVType
 		ComponentTypeID As UInt32
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		ElementTypeID As UInt32
+	#tag EndProperty
+
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
@@ -111,6 +115,10 @@ Protected Class SPIRVType
 		#tag EndGetter
 		InstructionText As String
 	#tag EndComputedProperty
+
+	#tag Property, Flags = &h0
+		Length As UInt32
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		ParmTypeID() As UInt32
