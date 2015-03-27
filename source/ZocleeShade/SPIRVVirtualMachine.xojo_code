@@ -719,6 +719,31 @@ Protected Class SPIRVVirtualMachine
 		        op.HasErrors = True
 		      end if
 		      
+		      ' ***** OpStore ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpStore
+		      if wordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Pointer ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Object ID out of bounds.")
+		        op.HasErrors = True
+		      end if
+		      ub = op.Offset + (wordCount * 4)
+		      j = op.Offset + 12
+		      while j < ub
+		        if (ModuleBinary.UInt32Value(j) < 1) or (ModuleBinary.UInt32Value(j) > 2) then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Memory Access enumeration value " + Str(ModuleBinary.UInt32Value(j)) + ".")
+		          op.HasErrors = True
+		        end if
+		        j = j + 4
+		      wend
+		      
 		      ' ***** OpTypeArray ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeArray
