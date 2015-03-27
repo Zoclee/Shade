@@ -70,7 +70,7 @@ Protected Class SPIRVOpcode
 			    result.Append Str(VM.ModuleBinary.UInt16Value(Offset + 8))
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt16Value(Offset + 12))
-			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    ub = offset + WordCount
 			    i = Offset + 16
 			    while i < ub
 			      result.Append " "
@@ -83,7 +83,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
 			    result.Append "CompositeExtract "
 			    result.Append compose_id(Offset + 12)
-			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    ub = offset + WordCount
 			    i = Offset + 16
 			    while i < ub
 			      result.Append " "
@@ -101,7 +101,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpConstantComposite
 			    result.Append "ConstantComposite "
-			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    ub = offset + WordCount
 			    i = Offset + 12
 			    while i < ub
 			      result.Append " "
@@ -204,7 +204,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
 			    result.Append "InBoundsAccessChain "
 			    result.Append compose_id(Offset + 12)
-			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    ub = offset + WordCount
 			    i = Offset + 16
 			    while i < ub
 			      result.Append " "
@@ -279,7 +279,7 @@ Protected Class SPIRVOpcode
 			    result.Append compose_id(Offset + 4)
 			    result.Append " "
 			    result.Append compose_id(Offset + 8)
-			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    ub = offset + WordCount
 			    i = Offset + 12
 			    while i < ub
 			      result.Append " "
@@ -311,7 +311,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTypeFunction
 			    result.Append "TypeFunction "
 			    result.Append compose_type(Offset + 8)
-			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    ub = offset + WordCount
 			    i = Offset + 12
 			    while i < ub
 			      result.Append " "
@@ -350,7 +350,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeStruct
 			    result.Append "TypeStruct "
-			    ub = offset + VM.ModuleBinary.UInt16Value(Offset + 2) * 4
+			    ub = offset + WordCount
 			    i = Offset + 8
 			    while i < ub
 			      result.Append " "
@@ -384,7 +384,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpVariable
 			    result.Append "Variable "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 12))
-			    if VM.ModuleBinary.UInt16Value(Offset + 2) > 4 then
+			    if WordCount > 4 then
 			      break // todo: optional initializer
 			    end if
 			    
