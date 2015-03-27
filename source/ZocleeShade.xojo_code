@@ -2,6 +2,9 @@
 Protected Module ZocleeShade
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeAddressingModel(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -22,6 +25,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeBuiltIn(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -120,6 +126,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeDecoration(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -224,6 +233,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeExecutionModel(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -252,6 +264,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeFPFastMathMode(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -276,6 +291,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeFPRoundingMode(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -298,6 +316,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeFuncParamAttr(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -330,6 +351,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeFunctionControlMask(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -354,6 +378,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeLinkageType(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -372,6 +399,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeMemoryModel(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -396,6 +426,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeSelectionControl(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -416,6 +449,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeSourceLanguage(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -438,6 +474,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeStorageClass(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As String
 		  
 		  select case value
@@ -474,6 +513,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVTestModule1() As MemoryBlock
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  ' Flow:
 		  ' 1 Optional OpSource instruction
 		  ' 2 Optional OpSourceExtension instruction
@@ -809,6 +851,9 @@ Protected Module ZocleeShade
 
 	#tag Method, Flags = &h0
 		Function SPIRVTestModule2() As MemoryBlock
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  ' Flow:
 		  ' 1 Optional OpSource instruction
 		  ' 2 Optional OpSourceExtension instruction

@@ -2,6 +2,9 @@
 Protected Class SPIRVType
 	#tag Method, Flags = &h0
 		Sub Constructor(initVM As ZocleeShade.SPIRVVirtualMachine, initResultID As UInt32)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  VM = initVM
 		  ResultID = initResultID
 		  
@@ -24,6 +27,9 @@ Protected Class SPIRVType
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			  ' www.zoclee.com/shade
+			  
 			  Dim result() As String
 			  Dim typ As ZocleeShade.SPIRVType
 			  Dim i As UInt32

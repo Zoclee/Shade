@@ -2,6 +2,9 @@
 Protected Class SPIRVOpcode
 	#tag Method, Flags = &h21
 		Private Function compose_id(binOffset As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result() As String
 		  
 		  result.Append Str(VM.ModuleBinary.UInt32Value(binOffset))
@@ -18,6 +21,9 @@ Protected Class SPIRVOpcode
 
 	#tag Method, Flags = &h21
 		Private Function compose_type(binOffset As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result() As String
 		  Dim typ As ZocleeShade.SPIRVType
 		  
@@ -38,6 +44,9 @@ Protected Class SPIRVOpcode
 
 	#tag Method, Flags = &h0
 		Sub Constructor(initVM As ZocleeShade.SPIRVVirtualMachine, initType As SPIRVOpcodeTypeEnum)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  VM = initVM
 		  Type = initType
 		  
@@ -54,6 +63,9 @@ Protected Class SPIRVOpcode
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			  ' www.zoclee.com/shade
+			  
 			  Dim result() As String
 			  Dim typ As ZocleeShade.SPIRVType
 			  Dim i As UInt32
@@ -410,6 +422,9 @@ Protected Class SPIRVOpcode
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			  ' www.zoclee.com/shade
+			  
 			  Dim result As UInt32
 			  
 			  result = 0
@@ -482,17 +497,15 @@ Protected Class SPIRVOpcode
 			  
 			End Get
 		#tag EndGetter
-		#tag Setter
-			Set
-			  break
-			End Set
-		#tag EndSetter
 		ResultID As UInt32
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			  ' www.zoclee.com/shade
+			  
 			  Dim result As String
 			  
 			  result = ""
@@ -527,6 +540,9 @@ Protected Class SPIRVOpcode
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			  ' www.zoclee.com/shade
+			  
 			  return VM.ModuleBinary.UInt16Value(Offset + 2)
 			End Get
 		#tag EndGetter

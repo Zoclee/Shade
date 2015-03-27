@@ -2,6 +2,9 @@
 Protected Class SPIRVVirtualMachine
 	#tag Method, Flags = &h0
 		Sub Clear()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  AddressingModel = 2 // Phyical64
 		  Bound = 0
 		  Constants = new Dictionary()
@@ -24,6 +27,9 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Method, Flags = &h0
 		Sub LoadModule(binary As MemoryBlock)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim ip As UInt32
 		  Dim moduleUB As Integer
 		  Dim tempIP As UInt32
@@ -297,6 +303,9 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Method, Flags = &h21
 		Private Sub logError(op As ZocleeShade.SPIRVOpcode, errMsg As String)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsg
 		  op.HasErrors = True
 		End Sub
@@ -304,6 +313,9 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Method, Flags = &h21
 		Private Sub validateOpcodes()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim i As UInt32
 		  Dim j As UInt32
 		  Dim k As Integer
@@ -661,6 +673,9 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Method, Flags = &h21
 		Private Sub validate_Id(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  if (id <= 0) or (id >= Bound) then
 		    logError op, errMsgOutOfBounds
 		  end if
@@ -673,6 +688,9 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Method, Flags = &h21
 		Private Sub validate_ResultId(op As ZocleeShade.SPIRVOpcode, id As UInt32)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  if (id <= 0) or (id >= Bound) then
 		    logError op, "Result ID out of bounds."
 		  end if
@@ -683,6 +701,9 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Method, Flags = &h21
 		Private Sub validate_typeId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  if (id <= 0) or (id >= Bound) then
 		    logError op, errMsgOutOfBounds
 		  end if
@@ -695,6 +716,9 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Method, Flags = &h21
 		Private Sub validate_WordCountEqual(op As ZocleeShade.SPIRVOpcode, cnt As UInt32)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  if op.WordCount <> cnt then
 		    logError op, "Invalid word count."
 		  end if
@@ -704,6 +728,9 @@ Protected Class SPIRVVirtualMachine
 
 	#tag Method, Flags = &h21
 		Private Sub validate_WordCountMinimum(op As ZocleeShade.SPIRVOpcode, min As UInt32)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  if op.WordCount < min then
 		    logError op, "Invalid word count."
 		  end if

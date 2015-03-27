@@ -195,6 +195,9 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Open()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Me.Title = "{Zoclee}™ Shade v" + Str(App.MajorVersion) + "." + Str(App.MinorVersion)+ "." + Str(App.BugVersion)
 		  Me.Maximize
 		  
@@ -204,6 +207,9 @@ End
 
 	#tag MenuHandler
 		Function mnuAbout() As Boolean Handles mnuAbout.Action
+			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			' www.zoclee.com/shade
+			
 			frmAbout.ShowModal()
 			
 			Return True
@@ -214,6 +220,9 @@ End
 
 	#tag Method, Flags = &h0
 		Sub actionOpen()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim f As FolderItem
 		  Dim dlg As new OpenDialog
 		  Dim m As MemoryBlock
@@ -354,6 +363,9 @@ End
 #tag Events lstErrors
 	#tag Event
 		Sub Change()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim tmpStr As String
 		  Dim pos As Integer
 		  Dim offset As UInt32
@@ -391,6 +403,9 @@ End
 #tag Events lstInstructions
 	#tag Event
 		Function CellTextPaint(g As Graphics, row As Integer, column As Integer, x as Integer, y as Integer) As Boolean
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim op As ZocleeShade.SPIRVOpcode
 		  
 		  op = Me.RowTag(row)
@@ -407,6 +422,9 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Open()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Me.ColumnSortDirection(0)=0
 		  Me.ColumnSortDirection(1)=0
 		  Me.ColumnSortDirection(2)=0
@@ -417,6 +435,9 @@ End
 #tag Events toolMain
 	#tag Event
 		Sub Action(item As ToolItem)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  select case item.Name
 		    
 		  case "toolOpen"

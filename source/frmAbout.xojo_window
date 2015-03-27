@@ -190,7 +190,8 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Open()
-		  ' Copyright ©2014 by {Zoclee}™. All rights reserved.
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
 		  
 		  lblVersion.Text = "Version " + Str(App.MajorVersion) + "." + Str(App.MinorVersion) + "." + Str(App.BugVersion)
 		End Sub
