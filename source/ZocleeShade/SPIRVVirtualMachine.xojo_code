@@ -315,22 +315,17 @@ Protected Class SPIRVVirtualMachine
 		      
 		    case SPIRVOpcodeTypeEnum.OpBranchConditional
 		      validate_WordCountMinimum(op, 4)
-		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "ERROR [" + Str(op.Offset) + "]: Condition ID out of bounds.", "ERROR [" + Str(op.Offset) + "]: Condition ID not declared.")
-		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "ERROR [" + Str(op.Offset) + "]: True Label ID out of bounds.", "ERROR [" + Str(op.Offset) + "]: True Label ID not declared.")
-		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "ERROR [" + Str(op.Offset) + "]: False Label ID out of bounds.", "ERROR [" + Str(op.Offset) + "]: False Label ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Condition ID out of bounds.", "Condition ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "True Label ID out of bounds.", "True Label ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "False Label ID out of bounds.", "False Label ID not declared.")
 		      
 		      ' ***** OpCompositeExtract ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpCompositeExtract
 		      validate_WordCountMinimum(op, 3)
-		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.", "ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
-		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8), "ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "ERROR [" + Str(op.Offset) + "]:  ID out of bounds.", "ERROR [" + Str(op.Offset) + "]: Composite  ID not declared.")
-		      
-		      if not OpcodeLookup.HasKey(ModuleBinary.UInt32Value(op.Offset + 12)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Composite  ID not declared.")
-		        op.HasErrors = True
-		      end if
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type  ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Result ID out of bounds.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Composite  ID out of bounds.", "Composite  ID not declared.")
 		      // todo: validate that result type id is the same type as the object selected by the last provided index
 		      
 		      ' ***** OpConstant ***********************************************************************************
@@ -1001,11 +996,11 @@ Protected Class SPIRVVirtualMachine
 	#tag Method, Flags = &h21
 		Private Sub validate_Id(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
 		  if (id <= 0) or (id >= Bound) then
-		    Errors.Append errMsgOutOfBounds
+		    Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsgOutOfBounds
 		    op.HasErrors = True
 		  end if
 		  if not OpcodeLookup.HasKey(id) then
-		    Errors.Append errMsgNotDeclared
+		    Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsgNotDeclared
 		    op.HasErrors = True
 		  end if
 		  
@@ -1015,7 +1010,7 @@ Protected Class SPIRVVirtualMachine
 	#tag Method, Flags = &h21
 		Private Sub validate_ResultId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String)
 		  if (id <= 0) or (id >= Bound) then
-		    Errors.Append errMsgOutOfBounds
+		    Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsgOutOfBounds
 		    op.HasErrors = True
 		  end if
 		  
@@ -1026,11 +1021,11 @@ Protected Class SPIRVVirtualMachine
 	#tag Method, Flags = &h21
 		Private Sub validate_typeId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutofBounds As String, errMsgNotDeclared As String)
 		  if (id <= 0) or (id >= Bound) then
-		    Errors.Append errMsgOutofBounds
+		    Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsgOutofBounds
 		    op.HasErrors = True
 		  end if
 		  if not Types.HasKey(id) then
-		    Errors.Append errMsgNotDeclared
+		    Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsgNotDeclared
 		    op.HasErrors = True
 		  end if
 		  
@@ -1040,7 +1035,7 @@ Protected Class SPIRVVirtualMachine
 	#tag Method, Flags = &h21
 		Private Sub validate_WordCountMinimum(op As ZocleeShade.SPIRVOpcode, min As UInt32)
 		  if op.WordCount < min then
-		    Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
+		    Errors.Append "ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + "."
 		    op.HasErrors = True
 		  end if
 		  
