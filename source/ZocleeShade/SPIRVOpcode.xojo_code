@@ -507,6 +507,15 @@ Protected Class SPIRVOpcode
 		VM As ZocleeShade.SPIRVVirtualMachine
 	#tag EndProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return VM.ModuleBinary.UInt16Value(Offset + 2)
+			End Get
+		#tag EndGetter
+		WordCount As UInt32
+	#tag EndComputedProperty
+
 
 	#tag ViewBehavior
 		#tag ViewProperty

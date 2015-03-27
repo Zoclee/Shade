@@ -299,22 +299,20 @@ Protected Class SPIRVVirtualMachine
 		  Dim k As Integer
 		  Dim ub As UInt32
 		  Dim op As ZocleeShade.SPIRVOpcode
-		  Dim wordCount As Integer
 		  Dim typ As ZocleeShade.SPIRVType
 		  
 		  i = 0
 		  while i <= Opcodes.Ubound
 		    
 		    op = Opcodes(i)
-		    wordCount = ModuleBinary.UInt16Value(op.Offset + 2)
 		    
 		    select case op.Type
 		      
 		      ' ***** OpCompositeExtract ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpCompositeExtract
-		      if wordCount < 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -338,8 +336,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpConstant ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpConstant
-		      if wordCount < 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -358,8 +356,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpConstantComposite ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpConstantComposite
-		      if wordCount < 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -374,7 +372,7 @@ Protected Class SPIRVVirtualMachine
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
 		        op.HasErrors = True
 		      end if
-		      ub = op.Offset + (wordCount * 4)
+		      ub = op.Offset + (op.WordCount * 4)
 		      j = op.Offset + 12
 		      k = 0
 		      while j < ub
@@ -405,18 +403,18 @@ Protected Class SPIRVVirtualMachine
 		      
 		      select case ModuleBinary.UInt32Value(op.Offset + 8)
 		      case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26
-		        if wordCount <> 3 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        if op.WordCount <> 3 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		          op.HasErrors = True
 		        end if
 		      case 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 44
-		        if wordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        if op.WordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		          op.HasErrors = True
 		        end if
 		      case 39 // Built-In
-		        if wordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        if op.WordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		          op.HasErrors = True
 		        end if
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 41 then
@@ -424,8 +422,8 @@ Protected Class SPIRVVirtualMachine
 		          op.HasErrors = True
 		        end if
 		      case 40 // Function Parameter Attribute
-		        if wordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        if op.WordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		          op.HasErrors = True
 		        end if
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 8 then
@@ -433,8 +431,8 @@ Protected Class SPIRVVirtualMachine
 		          op.HasErrors = True
 		        end if
 		      case 41 // FP Rounding Mode
-		        if wordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        if op.WordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		          op.HasErrors = True
 		        end if
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 3 then
@@ -442,14 +440,14 @@ Protected Class SPIRVVirtualMachine
 		          op.HasErrors = True
 		        end if
 		      case 42 // FP Fast Math Mode
-		        if wordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        if op.WordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		          op.HasErrors = True
 		        end if
 		        break // todo
 		      case 43 // Linkage Type
-		        if wordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		        if op.WordCount <> 4 then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		          op.HasErrors = True
 		        end if
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 1 then
@@ -462,8 +460,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpEntryPoint ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpEntryPoint
-		      if wordCount <> 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 6 then
@@ -478,8 +476,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpExtInstImport ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpExtInstImport
-		      if wordCount < 2 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount < 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -494,8 +492,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpFunction ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpFunction
-		      if wordCount <> 5 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 5 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -533,16 +531,16 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpFunctionEnd ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpFunctionEnd
-		      if wordCount <> 1 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 1 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      
 		      ' ***** OpFunctionParameter ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpFunctionParameter
-		      if wordCount <> 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -561,8 +559,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpIAdd ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpIAdd
-		      if wordCount <> 5 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 5 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -597,8 +595,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpInBoundsAccessChain ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
-		      if wordCount < 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount < 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -625,8 +623,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpLabel ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpLabel
-		      if wordCount <> 2 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -637,8 +635,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpLoad ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpLoad
-		      if wordCount < 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount < 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -661,8 +659,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpMemberName ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpMemberName
-		      if wordCount < 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
@@ -677,8 +675,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpMemoryModel ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpMemoryModel
-		      if wordCount <> 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 2 then
@@ -705,16 +703,16 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpReturn ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpReturn
-		      if wordCount <> 1 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 1 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      
 		      ' ***** OpSelectionMerge ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpSelectionMerge
-		      if wordCount <> 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -729,8 +727,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpSource ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpSource
-		      if wordCount <> 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 4 then
@@ -741,8 +739,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpStore ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpStore
-		      if wordCount < 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -753,7 +751,7 @@ Protected Class SPIRVVirtualMachine
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Object ID out of bounds.")
 		        op.HasErrors = True
 		      end if
-		      ub = op.Offset + (wordCount * 4)
+		      ub = op.Offset + (op.WordCount * 4)
 		      j = op.Offset + 12
 		      while j < ub
 		        if (ModuleBinary.UInt32Value(j) < 1) or (ModuleBinary.UInt32Value(j) > 2) then
@@ -766,8 +764,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeArray ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeArray
-		      if wordCount <> 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -794,8 +792,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeBool ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeBool
-		      if wordCount <> 2 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -806,8 +804,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeFloat ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeFloat
-		      if wordCount <> 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -822,8 +820,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeFunction ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeFunction
-		      if wordCount < 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount < 3 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -838,7 +836,7 @@ Protected Class SPIRVVirtualMachine
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Return Type  ID not declared.")
 		        op.HasErrors = True
 		      end if
-		      ub = op.Offset + (wordCount * 4)
+		      ub = op.Offset + (op.WordCount * 4)
 		      j = op.Offset + 12
 		      k = 0
 		      while j < ub
@@ -857,8 +855,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeInt ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeInt
-		      if wordCount <> 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -877,8 +875,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypePointer ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypePointer
-		      if wordCount <> 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -901,15 +899,15 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeStruct ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeStruct
-		      if wordCount < 2 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount < 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
 		        op.HasErrors = True
 		      end if
-		      ub = op.Offset + (wordCount * 4)
+		      ub = op.Offset + (op.WordCount * 4)
 		      j = op.Offset + 8
 		      k = 0
 		      while j < ub
@@ -928,8 +926,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeVector ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeVector
-		      if wordCount <> 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -956,8 +954,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeVoid ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeVoid
-		      if wordCount <> 2 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount <> 2 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
@@ -968,8 +966,8 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpVariable ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpVariable
-		      if wordCount < 4 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(wordCount) + ".")
+		      if op.WordCount < 4 then
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
 		        op.HasErrors = True
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
