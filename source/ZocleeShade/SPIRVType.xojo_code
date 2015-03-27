@@ -26,9 +26,18 @@ Protected Class SPIRVType
 			  
 			  select case Type
 			    
+			    ' ***** Bool ***********************************************************************************
+			    
+			  case SPIRVTypeEnum.Boolean
+			    result.Append "Bool"
+			    
+			    ' ***** Float ***********************************************************************************
+			    
 			  case SPIRVTypeEnum.Float
 			    result.Append "Float"
 			    result.Append Str(Width)
+			    
+			    ' ***** Function_ ***********************************************************************************
 			    
 			  case SPIRVTypeEnum.Function_
 			    if (ReturnTypeID <> ResultID) and VM.Types.HasKey(ReturnTypeID) then
@@ -53,6 +62,8 @@ Protected Class SPIRVType
 			    wend
 			    result.Append ")"
 			    
+			    ' ***** Enum ***********************************************************************************
+			    
 			  case SPIRVTypeEnum.Integer
 			    if Signed then
 			      result.Append "Int"
@@ -70,6 +81,8 @@ Protected Class SPIRVType
 			      result.Append "Unknown"
 			    end if
 			    
+			    ' ***** Vector ***********************************************************************************
+			    
 			  case SPIRVTypeEnum.Vector
 			    if (ComponentTypeID <> ResultID) and VM.Types.HasKey(ComponentTypeID) then
 			      typ = VM.Types.Value(ComponentTypeID)
@@ -81,6 +94,8 @@ Protected Class SPIRVType
 			    else
 			      result.Append "Unknown"
 			    end if
+			    
+			    ' ***** Void ***********************************************************************************
 			    
 			  case SPIRVTypeEnum.Void
 			    result.Append "Void"

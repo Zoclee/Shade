@@ -262,6 +262,11 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpTypeBool *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeBool
+			    result.Append "TypeBool"
+			    
 			    // ***** OpTypeFloat *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFloat
@@ -387,6 +392,9 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpLoad
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeBool
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFloat
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
@@ -518,29 +526,30 @@ Protected Class SPIRVOpcode
 				"0 - Unknown"
 				"1 - OpCompositeExtract"
 				"2 - OpConstant"
-				"3 - OpDecorate"
-				"4 - OpEntryPoint"
-				"5 - OpExtInstImport"
-				"6 - OpFunction"
-				"7 - OpFunctionEnd"
-				"8 - OpFunctionParameter"
-				"9 - OpIAdd"
-				"10 - OpInBoundsAccessChain"
-				"11 - OpLabel"
-				"12 - OpLoad"
-				"13 - OpMemberName"
-				"14 - OpMemoryModel"
-				"15 - OpName"
-				"16 - OpTypeFloat"
-				"17 - OpTypeFunction"
-				"18 - OpTypeInt"
-				"19 - OpTypeVector"
-				"20 - OpTypePointer"
-				"21 - OpTypeVoid"
-				"22 - OpReturn"
-				"23 - OpSource"
-				"24 - OpStore"
-				"25 - OpVariable"
+				"3 - OpConstantComposite"
+				"4 - OpDecorate"
+				"5 - OpEntryPoint"
+				"6 - OpExtInstImport"
+				"7 - OpFunction"
+				"8 - OpFunctionEnd"
+				"9 - OpFunctionParameter"
+				"10 - OpIAdd"
+				"11 - OpInBoundsAccessChain"
+				"12 - OpLabel"
+				"13 - OpLoad"
+				"14 - OpMemberName"
+				"15 - OpMemoryModel"
+				"16 - OpName"
+				"17 - OpTypeFloat"
+				"18 - OpTypeFunction"
+				"19 - OpTypeInt"
+				"20 - OpTypeVector"
+				"21 - OpTypePointer"
+				"22 - OpTypeVoid"
+				"23 - OpReturn"
+				"24 - OpSource"
+				"25 - OpStore"
+				"26 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
