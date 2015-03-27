@@ -296,6 +296,13 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub logError(op As ZocleeShade.SPIRVOpcode, errMsg As String)
+		  Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsg
+		  op.HasErrors = True
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub validateOpcodes()
 		  Dim i As UInt32
 		  Dim j As UInt32
@@ -355,8 +362,7 @@ Protected Class SPIRVVirtualMachine
 		    case SPIRVOpcodeTypeEnum.OpDecorate
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target  ID out of bounds.", "Target  ID not declared.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 44 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid Decoration enumeration value.")
-		        op.HasErrors = True
+		        logError op, "Invalid Decoration enumeration value."
 		      end if
 		      
 		      select case ModuleBinary.UInt32Value(op.Offset + 8)
@@ -367,20 +373,17 @@ Protected Class SPIRVVirtualMachine
 		      case 39 // Built-In
 		        validate_WordCountEqual(op, 4)
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 41 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid Built-In enumeration value.")
-		          op.HasErrors = True
+		          logError op, "Invalid Built-In enumeration value."
 		        end if
 		      case 40 // Function Parameter Attribute
 		        validate_WordCountEqual(op, 4)
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 8 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid Function Parameter Attribute enumeration value.")
-		          op.HasErrors = True
+		          logError op, "Invalid Function Parameter Attribute enumeration value."
 		        end if
 		      case 41 // FP Rounding Mode
 		        validate_WordCountEqual(op, 4)
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 3 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid FP Rounding Mode enumeration value.")
-		          op.HasErrors = True
+		          logError op, "Invalid FP Rounding Mode enumeration value."
 		        end if
 		      case 42 // FP Fast Math Mode
 		        validate_WordCountEqual(op, 4)
@@ -388,8 +391,7 @@ Protected Class SPIRVVirtualMachine
 		      case 43 // Linkage Type
 		        validate_WordCountEqual(op, 4)
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 1 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid Linkage Type enumeration value.")
-		          op.HasErrors = True
+		          logError op, "Invalid Linkage Type enumeration value."
 		        end if
 		      end select
 		      
@@ -937,12 +939,10 @@ Protected Class SPIRVVirtualMachine
 	#tag Method, Flags = &h21
 		Private Sub validate_Id(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
 		  if (id <= 0) or (id >= Bound) then
-		    Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsgOutOfBounds
-		    op.HasErrors = True
+		    logError op, errMsgOutOfBounds
 		  end if
 		  if not OpcodeLookup.HasKey(id) then
-		    Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsgNotDeclared
-		    op.HasErrors = True
+		    logError op, errMsgNotDeclared
 		  end if
 		  
 		End Sub
@@ -951,8 +951,7 @@ Protected Class SPIRVVirtualMachine
 	#tag Method, Flags = &h21
 		Private Sub validate_ResultId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String)
 		  if (id <= 0) or (id >= Bound) then
-		    Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsgOutOfBounds
-		    op.HasErrors = True
+		    logError op, errMsgOutOfBounds
 		  end if
 		  
 		  
@@ -960,14 +959,12 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub validate_typeId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutofBounds As String, errMsgNotDeclared As String)
+		Private Sub validate_typeId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
 		  if (id <= 0) or (id >= Bound) then
-		    Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsgOutofBounds
-		    op.HasErrors = True
+		    logError op, errMsgOutOfBounds
 		  end if
 		  if not Types.HasKey(id) then
-		    Errors.Append "ERROR [" + Str(op.Offset) + "]: " + errMsgNotDeclared
-		    op.HasErrors = True
+		    logError op, errMsgNotDeclared
 		  end if
 		  
 		End Sub
@@ -976,8 +973,7 @@ Protected Class SPIRVVirtualMachine
 	#tag Method, Flags = &h21
 		Private Sub validate_WordCountEqual(op As ZocleeShade.SPIRVOpcode, cnt As UInt32)
 		  if op.WordCount <> cnt then
-		    Errors.Append "ERROR [" + Str(op.Offset) + "]: Invalid word count."
-		    op.HasErrors = True
+		    logError op, "Invalid word count."
 		  end if
 		  
 		End Sub
@@ -986,8 +982,7 @@ Protected Class SPIRVVirtualMachine
 	#tag Method, Flags = &h21
 		Private Sub validate_WordCountMinimum(op As ZocleeShade.SPIRVOpcode, min As UInt32)
 		  if op.WordCount < min then
-		    Errors.Append "ERROR [" + Str(op.Offset) + "]: Invalid word count."
-		    op.HasErrors = True
+		    logError op, "Invalid word count."
 		  end if
 		  
 		End Sub
