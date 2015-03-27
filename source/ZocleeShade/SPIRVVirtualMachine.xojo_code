@@ -322,7 +322,7 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpCompositeExtract ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpCompositeExtract
-		      validate_WordCountMinimum(op, 3)
+		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type  ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Result ID out of bounds.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Composite  ID out of bounds.", "Composite  ID not declared.")
@@ -331,54 +331,21 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpConstant ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpConstant
-		      if op.WordCount < 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountMinimum(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type  ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Result ID out of bounds.")
 		      
 		      ' ***** OpConstantComposite ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpConstantComposite
-		      if op.WordCount < 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountMinimum(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type  ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Result ID out of bounds.")
 		      ub = op.Offset + (op.WordCount * 4)
 		      j = op.Offset + 12
 		      k = 0
 		      while j < ub
-		        if ModuleBinary.UInt32Value(j) >= Bound then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Constituent " + Str(k) + " ID out of bounds.")
-		          op.HasErrors = True
-		        end if
-		        if not Constants.HasKey(ModuleBinary.UInt32Value(j)) then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Constituent " + Str(k) + " ID not declared.")
-		          op.HasErrors = True
-		        end if
+		        validate_Id(op, ModuleBinary.UInt32Value(j), "Constituent " + Str(k) + " ID out of bounds.", "Constituent " + Str(k) + " ID not declared.")
 		        j = j + 4
 		        k = k + 1
 		      wend
@@ -386,70 +353,44 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpDecorate ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpDecorate
-		      
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Target ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target  ID out of bounds.", "Target  ID not declared.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 44 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Decoration enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid Decoration enumeration value.")
 		        op.HasErrors = True
 		      end if
 		      
 		      select case ModuleBinary.UInt32Value(op.Offset + 8)
 		      case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26
-		        if op.WordCount <> 3 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		          op.HasErrors = True
-		        end if
+		        validate_WordCountEqual(op, 3)
 		      case 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 44
-		        if op.WordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		          op.HasErrors = True
-		        end if
+		        validate_WordCountEqual(op, 4)
 		      case 39 // Built-In
-		        if op.WordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		          op.HasErrors = True
-		        end if
+		        validate_WordCountEqual(op, 4)
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 41 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Built-In enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid Built-In enumeration value.")
 		          op.HasErrors = True
 		        end if
 		      case 40 // Function Parameter Attribute
-		        if op.WordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		          op.HasErrors = True
-		        end if
+		        validate_WordCountEqual(op, 4)
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 8 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Function Parameter Attribute enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid Function Parameter Attribute enumeration value.")
 		          op.HasErrors = True
 		        end if
 		      case 41 // FP Rounding Mode
-		        if op.WordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		          op.HasErrors = True
-		        end if
+		        validate_WordCountEqual(op, 4)
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 3 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown FP Rounding Mode enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid FP Rounding Mode enumeration value.")
 		          op.HasErrors = True
 		        end if
 		      case 42 // FP Fast Math Mode
-		        if op.WordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		          op.HasErrors = True
-		        end if
+		        validate_WordCountEqual(op, 4)
 		        break // todo
 		      case 43 // Linkage Type
-		        if op.WordCount <> 4 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		          op.HasErrors = True
-		        end if
+		        validate_WordCountEqual(op, 4)
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 1 then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unkown Linkage Type enumeration value " + Str(ModuleBinary.UInt32Value(op.Offset + 8)) + ".")
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Invalid Linkage Type enumeration value.")
 		          op.HasErrors = True
 		        end if
-		        
 		      end select
 		      
 		      ' ***** OpEntryPoint ***********************************************************************************
@@ -1033,9 +974,19 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub validate_WordCountEqual(op As ZocleeShade.SPIRVOpcode, cnt As UInt32)
+		  if op.WordCount <> cnt then
+		    Errors.Append "ERROR [" + Str(op.Offset) + "]: Invalid word count."
+		    op.HasErrors = True
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub validate_WordCountMinimum(op As ZocleeShade.SPIRVOpcode, min As UInt32)
 		  if op.WordCount < min then
-		    Errors.Append "ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + "."
+		    Errors.Append "ERROR [" + Str(op.Offset) + "]: Invalid word count."
 		    op.HasErrors = True
 		  end if
 		  

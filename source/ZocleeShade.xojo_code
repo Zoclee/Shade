@@ -630,7 +630,7 @@ Protected Module ZocleeShade
 		  ' Decorate 22 Alignment 4
 		  bin.UInt16Value(344) = 50 ' OpDecorate
 		  bin.UInt16Value(346) = 3 + 1 ' word count
-		  bin.UInt32Value(348) = 22 ' target id
+		  bin.UInt32Value(348) = 20 ' target id
 		  bin.UInt32Value(352) = 36 ' Alignment (TBD: This can probably be removed.)
 		  bin.UInt32Value(356) = 4 ' ? Not specified in SPIR-V specification
 		  
