@@ -361,6 +361,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpConstant
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpConstantComposite
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    

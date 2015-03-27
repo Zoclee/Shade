@@ -350,11 +350,11 @@ Protected Class SPIRVVirtualMachine
 		      k = 0
 		      while j < ub
 		        if ModuleBinary.UInt32Value(j) >= Bound then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Parameter " + Str(k) + "  Constituent ID out of bounds.")
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Constituent " + Str(k) + " ID out of bounds.")
 		          op.HasErrors = True
 		        end if
-		        if not Types.HasKey(ModuleBinary.UInt32Value(j)) then
-		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Parameter " + Str(k) + "  Constituent  ID not declared.")
+		        if not Constants.HasKey(ModuleBinary.UInt32Value(j)) then
+		          Errors.Append ("ERROR [" + Str(op.Offset) + "]: Constituent " + Str(k) + " ID not declared.")
 		          op.HasErrors = True
 		        end if
 		        j = j + 4
