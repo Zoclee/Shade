@@ -315,29 +315,18 @@ Protected Class SPIRVVirtualMachine
 		      
 		    case SPIRVOpcodeTypeEnum.OpBranchConditional
 		      validate_WordCountMinimum(op, 4)
-		      validate_IdInRange(op, ModuleBinary.UInt32Value(op.Offset + 4), "ERROR [" + Str(op.Offset) + "]: Condition ID out of bounds.")
-		      validate_IdInRange(op, ModuleBinary.UInt32Value(op.Offset + 8), "ERROR [" + Str(op.Offset) + "]: True Label ID out of bounds.")
-		      validate_IdInRange(op, ModuleBinary.UInt32Value(op.Offset + 12), "ERROR [" + Str(op.Offset) + "]: False Label ID out of bounds.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "ERROR [" + Str(op.Offset) + "]: Condition ID out of bounds.", "ERROR [" + Str(op.Offset) + "]: Condition ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "ERROR [" + Str(op.Offset) + "]: True Label ID out of bounds.", "ERROR [" + Str(op.Offset) + "]: True Label ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "ERROR [" + Str(op.Offset) + "]: False Label ID out of bounds.", "ERROR [" + Str(op.Offset) + "]: False Label ID not declared.")
 		      
 		      ' ***** OpCompositeExtract ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpCompositeExtract
-		      if op.WordCount < 3 then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Unexpected word count " + Str(op.WordCount) + ".")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 4) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.")
-		        op.HasErrors = True
-		      end if
-		      if not Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
-		        op.HasErrors = True
-		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 8) >= Bound then
-		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
-		        op.HasErrors = True
-		      end if
+		      validate_WordCountMinimum(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "ERROR [" + Str(op.Offset) + "]: Result Type ID out of bounds.", "ERROR [" + Str(op.Offset) + "]: Result Type  ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8), "ERROR [" + Str(op.Offset) + "]: Result ID out of bounds.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "ERROR [" + Str(op.Offset) + "]:  ID out of bounds.", "ERROR [" + Str(op.Offset) + "]: Composite  ID not declared.")
+		      
 		      if not OpcodeLookup.HasKey(ModuleBinary.UInt32Value(op.Offset + 12)) then
 		        Errors.Append ("ERROR [" + Str(op.Offset) + "]: Composite  ID not declared.")
 		        op.HasErrors = True
@@ -1010,9 +999,38 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub validate_IdInRange(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsg As String)
+		Private Sub validate_Id(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
 		  if (id <= 0) or (id >= Bound) then
-		    Errors.Append errMsg
+		    Errors.Append errMsgOutOfBounds
+		    op.HasErrors = True
+		  end if
+		  if not OpcodeLookup.HasKey(id) then
+		    Errors.Append errMsgNotDeclared
+		    op.HasErrors = True
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub validate_ResultId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String)
+		  if (id <= 0) or (id >= Bound) then
+		    Errors.Append errMsgOutOfBounds
+		    op.HasErrors = True
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub validate_typeId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutofBounds As String, errMsgNotDeclared As String)
+		  if (id <= 0) or (id >= Bound) then
+		    Errors.Append errMsgOutofBounds
+		    op.HasErrors = True
+		  end if
+		  if not Types.HasKey(id) then
+		    Errors.Append errMsgNotDeclared
 		    op.HasErrors = True
 		  end if
 		  
