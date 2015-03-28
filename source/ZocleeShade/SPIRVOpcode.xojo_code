@@ -131,7 +131,7 @@ Protected Class SPIRVOpcode
 			    i = Offset + 12
 			    while i < ub
 			      result.Append " "
-			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      result.Append compose_id(i)
 			      i = i + 4
 			    wend
 			    
@@ -286,7 +286,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpSelectionMerge
 			    result.Append "SelectionMerge "
-			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append compose_id(Offset + 4)
 			    result.Append " "
 			    result.Append SPIRVDescribeSelectionControl(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
@@ -309,7 +309,7 @@ Protected Class SPIRVOpcode
 			    i = Offset + 12
 			    while i < ub
 			      result.Append " "
-			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      result.Append SPIRVDescribeMemoryAccess(VM.ModuleBinary.UInt32Value(i))
 			      i = i + 4
 			    wend
 			    
@@ -341,15 +341,7 @@ Protected Class SPIRVOpcode
 			    i = Offset + 12
 			    while i < ub
 			      result.Append " "
-			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
-			      result.Append "("
-			      if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(i)) then
-			        typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(i))
-			        result.Append typ.InstructionText
-			      else
-			        result.Append "Unknown"
-			      end if
-			      result.Append ")"
+			      result.Append compose_type(i)
 			      i = i + 4
 			    wend
 			    
@@ -380,15 +372,7 @@ Protected Class SPIRVOpcode
 			    i = Offset + 8
 			    while i < ub
 			      result.Append " "
-			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
-			      result.Append "("
-			      if VM.Types.HasKey(VM.ModuleBinary.UInt32Value(i)) then
-			        typ = VM.Types.Value(VM.ModuleBinary.UInt32Value(i))
-			        result.Append typ.InstructionText
-			      else
-			        result.Append "Unknown"
-			      end if
-			      result.Append ")"
+			      result.Append compose_type(i)
 			      i = i + 4
 			    wend
 			    
