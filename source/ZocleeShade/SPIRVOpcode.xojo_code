@@ -73,6 +73,20 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
+			    // ***** OpAccessChain *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpAccessChain
+			    result.Append "AccessChain "
+			    result.Append Str(VM.ModuleBinary.UInt16Value(Offset + 12))
+			    result.Append " "
+			    ub = offset + WordCount * 4
+			    i = Offset + 16
+			    while i < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpBranchConditional *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpBranchConditional
@@ -82,7 +96,7 @@ Protected Class SPIRVOpcode
 			    result.Append Str(VM.ModuleBinary.UInt16Value(Offset + 8))
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt16Value(Offset + 12))
-			    ub = offset + WordCount
+			    ub = offset + WordCount * 4
 			    i = Offset + 16
 			    while i < ub
 			      result.Append " "
@@ -95,7 +109,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
 			    result.Append "CompositeExtract "
 			    result.Append compose_id(Offset + 12)
-			    ub = offset + WordCount
+			    ub = offset + WordCount * 4
 			    i = Offset + 16
 			    while i < ub
 			      result.Append " "
@@ -113,7 +127,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpConstantComposite
 			    result.Append "ConstantComposite "
-			    ub = offset + WordCount
+			    ub = offset + WordCount * 4
 			    i = Offset + 12
 			    while i < ub
 			      result.Append " "
@@ -216,7 +230,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
 			    result.Append "InBoundsAccessChain "
 			    result.Append compose_id(Offset + 12)
-			    ub = offset + WordCount
+			    ub = offset + WordCount * 4
 			    i = Offset + 16
 			    while i < ub
 			      result.Append " "
@@ -291,7 +305,7 @@ Protected Class SPIRVOpcode
 			    result.Append compose_id(Offset + 4)
 			    result.Append " "
 			    result.Append compose_id(Offset + 8)
-			    ub = offset + WordCount
+			    ub = offset + WordCount * 4
 			    i = Offset + 12
 			    while i < ub
 			      result.Append " "
@@ -323,7 +337,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTypeFunction
 			    result.Append "TypeFunction "
 			    result.Append compose_type(Offset + 8)
-			    ub = offset + WordCount
+			    ub = offset + WordCount * 4
 			    i = Offset + 12
 			    while i < ub
 			      result.Append " "
@@ -362,7 +376,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeStruct
 			    result.Append "TypeStruct "
-			    ub = offset + WordCount
+			    ub = offset + WordCount * 4
 			    i = Offset + 8
 			    while i < ub
 			      result.Append " "
@@ -411,10 +425,6 @@ Protected Class SPIRVOpcode
 		InstructionText As String
 	#tag EndComputedProperty
 
-	#tag Property, Flags = &h21
-		Private mResultType As String
-	#tag EndProperty
-
 	#tag Property, Flags = &h0
 		Offset As UInt32
 	#tag EndProperty
@@ -430,6 +440,9 @@ Protected Class SPIRVOpcode
 			  result = 0
 			  
 			  select case Type
+			    
+			  case SPIRVOpcodeTypeEnum.OpAccessChain
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  case SPIRVOpcodeTypeEnum.OpConstant
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
@@ -512,7 +525,7 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
-			  case SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
+			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
 			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpFunction, _
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpLoad, _
@@ -608,35 +621,37 @@ Protected Class SPIRVOpcode
 			EditorType="Enum"
 			#tag EnumValues
 				"0 - Unknown"
-				"1 - OpCompositeExtract"
-				"2 - OpConstant"
-				"3 - OpConstantComposite"
-				"4 - OpDecorate"
-				"5 - OpEntryPoint"
-				"6 - OpExtInstImport"
-				"7 - OpFunction"
-				"8 - OpFunctionEnd"
-				"9 - OpFunctionParameter"
-				"10 - OpIAdd"
-				"11 - OpInBoundsAccessChain"
-				"12 - OpLabel"
-				"13 - OpLoad"
-				"14 - OpMemberName"
-				"15 - OpMemoryModel"
-				"16 - OpName"
-				"17 - OpTypeArray"
-				"18 - OpTypeBool"
-				"19 - OpTypeFloat"
-				"20 - OpTypeFunction"
-				"21 - OpTypeInt"
-				"22 - OpTypePointer"
-				"23 - OpTypeStruct"
-				"24 - OpTypeVector"
-				"25 - OpTypeVoid"
-				"26 - OpReturn"
-				"27 - OpSource"
-				"28 - OpStore"
-				"29 - OpVariable"
+				"1 - OpBranchConditional"
+				"2 - OpCompositeExtract"
+				"3 - OpConstant"
+				"4 - OpConstantComposite"
+				"5 - OpDecorate"
+				"6 - OpEntryPoint"
+				"7 - OpExtInstImport"
+				"8 - OpFunction"
+				"9 - OpFunctionEnd"
+				"10 - OpFunctionParameter"
+				"11 - OpIAdd"
+				"12 - OpInBoundsAccessChain"
+				"13 - OpLabel"
+				"14 - OpLoad"
+				"15 - OpMemberName"
+				"16 - OpMemoryModel"
+				"17 - OpName"
+				"18 - OpTypeArray"
+				"19 - OpTypeBool"
+				"20 - OpTypeFloat"
+				"21 - OpTypeFunction"
+				"22 - OpTypeInt"
+				"23 - OpTypePointer"
+				"24 - OpTypeStruct"
+				"25 - OpTypeVector"
+				"26 - OpTypeVoid"
+				"27 - OpReturn"
+				"28 - OpSelectionMerge"
+				"29 - OpSource"
+				"30 - OpStore"
+				"31 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

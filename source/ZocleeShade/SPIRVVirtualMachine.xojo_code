@@ -235,6 +235,9 @@ Protected Class SPIRVVirtualMachine
 		        case 62 // ***** OpCompositeExtract ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeExtract)
 		          
+		        case 93 // ***** OpAccessChain ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
+		          
 		        case 94 // ***** OpInBoundsAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpInBoundsAccessChain)
 		          
@@ -329,6 +332,14 @@ Protected Class SPIRVVirtualMachine
 		    op = Opcodes(i)
 		    
 		    select case op.Type
+		      
+		      ' ***** OpAccessChain ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpAccessChain
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Base ID out of bounds.", "Base ID not declared.")
 		      
 		      ' ***** OpBranchConditional ***********************************************************************************
 		      

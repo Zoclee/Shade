@@ -1493,6 +1493,7 @@ Protected Module ZocleeShade
 
 	#tag Enum, Name = SPIRVOpcodeTypeEnum, Type = Integer, Flags = &h0
 		Unknown
+		  OpAccessChain
 		  OpBranchConditional
 		  OpCompositeExtract
 		  OpConstant
