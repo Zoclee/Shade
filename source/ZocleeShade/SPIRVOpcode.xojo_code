@@ -327,6 +327,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append SPIRVDescribeSelectionControl(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpSLessThan *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSLessThan
+			    result.Append "SLessThan "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpSource *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSource
@@ -504,6 +512,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpLoad
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpSLessThan
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpTypeArray
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
@@ -561,7 +572,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFMul, SPIRVOpcodeTypeEnum.OpFunction, _
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpLoad, _
-			    SPIRVOpcodeTypeEnum.OpVariable
+			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpVariable
 			    
 			    result = compose_type(Offset + 4)
 			    

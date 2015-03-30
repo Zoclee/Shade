@@ -1547,6 +1547,7 @@ Protected Module ZocleeShade
 		  OpTypeVoid
 		  OpReturn
 		  OpSelectionMerge
+		  OpSLessThan
 		  OpSource
 		  OpStore
 		OpVariable

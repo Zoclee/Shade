@@ -253,6 +253,9 @@ Protected Class SPIRVVirtualMachine
 		        case 127 // ***** OpFMul ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFMul)
 		          
+		        case 160 // ***** OpSLessThan ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
+		          
 		        case 207 // ***** OpSelectionMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSelectionMerge)
 		          
@@ -589,6 +592,15 @@ Protected Class SPIRVVirtualMachine
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
 		        logError op, "Invalid Selection Control enumeration value."
 		      end if
+		      
+		      ' ***** OpSLessThan ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSLessThan
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
 		      
 		      ' ***** OpSource ***********************************************************************************
 		      
