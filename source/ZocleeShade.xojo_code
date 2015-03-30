@@ -398,6 +398,29 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeLoopControl(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "NoControl"
+		  case 1
+		    result = "Unroll"
+		  case 2
+		    result = "DontUnroll"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeMemoryAccess(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -1533,6 +1556,7 @@ Protected Module ZocleeShade
 		  OpInBoundsAccessChain
 		  OpLabel
 		  OpLoad
+		  OpLoopMerge
 		  OpMemberName
 		  OpMemoryModel
 		  OpName

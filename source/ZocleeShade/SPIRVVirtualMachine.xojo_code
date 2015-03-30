@@ -256,6 +256,9 @@ Protected Class SPIRVVirtualMachine
 		        case 160 // ***** OpSLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
+		        case 206 // ***** OpLoopMerge ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
+		          
 		        case 207 // ***** OpSelectionMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSelectionMerge)
 		          
@@ -550,6 +553,15 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Pointer ID out of bounds.", "Pointer ID not found.")
+		      
+		      ' ***** OpLoopMerge ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpLoopMerge
+		      validate_WordCountEqual(op, 3)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Label ID out of bounds.", "Label ID not found.")
+		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
+		        logError op, "Invalid Loop Control enumeration value."
+		      end if
 		      
 		      ' ***** OpMemberName ***********************************************************************************
 		      

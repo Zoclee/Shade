@@ -286,6 +286,14 @@ Protected Class SPIRVOpcode
 			    result.Append "Load "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpLoopMerge *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpLoopMerge
+			    result.Append "LoopMerge "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append SPIRVDescribeLoopControl(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    
 			    // ***** OpMemberName *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpMemberName
