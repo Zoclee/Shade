@@ -356,6 +356,13 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpSourceExtension *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSourceExtension
+			    result.Append "SourceExtension """
+			    result.Append VM.ModuleBinary.CString(Offset + 4)
+			    result.Append """"
+			    
 			    // ***** OpStore *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpStore
@@ -688,30 +695,34 @@ Protected Class SPIRVOpcode
 				"9 - OpExtInst"
 				"10 - OpExtInstImport"
 				"11 - OpFAdd"
-				"12 - OpFunction"
-				"13 - OpFunctionEnd"
-				"14 - OpFunctionParameter"
-				"15 - OpIAdd"
-				"16 - OpInBoundsAccessChain"
-				"17 - OpLabel"
-				"18 - OpLoad"
-				"19 - OpMemberName"
-				"20 - OpMemoryModel"
-				"21 - OpName"
-				"22 - OpTypeArray"
-				"23 - OpTypeBool"
-				"24 - OpTypeFloat"
-				"25 - OpTypeFunction"
-				"26 - OpTypeInt"
-				"27 - OpTypePointer"
-				"28 - OpTypeStruct"
-				"29 - OpTypeVector"
-				"30 - OpTypeVoid"
-				"31 - OpReturn"
-				"32 - OpSelectionMerge"
-				"33 - OpSource"
-				"34 - OpStore"
-				"35 - OpVariable"
+				"12 - OpFMul"
+				"13 - OpFunction"
+				"14 - OpFunctionEnd"
+				"15 - OpFunctionParameter"
+				"16 - OpIAdd"
+				"17 - OpInBoundsAccessChain"
+				"18 - OpLabel"
+				"19 - OpLoad"
+				"20 - OpLoopMerge"
+				"21 - OpMemberName"
+				"22 - OpMemoryModel"
+				"23 - OpName"
+				"24 - OpNop"
+				"25 - OpTypeArray"
+				"26 - OpTypeBool"
+				"27 - OpTypeFloat"
+				"28 - OpTypeFunction"
+				"29 - OpTypeInt"
+				"30 - OpTypePointer"
+				"31 - OpTypeStruct"
+				"32 - OpTypeVector"
+				"33 - OpTypeVoid"
+				"34 - OpReturn"
+				"35 - OpSelectionMerge"
+				"36 - OpSLessThan"
+				"37 - OpSource"
+				"38 - OpStore"
+				"39 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

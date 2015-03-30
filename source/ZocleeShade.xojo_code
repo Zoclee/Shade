@@ -1574,6 +1574,7 @@ Protected Module ZocleeShade
 		  OpSelectionMerge
 		  OpSLessThan
 		  OpSource
+		  OpSourceExtension
 		  OpStore
 		OpVariable
 	#tag EndEnum

@@ -74,6 +74,9 @@ Protected Class SPIRVVirtualMachine
 		          SourceLanguage = ModuleBinary.UInt32Value(ip + 4)
 		          SourceVersion = ModuleBinary.UInt32Value(ip + 8)
 		          
+		        case 2 // ***** OpSourceExtension ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSourceExtension)
+		          
 		        case 4 // ***** OpExtInstImport ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtInstImport)
 		          
@@ -628,6 +631,14 @@ Protected Class SPIRVVirtualMachine
 		      validate_WordCountEqual(op, 3)
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 4 then
 		        logError op, "Invalid Source Language enumeration value."
+		      end if
+		      
+		      ' ***** OpSourceExtension ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSourceExtension
+		      validate_WordCountMinimum(op, 1)
+		      if Trim(ModuleBinary.CString(op.Offset + 4)) = "" then
+		        logError op, "Invalid extension."
 		      end if
 		      
 		      ' ***** OpStore ***********************************************************************************
