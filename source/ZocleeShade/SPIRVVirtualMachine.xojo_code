@@ -262,6 +262,9 @@ Protected Class SPIRVVirtualMachine
 		        case 124 // ***** OpISub ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpISub)
 		          
+		        case 125 // ***** OpFSub ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFSub)
+		          
 		        case 127 // ***** OpFMul ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFMul)
 		          
@@ -525,6 +528,15 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpFMul ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpFMul
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
+		      
+		      ' ***** OpFSub ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpFSub
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
