@@ -276,6 +276,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpIMul *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpIMul
+			    result.Append "IMul "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpInBoundsAccessChain *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
@@ -548,6 +556,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpIAdd
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpIMul
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -620,6 +631,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFMul, SPIRVOpcodeTypeEnum.OpFSub, _
 			    SPIRVOpcodeTypeEnum.OpFunction, _
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
+			    SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpVariable

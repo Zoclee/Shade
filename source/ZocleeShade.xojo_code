@@ -1555,6 +1555,7 @@ Protected Module ZocleeShade
 		  OpFunctionEnd
 		  OpFunctionParameter
 		  OpIAdd
+		  OpIMul
 		  OpInBoundsAccessChain
 		  OpISub
 		  OpLabel
