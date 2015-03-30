@@ -1525,6 +1525,7 @@ Protected Module ZocleeShade
 		  OpExtInst
 		  OpExtInstImport
 		  OpFAdd
+		  OpFMul
 		  OpFunction
 		  OpFunctionEnd
 		  OpFunctionParameter

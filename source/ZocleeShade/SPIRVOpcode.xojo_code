@@ -227,6 +227,15 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpFMul *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFMul
+			    result.Append "FMul "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
+			    
 			    // ***** OpFunction *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFunction
@@ -474,6 +483,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpFAdd
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpFMul
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpFunction
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -545,7 +557,8 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpConstant, _
 			    SPIRVOpcodeTypeEnum.OpConstantComposite, SPIRVOpcodeTypeEnum.OpExtInst, _
-			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpFAdd, SPIRVOpcodeTypeEnum.OpFunction, _
+			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpFAdd, _
+			    SPIRVOpcodeTypeEnum.OpFMul, SPIRVOpcodeTypeEnum.OpFunction, _
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpVariable
@@ -641,37 +654,40 @@ Protected Class SPIRVOpcode
 			#tag EnumValues
 				"0 - Unknown"
 				"1 - OpAccessChain"
-				"2 - OpBranchConditional"
-				"3 - OpCompositeExtract"
-				"4 - OpConstant"
-				"5 - OpConstantComposite"
-				"6 - OpDecorate"
-				"7 - OpEntryPoint"
-				"8 - OpExtInstImport"
-				"9 - OpFunction"
-				"10 - OpFunctionEnd"
-				"11 - OpFunctionParameter"
-				"12 - OpIAdd"
-				"13 - OpInBoundsAccessChain"
-				"14 - OpLabel"
-				"15 - OpLoad"
-				"16 - OpMemberName"
-				"17 - OpMemoryModel"
-				"18 - OpName"
-				"19 - OpTypeArray"
-				"20 - OpTypeBool"
-				"21 - OpTypeFloat"
-				"22 - OpTypeFunction"
-				"23 - OpTypeInt"
-				"24 - OpTypePointer"
-				"25 - OpTypeStruct"
-				"26 - OpTypeVector"
-				"27 - OpTypeVoid"
-				"28 - OpReturn"
-				"29 - OpSelectionMerge"
-				"30 - OpSource"
-				"31 - OpStore"
-				"32 - OpVariable"
+				"2 - OpBranch"
+				"3 - OpBranchConditional"
+				"4 - OpCompositeExtract"
+				"5 - OpConstant"
+				"6 - OpConstantComposite"
+				"7 - OpDecorate"
+				"8 - OpEntryPoint"
+				"9 - OpExtInst"
+				"10 - OpExtInstImport"
+				"11 - OpFAdd"
+				"12 - OpFunction"
+				"13 - OpFunctionEnd"
+				"14 - OpFunctionParameter"
+				"15 - OpIAdd"
+				"16 - OpInBoundsAccessChain"
+				"17 - OpLabel"
+				"18 - OpLoad"
+				"19 - OpMemberName"
+				"20 - OpMemoryModel"
+				"21 - OpName"
+				"22 - OpTypeArray"
+				"23 - OpTypeBool"
+				"24 - OpTypeFloat"
+				"25 - OpTypeFunction"
+				"26 - OpTypeInt"
+				"27 - OpTypePointer"
+				"28 - OpTypeStruct"
+				"29 - OpTypeVector"
+				"30 - OpTypeVoid"
+				"31 - OpReturn"
+				"32 - OpSelectionMerge"
+				"33 - OpSource"
+				"34 - OpStore"
+				"35 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
