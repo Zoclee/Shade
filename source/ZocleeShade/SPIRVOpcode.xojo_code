@@ -322,6 +322,11 @@ Protected Class SPIRVOpcode
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
 			    result.Append """"
 			    
+			    // ***** OpNop *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpNop
+			    result.Append "Nop"
+			    
 			    // ***** OpReturn *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpReturn

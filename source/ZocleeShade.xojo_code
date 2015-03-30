@@ -1560,6 +1560,7 @@ Protected Module ZocleeShade
 		  OpMemberName
 		  OpMemoryModel
 		  OpName
+		  OpNop
 		  OpTypeArray
 		  OpTypeBool
 		  OpTypeFloat

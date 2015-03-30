@@ -66,6 +66,9 @@ Protected Class SPIRVVirtualMachine
 		        
 		        select case ModuleBinary.UInt16Value(ip)
 		          
+		        case 0 // ***** OpNop ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpNop)
+		          
 		        case 1 // ***** OpSource ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSource)
 		          SourceLanguage = ModuleBinary.UInt32Value(ip + 4)
@@ -590,6 +593,11 @@ Protected Class SPIRVVirtualMachine
 		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
 		        logError op, "Invalid name."
 		      end if
+		      
+		      ' ***** OpNop ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpNop
+		      logError op, "Use of OpNop is invalid."
 		      
 		      ' ***** OpReturn ***********************************************************************************
 		      
