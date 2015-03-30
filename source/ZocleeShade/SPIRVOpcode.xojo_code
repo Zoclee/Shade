@@ -87,6 +87,12 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpBranch *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpBranch
+			    result.Append "Branch "
+			    result.Append compose_id(Offset + 4)
+			    
 			    // ***** OpBranchConditional *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpBranchConditional

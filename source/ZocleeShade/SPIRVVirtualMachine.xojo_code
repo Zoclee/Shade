@@ -253,6 +253,9 @@ Protected Class SPIRVVirtualMachine
 		        case 208 // ***** OpLabel ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLabel)
 		          
+		        case 209 // ***** OpBranch ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBranch)
+		          
 		        case 210 // ***** OpBranchConditional ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBranchConditional)
 		          
@@ -343,6 +346,12 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Base ID out of bounds.", "Base ID not declared.")
+		      
+		      ' ***** OpBranch ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpBranch
+		      validate_WordCountEqual(op, 2)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target Label ID out of bounds.", "Target Label ID not declared.")
 		      
 		      ' ***** OpBranchConditional ***********************************************************************************
 		      
