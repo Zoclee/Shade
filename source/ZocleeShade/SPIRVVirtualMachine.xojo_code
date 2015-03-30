@@ -200,6 +200,9 @@ Protected Class SPIRVVirtualMachine
 		        case 42 // ***** OpFunctionEnd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionEnd)
 		          
+		        case 44 // ***** OpExtInst ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtInst)
+		          
 		        case 46 // ***** OpLoad ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoad)
 		          
@@ -438,6 +441,22 @@ Protected Class SPIRVVirtualMachine
 		        logError op, "Execution Model enumeration value."
 		      end if
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Entry Point ID out of bounds.", "Entry Point ID not declared.")
+		      
+		      ' ***** OpExtInst ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpExtInst
+		      validate_WordCountMinimum(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Set ID out of bounds.", "Set ID not declared.")
+		      ub = op.Offset + (op.WordCount * 4)
+		      j = op.Offset + 20
+		      k = 0
+		      while j < ub
+		        validate_Id(op, ModuleBinary.UInt32Value(j), "Operand " + Str(k) + " ID out of bounds.", "Operand " + Str(k) + " ID not declared.")
+		        j = j + 4
+		        k = k + 1
+		      wend
 		      
 		      ' ***** OpExtInstImport ***********************************************************************************
 		      

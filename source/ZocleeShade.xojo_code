@@ -1522,6 +1522,7 @@ Protected Module ZocleeShade
 		  OpConstantComposite
 		  OpDecorate
 		  OpEntryPoint
+		  OpExtInst
 		  OpExtInstImport
 		  OpFAdd
 		  OpFunction
