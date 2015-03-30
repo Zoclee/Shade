@@ -197,6 +197,13 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 8)
 			    
+			    // ***** OpExtension *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpExtension
+			    result.Append "Extension """
+			    result.Append VM.ModuleBinary.CString(Offset + 4)
+			    result.Append """"
+			    
 			    // ***** OpExtInst *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpExtInst

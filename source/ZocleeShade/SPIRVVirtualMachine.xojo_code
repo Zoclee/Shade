@@ -77,6 +77,9 @@ Protected Class SPIRVVirtualMachine
 		        case 2 // ***** OpSourceExtension ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSourceExtension)
 		          
+		        case 3 // ***** OpExtension ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtension)
+		          
 		        case 4 // ***** OpExtInstImport ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtInstImport)
 		          
@@ -456,6 +459,14 @@ Protected Class SPIRVVirtualMachine
 		        logError op, "Execution Model enumeration value."
 		      end if
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Entry Point ID out of bounds.", "Entry Point ID not declared.")
+		      
+		      ' ***** OpExtension ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpExtension
+		      validate_WordCountMinimum(op, 1)
+		      if Trim(ModuleBinary.CString(op.Offset + 4)) = "" then
+		        logError op, "Invalid name."
+		      end if
 		      
 		      ' ***** OpExtInst ***********************************************************************************
 		      
