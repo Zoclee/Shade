@@ -454,6 +454,11 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTypeBool
 			    result.Append "TypeBool"
 			    
+			    // ***** OpTypeDeviceEvent *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeDeviceEvent
+			    result.Append "TypeDeviceEvent"
+			    
 			    // ***** OpTypeEvent *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeEvent
@@ -666,6 +671,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTypeBool
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
+			  case SPIRVOpcodeTypeEnum.OpTypeDeviceEvent
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
 			  case SPIRVOpcodeTypeEnum.OpTypeEvent
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
@@ -867,19 +875,20 @@ Protected Class SPIRVOpcode
 				"35 - OpStore"
 				"36 - OpTypeArray"
 				"37 - OpTypeBool"
-				"38 - OpTypeFilter"
-				"39 - OpTypeFloat"
-				"40 - OpTypeFunction"
-				"41 - OpTypeInt"
-				"42 - OpTypeMatrix"
-				"43 - OpTypeOpaque"
-				"44 - OpTypePointer"
-				"45 - OpTypeRuntimeArray"
-				"46 - OpTypeSampler"
-				"47 - OpTypeStruct"
-				"48 - OpTypeVector"
-				"49 - OpTypeVoid"
-				"50 - OpVariable"
+				"38 - OpTypeEvent"
+				"39 - OpTypeFilter"
+				"40 - OpTypeFloat"
+				"41 - OpTypeFunction"
+				"42 - OpTypeInt"
+				"43 - OpTypeMatrix"
+				"44 - OpTypeOpaque"
+				"45 - OpTypePointer"
+				"46 - OpTypeRuntimeArray"
+				"47 - OpTypeSampler"
+				"48 - OpTypeStruct"
+				"49 - OpTypeVector"
+				"50 - OpTypeVoid"
+				"51 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

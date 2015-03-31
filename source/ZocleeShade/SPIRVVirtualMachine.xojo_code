@@ -229,6 +229,12 @@ Protected Class SPIRVVirtualMachine
 		          typ.Type = SPIRVTypeEnum.Event_
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
+		        case 23 // ***** OpTypeDeviceEvent ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeDeviceEvent)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.DeviceEvent
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
 		        case 29 // ***** OpConstant ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstant)
 		          cnst = new ZocleeShade.SPIRVConstant
@@ -797,6 +803,12 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTypeBool ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeBool
+		      validate_WordCountEqual(op, 2)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      
+		      ' ***** OpTypeDeviceEvent ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTypeDeviceEvent
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
