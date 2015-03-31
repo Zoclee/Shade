@@ -223,6 +223,12 @@ Protected Class SPIRVVirtualMachine
 		          wend
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
+		        case 22 // ***** OpTypeEvent ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeEvent)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.Event_
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
 		        case 29 // ***** OpConstant ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstant)
 		          cnst = new ZocleeShade.SPIRVConstant
@@ -794,6 +800,12 @@ Protected Class SPIRVVirtualMachine
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
+		      ' ***** OpTypeEvent ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTypeEvent
+		      validate_WordCountEqual(op, 2)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      
 		      ' ***** OpTypeFloat ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTypeFloat
@@ -903,7 +915,7 @@ Protected Class SPIRVVirtualMachine
 		        if ModuleBinary.UInt32Value(op.Offset + 32) > 2 then
 		          logError op, "Invalid Access Qualifier enumeration value."
 		        end if
-		      end if 
+		      end if
 		      
 		      ' ***** OpTypeStruct ***********************************************************************************
 		      

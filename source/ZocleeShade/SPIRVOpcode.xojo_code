@@ -454,6 +454,11 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTypeBool
 			    result.Append "TypeBool"
 			    
+			    // ***** OpTypeEvent *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeEvent
+			    result.Append "TypeEvent"
+			    
 			    // ***** OpTypeFilter *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFilter
@@ -661,6 +666,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTypeBool
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
+			  case SPIRVOpcodeTypeEnum.OpTypeEvent
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFilter
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
@@ -864,12 +872,14 @@ Protected Class SPIRVOpcode
 				"40 - OpTypeFunction"
 				"41 - OpTypeInt"
 				"42 - OpTypeMatrix"
-				"43 - OpTypePointer"
-				"44 - OpTypeRuntimeArray"
-				"45 - OpTypeStruct"
-				"46 - OpTypeVector"
-				"47 - OpTypeVoid"
-				"48 - OpVariable"
+				"43 - OpTypeOpaque"
+				"44 - OpTypePointer"
+				"45 - OpTypeRuntimeArray"
+				"46 - OpTypeSampler"
+				"47 - OpTypeStruct"
+				"48 - OpTypeVector"
+				"49 - OpTypeVoid"
+				"50 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

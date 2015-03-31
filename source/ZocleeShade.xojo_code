@@ -1791,6 +1791,7 @@ Protected Module ZocleeShade
 		  OpStore
 		  OpTypeArray
 		  OpTypeBool
+		  OpTypeEvent
 		  OpTypeFilter
 		  OpTypeFloat
 		  OpTypeFunction
