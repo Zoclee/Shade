@@ -1647,6 +1647,7 @@ Protected Module ZocleeShade
 		  OpNop
 		  OpTypeArray
 		  OpTypeBool
+		  OpTypeFilter
 		  OpTypeFloat
 		  OpTypeFunction
 		  OpTypeInt
@@ -1669,6 +1670,7 @@ Protected Module ZocleeShade
 		  Boolean
 		  DeviceEvent
 		  Event_
+		  Filter
 		  Float
 		  Function_
 		  Integer

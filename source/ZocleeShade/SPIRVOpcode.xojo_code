@@ -454,6 +454,11 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTypeBool
 			    result.Append "TypeBool"
 			    
+			    // ***** OpTypeFilter *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeFilter
+			    result.Append "TypeFilter"
+			    
 			    // ***** OpTypeFloat *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFloat
@@ -619,6 +624,9 @@ Protected Class SPIRVOpcode
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeBool
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeFilter
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeFloat

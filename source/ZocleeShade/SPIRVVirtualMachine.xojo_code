@@ -143,6 +143,13 @@ Protected Class SPIRVVirtualMachine
 		          typ.Type = SPIRVTypeEnum.Matrix
 		          typ.ColumnTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.ColumnCount = ModuleBinary.UInt32Value(ip + 12)
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
+		        case 15 // ***** OpTypeFilter ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeFilter)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.Filter
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 16 // ***** OpTypeArray ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeArray)
