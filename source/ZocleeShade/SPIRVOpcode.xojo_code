@@ -484,6 +484,14 @@ Protected Class SPIRVOpcode
 			      result.Append " Signed"
 			    end if
 			    
+			    // ***** OpTypeMatrix *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeMatrix
+			    result.Append "TypeMatrix "
+			    result.Append compose_type(Offset + 8)
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    
 			    // ***** OpTypePointer *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypePointer
@@ -620,6 +628,9 @@ Protected Class SPIRVOpcode
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeInt
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeMatrix
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypePointer
@@ -767,42 +778,43 @@ Protected Class SPIRVOpcode
 				"6 - OpConstantComposite"
 				"7 - OpDecorate"
 				"8 - OpEntryPoint"
-				"9 - OpExtension"
-				"10 - OpExtInst"
-				"11 - OpExtInstImport"
-				"12 - OpFAdd"
-				"13 - OpFMul"
-				"14 - OpFSub"
-				"15 - OpFunction"
-				"16 - OpFunctionEnd"
-				"17 - OpFunctionParameter"
-				"18 - OpIAdd"
-				"19 - OpIMul"
-				"20 - OpInBoundsAccessChain"
-				"21 - OpISub"
-				"22 - OpLabel"
-				"23 - OpLoad"
-				"24 - OpLoopMerge"
-				"25 - OpMemberName"
-				"26 - OpMemoryModel"
-				"27 - OpName"
-				"28 - OpNop"
-				"29 - OpTypeArray"
-				"30 - OpTypeBool"
-				"31 - OpTypeFloat"
-				"32 - OpTypeFunction"
-				"33 - OpTypeInt"
-				"34 - OpTypePointer"
-				"35 - OpTypeStruct"
-				"36 - OpTypeVector"
-				"37 - OpTypeVoid"
-				"38 - OpReturn"
-				"39 - OpSelectionMerge"
-				"40 - OpSLessThan"
-				"41 - OpSource"
-				"42 - OpSourceExtension"
-				"43 - OpStore"
-				"44 - OpVariable"
+				"9 - OpExecutionMode"
+				"10 - OpExtension"
+				"11 - OpExtInst"
+				"12 - OpExtInstImport"
+				"13 - OpFAdd"
+				"14 - OpFMul"
+				"15 - OpFSub"
+				"16 - OpFunction"
+				"17 - OpFunctionEnd"
+				"18 - OpFunctionParameter"
+				"19 - OpIAdd"
+				"20 - OpIMul"
+				"21 - OpInBoundsAccessChain"
+				"22 - OpISub"
+				"23 - OpLabel"
+				"24 - OpLoad"
+				"25 - OpLoopMerge"
+				"26 - OpMemberName"
+				"27 - OpMemoryModel"
+				"28 - OpName"
+				"29 - OpNop"
+				"30 - OpTypeArray"
+				"31 - OpTypeBool"
+				"32 - OpTypeFloat"
+				"33 - OpTypeFunction"
+				"34 - OpTypeInt"
+				"35 - OpTypePointer"
+				"36 - OpTypeStruct"
+				"37 - OpTypeVector"
+				"38 - OpTypeVoid"
+				"39 - OpReturn"
+				"40 - OpSelectionMerge"
+				"41 - OpSLessThan"
+				"42 - OpSource"
+				"43 - OpSourceExtension"
+				"44 - OpStore"
+				"45 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

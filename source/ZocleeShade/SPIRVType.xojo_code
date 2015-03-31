@@ -13,6 +13,14 @@ Protected Class SPIRVType
 
 
 	#tag Property, Flags = &h0
+		ColumnCount As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		ColumnTypeID As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		ComponentCount As UInt32
 	#tag EndProperty
 

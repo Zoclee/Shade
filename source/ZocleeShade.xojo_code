@@ -1650,6 +1650,7 @@ Protected Module ZocleeShade
 		  OpTypeFloat
 		  OpTypeFunction
 		  OpTypeInt
+		  OpTypeMatrix
 		  OpTypePointer
 		  OpTypeStruct
 		  OpTypeVector

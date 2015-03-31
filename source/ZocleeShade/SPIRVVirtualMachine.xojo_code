@@ -88,15 +88,15 @@ Protected Class SPIRVVirtualMachine
 		          AddressingModel = ModuleBinary.UInt32Value(ip + 4)
 		          MemoryModel = ModuleBinary.UInt32Value(ip + 8)
 		          
-		        case 7 // ***** OpExecutionMode ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExecutionMode)
-		          
 		        case 6 // ***** OpEntryPoint ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEntryPoint)
 		          ep = new ZocleeShade.SPIRVEntryPoint
 		          ep.ExecutionModel = ModuleBinary.UInt32Value(ip + 4)
 		          ep.EntryPointID = ModuleBinary.UInt32Value(ip + 8)
 		          EntryPoints.Value(ep.EntryPointID) = ep
+		          
+		        case 7 // ***** OpExecutionMode ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExecutionMode)
 		          
 		        case 8 // ***** OpTypeVoid ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeVoid)
@@ -136,6 +136,13 @@ Protected Class SPIRVVirtualMachine
 		          typ.ComponentTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.ComponentCount = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
+		        case 13 // ***** OpTypeMatrix ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeMatrix)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.Matrix
+		          typ.ColumnTypeID = ModuleBinary.UInt32Value(ip + 8)
+		          typ.ColumnCount = ModuleBinary.UInt32Value(ip + 12)
 		          
 		        case 16 // ***** OpTypeArray ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeArray)
@@ -783,6 +790,19 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 12) > 1 then
 		        logError op, "Invalid sign value."
+		      end if
+		      
+		      ' ***** OpTypeMatrix ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTypeMatrix
+		      validate_WordCountEqual(op, 4)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Column Type ID out of bounds.", "Column Type ID not declared.")
+		      if ModuleBinary.UInt32Value(op.Offset + 8) = ModuleBinary.UInt32Value(op.Offset + 4) then
+		        logError op, "Circular Column Type  ID reference."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 12) < 2 then
+		        logError op, "Invalid Column Count."
 		      end if
 		      
 		      ' ***** OpTypePointer ***********************************************************************************
