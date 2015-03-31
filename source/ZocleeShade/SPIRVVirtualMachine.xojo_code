@@ -195,6 +195,13 @@ Protected Class SPIRVVirtualMachine
 		          wend
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
+		        case 19 // ***** OpTypeOpaque ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeOpaque)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.Opaque
+		          typ.Name = ModuleBinary.CString(ip + 8)
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
 		        case 20 // ***** OpTypePointer ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypePointer)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
@@ -834,6 +841,15 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      if ModuleBinary.UInt32Value(op.Offset + 12) < 2 then
 		        logError op, "Invalid Column Count."
+		      end if
+		      
+		      ' ***** OpTypeOpaque ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTypeOpaque
+		      validate_WordCountMinimum(op, 2)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
+		        logError op, "Invalid opaque type name."
 		      end if
 		      
 		      ' ***** OpTypePointer ***********************************************************************************

@@ -497,6 +497,13 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
+			    // ***** OpTypeOpaque *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeOpaque
+			    result.Append "TypeOpaque """
+			    result.Append VM.ModuleBinary.CString(Offset + 8)
+			    result.Append """"
+			    
 			    // ***** OpTypePointer *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypePointer
@@ -667,6 +674,9 @@ Protected Class SPIRVOpcode
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeMatrix
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeOpaque
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypePointer

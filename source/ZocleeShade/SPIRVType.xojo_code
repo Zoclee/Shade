@@ -219,6 +219,10 @@ Protected Class SPIRVType
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		Name As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		ParmTypeID() As UInt32
 	#tag EndProperty
 

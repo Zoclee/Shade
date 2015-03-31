@@ -1796,6 +1796,7 @@ Protected Module ZocleeShade
 		  OpTypeFunction
 		  OpTypeInt
 		  OpTypeMatrix
+		  OpTypeOpaque
 		  OpTypePointer
 		  OpTypeRuntimeArray
 		  OpTypeSampler
