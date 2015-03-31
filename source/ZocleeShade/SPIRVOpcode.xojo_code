@@ -505,6 +505,12 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_type(Offset + 12)
 			    
+			    // ***** OpTypeRuntimeArray *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeRuntimeArray
+			    result.Append "TypeRuntimeArray "
+			    result.Append compose_type(Offset + 8)
+			    
 			    // ***** OpTypeStruct *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeStruct
@@ -642,6 +648,9 @@ Protected Class SPIRVOpcode
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypePointer
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeRuntimeArray
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeStruct

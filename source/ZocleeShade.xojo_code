@@ -1645,6 +1645,12 @@ Protected Module ZocleeShade
 		  OpMemoryModel
 		  OpName
 		  OpNop
+		  OpReturn
+		  OpSelectionMerge
+		  OpSLessThan
+		  OpSource
+		  OpSourceExtension
+		  OpStore
 		  OpTypeArray
 		  OpTypeBool
 		  OpTypeFilter
@@ -1653,15 +1659,10 @@ Protected Module ZocleeShade
 		  OpTypeInt
 		  OpTypeMatrix
 		  OpTypePointer
+		  OpTypeRuntimeArray
 		  OpTypeStruct
 		  OpTypeVector
 		  OpTypeVoid
-		  OpReturn
-		  OpSelectionMerge
-		  OpSLessThan
-		  OpSource
-		  OpSourceExtension
-		  OpStore
 		OpVariable
 	#tag EndEnum
 

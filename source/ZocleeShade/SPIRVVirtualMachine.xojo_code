@@ -159,6 +159,13 @@ Protected Class SPIRVVirtualMachine
 		          typ.Length = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
+		        case 17 // ***** OpTypeRuntimeArray ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeRuntimeArray)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.RuntimeArray
+		          typ.ElementTypeID = ModuleBinary.UInt32Value(ip + 8)
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
 		        case 18 // ***** OpTypeStruct ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeStruct)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
@@ -823,6 +830,16 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 12), "Type ID out of bounds.", "Type ID not declared.")
 		      if ModuleBinary.UInt32Value(op.Offset + 12) = ModuleBinary.UInt32Value(op.Offset + 4) then
 		        logError op, "Circular Type  ID reference."
+		      end if
+		      
+		      ' ***** OpTypeRuntimeArray ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTypeRuntimeArray
+		      validate_WordCountEqual(op, 3)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Element Type ID out of bounds.", "Element Type ID not declared.")
+		      if ModuleBinary.UInt32Value(op.Offset + 8) = ModuleBinary.UInt32Value(op.Offset + 4) then
+		        logError op, "Circular Element Type  ID reference."
 		      end if
 		      
 		      ' ***** OpTypeStruct ***********************************************************************************

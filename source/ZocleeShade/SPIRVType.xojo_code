@@ -72,6 +72,11 @@ Protected Class SPIRVType
 			    end if
 			    result.Append Str(Width)
 			    
+			    ' ***** Filter ***********************************************************************************
+			    
+			  case SPIRVTypeEnum.Filter
+			    result.Append "Filter"
+			    
 			    ' ***** Float ***********************************************************************************
 			    
 			  case SPIRVTypeEnum.Float
@@ -103,6 +108,20 @@ Protected Class SPIRVType
 			    wend
 			    result.Append ")"
 			    
+			    ' ***** Matrix ***********************************************************************************
+			    
+			  case SPIRVTypeEnum.Matrix
+			    if (ColumnTypeID <> ResultID) and VM.Types.HasKey(ColumnTypeID) then
+			      typ = VM.Types.Value(ColumnTypeID)
+			      result.Append typ.InstructionText
+			      result.Append "Mat"
+			      result.Append "["
+			      result.Append Str(ColumnCount)
+			      result.Append "]"
+			    else
+			      result.Append "Unknown"
+			    end if
+			    
 			    ' ***** Pointer ***********************************************************************************
 			    
 			  case SPIRVTypeEnum.Pointer
@@ -113,6 +132,18 @@ Protected Class SPIRVType
 			    else
 			      result.Append "Unknown"
 			    end if
+			    
+			    ' ***** RuntimeArray ***********************************************************************************
+			    
+			  case SPIRVTypeEnum.Array_
+			    if VM.Types.HasKey(ElementTypeID) then
+			      typ = VM.Types.Value(ElementTypeID)
+			      result.Append typ.InstructionText
+			    else
+			      result.Append "Unknown"
+			    end if
+			    result.Append "["
+			    result.Append "]"
 			    
 			    ' ***** Struct ***********************************************************************************
 			    
