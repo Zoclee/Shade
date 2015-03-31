@@ -1800,6 +1800,7 @@ Protected Module ZocleeShade
 		  OpTypeMatrix
 		  OpTypeOpaque
 		  OpTypePointer
+		  OpTypeReserveId
 		  OpTypeRuntimeArray
 		  OpTypeSampler
 		  OpTypeStruct

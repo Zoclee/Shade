@@ -235,6 +235,12 @@ Protected Class SPIRVVirtualMachine
 		          typ.Type = SPIRVTypeEnum.DeviceEvent
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
+		        case 24 // ***** OpTypeReserveId ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeReserveId)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.ReservedId
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
 		        case 29 // ***** OpConstant ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstant)
 		          cnst = new ZocleeShade.SPIRVConstant
@@ -888,6 +894,12 @@ Protected Class SPIRVVirtualMachine
 		      if ModuleBinary.UInt32Value(op.Offset + 12) = ModuleBinary.UInt32Value(op.Offset + 4) then
 		        logError op, "Circular Type  ID reference."
 		      end if
+		      
+		      ' ***** OpTypeReserveId ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTypeReserveId
+		      validate_WordCountEqual(op, 2)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpTypeRuntimeArray ***********************************************************************************
 		      
