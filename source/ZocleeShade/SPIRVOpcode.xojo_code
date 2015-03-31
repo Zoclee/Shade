@@ -141,6 +141,16 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpConstantFalse *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpConstantFalse
+			    result.Append "ConstantFalse"
+			    
+			    // ***** OpConstantTrue *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpConstantTrue
+			    result.Append "ConstantTrue"
+			    
 			    // ***** OpDecorate *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpDecorate
@@ -632,10 +642,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpAccessChain
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
-			  case SPIRVOpcodeTypeEnum.OpConstant
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpConstantComposite
+			  case SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, SPIRVOpcodeTypeEnum.OpConstantFalse, SPIRVOpcodeTypeEnum.OpConstantTrue
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
@@ -765,7 +772,8 @@ Protected Class SPIRVOpcode
 			  select case Type
 			    
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpConstant, _
-			    SPIRVOpcodeTypeEnum.OpConstantComposite, SPIRVOpcodeTypeEnum.OpExtInst, _
+			    SPIRVOpcodeTypeEnum.OpConstantComposite, SPIRVOpcodeTypeEnum.OpConstantFalse, _
+			    SPIRVOpcodeTypeEnum.OpConstantTrue, SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpFAdd, _
 			    SPIRVOpcodeTypeEnum.OpFMul, SPIRVOpcodeTypeEnum.OpFSub, _
 			    SPIRVOpcodeTypeEnum.OpFunction, _

@@ -9,7 +9,7 @@ Protected Class SPIRVConstant
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		ReturnTypeID As UInt32
+		ResultTypeID As UInt32
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

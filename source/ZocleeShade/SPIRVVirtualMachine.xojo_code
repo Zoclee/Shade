@@ -255,11 +255,27 @@ Protected Class SPIRVVirtualMachine
 		          typ.AccessQualifier = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
+		        case 27 // ***** OpConstantTrue ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantTrue)
+		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
+		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          cnst.Value = "true"
+		          Constants.Value(cnst.ResultID) = cnst
+		          
+		        case 28 // ***** OpConstantFalse ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantFalse)
+		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
+		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          cnst.Value = "false"
+		          Constants.Value(cnst.ResultID) = cnst
+		          
 		        case 29 // ***** OpConstant ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstant)
 		          cnst = new ZocleeShade.SPIRVConstant
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
-		          cnst.ReturnTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          cnst.Value = Str(ModuleBinary.UInt32Value(ip + 12))
 		          Constants.Value(cnst.ResultID) = cnst
 		          
@@ -267,7 +283,7 @@ Protected Class SPIRVVirtualMachine
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantComposite)
 		          cnst = new ZocleeShade.SPIRVConstant
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
-		          cnst.ReturnTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          tempIP = ip + 12
 		          ub = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
 		          while tempIP < ub
@@ -501,6 +517,32 @@ Protected Class SPIRVVirtualMachine
 		        j = j + 4
 		        k = k + 1
 		      wend
+		      
+		      ' ***** OpConstantFalse ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpConstantFalse
+		      validate_WordCountEqual(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
+		        if typ.Type <> SPIRVTypeEnum.Boolean then
+		          logError op, "Expected scalar Boolean type."
+		        end if
+		      end if
+		      
+		      ' ***** OpConstantTrue ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpConstantTrue
+		      validate_WordCountEqual(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
+		        if typ.Type <> SPIRVTypeEnum.Boolean then
+		          logError op, "Expected scalar Boolean type."
+		        end if
+		      end if
 		      
 		      ' ***** OpDecorate ***********************************************************************************
 		      
