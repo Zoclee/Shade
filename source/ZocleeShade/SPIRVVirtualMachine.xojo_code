@@ -156,9 +156,9 @@ Protected Class SPIRVVirtualMachine
 		          typ.Compare = ModuleBinary.UInt32Value(ip + 24)
 		          typ.Multisampled = ModuleBinary.UInt32Value(ip + 28)
 		          if ModuleBinary.UInt16Value(ip + 2) >= 9 then
-		            typ.Qualifier = ModuleBinary.UInt32Value(ip + 32)
+		            typ.AccessQualifier = ModuleBinary.UInt32Value(ip + 32)
 		          else
-		            typ.Qualifier = 0
+		            typ.AccessQualifier = 0
 		          end if
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
@@ -245,6 +245,14 @@ Protected Class SPIRVVirtualMachine
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeQueue)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Queue
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
+		        case 26 // ***** OpTypePipe ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypePipe)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.Pipe
+		          typ.DataTypeID = ModuleBinary.UInt32Value(ip + 8)
+		          typ.AccessQualifier = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 29 // ***** OpConstant ***************************************************
@@ -886,6 +894,16 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
 		        logError op, "Invalid opaque type name."
+		      end if
+		      
+		      ' ***** OpTypePipe ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTypePipe
+		      validate_WordCountMinimum(op, 4)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Type ID out of bounds.", "Type ID not declared.")
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 2 then
+		        logError op, "Invalid Access Qualifier enumeration value."
 		      end if
 		      
 		      ' ***** OpTypePointer ***********************************************************************************

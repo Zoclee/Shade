@@ -1799,6 +1799,7 @@ Protected Module ZocleeShade
 		  OpTypeInt
 		  OpTypeMatrix
 		  OpTypeOpaque
+		  OpTypePipe
 		  OpTypePointer
 		  OpTypeQueue
 		  OpTypeReserveId

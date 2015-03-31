@@ -514,6 +514,14 @@ Protected Class SPIRVOpcode
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
 			    result.Append """"
 			    
+			    // ***** OpTypePipe *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypePipe
+			    result.Append "TypePipe "
+			    result.Append compose_type(Offset + 8)
+			    result.Append " "
+			    result.Append SPIRVDescribeAccessQualifier(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    
 			    // ***** OpTypePointer *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypePointer
@@ -703,6 +711,9 @@ Protected Class SPIRVOpcode
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeOpaque
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypePipe
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypePointer

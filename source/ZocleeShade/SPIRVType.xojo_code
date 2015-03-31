@@ -13,6 +13,10 @@ Protected Class SPIRVType
 
 
 	#tag Property, Flags = &h0
+		AccessQualifier As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Arrayed As UInt32
 	#tag EndProperty
 
@@ -38,6 +42,10 @@ Protected Class SPIRVType
 
 	#tag Property, Flags = &h0
 		Content As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		DataTypeID As UInt32
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -224,10 +232,6 @@ Protected Class SPIRVType
 
 	#tag Property, Flags = &h0
 		ParmTypeID() As UInt32
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		Qualifier As UInt32
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
