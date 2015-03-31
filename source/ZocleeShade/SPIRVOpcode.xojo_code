@@ -522,6 +522,11 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_type(Offset + 12)
 			    
+			    // ***** OpTypeQueue *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeQueue
+			    result.Append "TypeQueue"
+			    
 			    // ***** OpTypeReserveId *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeReserveId
@@ -701,6 +706,9 @@ Protected Class SPIRVOpcode
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypePointer
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeQueue
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeReserveId
