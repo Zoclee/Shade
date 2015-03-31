@@ -511,6 +511,28 @@ Protected Class SPIRVOpcode
 			    result.Append "TypeRuntimeArray "
 			    result.Append compose_type(Offset + 8)
 			    
+			    // ***** OpTypeSampler *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeSampler
+			    result.Append "TypeSampler "
+			    result.Append compose_type(Offset + 8)
+			    result.Append " "
+			    result.Append SPIRVDescribeDimensionality(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append SPIRVDescribeContent(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append " "
+			    result.Append SPIRVDescribeArrayed(VM.ModuleBinary.UInt32Value(Offset + 20))
+			    result.Append " "
+			    result.Append SPIRVDescribeCompare(VM.ModuleBinary.UInt32Value(Offset + 24))
+			    result.Append " "
+			    result.Append SPIRVDescribeMultisampled(VM.ModuleBinary.UInt32Value(Offset + 28))
+			    result.Append " "
+			    if WordCount >= 9 then
+			      result.Append SPIRVDescribeAccessQualifier(VM.ModuleBinary.UInt32Value(Offset + 32))
+			    else
+			      result.Append SPIRVDescribeAccessQualifier(0)
+			    end if
+			    
 			    // ***** OpTypeStruct *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeStruct
@@ -651,6 +673,9 @@ Protected Class SPIRVOpcode
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeRuntimeArray
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  case SPIRVOpcodeTypeEnum.OpTypeSampler
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpTypeStruct
@@ -816,22 +841,25 @@ Protected Class SPIRVOpcode
 				"27 - OpMemoryModel"
 				"28 - OpName"
 				"29 - OpNop"
-				"30 - OpTypeArray"
-				"31 - OpTypeBool"
-				"32 - OpTypeFloat"
-				"33 - OpTypeFunction"
-				"34 - OpTypeInt"
-				"35 - OpTypePointer"
-				"36 - OpTypeStruct"
-				"37 - OpTypeVector"
-				"38 - OpTypeVoid"
-				"39 - OpReturn"
-				"40 - OpSelectionMerge"
-				"41 - OpSLessThan"
-				"42 - OpSource"
-				"43 - OpSourceExtension"
-				"44 - OpStore"
-				"45 - OpVariable"
+				"30 - OpReturn"
+				"31 - OpSelectionMerge"
+				"32 - OpSLessThan"
+				"33 - OpSource"
+				"34 - OpSourceExtension"
+				"35 - OpStore"
+				"36 - OpTypeArray"
+				"37 - OpTypeBool"
+				"38 - OpTypeFilter"
+				"39 - OpTypeFloat"
+				"40 - OpTypeFunction"
+				"41 - OpTypeInt"
+				"42 - OpTypeMatrix"
+				"43 - OpTypePointer"
+				"44 - OpTypeRuntimeArray"
+				"45 - OpTypeStruct"
+				"46 - OpTypeVector"
+				"47 - OpTypeVoid"
+				"48 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

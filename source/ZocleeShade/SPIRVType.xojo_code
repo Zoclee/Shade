@@ -13,6 +13,10 @@ Protected Class SPIRVType
 
 
 	#tag Property, Flags = &h0
+		Arrayed As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		ColumnCount As UInt32
 	#tag EndProperty
 
@@ -21,11 +25,23 @@ Protected Class SPIRVType
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		Compare As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		ComponentCount As UInt32
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		ComponentTypeID As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Content As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Dimensionality As UInt32
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -145,6 +161,11 @@ Protected Class SPIRVType
 			    result.Append "["
 			    result.Append "]"
 			    
+			    ' ***** Sampler ***********************************************************************************
+			    
+			  case SPIRVTypeEnum.Sampler
+			    result.Append "Sampler"
+			    
 			    ' ***** Struct ***********************************************************************************
 			    
 			  case SPIRVTypeEnum.Struct
@@ -194,7 +215,15 @@ Protected Class SPIRVType
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		Multisampled As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		ParmTypeID() As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Qualifier As UInt32
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -203,6 +232,10 @@ Protected Class SPIRVType
 
 	#tag Property, Flags = &h0
 		ReturnTypeID As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		SampledTypeID As UInt32
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -285,20 +318,21 @@ Protected Class SPIRVType
 				"1 - Boolean"
 				"2 - DeviceEvent"
 				"3 - Event_"
-				"4 - Float"
-				"5 - Function_"
-				"6 - Integer"
-				"7 - Matrix"
-				"8 - Opaque"
-				"9 - Pipe"
-				"10 - Pointer"
-				"11 - Queue"
-				"12 - ReservedId"
-				"13 - RuntimeArray"
-				"14 - Sampler"
-				"15 - Struct"
-				"16 - Vector"
-				"17 - Void"
+				"4 - Filter"
+				"5 - Float"
+				"6 - Function_"
+				"7 - Integer"
+				"8 - Matrix"
+				"9 - Opaque"
+				"10 - Pipe"
+				"11 - Pointer"
+				"12 - Queue"
+				"13 - ReservedId"
+				"14 - RuntimeArray"
+				"15 - Sampler"
+				"16 - Struct"
+				"17 - Vector"
+				"18 - Void"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

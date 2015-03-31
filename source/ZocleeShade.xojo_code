@@ -1,6 +1,29 @@
 #tag Module
 Protected Module ZocleeShade
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeAccessQualifier(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "ReadOnly"
+		  case 1
+		    result = "WriteOnly"
+		  case 2
+		    result = "ReadWrite"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeAddressingModel(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -14,6 +37,27 @@ Protected Module ZocleeShade
 		    result = "Physical32"
 		  case 2
 		    result = "Physical64"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SPIRVDescribeArrayed(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "NonArrayed"
+		  case 1
+		    result = "Arrayed"
 		  case else
 		    result = "Unknown"
 		  end select
@@ -125,6 +169,50 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeCompare(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "NoDepthComparisons"
+		  case 1
+		    result = "DepthComparisons"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SPIRVDescribeContent(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "Texture"
+		  case 1
+		    result = "Image"
+		  case 2
+		    result = "TextureAndFilter"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeDecoration(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -222,6 +310,35 @@ Protected Module ZocleeShade
 		    result = "Linkage Type"
 		  case 44
 		    result = "SpecId"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SPIRVDescribeDimensionality(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "1D"
+		  case 1
+		    result = "2D"
+		  case 2
+		    result = "3D"
+		  case 3
+		    result = "Cube"
+		  case 4
+		    result = "Rect"
+		  case 5
+		    result = "Buffer"
 		  case else
 		    result = "Unknown"
 		  end select
@@ -538,6 +655,27 @@ Protected Module ZocleeShade
 		    result = "OpenCL2.0"
 		  case 4
 		    result = "OpenCL2.1"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SPIRVDescribeMultisampled(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "SingleSampled"
+		  case 1
+		    result = "MultiSampled"
 		  case else
 		    result = "Unknown"
 		  end select
@@ -1660,6 +1798,7 @@ Protected Module ZocleeShade
 		  OpTypeMatrix
 		  OpTypePointer
 		  OpTypeRuntimeArray
+		  OpTypeSampler
 		  OpTypeStruct
 		  OpTypeVector
 		  OpTypeVoid

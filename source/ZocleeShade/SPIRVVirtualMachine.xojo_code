@@ -145,6 +145,23 @@ Protected Class SPIRVVirtualMachine
 		          typ.ColumnCount = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
+		        case 14 // ***** OpTypeSampler ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeSampler)
+		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          typ.Type = SPIRVTypeEnum.Sampler
+		          typ.SampledTypeID = ModuleBinary.UInt32Value(ip + 8)
+		          typ.Dimensionality = ModuleBinary.UInt32Value(ip + 12)
+		          typ.Content = ModuleBinary.UInt32Value(ip + 16)
+		          typ.Arrayed = ModuleBinary.UInt32Value(ip + 20)
+		          typ.Compare = ModuleBinary.UInt32Value(ip + 24)
+		          typ.Multisampled = ModuleBinary.UInt32Value(ip + 28)
+		          if ModuleBinary.UInt16Value(ip + 2) >= 9 then
+		            typ.Qualifier = ModuleBinary.UInt32Value(ip + 32)
+		          else
+		            typ.Qualifier = 0
+		          end if
+		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
+		          
 		        case 15 // ***** OpTypeFilter ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeFilter)
 		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
@@ -841,6 +858,36 @@ Protected Class SPIRVVirtualMachine
 		      if ModuleBinary.UInt32Value(op.Offset + 8) = ModuleBinary.UInt32Value(op.Offset + 4) then
 		        logError op, "Circular Element Type  ID reference."
 		      end if
+		      
+		      ' ***** OpTypeSampler ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTypeSampler
+		      validate_WordCountMinimum(op, 8)
+		      if op.WordCount > 9 then
+		        logError op, "Invalid word count."
+		      end if
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Sampled Type ID out of bounds.", "Sampled Type ID not declared.")
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 5 then
+		        logError op, "Invalid Dimensionality enumeration value."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 16) > 2 then
+		        logError op, "Invalid Content value."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 20) > 1 then
+		        logError op, "Invalid Arrayed value."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 24) > 1 then
+		        logError op, "Invalid Compare value."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 28) > 1 then
+		        logError op, "Invalid Multisampled value."
+		      end if
+		      if op.WordCount >= 9 then
+		        if ModuleBinary.UInt32Value(op.Offset + 32) > 2 then
+		          logError op, "Invalid Access Qualifier enumeration value."
+		        end if
+		      end if 
 		      
 		      ' ***** OpTypeStruct ***********************************************************************************
 		      
