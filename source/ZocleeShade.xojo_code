@@ -232,6 +232,85 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeExecutionMode(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "Invocations"
+		  case 1
+		    result = "SpacingEqual"
+		  case 2
+		    result = "SpacingFractionalEven"
+		  case 3
+		    result = "SpacingFractionalOdd"
+		  case 4
+		    result = "VertexOrderCw"
+		  case 5
+		    result = "VertexOrderCcw"
+		  case 6
+		    result = "PixelCenterInteger"
+		  case 7
+		    result = "OriginUpperLeft"
+		  case 8
+		    result = "EarlyFragmentTests"
+		  case 9
+		    result = "PointMode"
+		  case 10
+		    result = "Xfb"
+		  case 11
+		    result = "DepthReplacing"
+		  case 12
+		    result = "DepthAny"
+		  case 13
+		    result = "DepthGreater"
+		  case 14
+		    result = "DepthLess"
+		  case 15
+		    result = "DepthUnchanged"
+		  case 16
+		    result = "LocalSize"
+		  case 17
+		    result = "LocalSizeHint"
+		  case 18
+		    result = "InputPoints"
+		  case 19
+		    result = "InputLines"
+		  case 20
+		    result = "InputLinesAdjacency"
+		  case 21
+		    result = "InputTriangles"
+		  case 22
+		    result = "InputTrianglesAdjacency"
+		  case 23
+		    result = "InputQuads"
+		  case 24
+		    result = "InputIsolines"
+		  case 25
+		    result = "OutputVertices"
+		  case 26
+		    result = "OutputPoints"
+		  case 27
+		    result = "OutputLineStrip"
+		  case 28
+		    result = "OutputTriangleStrip"
+		  case 29
+		    result = "VecTypeHint"
+		  case 30
+		    result = "ContractionOff"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeExecutionModel(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -1545,6 +1624,7 @@ Protected Module ZocleeShade
 		  OpConstantComposite
 		  OpDecorate
 		  OpEntryPoint
+		  OpExecutionMode
 		  OpExtension
 		  OpExtInst
 		  OpExtInstImport

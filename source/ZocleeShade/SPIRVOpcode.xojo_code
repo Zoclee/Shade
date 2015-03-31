@@ -197,6 +197,39 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 8)
 			    
+			    // ***** OpExecutionMode *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpExecutionMode
+			    result.Append "ExecutionMode "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionMode(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    select case VM.ModuleBinary.UInt32Value(Offset + 8)
+			    case 0 // Invocations
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    case 16 // LocalSize
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 20))
+			    case 17 // LocalSize
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 20))
+			    case 25 // OutputVertices
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    case 29 // VecTypeHint
+			      result.Append " "
+			      result.Append compose_type(Offset + 12)
+			    end select
+			    
 			    // ***** OpExtension *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpExtension
@@ -734,37 +767,42 @@ Protected Class SPIRVOpcode
 				"6 - OpConstantComposite"
 				"7 - OpDecorate"
 				"8 - OpEntryPoint"
-				"9 - OpExtInst"
-				"10 - OpExtInstImport"
-				"11 - OpFAdd"
-				"12 - OpFMul"
-				"13 - OpFunction"
-				"14 - OpFunctionEnd"
-				"15 - OpFunctionParameter"
-				"16 - OpIAdd"
-				"17 - OpInBoundsAccessChain"
-				"18 - OpLabel"
-				"19 - OpLoad"
-				"20 - OpLoopMerge"
-				"21 - OpMemberName"
-				"22 - OpMemoryModel"
-				"23 - OpName"
-				"24 - OpNop"
-				"25 - OpTypeArray"
-				"26 - OpTypeBool"
-				"27 - OpTypeFloat"
-				"28 - OpTypeFunction"
-				"29 - OpTypeInt"
-				"30 - OpTypePointer"
-				"31 - OpTypeStruct"
-				"32 - OpTypeVector"
-				"33 - OpTypeVoid"
-				"34 - OpReturn"
-				"35 - OpSelectionMerge"
-				"36 - OpSLessThan"
-				"37 - OpSource"
-				"38 - OpStore"
-				"39 - OpVariable"
+				"9 - OpExtension"
+				"10 - OpExtInst"
+				"11 - OpExtInstImport"
+				"12 - OpFAdd"
+				"13 - OpFMul"
+				"14 - OpFSub"
+				"15 - OpFunction"
+				"16 - OpFunctionEnd"
+				"17 - OpFunctionParameter"
+				"18 - OpIAdd"
+				"19 - OpIMul"
+				"20 - OpInBoundsAccessChain"
+				"21 - OpISub"
+				"22 - OpLabel"
+				"23 - OpLoad"
+				"24 - OpLoopMerge"
+				"25 - OpMemberName"
+				"26 - OpMemoryModel"
+				"27 - OpName"
+				"28 - OpNop"
+				"29 - OpTypeArray"
+				"30 - OpTypeBool"
+				"31 - OpTypeFloat"
+				"32 - OpTypeFunction"
+				"33 - OpTypeInt"
+				"34 - OpTypePointer"
+				"35 - OpTypeStruct"
+				"36 - OpTypeVector"
+				"37 - OpTypeVoid"
+				"38 - OpReturn"
+				"39 - OpSelectionMerge"
+				"40 - OpSLessThan"
+				"41 - OpSource"
+				"42 - OpSourceExtension"
+				"43 - OpStore"
+				"44 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

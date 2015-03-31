@@ -302,7 +302,7 @@ End
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.SourceVersion)
 		    
 		    lstInfo.AddRow "Entry Points"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.EntryPoints.Ubound + 1)
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.EntryPoints.Count)
 		    
 		    lstInfo.AddRow "Addressing Model"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeAddressingModel(App.VM.AddressingModel)

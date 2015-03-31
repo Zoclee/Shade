@@ -9,7 +9,7 @@ Protected Class SPIRVVirtualMachine
 		  Bound = 0
 		  Constants = new Dictionary()
 		  Redim Decorations(-1)
-		  Redim EntryPoints(-1)
+		  EntryPoints = new Dictionary()
 		  Redim Errors(-1)
 		  Functions = new Dictionary()
 		  GeneratorMagicNumber = 0
@@ -88,12 +88,15 @@ Protected Class SPIRVVirtualMachine
 		          AddressingModel = ModuleBinary.UInt32Value(ip + 4)
 		          MemoryModel = ModuleBinary.UInt32Value(ip + 8)
 		          
+		        case 7 // ***** OpExecutionMode ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExecutionMode)
+		          
 		        case 6 // ***** OpEntryPoint ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEntryPoint)
 		          ep = new ZocleeShade.SPIRVEntryPoint
 		          ep.ExecutionModel = ModuleBinary.UInt32Value(ip + 4)
 		          ep.EntryPointID = ModuleBinary.UInt32Value(ip + 8)
-		          EntryPoints.Append ep
+		          EntryPoints.Value(ep.EntryPointID) = ep
 		          
 		        case 8 // ***** OpTypeVoid ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeVoid)
@@ -431,8 +434,6 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      
 		      select case ModuleBinary.UInt32Value(op.Offset + 8)
-		      case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26
-		        validate_WordCountEqual(op, 3)
 		      case 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 44
 		        validate_WordCountEqual(op, 4)
 		      case 39 // Built-In
@@ -458,6 +459,8 @@ Protected Class SPIRVVirtualMachine
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 1 then
 		          logError op, "Invalid Linkage Type enumeration value."
 		        end if
+		      case else
+		        validate_WordCountEqual(op, 3)
 		      end select
 		      
 		      ' ***** OpEntryPoint ***********************************************************************************
@@ -468,6 +471,30 @@ Protected Class SPIRVVirtualMachine
 		        logError op, "Execution Model enumeration value."
 		      end if
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Entry Point ID out of bounds.", "Entry Point ID not declared.")
+		      
+		      ' ***** OpExecutionMode ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpExecutionMode
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Entry Point ID out of bounds.", "Entry Point ID not declared.")
+		      if not EntryPoints.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        logError op, "Entry Point not declared."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 8) > 30 then
+		        logError op, "Invalid Execution Mode enumeration value."
+		      end if
+		      select case ModuleBinary.UInt32Value(op.Offset + 8)
+		      case 0 // Invocations
+		      case 16 // LocalSize
+		        validate_WordCountEqual(op, 6)
+		      case 17 // LocalSize
+		        validate_WordCountEqual(op, 6)
+		      case 25 // OutputVertices
+		        validate_WordCountEqual(op, 4)
+		      case 29 // VecTypeHint
+		        validate_WordCountEqual(op, 4)
+		      case else
+		        validate_WordCountEqual(op, 3)
+		      end select
 		      
 		      ' ***** OpExtension ***********************************************************************************
 		      
@@ -909,7 +936,7 @@ Protected Class SPIRVVirtualMachine
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		EntryPoints() As ZocleeShade.SPIRVEntryPoint
+		EntryPoints As Dictionary
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
