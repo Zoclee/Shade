@@ -1821,6 +1821,18 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 
+	#tag Enum, Name = SPIRVConstantType, Type = Integer, Flags = &h0
+		Unknown
+		  Composite
+		  BooleanFalse
+		  BooleanTrue
+		  Float
+		  Integer
+		  NullObject
+		  NullPointer
+		Sampler
+	#tag EndEnum
+
 	#tag Enum, Name = SPIRVOpcodeTypeEnum, Type = Integer, Flags = &h0
 		Unknown
 		  OpAccessChain

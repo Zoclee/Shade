@@ -13,14 +13,6 @@ Protected Class SPIRVConstant
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		NullObject As Boolean = False
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		NullPointer As Boolean = False
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
 		Param As UInt32
 	#tag EndProperty
 
@@ -33,7 +25,11 @@ Protected Class SPIRVConstant
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Value As String
+		StringValue As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Type As SPIRVConstantType
 	#tag EndProperty
 
 
@@ -59,6 +55,12 @@ Protected Class SPIRVConstant
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="StringValue"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
@@ -70,12 +72,6 @@ Protected Class SPIRVConstant
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Value"
-			Group="Behavior"
-			Type="String"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

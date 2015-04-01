@@ -258,30 +258,41 @@ Protected Class SPIRVVirtualMachine
 		        case 27 // ***** OpConstantTrue ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantTrue)
 		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.Type = SPIRVConstantType.BooleanTrue
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
-		          cnst.Value = "true"
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 28 // ***** OpConstantFalse ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantFalse)
 		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.Type = SPIRVConstantType.BooleanFalse
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
-		          cnst.Value = "false"
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 29 // ***** OpConstant ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstant)
+		          
 		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.Type = SPIRVConstantType.Unknown
+		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
+		            typ = Types.Value(ModuleBinary.UInt32Value(ip + 4))
+		            select case typ.Type
+		            case SPIRVTypeEnum.Float
+		              cnst.Type = SPIRVConstantType.Float
+		            case SPIRVTypeEnum.Integer
+		              cnst.Type = SPIRVConstantType.Integer
+		            end select
+		          end if
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
-		          cnst.Value = Str(ModuleBinary.UInt32Value(ip + 12))
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 30 // ***** OpConstantComposite ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantComposite)
 		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.Type = SPIRVConstantType.Composite
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          tempIP = ip + 12
@@ -305,7 +316,7 @@ Protected Class SPIRVVirtualMachine
 		        case 32 // ***** OpConstantNullPointer ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantNullPointer)
 		          cnst = new ZocleeShade.SPIRVConstant
-		          cnst.NullPointer = true
+		          cnst.Type = SPIRVConstantType.NullPointer
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
@@ -313,7 +324,7 @@ Protected Class SPIRVVirtualMachine
 		        case 33 // ***** OpConstantNullObject ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantNullObject)
 		          cnst = new ZocleeShade.SPIRVConstant
-		          cnst.NullObject = true
+		          cnst.Type = SPIRVConstantType.NullObject
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
@@ -527,6 +538,15 @@ Protected Class SPIRVVirtualMachine
 		    case SPIRVOpcodeTypeEnum.OpConstant
 		      validate_WordCountMinimum(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
+		        select case typ.Type
+		        case SPIRVTypeEnum.Float, SPIRVTypeEnum.Integer
+		          // do nothing
+		        case else
+		          logError op, "Invalid constant type. Expected integer or float."
+		        end select
+		      end if
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      
 		      ' ***** OpConstantComposite ***********************************************************************************
