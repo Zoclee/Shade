@@ -5,6 +5,18 @@ Protected Class SPIRVConstant
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		Filter As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Mode As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Param As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		ResultID As UInt32
 	#tag EndProperty
 

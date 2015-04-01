@@ -292,6 +292,16 @@ Protected Class SPIRVVirtualMachine
 		          wend
 		          Constants.Value(cnst.ResultID) = cnst
 		          
+		        case 31 // ***** OpConstantSampler ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantSampler)
+		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
+		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          cnst.Mode = ModuleBinary.UInt32Value(ip + 12)
+		          cnst.Param = ModuleBinary.UInt32Value(ip + 16)
+		          cnst.Filter = ModuleBinary.UInt32Value(ip + 20)
+		          Constants.Value(cnst.ResultID) = cnst
+		          
 		        case 38 // ***** OpVariable ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVariable)
 		          
@@ -529,6 +539,22 @@ Protected Class SPIRVVirtualMachine
 		        if typ.Type <> SPIRVTypeEnum.Boolean then
 		          logError op, "Expected scalar Boolean type."
 		        end if
+		      end if
+		      
+		      ' ***** OpConstantSampler ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpConstantSampler
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if (ModuleBinary.UInt32Value(op.Offset + 12) > 8) or (ModuleBinary.UInt32Value(op.Offset + 12) mod 2 <> 0) then
+		        logError op, "Invalid Sampler Addressing Mode enumeration value."
+		      end if
+		      if (ModuleBinary.UInt32Value(op.Offset + 16) > 1) then
+		        logError op, "Invalid Param enumeration value."
+		      end if
+		      if (ModuleBinary.UInt32Value(op.Offset + 20) <> 16) and (ModuleBinary.UInt32Value(op.Offset + 20) <> 32) then
+		        logError op, "Invalid Sampler Filter Mode enumeration value."
 		      end if
 		      
 		      ' ***** OpConstantTrue ***********************************************************************************

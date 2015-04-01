@@ -686,6 +686,75 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeParam(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "Nonparametric"
+		  case 1
+		    result = "Parametric"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SPIRVDescribeSamplerAddressingMode(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "None"
+		  case 2
+		    result = "ClampEdge"
+		  case 4
+		    result = "Clamp"
+		  case 6
+		    result = "Repeat"
+		  case 8
+		    result = "RepeatMirrored"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SPIRVDescribeSamplerFilterMode(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 16
+		    result = "Nearest"
+		  case 32
+		    result = "Linear"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeSelectionControl(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -1760,6 +1829,7 @@ Protected Module ZocleeShade
 		  OpCompositeExtract
 		  OpConstant
 		  OpConstantFalse
+		  OpConstantSampler
 		  OpConstantTrue
 		  OpConstantComposite
 		  OpDecorate

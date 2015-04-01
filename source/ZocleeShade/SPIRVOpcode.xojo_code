@@ -146,6 +146,16 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpConstantFalse
 			    result.Append "ConstantFalse"
 			    
+			    // ***** OpConstantSampler *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpConstantSampler
+			    result.Append "ConstantSampler "
+			    result.Append SPIRVDescribeSamplerAddressingMode(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append SPIRVDescribeParam(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append " "
+			    result.Append SPIRVDescribeSamplerFilterMode(VM.ModuleBinary.UInt32Value(Offset + 20))
+			    
 			    // ***** OpConstantTrue *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpConstantTrue
@@ -642,7 +652,10 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpAccessChain
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
-			  case SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, SPIRVOpcodeTypeEnum.OpConstantFalse, SPIRVOpcodeTypeEnum.OpConstantTrue
+			  case SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
+			    SPIRVOpcodeTypeEnum.OpConstantFalse, SPIRVOpcodeTypeEnum.OpConstantSampler, _
+			    SPIRVOpcodeTypeEnum.OpConstantTrue
+			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
@@ -773,8 +786,9 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpConstant, _
 			    SPIRVOpcodeTypeEnum.OpConstantComposite, SPIRVOpcodeTypeEnum.OpConstantFalse, _
-			    SPIRVOpcodeTypeEnum.OpConstantTrue, SPIRVOpcodeTypeEnum.OpExtInst, _
-			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpFAdd, _
+			    SPIRVOpcodeTypeEnum.OpConstantSampler, SPIRVOpcodeTypeEnum.OpConstantTrue, _
+			    SPIRVOpcodeTypeEnum.OpExtInst, SPIRVOpcodeTypeEnum.OpCompositeExtract, _
+			    SPIRVOpcodeTypeEnum.OpFAdd, _
 			    SPIRVOpcodeTypeEnum.OpFMul, SPIRVOpcodeTypeEnum.OpFSub, _
 			    SPIRVOpcodeTypeEnum.OpFunction, _
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
@@ -878,52 +892,58 @@ Protected Class SPIRVOpcode
 				"3 - OpBranchConditional"
 				"4 - OpCompositeExtract"
 				"5 - OpConstant"
-				"6 - OpConstantComposite"
-				"7 - OpDecorate"
-				"8 - OpEntryPoint"
-				"9 - OpExecutionMode"
-				"10 - OpExtension"
-				"11 - OpExtInst"
-				"12 - OpExtInstImport"
-				"13 - OpFAdd"
-				"14 - OpFMul"
-				"15 - OpFSub"
-				"16 - OpFunction"
-				"17 - OpFunctionEnd"
-				"18 - OpFunctionParameter"
-				"19 - OpIAdd"
-				"20 - OpIMul"
-				"21 - OpInBoundsAccessChain"
-				"22 - OpISub"
-				"23 - OpLabel"
-				"24 - OpLoad"
-				"25 - OpLoopMerge"
-				"26 - OpMemberName"
-				"27 - OpMemoryModel"
-				"28 - OpName"
-				"29 - OpNop"
-				"30 - OpReturn"
-				"31 - OpSelectionMerge"
-				"32 - OpSLessThan"
-				"33 - OpSource"
-				"34 - OpSourceExtension"
-				"35 - OpStore"
-				"36 - OpTypeArray"
-				"37 - OpTypeBool"
-				"38 - OpTypeEvent"
-				"39 - OpTypeFilter"
-				"40 - OpTypeFloat"
-				"41 - OpTypeFunction"
-				"42 - OpTypeInt"
-				"43 - OpTypeMatrix"
-				"44 - OpTypeOpaque"
-				"45 - OpTypePointer"
-				"46 - OpTypeRuntimeArray"
-				"47 - OpTypeSampler"
-				"48 - OpTypeStruct"
-				"49 - OpTypeVector"
-				"50 - OpTypeVoid"
-				"51 - OpVariable"
+				"6 - OpConstantFalse"
+				"7 - OpConstantTrue"
+				"8 - OpConstantComposite"
+				"9 - OpDecorate"
+				"10 - OpEntryPoint"
+				"11 - OpExecutionMode"
+				"12 - OpExtension"
+				"13 - OpExtInst"
+				"14 - OpExtInstImport"
+				"15 - OpFAdd"
+				"16 - OpFMul"
+				"17 - OpFSub"
+				"18 - OpFunction"
+				"19 - OpFunctionEnd"
+				"20 - OpFunctionParameter"
+				"21 - OpIAdd"
+				"22 - OpIMul"
+				"23 - OpInBoundsAccessChain"
+				"24 - OpISub"
+				"25 - OpLabel"
+				"26 - OpLoad"
+				"27 - OpLoopMerge"
+				"28 - OpMemberName"
+				"29 - OpMemoryModel"
+				"30 - OpName"
+				"31 - OpNop"
+				"32 - OpReturn"
+				"33 - OpSelectionMerge"
+				"34 - OpSLessThan"
+				"35 - OpSource"
+				"36 - OpSourceExtension"
+				"37 - OpStore"
+				"38 - OpTypeArray"
+				"39 - OpTypeBool"
+				"40 - OpTypeDeviceEvent"
+				"41 - OpTypeEvent"
+				"42 - OpTypeFilter"
+				"43 - OpTypeFloat"
+				"44 - OpTypeFunction"
+				"45 - OpTypeInt"
+				"46 - OpTypeMatrix"
+				"47 - OpTypeOpaque"
+				"48 - OpTypePipe"
+				"49 - OpTypePointer"
+				"50 - OpTypeQueue"
+				"51 - OpTypeReserveId"
+				"52 - OpTypeRuntimeArray"
+				"53 - OpTypeSampler"
+				"54 - OpTypeStruct"
+				"55 - OpTypeVector"
+				"56 - OpTypeVoid"
+				"57 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
