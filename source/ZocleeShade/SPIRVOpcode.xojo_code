@@ -146,6 +146,11 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpConstantFalse
 			    result.Append "ConstantFalse"
 			    
+			    // ***** OpConstantNullPointer *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpConstantNullPointer
+			    result.Append "ConstantNullPointer"
+			    
 			    // ***** OpConstantSampler *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpConstantSampler
@@ -653,8 +658,8 @@ Protected Class SPIRVOpcode
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  case SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
-			    SPIRVOpcodeTypeEnum.OpConstantFalse, SPIRVOpcodeTypeEnum.OpConstantSampler, _
-			    SPIRVOpcodeTypeEnum.OpConstantTrue
+			    SPIRVOpcodeTypeEnum.OpConstantFalse, SPIRVOpcodeTypeEnum.OpConstantNullPointer, _
+			    SPIRVOpcodeTypeEnum.OpConstantSampler, SPIRVOpcodeTypeEnum.OpConstantTrue
 			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -786,6 +791,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpConstant, _
 			    SPIRVOpcodeTypeEnum.OpConstantComposite, SPIRVOpcodeTypeEnum.OpConstantFalse, _
+			    SPIRVOpcodeTypeEnum.OpConstantNullPointer, _
 			    SPIRVOpcodeTypeEnum.OpConstantSampler, SPIRVOpcodeTypeEnum.OpConstantTrue, _
 			    SPIRVOpcodeTypeEnum.OpExtInst, SPIRVOpcodeTypeEnum.OpCompositeExtract, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, _
@@ -893,57 +899,58 @@ Protected Class SPIRVOpcode
 				"4 - OpCompositeExtract"
 				"5 - OpConstant"
 				"6 - OpConstantFalse"
-				"7 - OpConstantTrue"
-				"8 - OpConstantComposite"
-				"9 - OpDecorate"
-				"10 - OpEntryPoint"
-				"11 - OpExecutionMode"
-				"12 - OpExtension"
-				"13 - OpExtInst"
-				"14 - OpExtInstImport"
-				"15 - OpFAdd"
-				"16 - OpFMul"
-				"17 - OpFSub"
-				"18 - OpFunction"
-				"19 - OpFunctionEnd"
-				"20 - OpFunctionParameter"
-				"21 - OpIAdd"
-				"22 - OpIMul"
-				"23 - OpInBoundsAccessChain"
-				"24 - OpISub"
-				"25 - OpLabel"
-				"26 - OpLoad"
-				"27 - OpLoopMerge"
-				"28 - OpMemberName"
-				"29 - OpMemoryModel"
-				"30 - OpName"
-				"31 - OpNop"
-				"32 - OpReturn"
-				"33 - OpSelectionMerge"
-				"34 - OpSLessThan"
-				"35 - OpSource"
-				"36 - OpSourceExtension"
-				"37 - OpStore"
-				"38 - OpTypeArray"
-				"39 - OpTypeBool"
-				"40 - OpTypeDeviceEvent"
-				"41 - OpTypeEvent"
-				"42 - OpTypeFilter"
-				"43 - OpTypeFloat"
-				"44 - OpTypeFunction"
-				"45 - OpTypeInt"
-				"46 - OpTypeMatrix"
-				"47 - OpTypeOpaque"
-				"48 - OpTypePipe"
-				"49 - OpTypePointer"
-				"50 - OpTypeQueue"
-				"51 - OpTypeReserveId"
-				"52 - OpTypeRuntimeArray"
-				"53 - OpTypeSampler"
-				"54 - OpTypeStruct"
-				"55 - OpTypeVector"
-				"56 - OpTypeVoid"
-				"57 - OpVariable"
+				"7 - OpConstantSampler"
+				"8 - OpConstantTrue"
+				"9 - OpConstantComposite"
+				"10 - OpDecorate"
+				"11 - OpEntryPoint"
+				"12 - OpExecutionMode"
+				"13 - OpExtension"
+				"14 - OpExtInst"
+				"15 - OpExtInstImport"
+				"16 - OpFAdd"
+				"17 - OpFMul"
+				"18 - OpFSub"
+				"19 - OpFunction"
+				"20 - OpFunctionEnd"
+				"21 - OpFunctionParameter"
+				"22 - OpIAdd"
+				"23 - OpIMul"
+				"24 - OpInBoundsAccessChain"
+				"25 - OpISub"
+				"26 - OpLabel"
+				"27 - OpLoad"
+				"28 - OpLoopMerge"
+				"29 - OpMemberName"
+				"30 - OpMemoryModel"
+				"31 - OpName"
+				"32 - OpNop"
+				"33 - OpReturn"
+				"34 - OpSelectionMerge"
+				"35 - OpSLessThan"
+				"36 - OpSource"
+				"37 - OpSourceExtension"
+				"38 - OpStore"
+				"39 - OpTypeArray"
+				"40 - OpTypeBool"
+				"41 - OpTypeDeviceEvent"
+				"42 - OpTypeEvent"
+				"43 - OpTypeFilter"
+				"44 - OpTypeFloat"
+				"45 - OpTypeFunction"
+				"46 - OpTypeInt"
+				"47 - OpTypeMatrix"
+				"48 - OpTypeOpaque"
+				"49 - OpTypePipe"
+				"50 - OpTypePointer"
+				"51 - OpTypeQueue"
+				"52 - OpTypeReserveId"
+				"53 - OpTypeRuntimeArray"
+				"54 - OpTypeSampler"
+				"55 - OpTypeStruct"
+				"56 - OpTypeVector"
+				"57 - OpTypeVoid"
+				"58 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

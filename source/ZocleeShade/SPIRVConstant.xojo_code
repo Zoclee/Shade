@@ -13,6 +13,10 @@ Protected Class SPIRVConstant
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		NullPointer As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Param As UInt32
 	#tag EndProperty
 
