@@ -303,9 +303,17 @@ Protected Class SPIRVVirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 32 // ***** OpConstantNullPointer ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantSampler)
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantNullPointer)
 		          cnst = new ZocleeShade.SPIRVConstant
 		          cnst.NullPointer = true
+		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
+		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          Constants.Value(cnst.ResultID) = cnst
+		          
+		        case 33 // ***** OpConstantNullObject ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantNullObject)
+		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.NullObject = true
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
@@ -548,6 +556,13 @@ Protected Class SPIRVVirtualMachine
 		          logError op, "Expected scalar Boolean type."
 		        end if
 		      end if
+		      
+		      ' ***** OpConstantNullObject ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpConstantNullObject
+		      validate_WordCountEqual(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      
 		      ' ***** OpConstantNullPointer ***********************************************************************************
 		      

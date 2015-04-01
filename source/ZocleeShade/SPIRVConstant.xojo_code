@@ -13,6 +13,10 @@ Protected Class SPIRVConstant
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		NullObject As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		NullPointer As Boolean = False
 	#tag EndProperty
 

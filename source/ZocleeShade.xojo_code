@@ -1829,6 +1829,7 @@ Protected Module ZocleeShade
 		  OpCompositeExtract
 		  OpConstant
 		  OpConstantFalse
+		  OpConstantNullObject
 		  OpConstantNullPointer
 		  OpConstantSampler
 		  OpConstantTrue
