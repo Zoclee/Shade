@@ -8,6 +8,13 @@
 
 The primary goal of [{Zoclee}™ Shade](http://www.zoclee.com/shade), is to provide a convenient platform for testing and debugging [SPIR-V](http://www.khronos.org/registry/spir-v/) binaries. Please note however that [{Zoclee}™ Shade](http://www.zoclee.com/shade) is currently work in progress.
 
+## Features
+
+* Open SPIR-V binary files.
+* View SPIR-V instructions in a human-readable format.
+* Validate correctness of opcodes (e.g. missing types, out of bound indexes etc.).
+* Track error opcodes easily by clicking on error messages. 
+
 ## Install
 
 Work in progress
