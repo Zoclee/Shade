@@ -456,6 +456,11 @@ Protected Class SPIRVOpcode
 			    result.Append VM.ModuleBinary.CString(Offset + 4)
 			    result.Append """"
 			    
+			    // ***** OpSpecConstantTrue *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSpecConstantTrue
+			    result.Append "SpecConstantTrue"
+			    
 			    // ***** OpStore *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpStore
@@ -714,6 +719,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpSLessThan
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpSpecConstantTrue
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpTypeArray
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
@@ -807,7 +815,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
-			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpVariable
+			    SPIRVOpcodeTypeEnum.OpSLessThan, _
+			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
+			    SPIRVOpcodeTypeEnum.OpVariable
 			    
 			    result = compose_type(Offset + 4)
 			    
@@ -905,58 +915,60 @@ Protected Class SPIRVOpcode
 				"4 - OpCompositeExtract"
 				"5 - OpConstant"
 				"6 - OpConstantFalse"
-				"7 - OpConstantSampler"
-				"8 - OpConstantTrue"
-				"9 - OpConstantComposite"
-				"10 - OpDecorate"
-				"11 - OpEntryPoint"
-				"12 - OpExecutionMode"
-				"13 - OpExtension"
-				"14 - OpExtInst"
-				"15 - OpExtInstImport"
-				"16 - OpFAdd"
-				"17 - OpFMul"
-				"18 - OpFSub"
-				"19 - OpFunction"
-				"20 - OpFunctionEnd"
-				"21 - OpFunctionParameter"
-				"22 - OpIAdd"
-				"23 - OpIMul"
-				"24 - OpInBoundsAccessChain"
-				"25 - OpISub"
-				"26 - OpLabel"
-				"27 - OpLoad"
-				"28 - OpLoopMerge"
-				"29 - OpMemberName"
-				"30 - OpMemoryModel"
-				"31 - OpName"
-				"32 - OpNop"
-				"33 - OpReturn"
-				"34 - OpSelectionMerge"
-				"35 - OpSLessThan"
-				"36 - OpSource"
-				"37 - OpSourceExtension"
-				"38 - OpStore"
-				"39 - OpTypeArray"
-				"40 - OpTypeBool"
-				"41 - OpTypeDeviceEvent"
-				"42 - OpTypeEvent"
-				"43 - OpTypeFilter"
-				"44 - OpTypeFloat"
-				"45 - OpTypeFunction"
-				"46 - OpTypeInt"
-				"47 - OpTypeMatrix"
-				"48 - OpTypeOpaque"
-				"49 - OpTypePipe"
-				"50 - OpTypePointer"
-				"51 - OpTypeQueue"
-				"52 - OpTypeReserveId"
-				"53 - OpTypeRuntimeArray"
-				"54 - OpTypeSampler"
-				"55 - OpTypeStruct"
-				"56 - OpTypeVector"
-				"57 - OpTypeVoid"
-				"58 - OpVariable"
+				"7 - OpConstantNullObject"
+				"8 - OpConstantNullPointer"
+				"9 - OpConstantSampler"
+				"10 - OpConstantTrue"
+				"11 - OpConstantComposite"
+				"12 - OpDecorate"
+				"13 - OpEntryPoint"
+				"14 - OpExecutionMode"
+				"15 - OpExtension"
+				"16 - OpExtInst"
+				"17 - OpExtInstImport"
+				"18 - OpFAdd"
+				"19 - OpFMul"
+				"20 - OpFSub"
+				"21 - OpFunction"
+				"22 - OpFunctionEnd"
+				"23 - OpFunctionParameter"
+				"24 - OpIAdd"
+				"25 - OpIMul"
+				"26 - OpInBoundsAccessChain"
+				"27 - OpISub"
+				"28 - OpLabel"
+				"29 - OpLoad"
+				"30 - OpLoopMerge"
+				"31 - OpMemberName"
+				"32 - OpMemoryModel"
+				"33 - OpName"
+				"34 - OpNop"
+				"35 - OpReturn"
+				"36 - OpSelectionMerge"
+				"37 - OpSLessThan"
+				"38 - OpSource"
+				"39 - OpSourceExtension"
+				"40 - OpStore"
+				"41 - OpTypeArray"
+				"42 - OpTypeBool"
+				"43 - OpTypeDeviceEvent"
+				"44 - OpTypeEvent"
+				"45 - OpTypeFilter"
+				"46 - OpTypeFloat"
+				"47 - OpTypeFunction"
+				"48 - OpTypeInt"
+				"49 - OpTypeMatrix"
+				"50 - OpTypeOpaque"
+				"51 - OpTypePipe"
+				"52 - OpTypePointer"
+				"53 - OpTypeQueue"
+				"54 - OpTypeReserveId"
+				"55 - OpTypeRuntimeArray"
+				"56 - OpTypeSampler"
+				"57 - OpTypeStruct"
+				"58 - OpTypeVector"
+				"59 - OpTypeVoid"
+				"60 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
