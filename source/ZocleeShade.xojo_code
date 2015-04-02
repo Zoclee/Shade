@@ -1824,6 +1824,7 @@ Protected Module ZocleeShade
 	#tag Enum, Name = SPIRVConstantType, Type = Integer, Flags = &h0
 		Unknown
 		  Composite
+		  Constant
 		  BooleanFalse
 		  BooleanTrue
 		  Float
@@ -1832,7 +1833,8 @@ Protected Module ZocleeShade
 		  NullPointer
 		  Sampler
 		  SpecBooleanTrue
-		SpecBooleanFalse
+		  SpecBooleanFalse
+		SpecConstant
 	#tag EndEnum
 
 	#tag Enum, Name = SPIRVOpcodeTypeEnum, Type = Integer, Flags = &h0
@@ -1876,6 +1878,7 @@ Protected Module ZocleeShade
 		  OpSLessThan
 		  OpSource
 		  OpSourceExtension
+		  OpSpecConstant
 		  OpSpecConstantFalse
 		  OpSpecConstantTrue
 		  OpStore

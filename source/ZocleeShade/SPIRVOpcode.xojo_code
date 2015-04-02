@@ -461,6 +461,12 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpSpecConstantFalse
 			    result.Append "SpecConstantFalse"
 			    
+			    // ***** OpSpecConstant *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSpecConstant
+			    result.Append "SpecConstant "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    
 			    // ***** OpSpecConstantTrue *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSpecConstantTrue
@@ -724,7 +730,8 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpSLessThan
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
-			  case SPIRVOpcodeTypeEnum.OpSpecConstantFalse
+			  case SPIRVOpcodeTypeEnum.OpSpecConstantFalse, SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
+			    SPIRVOpcodeTypeEnum.OpSpecConstant
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  case SPIRVOpcodeTypeEnum.OpSpecConstantTrue
@@ -823,7 +830,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
-			    SPIRVOpcodeTypeEnum.OpSLessThan, _
+			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantFalse, SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
 			    SPIRVOpcodeTypeEnum.OpVariable
 			    
@@ -956,27 +963,29 @@ Protected Class SPIRVOpcode
 				"37 - OpSLessThan"
 				"38 - OpSource"
 				"39 - OpSourceExtension"
-				"40 - OpStore"
-				"41 - OpTypeArray"
-				"42 - OpTypeBool"
-				"43 - OpTypeDeviceEvent"
-				"44 - OpTypeEvent"
-				"45 - OpTypeFilter"
-				"46 - OpTypeFloat"
-				"47 - OpTypeFunction"
-				"48 - OpTypeInt"
-				"49 - OpTypeMatrix"
-				"50 - OpTypeOpaque"
-				"51 - OpTypePipe"
-				"52 - OpTypePointer"
-				"53 - OpTypeQueue"
-				"54 - OpTypeReserveId"
-				"55 - OpTypeRuntimeArray"
-				"56 - OpTypeSampler"
-				"57 - OpTypeStruct"
-				"58 - OpTypeVector"
-				"59 - OpTypeVoid"
-				"60 - OpVariable"
+				"40 - OpSpecConstantFalse"
+				"41 - OpSpecConstantTrue"
+				"42 - OpStore"
+				"43 - OpTypeArray"
+				"44 - OpTypeBool"
+				"45 - OpTypeDeviceEvent"
+				"46 - OpTypeEvent"
+				"47 - OpTypeFilter"
+				"48 - OpTypeFloat"
+				"49 - OpTypeFunction"
+				"50 - OpTypeInt"
+				"51 - OpTypeMatrix"
+				"52 - OpTypeOpaque"
+				"53 - OpTypePipe"
+				"54 - OpTypePointer"
+				"55 - OpTypeQueue"
+				"56 - OpTypeReserveId"
+				"57 - OpTypeRuntimeArray"
+				"58 - OpTypeSampler"
+				"59 - OpTypeStruct"
+				"60 - OpTypeVector"
+				"61 - OpTypeVoid"
+				"62 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

@@ -275,7 +275,7 @@ Protected Class SPIRVVirtualMachine
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstant)
 		          
 		          cnst = new ZocleeShade.SPIRVConstant
-		          cnst.Type = SPIRVConstantType.Unknown
+		          cnst.Type = SPIRVConstantType.Constant
 		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
 		            typ = Types.Value(ModuleBinary.UInt32Value(ip + 4))
 		            select case typ.Type
@@ -341,6 +341,24 @@ Protected Class SPIRVVirtualMachine
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstantFalse)
 		          cnst = new ZocleeShade.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.SpecBooleanFalse
+		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
+		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          Constants.Value(cnst.ResultID) = cnst
+		          
+		        case 36 // ***** OpSpecConstant ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstant)
+		          
+		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.Type = SPIRVConstantType.SpecConstant
+		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
+		            typ = Types.Value(ModuleBinary.UInt32Value(ip + 4))
+		            select case typ.Type
+		            case SPIRVTypeEnum.Float
+		              cnst.Type = SPIRVConstantType.Float
+		            case SPIRVTypeEnum.Integer
+		              cnst.Type = SPIRVConstantType.Integer
+		            end select
+		          end if
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
@@ -925,6 +943,22 @@ Protected Class SPIRVVirtualMachine
 		      if Trim(ModuleBinary.CString(op.Offset + 4)) = "" then
 		        logError op, "Invalid extension."
 		      end if
+		      
+		      ' ***** OpSpecConstant ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSpecConstant
+		      validate_WordCountMinimum(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
+		        select case typ.Type
+		        case SPIRVTypeEnum.Float, SPIRVTypeEnum.Integer
+		          // do nothing
+		        case else
+		          logError op, "Invalid constant type. Expected integer or float."
+		        end select
+		      end if
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      
 		      ' ***** OpSpecConstantFalse ***********************************************************************************
 		      
