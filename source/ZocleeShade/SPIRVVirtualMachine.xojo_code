@@ -1234,7 +1234,7 @@ Protected Class SPIRVVirtualMachine
 		    case SPIRVOpcodeTypeEnum.OpVariable
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
-		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      if ModuleBinary.UInt32Value(op.Offset + 12) > 10 then
 		        logError op, "Invalid Storage Class enumeration value."
 		      end if
