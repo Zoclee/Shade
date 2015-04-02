@@ -392,6 +392,9 @@ Protected Class SPIRVVirtualMachine
 		        case 42 // ***** OpFunctionEnd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionEnd)
 		          
+		        case 43 // ***** OpFunctionCall ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionCall)
+		          
 		        case 44 // ***** OpExtInst ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtInst)
 		          
@@ -774,23 +777,6 @@ Protected Class SPIRVVirtualMachine
 		        logError op, "Invalid name."
 		      end if
 		      
-		      ' ***** OpFunction ***********************************************************************************
-		      
-		    case SPIRVOpcodeTypeEnum.OpFunction
-		      validate_WordCountEqual(op, 5)
-		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
-		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
-		      if ModuleBinary.UInt32Value(op.Offset + 12) > 15 then
-		        logError op, "Invalid Function Control Mask value."
-		      end if
-		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 16), "Function Type ID out of bounds.", "Function TypeID not declared.")
-		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 16)) then
-		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 16))
-		        if typ.ReturnTypeID <> ModuleBinary.UInt32Value(op.Offset + 4) then
-		          logError op, "Result Type ID does not match Return Type ID in function declaration."
-		        end if
-		      end if
-		      
 		      ' ***** OpFAdd ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpFAdd
@@ -817,6 +803,39 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
+		      
+		      ' ***** OpFunction ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpFunction
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 15 then
+		        logError op, "Invalid Function Control Mask value."
+		      end if
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 16), "Function Type ID out of bounds.", "Function TypeID not declared.")
+		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 16)) then
+		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 16))
+		        if typ.ReturnTypeID <> ModuleBinary.UInt32Value(op.Offset + 4) then
+		          logError op, "Result Type ID does not match Return Type ID in function declaration."
+		        end if
+		      end if
+		      
+		      ' ***** OpFunctionCall ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpFunctionCall
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_functionId(op, ModuleBinary.UInt32Value(op.Offset + 12), "Function ID out of bounds.", "Function ID not declared.")
+		      ub = op.Offset + (op.WordCount * 4)
+		      j = op.Offset + 16
+		      k = 0
+		      while j < ub
+		        validate_Id(op, ModuleBinary.UInt32Value(j), "Argument " + Str(k) + " ID out of bounds.", "Argument " + Str(k) + " ID not declared.")
+		        j = j + 4
+		        k = k + 1
+		      wend
 		      
 		      ' ***** OpFunctionEnd ***********************************************************************************
 		      
@@ -1256,6 +1275,21 @@ Protected Class SPIRVVirtualMachine
 		    
 		    i = i + 1
 		  wend
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub validate_functionId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  if (id <= 0) or (id >= Bound) then
+		    logError op, errMsgOutOfBounds
+		  end if
+		  if not Functions.HasKey(id) then
+		    logError op, errMsgNotDeclared
+		  end if
+		  
 		End Sub
 	#tag EndMethod
 

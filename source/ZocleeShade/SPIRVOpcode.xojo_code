@@ -321,6 +321,19 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_type(Offset + 16)
 			    
+			    // ***** OpFunctionCall *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFunctionCall
+			    result.Append "FunctionCall "
+			    result.Append compose_id(Offset + 12)
+			    ub = offset + WordCount * 4
+			    i = Offset + 16
+			    while i < ub
+			      result.Append " "
+			      result.Append compose_id(i)
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpFunctionEnd *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFunctionEnd
@@ -726,6 +739,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpFunction
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpFunctionCall
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -849,7 +865,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpExtInst, SPIRVOpcodeTypeEnum.OpCompositeExtract, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, _
 			    SPIRVOpcodeTypeEnum.OpFMul, SPIRVOpcodeTypeEnum.OpFSub, _
-			    SPIRVOpcodeTypeEnum.OpFunction, _
+			    SPIRVOpcodeTypeEnum.OpFunction, SPIRVOpcodeTypeEnum.OpFunctionCall, _
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _

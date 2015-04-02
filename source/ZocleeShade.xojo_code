@@ -1861,6 +1861,7 @@ Protected Module ZocleeShade
 		  OpFMul
 		  OpFSub
 		  OpFunction
+		  OpFunctionCall
 		  OpFunctionEnd
 		  OpFunctionParameter
 		  OpIAdd
