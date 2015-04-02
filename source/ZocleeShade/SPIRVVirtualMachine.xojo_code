@@ -398,6 +398,9 @@ Protected Class SPIRVVirtualMachine
 		        case 44 // ***** OpExtInst ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtInst)
 		          
+		        case 45 // ***** OpUndef ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUndef)
+		          
 		        case 46 // ***** OpLoad ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoad)
 		          
@@ -1247,6 +1250,13 @@ Protected Class SPIRVVirtualMachine
 		    case SPIRVOpcodeTypeEnum.OpTypeVoid
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      
+		      ' ***** OpUndef ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpUndef
+		      validate_WordCountEqual(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      
 		      ' ***** OpVariable ***********************************************************************************
 		      

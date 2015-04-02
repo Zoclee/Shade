@@ -664,6 +664,11 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTypeVoid
 			    result.Append "TypeVoid"
 			    
+			    // ***** OpUndef *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpUndef
+			    result.Append "Undef"
+			    
 			    // ***** OpVariable *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpVariable
@@ -831,6 +836,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTypeVoid
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
+			  case SPIRVOpcodeTypeEnum.OpUndef
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpVariable
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -872,7 +880,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSpecConstant, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
-			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, SPIRVOpcodeTypeEnum.OpVariable, _
+			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, SPIRVOpcodeTypeEnum.OpUndef, _
+			    SPIRVOpcodeTypeEnum.OpVariable, _
 			    SPIRVOpcodeTypeEnum.OpVariableArray
 			    
 			    result = compose_type(Offset + 4)

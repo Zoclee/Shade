@@ -1904,6 +1904,7 @@ Protected Module ZocleeShade
 		  OpTypeStruct
 		  OpTypeVector
 		  OpTypeVoid
+		  OpUndef
 		  OpVariable
 		OpVariableArray
 	#tag EndEnum
