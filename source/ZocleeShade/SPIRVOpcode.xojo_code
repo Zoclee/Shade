@@ -456,16 +456,28 @@ Protected Class SPIRVOpcode
 			    result.Append VM.ModuleBinary.CString(Offset + 4)
 			    result.Append """"
 			    
-			    // ***** OpSpecConstantFalse *************************************************
-			    
-			  case SPIRVOpcodeTypeEnum.OpSpecConstantFalse
-			    result.Append "SpecConstantFalse"
-			    
 			    // ***** OpSpecConstant *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSpecConstant
 			    result.Append "SpecConstant "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    
+			    // ***** OpSpecConstantComposite *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSpecConstantComposite
+			    result.Append "SpecConstantComposite "
+			    ub = offset + WordCount * 4
+			    i = Offset + 12
+			    while i < ub
+			      result.Append " "
+			      result.Append compose_id(i)
+			      i = i + 4
+			    wend
+			    
+			    // ***** OpSpecConstantFalse *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSpecConstantFalse
+			    result.Append "SpecConstantFalse"
 			    
 			    // ***** OpSpecConstantTrue *************************************************
 			    
@@ -730,8 +742,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpSLessThan
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
-			  case SPIRVOpcodeTypeEnum.OpSpecConstantFalse, SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
-			    SPIRVOpcodeTypeEnum.OpSpecConstant
+			  case SPIRVOpcodeTypeEnum.OpSpecConstant, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
+			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantTrue
+			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  case SPIRVOpcodeTypeEnum.OpSpecConstantTrue
@@ -830,9 +843,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
-			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
-			    SPIRVOpcodeTypeEnum.OpSpecConstantFalse, SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
-			    SPIRVOpcodeTypeEnum.OpVariable
+			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSpecConstant, _
+			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
+			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, SPIRVOpcodeTypeEnum.OpVariable
 			    
 			    result = compose_type(Offset + 4)
 			    
@@ -963,29 +976,30 @@ Protected Class SPIRVOpcode
 				"37 - OpSLessThan"
 				"38 - OpSource"
 				"39 - OpSourceExtension"
-				"40 - OpSpecConstantFalse"
-				"41 - OpSpecConstantTrue"
-				"42 - OpStore"
-				"43 - OpTypeArray"
-				"44 - OpTypeBool"
-				"45 - OpTypeDeviceEvent"
-				"46 - OpTypeEvent"
-				"47 - OpTypeFilter"
-				"48 - OpTypeFloat"
-				"49 - OpTypeFunction"
-				"50 - OpTypeInt"
-				"51 - OpTypeMatrix"
-				"52 - OpTypeOpaque"
-				"53 - OpTypePipe"
-				"54 - OpTypePointer"
-				"55 - OpTypeQueue"
-				"56 - OpTypeReserveId"
-				"57 - OpTypeRuntimeArray"
-				"58 - OpTypeSampler"
-				"59 - OpTypeStruct"
-				"60 - OpTypeVector"
-				"61 - OpTypeVoid"
-				"62 - OpVariable"
+				"40 - OpSpecConstant"
+				"41 - OpSpecConstantFalse"
+				"42 - OpSpecConstantTrue"
+				"43 - OpStore"
+				"44 - OpTypeArray"
+				"45 - OpTypeBool"
+				"46 - OpTypeDeviceEvent"
+				"47 - OpTypeEvent"
+				"48 - OpTypeFilter"
+				"49 - OpTypeFloat"
+				"50 - OpTypeFunction"
+				"51 - OpTypeInt"
+				"52 - OpTypeMatrix"
+				"53 - OpTypeOpaque"
+				"54 - OpTypePipe"
+				"55 - OpTypePointer"
+				"56 - OpTypeQueue"
+				"57 - OpTypeReserveId"
+				"58 - OpTypeRuntimeArray"
+				"59 - OpTypeSampler"
+				"60 - OpTypeStruct"
+				"61 - OpTypeVector"
+				"62 - OpTypeVoid"
+				"63 - OpVariable"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

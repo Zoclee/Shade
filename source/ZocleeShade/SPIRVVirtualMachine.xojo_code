@@ -347,7 +347,6 @@ Protected Class SPIRVVirtualMachine
 		          
 		        case 36 // ***** OpSpecConstant ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstant)
-		          
 		          cnst = new ZocleeShade.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.SpecConstant
 		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
@@ -361,6 +360,20 @@ Protected Class SPIRVVirtualMachine
 		          end if
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          Constants.Value(cnst.ResultID) = cnst
+		          
+		        case 37 // ***** OpSpecConstantComposite ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstantComposite)
+		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.Type = SPIRVConstantType.SpecComposite
+		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
+		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          tempIP = ip + 12
+		          ub = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
+		          while tempIP < ub
+		            cnst.Constituents.Append ModuleBinary.UInt32Value(tempIP)
+		            tempIP = tempIP + 4
+		          wend
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 38 // ***** OpVariable ***************************************************
@@ -959,6 +972,21 @@ Protected Class SPIRVVirtualMachine
 		        end select
 		      end if
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      
+		      ' ***** OpSpecConstantComposite ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSpecConstantComposite
+		      validate_WordCountMinimum(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      ub = op.Offset + (op.WordCount * 4)
+		      j = op.Offset + 12
+		      k = 0
+		      while j < ub
+		        validate_Id(op, ModuleBinary.UInt32Value(j), "Constituent " + Str(k) + " ID out of bounds.", "Constituent " + Str(k) + " ID not declared.")
+		        j = j + 4
+		        k = k + 1
+		      wend
 		      
 		      ' ***** OpSpecConstantFalse ***********************************************************************************
 		      

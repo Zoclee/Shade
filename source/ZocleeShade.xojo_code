@@ -1834,6 +1834,7 @@ Protected Module ZocleeShade
 		  Sampler
 		  SpecBooleanTrue
 		  SpecBooleanFalse
+		  SpecComposite
 		SpecConstant
 	#tag EndEnum
 
@@ -1879,6 +1880,7 @@ Protected Module ZocleeShade
 		  OpSource
 		  OpSourceExtension
 		  OpSpecConstant
+		  OpSpecConstantComposite
 		  OpSpecConstantFalse
 		  OpSpecConstantTrue
 		  OpStore
