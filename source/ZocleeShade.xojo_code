@@ -1875,6 +1875,7 @@ Protected Module ZocleeShade
 		  OpMemoryModel
 		  OpName
 		  OpNop
+		  OpPhi
 		  OpReturn
 		  OpSelectionMerge
 		  OpSLessThan

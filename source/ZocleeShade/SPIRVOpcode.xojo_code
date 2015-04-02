@@ -433,6 +433,18 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpNop
 			    result.Append "Nop"
 			    
+			    // ***** OpPhi *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpPhi
+			    result.Append "Phi "
+			    ub = offset + WordCount * 4
+			    i = Offset + 12
+			    while i < ub
+			      result.Append " "
+			      result.Append compose_id(i)
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpReturn *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpReturn
@@ -768,6 +780,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpLoad
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpPhi
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpSLessThan
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -877,7 +892,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
-			    SPIRVOpcodeTypeEnum.OpLoad, _
+			    SPIRVOpcodeTypeEnum.OpLoad, SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSpecConstant, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, SPIRVOpcodeTypeEnum.OpUndef, _

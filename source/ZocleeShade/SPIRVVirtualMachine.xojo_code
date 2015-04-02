@@ -407,6 +407,9 @@ Protected Class SPIRVVirtualMachine
 		        case 47 // ***** OpStore ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpStore)
 		          
+		        case 48 // ***** OpPhi ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpPhi)
+		          
 		        case 50 // ***** OpDecorate ***************************************************
 		          
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDecorate)
@@ -942,6 +945,22 @@ Protected Class SPIRVVirtualMachine
 		      
 		    case SPIRVOpcodeTypeEnum.OpNop
 		      logError op, "Use of OpNop is invalid."
+		      
+		      ' ***** OpPhi ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpPhi
+		      validate_WordCountMinimum(op, 3)
+		      if ((op.WordCount mod 2) <> 1) then
+		        logError op, "Operands need to be in pairs."
+		      end if
+		      ub = op.Offset + (op.WordCount * 4)
+		      j = op.Offset + 12
+		      k = 0
+		      while j < ub
+		        validate_Id(op, ModuleBinary.UInt32Value(j), "Operand " + Str(k) + " ID out of bounds.", "Operand " + Str(k) + " ID not declared.")
+		        j = j + 4
+		        k = k + 1
+		      wend
 		      
 		      ' ***** OpReturn ***********************************************************************************
 		      
