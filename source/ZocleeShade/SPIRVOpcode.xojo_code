@@ -456,6 +456,11 @@ Protected Class SPIRVOpcode
 			    result.Append VM.ModuleBinary.CString(Offset + 4)
 			    result.Append """"
 			    
+			    // ***** OpSpecConstantFalse *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSpecConstantFalse
+			    result.Append "SpecConstantFalse"
+			    
 			    // ***** OpSpecConstantTrue *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSpecConstantTrue
@@ -719,6 +724,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpSLessThan
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpSpecConstantFalse
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpSpecConstantTrue
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -816,7 +824,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, _
-			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
+			    SPIRVOpcodeTypeEnum.OpSpecConstantFalse, SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
 			    SPIRVOpcodeTypeEnum.OpVariable
 			    
 			    result = compose_type(Offset + 4)

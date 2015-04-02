@@ -1831,7 +1831,8 @@ Protected Module ZocleeShade
 		  NullObject
 		  NullPointer
 		  Sampler
-		SpecBooleanTrue
+		  SpecBooleanTrue
+		SpecBooleanFalse
 	#tag EndEnum
 
 	#tag Enum, Name = SPIRVOpcodeTypeEnum, Type = Integer, Flags = &h0
@@ -1875,6 +1876,7 @@ Protected Module ZocleeShade
 		  OpSLessThan
 		  OpSource
 		  OpSourceExtension
+		  OpSpecConstantFalse
 		  OpSpecConstantTrue
 		  OpStore
 		  OpTypeArray

@@ -337,6 +337,14 @@ Protected Class SPIRVVirtualMachine
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
 		          
+		        case 35 // ***** OpSpecConstantFalse ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstantFalse)
+		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst.Type = SPIRVConstantType.SpecBooleanFalse
+		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
+		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
+		          Constants.Value(cnst.ResultID) = cnst
+		          
 		        case 38 // ***** OpVariable ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVariable)
 		          
@@ -916,6 +924,19 @@ Protected Class SPIRVVirtualMachine
 		      validate_WordCountMinimum(op, 1)
 		      if Trim(ModuleBinary.CString(op.Offset + 4)) = "" then
 		        logError op, "Invalid extension."
+		      end if
+		      
+		      ' ***** OpSpecConstantFalse ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSpecConstantFalse
+		      validate_WordCountEqual(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
+		        if typ.Type <> SPIRVTypeEnum.Boolean then
+		          logError op, "Expected scalar Boolean type."
+		        end if
 		      end if
 		      
 		      ' ***** OpSpecConstantTrue ***********************************************************************************
