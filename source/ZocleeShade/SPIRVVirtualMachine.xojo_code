@@ -410,6 +410,9 @@ Protected Class SPIRVVirtualMachine
 		        case 48 // ***** OpPhi ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpPhi)
 		          
+		        case 49 // ***** OpDecorationGroup ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDecorationGroup)
+		          
 		        case 50 // ***** OpDecorate ***************************************************
 		          
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDecorate)
@@ -716,6 +719,12 @@ Protected Class SPIRVVirtualMachine
 		      case else
 		        validate_WordCountEqual(op, 3)
 		      end select
+		      
+		      ' ***** OpDecorationGroup ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpDecorationGroup
+		      validate_WordCountEqual(op, 2)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpEntryPoint ***********************************************************************************
 		      

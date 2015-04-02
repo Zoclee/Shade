@@ -219,6 +219,11 @@ Protected Class SPIRVOpcode
 			      break
 			    end select
 			    
+			    // ***** OpDecorationGroup *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpDecorationGroup
+			    result.Append "DecorationGroup"
+			    
 			    // ***** OpEntryPoint *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpEntryPoint
@@ -737,6 +742,9 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
+			  case SPIRVOpcodeTypeEnum.OpDecorationGroup
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
 			  case SPIRVOpcodeTypeEnum.OpExtInst
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)

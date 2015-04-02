@@ -1852,6 +1852,7 @@ Protected Module ZocleeShade
 		  OpConstantTrue
 		  OpConstantComposite
 		  OpDecorate
+		  OpDecorationGroup
 		  OpEntryPoint
 		  OpExecutionMode
 		  OpExtension
