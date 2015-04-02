@@ -660,6 +660,14 @@ Protected Class SPIRVOpcode
 			      break // todo: optional initializer
 			    end if
 			    
+			    // ***** OpVariableArray *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpVariableArray
+			    result.Append "VariableArray "
+			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    
 			  case else
 			    result.Append "Unknown"
 			    
@@ -810,6 +818,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpVariable
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpVariableArray
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  end select
 			  
 			  return result
@@ -845,7 +856,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSpecConstant, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
-			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, SPIRVOpcodeTypeEnum.OpVariable
+			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, SPIRVOpcodeTypeEnum.OpVariable, _
+			    SPIRVOpcodeTypeEnum.OpVariableArray
 			    
 			    result = compose_type(Offset + 4)
 			    

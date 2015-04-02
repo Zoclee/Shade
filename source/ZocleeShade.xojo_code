@@ -1903,7 +1903,8 @@ Protected Module ZocleeShade
 		  OpTypeStruct
 		  OpTypeVector
 		  OpTypeVoid
-		OpVariable
+		  OpVariable
+		OpVariableArray
 	#tag EndEnum
 
 	#tag Enum, Name = SPIRVTypeEnum, Type = Integer, Flags = &h0

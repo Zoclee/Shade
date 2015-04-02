@@ -379,6 +379,9 @@ Protected Class SPIRVVirtualMachine
 		        case 38 // ***** OpVariable ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVariable)
 		          
+		        case 39 // ***** OpVariableArray ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVariableArray)
+		          
 		        case 40 // ***** OpFunction ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunction)
 		          Functions.Value(ModuleBinary.UInt32Value(ip + 8)) = op
@@ -1232,6 +1235,16 @@ Protected Class SPIRVVirtualMachine
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 10 then
+		        logError op, "Invalid Storage Class enumeration value."
+		      end if
+		      
+		      ' ***** OpVariableArray ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpVariableArray
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      if ModuleBinary.UInt32Value(op.Offset + 12) > 10 then
 		        logError op, "Invalid Storage Class enumeration value."
 		      end if
