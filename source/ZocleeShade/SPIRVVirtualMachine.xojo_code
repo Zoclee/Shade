@@ -448,6 +448,9 @@ Protected Class SPIRVVirtualMachine
 		        case 55 // ***** OpMemberName ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemberName)
 		          
+		        case 56 // ***** OpString ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpString)
+		          
 		        case 62 // ***** OpCompositeExtract ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeExtract)
 		          
@@ -1156,6 +1159,15 @@ Protected Class SPIRVVirtualMachine
 		        end if
 		        j = j + 4
 		      wend
+		      
+		      ' ***** OpString ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpString
+		      validate_WordCountMinimum(op, 2)
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
+		        logError op, "Invalid string."
+		      end if
 		      
 		      ' ***** OpTypeArray ***********************************************************************************
 		      

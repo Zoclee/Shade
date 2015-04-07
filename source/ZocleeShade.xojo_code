@@ -1890,6 +1890,7 @@ Protected Module ZocleeShade
 		  OpSpecConstantFalse
 		  OpSpecConstantTrue
 		  OpStore
+		  OpString
 		  OpTypeArray
 		  OpTypeBool
 		  OpTypeDeviceEvent
