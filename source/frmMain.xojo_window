@@ -239,9 +239,9 @@ End
 		  allType.Extensions = ".*"
 		  
 		  spirvType.Name = "SPIR-V Binary Modules"
-		  spirvType.MacType = "SPIRV"
-		  spirvType.MacCreator = "spirv"
-		  spirvType.Extensions = ".spirv"
+		  spirvType.MacType = "SPIRV;SPV"
+		  spirvType.MacCreator = "spirv;spv"
+		  spirvType.Extensions = ".spirv;.spv"
 		  
 		  dlg.Filter = spirvType + allType
 		  
