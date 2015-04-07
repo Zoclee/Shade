@@ -804,7 +804,7 @@ Protected Class SPIRVOpcode
 			    result.Append "VectorExtractDynamic "
 			    result.Append compose_id(Offset + 12)
 			    result.Append " "
-			    result.Append Str(Offset + 16)
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    
 			    // ***** OpVectorInsertDynamic *************************************************
 			    
@@ -814,7 +814,22 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    result.Append " "
-			    result.Append Str(Offset + 20)
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 20))
+			    
+			    // ***** OpVectorShuffle *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpVectorShuffle
+			    result.Append "VectorShuffle "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    ub = offset + WordCount * 4
+			    i = Offset + 20
+			    while i < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      i = i + 4
+			    wend
 			    
 			  case else
 			    result.Append "Unknown"
@@ -990,6 +1005,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpVectorInsertDynamic
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpVectorShuffle
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  end select
 			  
 			  return result
@@ -1028,7 +1046,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, SPIRVOpcodeTypeEnum.OpUndef, _
 			    SPIRVOpcodeTypeEnum.OpVariable, _
 			    SPIRVOpcodeTypeEnum.OpVariableArray, SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, _
-			    SPIRVOpcodeTypeEnum.OpVectorInsertDynamic
+			    SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, SPIRVOpcodeTypeEnum.OpVectorShuffle
 			    
 			    result = compose_type(Offset + 4)
 			    
