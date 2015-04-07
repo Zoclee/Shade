@@ -198,6 +198,21 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpConstantTrue
 			    result.Append "ConstantTrue"
 			    
+			    // ***** OpCopyMemory *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpCopyMemory
+			    result.Append "CopyMemory "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append compose_id(Offset + 8)
+			    ub = offset + WordCount * 4
+			    i = Offset + 12
+			    while i < ub
+			      result.Append " "
+			      result.Append SPIRVDescribeMemoryAccess(VM.ModuleBinary.UInt32Value(i))
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpCopyObject *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpCopyObject

@@ -475,6 +475,9 @@ Protected Class SPIRVVirtualMachine
 		        case 64 // ***** OpCopyObject ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyObject)
 		          
+		        case 65 // ***** OpCopyMemory ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyMemory)
+		          
 		        case 93 // ***** OpAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
 		          
@@ -738,6 +741,21 @@ Protected Class SPIRVVirtualMachine
 		          logError op, "Expected scalar Boolean type."
 		        end if
 		      end if
+		      
+		      ' ***** OpCopyMemory ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpCopyMemory
+		      validate_WordCountMinimum(op, 3)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Source ID out of bounds.", "Source ID not declared.")
+		      ub = op.Offset + (op.WordCount * 4)
+		      j = op.Offset + 12
+		      while j < ub
+		        if (ModuleBinary.UInt32Value(j) < 1) or (ModuleBinary.UInt32Value(j) > 2) then
+		          logError op, "Invalid Memory Access enumeration value."
+		        end if
+		        j = j + 4
+		      wend
 		      
 		      ' ***** OpCopyObject ***********************************************************************************
 		      
