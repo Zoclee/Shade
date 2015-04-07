@@ -1872,6 +1872,7 @@ Protected Module ZocleeShade
 		  OpLabel
 		  OpLoad
 		  OpLoopMerge
+		  OpMemberDecorate
 		  OpMemberName
 		  OpMemoryModel
 		  OpName

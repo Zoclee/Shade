@@ -432,6 +432,9 @@ Protected Class SPIRVVirtualMachine
 		          end select
 		          Decorations.Append dec
 		          
+		        case 51 // ***** OpMemberDecorate ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemberDecorate)
+		          
 		        case 54 // ***** OpName ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpName)
 		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
@@ -921,6 +924,45 @@ Protected Class SPIRVVirtualMachine
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
 		        logError op, "Invalid Loop Control enumeration value."
 		      end if
+		      
+		      ' ***** OpMemberDecorate ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpMemberDecorate
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not declared.")
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 44 then
+		        logError op, "Invalid Decoration enumeration value."
+		      end if
+		      
+		      select case ModuleBinary.UInt32Value(op.Offset + 12)
+		      case 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 44
+		        validate_WordCountEqual(op, 4)
+		      case 39 // Built-In
+		        validate_WordCountEqual(op, 4)
+		        if ModuleBinary.UInt32Value(op.Offset + 16) > 41 then
+		          logError op, "Invalid Built-In enumeration value."
+		        end if
+		      case 40 // Function Parameter Attribute
+		        validate_WordCountEqual(op, 4)
+		        if ModuleBinary.UInt32Value(op.Offset + 16) > 8 then
+		          logError op, "Invalid Function Parameter Attribute enumeration value."
+		        end if
+		      case 41 // FP Rounding Mode
+		        validate_WordCountEqual(op, 4)
+		        if ModuleBinary.UInt32Value(op.Offset + 16) > 3 then
+		          logError op, "Invalid FP Rounding Mode enumeration value."
+		        end if
+		      case 42 // FP Fast Math Mode
+		        validate_WordCountEqual(op, 4)
+		        break // todo
+		      case 43 // Linkage Type
+		        validate_WordCountEqual(op, 4)
+		        if ModuleBinary.UInt32Value(op.Offset + 16) > 1 then
+		          logError op, "Invalid Linkage Type enumeration value."
+		        end if
+		      case else
+		        validate_WordCountEqual(op, 3)
+		      end select
+		      
 		      
 		      ' ***** OpMemberName ***********************************************************************************
 		      

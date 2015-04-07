@@ -405,6 +405,56 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append SPIRVDescribeLoopControl(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpMemberDecorate *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpMemberDecorate
+			    result.Append "MemberDecorate "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append " "
+			    result.Append SPIRVDescribeDecoration(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    select case VM.ModuleBinary.UInt32Value(Offset + 12)
+			    case 29 // Stream
+			      break
+			    case 30 // Location
+			      break
+			    case 31 // Component
+			      break
+			    case 32 // Index
+			      break
+			    case 33 // Binding
+			      break
+			    case 34 // DescriptorSet
+			      break
+			    case 35 // Offset
+			      break
+			    case 36 // Alignment
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    case 37 // XfbBuffer
+			      break
+			    case 38 // Stride
+			      break
+			    case 39 // Built-In
+			      result.Append " "
+			      result.Append SPIRVDescribeBuiltIn(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    case 40 // FuncParamAttr
+			      result.Append " "
+			      result.Append SPIRVDescribeFuncParamAttr(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    case 41 // FP Rounding Mode
+			      result.Append " "
+			      result.Append SPIRVDescribeFPRoundingMode(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    case 42 // FP Fast Math Mode
+			      result.Append " "
+			      result.Append SPIRVDescribeFPFastMathMode(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    case 43 // Linkage Type
+			      result.Append " "
+			      result.Append SPIRVDescribeLinkageType(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    case 44 // SpecId
+			      break
+			    end select
+			    
 			    // ***** OpMemberName *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpMemberName
@@ -1009,57 +1059,63 @@ Protected Class SPIRVOpcode
 				"10 - OpConstantTrue"
 				"11 - OpConstantComposite"
 				"12 - OpDecorate"
-				"13 - OpEntryPoint"
-				"14 - OpExecutionMode"
-				"15 - OpExtension"
-				"16 - OpExtInst"
-				"17 - OpExtInstImport"
-				"18 - OpFAdd"
-				"19 - OpFMul"
-				"20 - OpFSub"
-				"21 - OpFunction"
-				"22 - OpFunctionEnd"
-				"23 - OpFunctionParameter"
-				"24 - OpIAdd"
-				"25 - OpIMul"
-				"26 - OpInBoundsAccessChain"
-				"27 - OpISub"
-				"28 - OpLabel"
-				"29 - OpLoad"
-				"30 - OpLoopMerge"
-				"31 - OpMemberName"
-				"32 - OpMemoryModel"
-				"33 - OpName"
-				"34 - OpNop"
-				"35 - OpReturn"
-				"36 - OpSelectionMerge"
-				"37 - OpSLessThan"
-				"38 - OpSource"
-				"39 - OpSourceExtension"
-				"40 - OpSpecConstant"
-				"41 - OpSpecConstantFalse"
-				"42 - OpSpecConstantTrue"
-				"43 - OpStore"
-				"44 - OpTypeArray"
-				"45 - OpTypeBool"
-				"46 - OpTypeDeviceEvent"
-				"47 - OpTypeEvent"
-				"48 - OpTypeFilter"
-				"49 - OpTypeFloat"
-				"50 - OpTypeFunction"
-				"51 - OpTypeInt"
-				"52 - OpTypeMatrix"
-				"53 - OpTypeOpaque"
-				"54 - OpTypePipe"
-				"55 - OpTypePointer"
-				"56 - OpTypeQueue"
-				"57 - OpTypeReserveId"
-				"58 - OpTypeRuntimeArray"
-				"59 - OpTypeSampler"
-				"60 - OpTypeStruct"
-				"61 - OpTypeVector"
-				"62 - OpTypeVoid"
-				"63 - OpVariable"
+				"13 - OpDecorationGroup"
+				"14 - OpEntryPoint"
+				"15 - OpExecutionMode"
+				"16 - OpExtension"
+				"17 - OpExtInst"
+				"18 - OpExtInstImport"
+				"19 - OpFAdd"
+				"20 - OpFMul"
+				"21 - OpFSub"
+				"22 - OpFunction"
+				"23 - OpFunctionCall"
+				"24 - OpFunctionEnd"
+				"25 - OpFunctionParameter"
+				"26 - OpIAdd"
+				"27 - OpIMul"
+				"28 - OpInBoundsAccessChain"
+				"29 - OpISub"
+				"30 - OpLabel"
+				"31 - OpLoad"
+				"32 - OpLoopMerge"
+				"33 - OpMemberName"
+				"34 - OpMemoryModel"
+				"35 - OpName"
+				"36 - OpNop"
+				"37 - OpPhi"
+				"38 - OpReturn"
+				"39 - OpSelectionMerge"
+				"40 - OpSLessThan"
+				"41 - OpSource"
+				"42 - OpSourceExtension"
+				"43 - OpSpecConstant"
+				"44 - OpSpecConstantComposite"
+				"45 - OpSpecConstantFalse"
+				"46 - OpSpecConstantTrue"
+				"47 - OpStore"
+				"48 - OpTypeArray"
+				"49 - OpTypeBool"
+				"50 - OpTypeDeviceEvent"
+				"51 - OpTypeEvent"
+				"52 - OpTypeFilter"
+				"53 - OpTypeFloat"
+				"54 - OpTypeFunction"
+				"55 - OpTypeInt"
+				"56 - OpTypeMatrix"
+				"57 - OpTypeOpaque"
+				"58 - OpTypePipe"
+				"59 - OpTypePointer"
+				"60 - OpTypeQueue"
+				"61 - OpTypeReserveId"
+				"62 - OpTypeRuntimeArray"
+				"63 - OpTypeSampler"
+				"64 - OpTypeStruct"
+				"65 - OpTypeVector"
+				"66 - OpTypeVoid"
+				"67 - OpUndef"
+				"68 - OpVariable"
+				"69 - OpVariableArray"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
