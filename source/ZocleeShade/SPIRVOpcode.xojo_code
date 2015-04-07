@@ -798,6 +798,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    
+			    // ***** OpVectorExtractDynamic *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpVectorExtractDynamic
+			    result.Append "VectorExtractDynamic "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append Str(Offset + 16)
+			    
 			  case else
 			    result.Append "Unknown"
 			    
@@ -966,6 +974,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpVariableArray
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpVectorExtractDynamic
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  end select
 			  
 			  return result
@@ -1003,7 +1014,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, SPIRVOpcodeTypeEnum.OpUndef, _
 			    SPIRVOpcodeTypeEnum.OpVariable, _
-			    SPIRVOpcodeTypeEnum.OpVariableArray
+			    SPIRVOpcodeTypeEnum.OpVariableArray, SPIRVOpcodeTypeEnum.OpVectorExtractDynamic
 			    
 			    result = compose_type(Offset + 4)
 			    
