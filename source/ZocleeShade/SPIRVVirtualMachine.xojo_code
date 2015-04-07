@@ -463,6 +463,9 @@ Protected Class SPIRVVirtualMachine
 		        case 60 // ***** OpVectorShuffle ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorShuffle)
 		          
+		        case 61 // ***** OpCompositeConstruct ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeConstruct)
+		          
 		        case 62 // ***** OpCompositeExtract ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeExtract)
 		          
@@ -609,6 +612,21 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Condition ID out of bounds.", "Condition ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "True Label ID out of bounds.", "True Label ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "False Label ID out of bounds.", "False Label ID not declared.")
+		      
+		      ' ***** OpCompositeConstruct ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpCompositeConstruct
+		      validate_WordCountMinimum(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      ub = op.Offset + (op.WordCount * 4)
+		      j = op.Offset + 12
+		      k = 0
+		      while j < ub
+		        validate_Id(op, ModuleBinary.UInt32Value(j), "Constituent " + Str(k) + " ID out of bounds.", "Constituent " + Str(k) + " ID not declared.")
+		        j = j + 4
+		        k = k + 1
+		      wend
 		      
 		      ' ***** OpCompositeExtract ***********************************************************************************
 		      

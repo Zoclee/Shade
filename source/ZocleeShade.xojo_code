@@ -1843,6 +1843,7 @@ Protected Module ZocleeShade
 		  OpAccessChain
 		  OpBranch
 		  OpBranchConditional
+		  OpCompositeConstruct
 		  OpCompositeExtract
 		  OpConstant
 		  OpConstantFalse
