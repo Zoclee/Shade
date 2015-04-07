@@ -469,6 +469,9 @@ Protected Class SPIRVVirtualMachine
 		        case 62 // ***** OpCompositeExtract ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeExtract)
 		          
+		        case 63 // ***** OpCompositeInsert ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeInsert)
+		          
 		        case 93 // ***** OpAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
 		          
@@ -636,6 +639,15 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Composite ID out of bounds.", "Composite ID not declared.")
 		      // todo: validate that result type id is the same type as the object selected by the last provided index
+		      
+		      ' ***** OpCompositeInsert ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpCompositeInsert
+		      validate_WordCountMinimum(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Object ID out of bounds.", "Object ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Composite ID out of bounds.", "Composite ID not declared.")
 		      
 		      ' ***** OpConstant ***********************************************************************************
 		      

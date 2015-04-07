@@ -135,6 +135,21 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpCompositeInsert *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpCompositeInsert
+			    result.Append "CompositeInsert "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    ub = offset + WordCount * 4
+			    i = Offset + 20
+			    while i < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpConstant *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpConstant
@@ -886,6 +901,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpCompositeInsert
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpDecorationGroup
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
@@ -1046,6 +1064,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, _
 			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, SPIRVOpcodeTypeEnum.OpCompositeExtract, _
+			    SPIRVOpcodeTypeEnum.OpCompositeInsert, _
 			    SPIRVOpcodeTypeEnum.OpConstant, _
 			    SPIRVOpcodeTypeEnum.OpConstantComposite, SPIRVOpcodeTypeEnum.OpConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpConstantNullObject, SPIRVOpcodeTypeEnum.OpConstantNullPointer, _

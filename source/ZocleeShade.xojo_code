@@ -1845,6 +1845,7 @@ Protected Module ZocleeShade
 		  OpBranchConditional
 		  OpCompositeConstruct
 		  OpCompositeExtract
+		  OpCompositeInsert
 		  OpConstant
 		  OpConstantFalse
 		  OpConstantNullObject
