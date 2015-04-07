@@ -435,6 +435,9 @@ Protected Class SPIRVVirtualMachine
 		        case 51 // ***** OpMemberDecorate ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemberDecorate)
 		          
+		        case 52 // ***** OpGroupDecorate ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupDecorate)
+		          
 		        case 54 // ***** OpName ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpName)
 		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
@@ -866,6 +869,20 @@ Protected Class SPIRVVirtualMachine
 		      validate_WordCountEqual(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      
+		      ' ***** OpGroupDecorate ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGroupDecorate
+		      validate_WordCountMinimum(op, 2)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Decoration Group ID out of bounds.", "Decoration Group ID not found.")
+		      ub = op.Offset + (op.WordCount * 4)
+		      j = op.Offset + 8
+		      k = 0
+		      while j < ub
+		        validate_Id(op, ModuleBinary.UInt32Value(j), "Target " + Str(k) + " ID out of bounds.", "Target " + Str(k) + " ID not declared.")
+		        j = j + 4
+		        k = k + 1
+		      wend
 		      
 		      ' ***** OpIAdd ***********************************************************************************
 		      

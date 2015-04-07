@@ -349,6 +349,19 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
 			    result.Append "FunctionParameter"
 			    
+			    // ***** OpGroupDecorate *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGroupDecorate
+			    result.Append "GroupDecorate "
+			    result.Append compose_id(Offset + 4)
+			    ub = offset + WordCount * 4
+			    i = Offset + 8
+			    while i < ub
+			      result.Append " "
+			      result.Append compose_id(i)
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpIAdd *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpIAdd

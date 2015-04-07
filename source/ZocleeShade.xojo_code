@@ -1865,6 +1865,7 @@ Protected Module ZocleeShade
 		  OpFunctionCall
 		  OpFunctionEnd
 		  OpFunctionParameter
+		  OpGroupDecorate
 		  OpIAdd
 		  OpIMul
 		  OpInBoundsAccessChain
