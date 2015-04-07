@@ -1853,6 +1853,7 @@ Protected Module ZocleeShade
 		  OpConstantSampler
 		  OpConstantTrue
 		  OpConstantComposite
+		  OpCopyObject
 		  OpDecorate
 		  OpDecorationGroup
 		  OpEntryPoint

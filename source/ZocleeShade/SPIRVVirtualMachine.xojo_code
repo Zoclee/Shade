@@ -472,6 +472,9 @@ Protected Class SPIRVVirtualMachine
 		        case 63 // ***** OpCompositeInsert ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeInsert)
 		          
+		        case 64 // ***** OpCopyObject ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyObject)
+		          
 		        case 93 // ***** OpAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
 		          
@@ -735,6 +738,14 @@ Protected Class SPIRVVirtualMachine
 		          logError op, "Expected scalar Boolean type."
 		        end if
 		      end if
+		      
+		      ' ***** OpCopyObject ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpCopyObject
+		      validate_WordCountEqual(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand ID out of bounds.", "Operand ID not declared.")
 		      
 		      ' ***** OpDecorate ***********************************************************************************
 		      

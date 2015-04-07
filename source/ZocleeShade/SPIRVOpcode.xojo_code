@@ -198,6 +198,12 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpConstantTrue
 			    result.Append "ConstantTrue"
 			    
+			    // ***** OpCopyObject *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpCopyObject
+			    result.Append "CopyObject "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpDecorate *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpDecorate
@@ -904,6 +910,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpCompositeInsert
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpCopyObject
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpDecorationGroup
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
@@ -1069,6 +1078,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpConstantComposite, SPIRVOpcodeTypeEnum.OpConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpConstantNullObject, SPIRVOpcodeTypeEnum.OpConstantNullPointer, _
 			    SPIRVOpcodeTypeEnum.OpConstantSampler, SPIRVOpcodeTypeEnum.OpConstantTrue, _
+			    SPIRVOpcodeTypeEnum.OpCopyObject, _
 			    SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, _
 			    SPIRVOpcodeTypeEnum.OpFMul, SPIRVOpcodeTypeEnum.OpFSub, _
