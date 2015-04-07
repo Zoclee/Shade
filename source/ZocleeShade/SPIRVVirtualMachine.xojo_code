@@ -457,6 +457,9 @@ Protected Class SPIRVVirtualMachine
 		        case 58 // ***** OpVectorExtractDynamic ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorExtractDynamic)
 		          
+		        case 59 // ***** OpVectorInsertDynamic ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorInsertDynamic)
+		          
 		        case 62 // ***** OpCompositeExtract ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeExtract)
 		          
@@ -1416,6 +1419,16 @@ Protected Class SPIRVVirtualMachine
 		      // todo: validate that vector id is a vector type
 		      // todo: validate that index not out of bounds
 		      // todo: validate that result type is sane type as vector type
+		      
+		      ' ***** OpVectorInsertDynamic ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpVectorInsertDynamic
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Vector ID out of bounds.", "Vector ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Component ID out of bounds.", "Component ID not declared.")
+		      // todo: validate that index not out of bounds
 		      
 		    case else
 		      logError op, "Unknown opcode type."
