@@ -451,6 +451,9 @@ Protected Class SPIRVVirtualMachine
 		        case 56 // ***** OpString ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpString)
 		          
+		        case 57 // ***** OpLine ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLine)
+		          
 		        case 62 // ***** OpCompositeExtract ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeExtract)
 		          
@@ -943,6 +946,13 @@ Protected Class SPIRVVirtualMachine
 		    case SPIRVOpcodeTypeEnum.OpLabel
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
+		      
+		      ' ***** OpLine ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpLine
+		      validate_WordCountEqual(op, 5)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "File ID out of bounds.", "File ID not found.")
 		      
 		      ' ***** OpLoad ***********************************************************************************
 		      

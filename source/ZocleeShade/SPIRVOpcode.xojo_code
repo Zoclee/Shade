@@ -417,6 +417,18 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpLabel
 			    result.Append "Label"
 			    
+			    // ***** OpLine *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpLine
+			    result.Append "Line "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append compose_id(Offset + 8)
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    
 			    // ***** OpLoad *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpLoad

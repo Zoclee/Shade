@@ -1872,6 +1872,7 @@ Protected Module ZocleeShade
 		  OpInBoundsAccessChain
 		  OpISub
 		  OpLabel
+		  OpLine
 		  OpLoad
 		  OpLoopMerge
 		  OpMemberDecorate
