@@ -481,6 +481,9 @@ Protected Class SPIRVVirtualMachine
 		        case 66 // ***** OpCopyMemorySized ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyMemorySized)
 		          
+		        case 67 // ***** OpSampler ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSampler)
+		          
 		        case 93 // ***** OpAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
 		          
@@ -1149,6 +1152,17 @@ Protected Class SPIRVVirtualMachine
 		      
 		    case SPIRVOpcodeTypeEnum.OpReturn
 		      validate_WordCountEqual(op, 1)
+		      
+		      ' ***** OpSampler ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSampler
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Sampler ID out of bounds.", "Sampler ID not found.")
+		      // todo: validate that sampler object type is OpTypeSampler
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Filter ID out of bounds.", "Filter ID not found.")
+		      // todo: validate that sampler object type is OpTypeFilter
 		      
 		      ' ***** OpSelectionMerge ***********************************************************************************
 		      
