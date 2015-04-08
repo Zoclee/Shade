@@ -478,6 +478,9 @@ Protected Class SPIRVVirtualMachine
 		        case 65 // ***** OpCopyMemory ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyMemory)
 		          
+		        case 66 // ***** OpCopyMemorySized ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyMemorySized)
+		          
 		        case 93 // ***** OpAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
 		          
@@ -750,6 +753,21 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Source ID out of bounds.", "Source ID not declared.")
 		      ub = op.Offset + (op.WordCount * 4)
 		      j = op.Offset + 12
+		      while j < ub
+		        if (ModuleBinary.UInt32Value(j) < 1) or (ModuleBinary.UInt32Value(j) > 2) then
+		          logError op, "Invalid Memory Access enumeration value."
+		        end if
+		        j = j + 4
+		      wend
+		      
+		      ' ***** OpCopyMemorySized ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpCopyMemorySized
+		      validate_WordCountMinimum(op, 4)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Source ID out of bounds.", "Source ID not declared.")
+		      ub = op.Offset + (op.WordCount * 4)
+		      j = op.Offset + 16
 		      while j < ub
 		        if (ModuleBinary.UInt32Value(j) < 1) or (ModuleBinary.UInt32Value(j) > 2) then
 		          logError op, "Invalid Memory Access enumeration value."

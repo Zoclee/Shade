@@ -1854,6 +1854,7 @@ Protected Module ZocleeShade
 		  OpConstantTrue
 		  OpConstantComposite
 		  OpCopyMemory
+		  OpCopyMemorySized
 		  OpCopyObject
 		  OpDecorate
 		  OpDecorationGroup
