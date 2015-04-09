@@ -496,6 +496,9 @@ Protected Class SPIRVVirtualMachine
 		        case 71 // ***** OpTextureSampleProj ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProj)
 		          
+		        case 72 // ***** OpTextureSampleGrad ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleGrad)
+		          
 		        case 93 // ***** OpAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
 		          
@@ -1314,6 +1317,17 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Coordinate ID out of bounds.", "Coordinate ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Dref ID out of bounds.", "Dref ID not found.")
 		      // todo: this opcode is only allowed under the fragment execution model
+		      
+		      ' ***** OpTextureSampleGrad ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTextureSampleGrad
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Sampler ID out of bounds.", "Sampler ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Coordinate ID out of bounds.", "Coordinate ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "dx ID out of bounds.", "dx ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 24), "dy ID out of bounds.", "dy ID not found.")
 		      
 		      ' ***** OpTextureSampleLod ***********************************************************************************
 		      
