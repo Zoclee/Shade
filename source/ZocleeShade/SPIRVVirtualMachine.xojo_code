@@ -487,6 +487,9 @@ Protected Class SPIRVVirtualMachine
 		        case 68 // ***** OpTextureSample ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSample)
 		          
+		        case 69 // ***** OpTextureSampleDref ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleDref)
+		          
 		        case 93 // ***** OpAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
 		          
@@ -1293,6 +1296,17 @@ Protected Class SPIRVVirtualMachine
 		      if op.WordCount = 6 then
 		        validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Bias ID out of bounds.", "Bias ID not found.")
 		      end if
+		      // todo: this opcode is only allowe under the fragment execution model
+		      
+		      ' ***** OpTextureSampleDref ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTextureSampleDref
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Sampler ID out of bounds.", "Sampler ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Coordinate ID out of bounds.", "Coordinate ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Dref ID out of bounds.", "Dref ID not found.")
 		      // todo: this opcode is only allowe under the fragment execution model
 		      
 		      ' ***** OpTypeArray ***********************************************************************************
