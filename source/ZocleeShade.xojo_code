@@ -1900,6 +1900,7 @@ Protected Module ZocleeShade
 		  OpString
 		  OpTextureSample
 		  OpTextureSampleDref
+		  OpTextureSampleLod
 		  OpTypeArray
 		  OpTypeBool
 		  OpTypeDeviceEvent
