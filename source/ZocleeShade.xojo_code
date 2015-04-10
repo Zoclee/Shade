@@ -1907,6 +1907,7 @@ Protected Module ZocleeShade
 		  OpTextureSampleProj
 		  OpTextureSampleProjGrad
 		  OpTextureSampleProjLod
+		  OpTextureSampleProjOffset
 		  OpTypeArray
 		  OpTypeBool
 		  OpTypeDeviceEvent
