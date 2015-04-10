@@ -1903,6 +1903,7 @@ Protected Module ZocleeShade
 		  OpTextureFetchTexel
 		  OpTextureFetchTexelOffset
 		  OpTextureGather
+		  OpTextureGatherOffset
 		  OpTextureSample
 		  OpTextureSampleDref
 		  OpTextureSampleGrad
