@@ -1901,6 +1901,7 @@ Protected Module ZocleeShade
 		  OpTextureSample
 		  OpTextureSampleDref
 		  OpTextureSampleGrad
+		  OpTextureSampleGradOffset
 		  OpTextureSampleLod
 		  OpTextureSampleLodOffset
 		  OpTextureSampleOffset

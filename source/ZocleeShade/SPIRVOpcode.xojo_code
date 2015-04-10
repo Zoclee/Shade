@@ -731,6 +731,20 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 24)
 			    
+			    // ***** OpTextureSampleGradOffset *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset
+			    result.Append "TextureSampleGradOffset "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
+			    result.Append " "
+			    result.Append compose_id(Offset + 24)
+			    result.Append " "
+			    result.Append compose_id(Offset + 28)
+			    
 			    // ***** OpTextureSampleLod *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTextureSampleLod
@@ -1145,6 +1159,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTextureSampleGrad
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpTextureSampleLod
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -1283,7 +1300,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
 			    SPIRVOpcodeTypeEnum.OpTextureSample, SPIRVOpcodeTypeEnum.OpTextureSampleDref, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleGrad, _
+			    SPIRVOpcodeTypeEnum.OpTextureSampleGrad, SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset, _
 			    SPIRVOpcodeTypeEnum.OpTextureSampleLod, SPIRVOpcodeTypeEnum.OpTextureSampleLodOffset, _
 			    SPIRVOpcodeTypeEnum.OpTextureSampleOffset, _
 			    SPIRVOpcodeTypeEnum.OpTextureSampleProj, SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad, _
@@ -1445,35 +1462,37 @@ Protected Class SPIRVOpcode
 				"60 - OpTextureSampleDref"
 				"61 - OpTextureSampleGrad"
 				"62 - OpTextureSampleLod"
-				"63 - OpTextureSampleOffset"
-				"64 - OpTextureSampleProj"
-				"65 - OpTextureSampleProjGrad"
-				"66 - OpTextureSampleProjLod"
-				"67 - OpTypeArray"
-				"68 - OpTypeBool"
-				"69 - OpTypeDeviceEvent"
-				"70 - OpTypeEvent"
-				"71 - OpTypeFilter"
-				"72 - OpTypeFloat"
-				"73 - OpTypeFunction"
-				"74 - OpTypeInt"
-				"75 - OpTypeMatrix"
-				"76 - OpTypeOpaque"
-				"77 - OpTypePipe"
-				"78 - OpTypePointer"
-				"79 - OpTypeQueue"
-				"80 - OpTypeReserveId"
-				"81 - OpTypeRuntimeArray"
-				"82 - OpTypeSampler"
-				"83 - OpTypeStruct"
-				"84 - OpTypeVector"
-				"85 - OpTypeVoid"
-				"86 - OpUndef"
-				"87 - OpVariable"
-				"88 - OpVariableArray"
-				"89 - OpVectorExtractDynamic"
-				"90 - OpVectorInsertDynamic"
-				"91 - OpVectorShuffle"
+				"63 - OpTextureSampleLodOffset"
+				"64 - OpTextureSampleOffset"
+				"65 - OpTextureSampleProj"
+				"66 - OpTextureSampleProjGrad"
+				"67 - OpTextureSampleProjLod"
+				"68 - OpTextureSampleProjOffset"
+				"69 - OpTypeArray"
+				"70 - OpTypeBool"
+				"71 - OpTypeDeviceEvent"
+				"72 - OpTypeEvent"
+				"73 - OpTypeFilter"
+				"74 - OpTypeFloat"
+				"75 - OpTypeFunction"
+				"76 - OpTypeInt"
+				"77 - OpTypeMatrix"
+				"78 - OpTypeOpaque"
+				"79 - OpTypePipe"
+				"80 - OpTypePointer"
+				"81 - OpTypeQueue"
+				"82 - OpTypeReserveId"
+				"83 - OpTypeRuntimeArray"
+				"84 - OpTypeSampler"
+				"85 - OpTypeStruct"
+				"86 - OpTypeVector"
+				"87 - OpTypeVoid"
+				"88 - OpUndef"
+				"89 - OpVariable"
+				"90 - OpVariableArray"
+				"91 - OpVectorExtractDynamic"
+				"92 - OpVectorInsertDynamic"
+				"93 - OpVectorShuffle"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
