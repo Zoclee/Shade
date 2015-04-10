@@ -697,6 +697,16 @@ Protected Class SPIRVOpcode
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
 			    result.Append """"
 			    
+			    // ***** OpTextureFetchSample *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTextureFetchSample
+			    result.Append "TextureFetchSample "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
+			    
 			    // ***** OpTextureFetchTexel *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTextureFetchTexel
@@ -1196,6 +1206,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpString
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
+			  case SPIRVOpcodeTypeEnum.OpTextureFetchSample
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpTextureFetchTexel
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -1357,6 +1370,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSpecConstant, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
+			    SPIRVOpcodeTypeEnum.OpTextureFetchSample, _
 			    SPIRVOpcodeTypeEnum.OpTextureFetchTexel, SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset, _
 			    SPIRVOpcodeTypeEnum.OpTextureSample, SPIRVOpcodeTypeEnum.OpTextureSampleDref, _
 			    SPIRVOpcodeTypeEnum.OpTextureSampleGrad, SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset, _
