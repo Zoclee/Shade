@@ -767,6 +767,18 @@ Protected Class SPIRVOpcode
 			      result.Append compose_id(Offset + 20)
 			    end if
 			    
+			    // ***** OpTextureSampleProjGrad *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad
+			    result.Append "TextureSampleProjGrad "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
+			    result.Append " "
+			    result.Append compose_id(Offset + 24)
+			    
 			    // ***** OpTextureSampleProjLod *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjLod
@@ -1116,6 +1128,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTextureSampleProj
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjLod
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -1238,7 +1253,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpTextureSample, SPIRVOpcodeTypeEnum.OpTextureSampleDref, _
 			    SPIRVOpcodeTypeEnum.OpTextureSampleGrad, _
 			    SPIRVOpcodeTypeEnum.OpTextureSampleLod, SPIRVOpcodeTypeEnum.OpTextureSampleOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleProj, SPIRVOpcodeTypeEnum.OpTextureSampleProjLod, _
+			    SPIRVOpcodeTypeEnum.OpTextureSampleProj, SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad, _
+			    SPIRVOpcodeTypeEnum.OpTextureSampleProjLod, _
 			    SPIRVOpcodeTypeEnum.OpUndef, _
 			    SPIRVOpcodeTypeEnum.OpVariable, _
 			    SPIRVOpcodeTypeEnum.OpVariableArray, SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, _

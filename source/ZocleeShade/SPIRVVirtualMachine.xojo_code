@@ -502,7 +502,10 @@ Protected Class SPIRVVirtualMachine
 		        case 73 // ***** OpTextureSampleOffset ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleOffset)
 		          
-		        case 74 // ***** OpTextureSampleProjLod ***************************************************
+		        case 74 // ***** OpTextureSampleProjGrad ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad)
+		          
+		        case 75 // ***** OpTextureSampleProjLod ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjLod)
 		          
 		        case 93 // ***** OpAccessChain ***************************************************
@@ -1327,7 +1330,7 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTextureSampleGrad ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTextureSampleGrad
-		      validate_WordCountEqual(op, 6)
+		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Sampler ID out of bounds.", "Sampler ID not found.")
@@ -1372,6 +1375,17 @@ Protected Class SPIRVVirtualMachine
 		        validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Bias ID out of bounds.", "Bias ID not found.")
 		      end if
 		      // todo: this opcode is only allowed under the fragment execution model
+		      
+		      ' ***** OpTextureSampleProjGrad ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad
+		      validate_WordCountEqual(op, 7)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Sampler ID out of bounds.", "Sampler ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Coordinate ID out of bounds.", "Coordinate ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "dx ID out of bounds.", "dx ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 24), "dy ID out of bounds.", "dy ID not found.")
 		      
 		      ' ***** OpTextureSampleProjLod ***********************************************************************************
 		      
