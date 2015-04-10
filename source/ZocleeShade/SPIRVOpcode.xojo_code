@@ -1195,242 +1195,57 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
-			  case SPIRVOpcodeTypeEnum.OpAccessChain
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
+			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpCompositeConstruct, _
+			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpCompositeInsert, _
+			    SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
 			    SPIRVOpcodeTypeEnum.OpConstantFalse, SPIRVOpcodeTypeEnum.OpConstantNullObject, _
 			    SPIRVOpcodeTypeEnum.OpConstantNullPointer, _
-			    SPIRVOpcodeTypeEnum.OpConstantSampler, SPIRVOpcodeTypeEnum.OpConstantTrue
+			    SPIRVOpcodeTypeEnum.OpConstantSampler, SPIRVOpcodeTypeEnum.OpConstantTrue, _
+			    SPIRVOpcodeTypeEnum.OpCopyObject, SPIRVOpcodeTypeEnum.OpExtInst, _
+			    SPIRVOpcodeTypeEnum.OpFAdd, SPIRVOpcodeTypeEnum.OpFMul, _
+			    SPIRVOpcodeTypeEnum.OpFSub, SPIRVOpcodeTypeEnum.OpFunction, _
+			    SPIRVOpcodeTypeEnum.OpFunctionCall, SPIRVOpcodeTypeEnum.OpFunctionParameter, _
+			    SPIRVOpcodeTypeEnum.OpIAdd, SPIRVOpcodeTypeEnum.OpIMul, _
+			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
+			    SPIRVOpcodeTypeEnum.OpLoad, SPIRVOpcodeTypeEnum.OpPhi, _
+			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSLessThan, _
+			    SPIRVOpcodeTypeEnum.OpSpecConstant, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
+			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
+			    SPIRVOpcodeTypeEnum.OpTextureFetchBuffer, SPIRVOpcodeTypeEnum.OpTextureFetchSample, _
+			    SPIRVOpcodeTypeEnum.OpTextureFetchTexel, SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset, _
+			    SPIRVOpcodeTypeEnum.OpTextureGather, SPIRVOpcodeTypeEnum.OpTextureGatherOffset, _
+			    SPIRVOpcodeTypeEnum.OpTextureGatherOffsets, SPIRVOpcodeTypeEnum.OpTextureQueryLevels, _
+			    SPIRVOpcodeTypeEnum.OpTextureQueryLod, SPIRVOpcodeTypeEnum.OpTextureQuerySamples, _
+			    SPIRVOpcodeTypeEnum.OpTextureQuerySize, SPIRVOpcodeTypeEnum.OpTextureQuerySizeLod, _
+			    SPIRVOpcodeTypeEnum.OpTextureSample, SPIRVOpcodeTypeEnum.OpTextureSampleDref, _
+			    SPIRVOpcodeTypeEnum.OpTextureSampleGrad, SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset, _
+			    SPIRVOpcodeTypeEnum.OpTextureSampleLod, SPIRVOpcodeTypeEnum.OpTextureSampleLodOffset, _
+			    SPIRVOpcodeTypeEnum.OpTextureSampleOffset, SPIRVOpcodeTypeEnum.OpTextureSampleProj, _
+			    SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad, SPIRVOpcodeTypeEnum.OpTextureSampleProjGradOffset, _
+			    SPIRVOpcodeTypeEnum.OpTextureSampleProjLod, SPIRVOpcodeTypeEnum.OpTextureSampleProjLodOffset, _
+			    SPIRVOpcodeTypeEnum.OpTextureSampleProjOffset, SPIRVOpcodeTypeEnum.OpUndef, _
+			    SPIRVOpcodeTypeEnum.OpVariable, SPIRVOpcodeTypeEnum.OpVariableArray, _
+			    SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, _
+			    SPIRVOpcodeTypeEnum.OpVectorShuffle
 			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
-			  case SPIRVOpcodeTypeEnum.OpCompositeConstruct
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
-			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			  case SPIRVOpcodeTypeEnum.OpDecorationGroup, SPIRVOpcodeTypeEnum.OpExtInstImport, _
+			    SPIRVOpcodeTypeEnum.OpLabel, SPIRVOpcodeTypeEnum.OpString, _
+			    SPIRVOpcodeTypeEnum.OpTypeArray, SPIRVOpcodeTypeEnum.OpTypeBool, _
+			    SPIRVOpcodeTypeEnum.OpTypeDeviceEvent, SPIRVOpcodeTypeEnum.OpTypeEvent, _
+			    SPIRVOpcodeTypeEnum.OpTypeFilter, SPIRVOpcodeTypeEnum.OpTypeFloat, _
+			    SPIRVOpcodeTypeEnum.OpTypeFunction, SPIRVOpcodeTypeEnum.OpTypeInt, _
+			    SPIRVOpcodeTypeEnum.OpTypeMatrix, SPIRVOpcodeTypeEnum.OpTypeOpaque, _
+			    SPIRVOpcodeTypeEnum.OpTypePipe, SPIRVOpcodeTypeEnum.OpTypePointer, _
+			    SPIRVOpcodeTypeEnum.OpTypeQueue, SPIRVOpcodeTypeEnum.OpTypeReserveId, _
+			    SPIRVOpcodeTypeEnum.OpTypeRuntimeArray. SPIRVOpcodeTypeEnum.OpTypeSampler, _
+			    SPIRVOpcodeTypeEnum.OpTypeStruct, SPIRVOpcodeTypeEnum.OpTypeVector, _
+			    SPIRVOpcodeTypeEnum.OpTypeVoid
 			    
-			  case SPIRVOpcodeTypeEnum.OpCompositeInsert
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpCopyObject
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpDecorationGroup
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
-			  case SPIRVOpcodeTypeEnum.OpExtInst
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpExtInstImport
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpFAdd
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpFMul
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpFSub
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpFunction
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpFunctionCall
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpIAdd
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpIMul
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpISub
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpLabel
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpLoad
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpPhi
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpSampler
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpSLessThan
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpSpecConstant, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
-			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantTrue
-			    
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpSpecConstantTrue
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpString
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureFetchBuffer
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureFetchSample
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureFetchTexel
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureGather
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureGatherOffset
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureGatherOffsets
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureQueryLevels
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureQueryLod
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureQuerySamples
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureQuerySize
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureQuerySizeLod
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSample
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleDref
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleGrad
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleLod
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleLodOffset
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleOffset
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProj
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjGradOffset
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjLod
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjLodOffset
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjOffset
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeArray
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeBool
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeDeviceEvent
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeEvent
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeFilter
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeFloat
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeFunction
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeInt
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeMatrix
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeOpaque
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypePipe
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypePointer
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeQueue
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeReserveId
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeRuntimeArray
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeSampler
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeStruct
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeVector
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpTypeVoid
-			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
-			    
-			  case SPIRVOpcodeTypeEnum.OpUndef
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpVariable
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpVariableArray
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpVectorExtractDynamic
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpVectorInsertDynamic
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
-			    
-			  case SPIRVOpcodeTypeEnum.OpVectorShuffle
-			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			  end select
 			  
