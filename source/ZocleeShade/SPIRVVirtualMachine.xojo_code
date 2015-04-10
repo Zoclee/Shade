@@ -517,6 +517,9 @@ Protected Class SPIRVVirtualMachine
 		        case 78 // ***** OpTextureSampleGradOffset ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset)
 		          
+		        case 79 // ***** OpTextureSampleProjLodOffset ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjLodOffset)
+		          
 		        case 93 // ***** OpAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
 		          
@@ -1433,6 +1436,17 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Sampler ID out of bounds.", "Sampler ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Coordinate ID out of bounds.", "Coordinate ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Level of Detail ID out of bounds.", "Level of Detail ID not found.")
+		      
+		      ' ***** OpTextureSampleProjLodOffset ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTextureSampleProjLodOffset
+		      validate_WordCountEqual(op, 7)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Sampler ID out of bounds.", "Sampler ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Coordinate ID out of bounds.", "Coordinate ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Level of Detail ID out of bounds.", "Level of Detail ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Offset ID out of bounds.", "Offset ID not found.")
 		      
 		      ' ***** OpTextureSampleProjOffset ***********************************************************************************
 		      
