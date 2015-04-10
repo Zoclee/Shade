@@ -523,6 +523,9 @@ Protected Class SPIRVVirtualMachine
 		        case 80 // ***** OpTextureSampleProjGradOffset ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjGradOffset)
 		          
+		        case 81 // ***** OpTextureFetchTexel ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchTexel)
+		          
 		        case 93 // ***** OpAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
 		          
@@ -1317,6 +1320,16 @@ Protected Class SPIRVVirtualMachine
 		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
 		        logError op, "Invalid string."
 		      end if
+		      
+		      ' ***** OpTextureFetchTexel ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTextureFetchTexel
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Sampler ID out of bounds.", "Sampler ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Coordinate ID out of bounds.", "Coordinate ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Level of Detail ID out of bounds.", "Level of Detail ID not found.")
 		      
 		      ' ***** OpTextureSample ***********************************************************************************
 		      
