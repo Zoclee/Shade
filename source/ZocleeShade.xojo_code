@@ -1907,6 +1907,7 @@ Protected Module ZocleeShade
 		  OpTextureGatherOffsets
 		  OpTextureQueryLevels
 		  OpTextureQueryLod
+		  OpTextureQuerySamples
 		  OpTextureQuerySize
 		  OpTextureQuerySizeLod
 		  OpTextureSample
