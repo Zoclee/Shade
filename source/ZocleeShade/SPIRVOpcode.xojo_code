@@ -769,6 +769,12 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 24)
 			    
+			    // ***** OpTextureQueryLevels *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpTextureQueryLevels
+			    result.Append "TextureQueryLevels "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpTextureQueryLod *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTextureQueryLod
@@ -1291,6 +1297,9 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpTextureGatherOffsets
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
+			  case SPIRVOpcodeTypeEnum.OpTextureQueryLevels
+			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
+			    
 			  case SPIRVOpcodeTypeEnum.OpTextureQueryLod
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -1459,7 +1468,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpTextureFetchSample, _
 			    SPIRVOpcodeTypeEnum.OpTextureFetchTexel, SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset, _
 			    SPIRVOpcodeTypeEnum.OpTextureGather, SPIRVOpcodeTypeEnum.OpTextureGatherOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureGatherOffsets, SPIRVOpcodeTypeEnum.OpTextureQueryLod, _
+			    SPIRVOpcodeTypeEnum.OpTextureGatherOffsets, SPIRVOpcodeTypeEnum.OpTextureQueryLevels, _
+			    SPIRVOpcodeTypeEnum.OpTextureQueryLod, _
 			    SPIRVOpcodeTypeEnum.OpTextureQuerySize, SPIRVOpcodeTypeEnum.OpTextureQuerySizeLod, _
 			    SPIRVOpcodeTypeEnum.OpTextureSample, SPIRVOpcodeTypeEnum.OpTextureSampleDref, _
 			    SPIRVOpcodeTypeEnum.OpTextureSampleGrad, SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset, _
