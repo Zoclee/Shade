@@ -1897,6 +1897,7 @@ Protected Module ZocleeShade
 		  OpNop
 		  OpNot
 		  OpPhi
+		  OpPtrCastToGeneric
 		  OpReturn
 		  OpSampler
 		  OpSConvert

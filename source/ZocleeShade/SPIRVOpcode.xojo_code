@@ -669,6 +669,12 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpPtrCastToGeneric *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpPtrCastToGeneric
+			    result.Append "PtrCastToGeneric "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpReturn *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpReturn
@@ -1304,6 +1310,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
+			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
 			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, _
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
@@ -1395,6 +1402,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
+			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
 			    SPIRVOpcodeTypeEnum.OpSampler, _
 			    SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSNegate, _
