@@ -1270,6 +1270,13 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpUndef
 			    result.Append "Undef"
 			    
+			    // ***** OpUnordered *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpUnordered
+			    result.Append "Unordered "
+			    result.Append compose_id(Offset + 12)
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpVariable *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpVariable
@@ -1402,6 +1409,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpTextureSampleProjOffset, SPIRVOpcodeTypeEnum.OpTranspose, _
 			    SPIRVOpcodeTypeEnum.OpUConvert, _
 			    SPIRVOpcodeTypeEnum.OpUndef, _
+			    SPIRVOpcodeTypeEnum.OpUnordered, _
 			    SPIRVOpcodeTypeEnum.OpVariable, SPIRVOpcodeTypeEnum.OpVariableArray, _
 			    SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, _
 			    SPIRVOpcodeTypeEnum.OpVectorShuffle
@@ -1508,6 +1516,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpTranspose, _
 			    SPIRVOpcodeTypeEnum.OpUConvert, _
 			    SPIRVOpcodeTypeEnum.OpUndef, _
+			    SPIRVOpcodeTypeEnum.OpUnordered, _
 			    SPIRVOpcodeTypeEnum.OpVariable, _
 			    SPIRVOpcodeTypeEnum.OpVariableArray, SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, _
 			    SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, SPIRVOpcodeTypeEnum.OpVectorShuffle
