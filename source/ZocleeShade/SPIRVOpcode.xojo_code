@@ -541,6 +541,12 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpIsFinite *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpIsFinite
+			    result.Append "IsFinite "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpIsInf *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpIsInf
@@ -1338,7 +1344,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFunctionCall, SPIRVOpcodeTypeEnum.OpFunctionParameter, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, SPIRVOpcodeTypeEnum.OpIMul, _
-			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpIsInf, _
+			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpIsFinite, _
+			    SPIRVOpcodeTypeEnum.OpIsInf, _
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
 			    SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
@@ -1435,7 +1442,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIMul, _
-			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpIsInf, _
+			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpIsFinite, _
+			    SPIRVOpcodeTypeEnum.OpIsInf, _
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
 			    SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _

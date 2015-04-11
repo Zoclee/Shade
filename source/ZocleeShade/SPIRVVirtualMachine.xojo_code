@@ -625,6 +625,9 @@ Protected Class SPIRVVirtualMachine
 		        case 114 // ***** OpIsInf ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsInf)
 		          
+		        case 115 // ***** OpIsFinite ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsFinite)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
@@ -1279,6 +1282,16 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Base ID out of bounds.", "Base ID not found.")
+		      
+		      ' ***** OpIsFinite ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpIsFinite
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "x ID out of bounds.", "x ID not declared.")
+		      // todo: Result Type must be a scalar or vector of Boolean type, with the same number of components as the operand.
+		      // todo: The operand’s type and Result Type must have the same number of components.
 		      
 		      ' ***** OpIsInf ***********************************************************************************
 		      

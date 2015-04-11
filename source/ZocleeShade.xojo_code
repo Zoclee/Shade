@@ -1887,6 +1887,7 @@ Protected Module ZocleeShade
 		  OpIAdd
 		  OpIMul
 		  OpInBoundsAccessChain
+		  OpIsFinite
 		  OpIsInf
 		  OpIsNan
 		  OpISub
