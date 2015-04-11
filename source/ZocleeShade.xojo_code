@@ -1860,6 +1860,7 @@ Protected Module ZocleeShade
 		  OpConvertPtrToU
 		  OpConvertSToF
 		  OpConvertUToF
+		  OpConvertUToPtr
 		  OpCopyMemory
 		  OpCopyMemorySized
 		  OpCopyObject

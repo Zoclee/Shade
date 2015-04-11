@@ -604,6 +604,9 @@ Protected Class SPIRVVirtualMachine
 		        case 107 // ***** OpConvertPtrToU ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertPtrToU)
 		          
+		        case 108 // ***** OpConvertUToPtr ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertUToPtr)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
@@ -935,6 +938,14 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Unsigned Value ID out of bounds.", "Unsigned Value ID not declared.")
 		      // todo: operand type and result type must have same number of components
+		      
+		      ' ***** OpConvertUToPtr ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpConvertUToPtr
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Integer Value ID out of bounds.", "Integer Value ID not declared.")
 		      
 		      ' ***** OpCopyMemory ***********************************************************************************
 		      
