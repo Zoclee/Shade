@@ -601,6 +601,9 @@ Protected Class SPIRVVirtualMachine
 		        case 106 // ***** OpFConvert ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFConvert)
 		          
+		        case 107 // ***** OpConvertPtrToU ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertPtrToU)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
@@ -905,6 +908,15 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Float Value ID out of bounds.", "Float Value ID not declared.")
 		      // todo: result type cannot be signed integer type
 		      // todo: operand type and result type must have same number of components
+		      
+		      ' ***** OpConvertPtrToU ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpConvertPtrToU
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Pointer ID out of bounds.", "Pointer ID not declared.")
+		      // todo: result type cannot be signed integer type
 		      
 		      ' ***** OpConvertSToF ***********************************************************************************
 		      
