@@ -616,6 +616,9 @@ Protected Class SPIRVVirtualMachine
 		        case 111 // ***** OpBitcast ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitcast)
 		          
+		        case 112 // ***** OpTranspose ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTranspose)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
@@ -1847,6 +1850,17 @@ Protected Class SPIRVVirtualMachine
 		      // todo: this opcode is only allowed under the fragment execution model
 		      // todo: offset must an <id> of an integer-based constant instruction of scalar or vector type
 		      // todo: number of components in Offset must equal the number of components in Coordinate, minus the array layer component, if present
+		      
+		      ' ***** OpTranspose ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTranspose
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Matrix ID out of bounds.", "Matrix ID not declared.")
+		      // todo: Matrix must be an intermediate <id> whose type comes from an OpTypeMatrix instruction.
+		      // todo: Result Type must be an <id> from an OpTypeMatrix instruction, where the number of columns and the column size is the reverse of those of the type of Matrix.
+		      
 		      
 		      ' ***** OpTypeArray ***********************************************************************************
 		      

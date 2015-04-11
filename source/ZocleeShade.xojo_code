@@ -1939,6 +1939,7 @@ Protected Module ZocleeShade
 		  OpTextureSampleProjLod
 		  OpTextureSampleProjLodOffset
 		  OpTextureSampleProjOffset
+		  OpTranspose
 		  OpTypeArray
 		  OpTypeBool
 		  OpTypeDeviceEvent
