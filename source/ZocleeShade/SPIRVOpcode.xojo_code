@@ -99,6 +99,14 @@ Protected Class SPIRVOpcode
 			    result.Append "Any "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpArrayLength *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpArrayLength
+			    result.Append "ArrayLength "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    
 			    // ***** OpBitcast *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpBitcast
@@ -1356,6 +1364,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAll, _
 			    SPIRVOpcodeTypeEnum.OpAny, _
+			    SPIRVOpcodeTypeEnum.OpArrayLength, _
 			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, _
 			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpCompositeInsert, _
@@ -1456,6 +1465,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAll, _
 			    SPIRVOpcodeTypeEnum.OpAny, _
+			    SPIRVOpcodeTypeEnum.OpArrayLength, _
 			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, SPIRVOpcodeTypeEnum.OpCompositeExtract, _
 			    SPIRVOpcodeTypeEnum.OpCompositeInsert, _

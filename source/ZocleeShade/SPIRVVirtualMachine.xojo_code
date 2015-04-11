@@ -643,6 +643,9 @@ Protected Class SPIRVVirtualMachine
 		        case 120 // ***** OpUnordered ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUnordered)
 		          
+		        case 121 // ***** OpArrayLength ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpArrayLength)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
@@ -794,6 +797,16 @@ Protected Class SPIRVVirtualMachine
 		          logError op, "Result Type must be a Boolean scalar type."
 		        end if
 		      end if
+		      
+		      ' ***** OpArrayLength ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpArrayLength
+		      validate_WordCountMinimum(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Structure ID out of bounds.", "Structure ID not declared.")
+		      // todo: Structure must be an object of type OpTypeStruct that contains a member that is a run-time array.
+		      // todo: Array member is a member number of Structure that must have a type from OpTypeRuntimeArray.
 		      
 		      ' ***** OpBitcast ***********************************************************************************
 		      
