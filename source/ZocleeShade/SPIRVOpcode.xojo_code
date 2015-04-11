@@ -700,6 +700,13 @@ Protected Class SPIRVOpcode
 			    result.Append "Not "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpOrdered *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpOrdered
+			    result.Append "Ordered "
+			    result.Append compose_id(Offset + 12)
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpPhi *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpPhi
@@ -1371,6 +1378,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
+			    SPIRVOpcodeTypeEnum.OpOrdered, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
 			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSConvert, _
@@ -1472,6 +1480,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
+			    SPIRVOpcodeTypeEnum.OpOrdered, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
 			    SPIRVOpcodeTypeEnum.OpSampler, _

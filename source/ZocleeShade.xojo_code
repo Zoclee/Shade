@@ -1903,6 +1903,7 @@ Protected Module ZocleeShade
 		  OpName
 		  OpNop
 		  OpNot
+		  OpOrdered
 		  OpPhi
 		  OpPtrCastToGeneric
 		  OpReturn
