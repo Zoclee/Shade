@@ -375,6 +375,12 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpFNegate *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFNegate
+			    result.Append "FNegate "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpFSub *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFSub
@@ -1209,6 +1215,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpConstantSampler, SPIRVOpcodeTypeEnum.OpConstantTrue, _
 			    SPIRVOpcodeTypeEnum.OpCopyObject, SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, SPIRVOpcodeTypeEnum.OpFMul, _
+			    SPIRVOpcodeTypeEnum.OpFNegate, _
 			    SPIRVOpcodeTypeEnum.OpFSub, SPIRVOpcodeTypeEnum.OpFunction, _
 			    SPIRVOpcodeTypeEnum.OpFunctionCall, SPIRVOpcodeTypeEnum.OpFunctionParameter, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, SPIRVOpcodeTypeEnum.OpIMul, _
@@ -1285,7 +1292,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpCopyObject, _
 			    SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, _
-			    SPIRVOpcodeTypeEnum.OpFMul, SPIRVOpcodeTypeEnum.OpFSub, _
+			    SPIRVOpcodeTypeEnum.OpFMul, _
+			    SPIRVOpcodeTypeEnum.OpFNegate, _
+			    SPIRVOpcodeTypeEnum.OpFSub, _
 			    SPIRVOpcodeTypeEnum.OpFunction, SPIRVOpcodeTypeEnum.OpFunctionCall, _
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIMul, _

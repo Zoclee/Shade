@@ -1865,6 +1865,7 @@ Protected Module ZocleeShade
 		  OpExtInstImport
 		  OpFAdd
 		  OpFMul
+		  OpFNegate
 		  OpFSub
 		  OpFunction
 		  OpFunctionCall
