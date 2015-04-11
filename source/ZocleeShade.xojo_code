@@ -1880,6 +1880,7 @@ Protected Module ZocleeShade
 		  OpFunctionCall
 		  OpFunctionEnd
 		  OpFunctionParameter
+		  OpGenericCastToPtr
 		  OpGroupDecorate
 		  OpGroupMemberDecorate
 		  OpIAdd

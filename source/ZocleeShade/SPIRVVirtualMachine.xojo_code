@@ -610,6 +610,9 @@ Protected Class SPIRVVirtualMachine
 		        case 109 // ***** OpPtrCastToGeneric ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpPtrCastToGeneric)
 		          
+		        case 110 // ***** OpGenericCastToPtr ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGenericCastToPtr)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
