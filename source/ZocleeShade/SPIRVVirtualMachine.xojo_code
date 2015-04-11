@@ -1192,6 +1192,17 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      
+		      ' ***** OpGenericCastToPtr ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGenericCastToPtr
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Source Pointer ID out of bounds.", "Source Pointer ID not declared.")
+		      // todo: Result Type must point to storage class WorkgroupLocal, WorkgroupGlobal or Private
+		      // todo: Result Type must be a pointer type pointing to storage class Generic
+		      // todo: Result Type and Source pointer must point to the same type.
+		      
 		      ' ***** OpGroupDecorate ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpGroupDecorate

@@ -242,7 +242,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** ConvertUToPtr *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.ConvertUToPtr
+			  case SPIRVOpcodeTypeEnum.OpConvertUToPtr
 			    result.Append "ConvertUToPtr "
 			    result.Append compose_id(Offset + 12)
 			    
@@ -473,6 +473,12 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
 			    result.Append "FunctionParameter"
+			    
+			    // ***** OpGenericCastToPtr *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGenericCastToPtr
+			    result.Append "GenericCastToPtr "
+			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGroupDecorate *************************************************
 			    
@@ -1305,6 +1311,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
 			    SPIRVOpcodeTypeEnum.OpFSub, SPIRVOpcodeTypeEnum.OpFunction, _
 			    SPIRVOpcodeTypeEnum.OpFunctionCall, SPIRVOpcodeTypeEnum.OpFunctionParameter, _
+			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
@@ -1346,7 +1353,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpTypeMatrix, SPIRVOpcodeTypeEnum.OpTypeOpaque, _
 			    SPIRVOpcodeTypeEnum.OpTypePipe, SPIRVOpcodeTypeEnum.OpTypePointer, _
 			    SPIRVOpcodeTypeEnum.OpTypeQueue, SPIRVOpcodeTypeEnum.OpTypeReserveId, _
-			    SPIRVOpcodeTypeEnum.OpTypeRuntimeArray. SPIRVOpcodeTypeEnum.OpTypeSampler, _
+			    SPIRVOpcodeTypeEnum.OpTypeRuntimeArray, SPIRVOpcodeTypeEnum.OpTypeSampler, _
 			    SPIRVOpcodeTypeEnum.OpTypeStruct, SPIRVOpcodeTypeEnum.OpTypeVector, _
 			    SPIRVOpcodeTypeEnum.OpTypeVoid
 			    
@@ -1396,7 +1403,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
 			    SPIRVOpcodeTypeEnum.OpFSub, _
 			    SPIRVOpcodeTypeEnum.OpFunction, SPIRVOpcodeTypeEnum.OpFunctionCall, _
-			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
+			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
+			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
