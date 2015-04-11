@@ -222,6 +222,12 @@ Protected Class SPIRVOpcode
 			    result.Append "ConvertFToU "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpConvertSToF *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpConvertSToF
+			    result.Append "ConvertSToF "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpCopyMemory *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpCopyMemory
@@ -1247,6 +1253,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpConstantSampler, SPIRVOpcodeTypeEnum.OpConstantTrue, _
 			    SPIRVOpcodeTypeEnum.OpConvertFToS, _
 			    SPIRVOpcodeTypeEnum.OpConvertFToU, _
+			    SPIRVOpcodeTypeEnum.OpConvertSToF, _
 			    SPIRVOpcodeTypeEnum.OpCopyObject, SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, SPIRVOpcodeTypeEnum.OpFMul, _
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
@@ -1328,6 +1335,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpConstantSampler, SPIRVOpcodeTypeEnum.OpConstantTrue, _
 			    SPIRVOpcodeTypeEnum.OpConvertFToS, _
 			    SPIRVOpcodeTypeEnum.OpConvertFToU, _
+			    SPIRVOpcodeTypeEnum.OpConvertSToF, _
 			    SPIRVOpcodeTypeEnum.OpCopyObject, _
 			    SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, _
