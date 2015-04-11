@@ -1856,6 +1856,7 @@ Protected Module ZocleeShade
 		  OpConstantTrue
 		  OpConstantComposite
 		  OpConvertFToU
+		  OpConvertFToS
 		  OpCopyMemory
 		  OpCopyMemorySized
 		  OpCopyObject
