@@ -1870,6 +1870,7 @@ Protected Module ZocleeShade
 		  OpExtInst
 		  OpExtInstImport
 		  OpFAdd
+		  OpFConvert
 		  OpFMul
 		  OpFNegate
 		  OpFSub
