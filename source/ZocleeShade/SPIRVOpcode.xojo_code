@@ -664,6 +664,12 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpSConvert *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSConvert
+			    result.Append "SConvert "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpSelectionMerge *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSelectionMerge
@@ -1277,7 +1283,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
-			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSLessThan, _
+			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSConvert, _
+			    SPIRVOpcodeTypeEnum.OpSLessThan, _
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
@@ -1365,6 +1372,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpNot, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpSampler, _
+			    SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _

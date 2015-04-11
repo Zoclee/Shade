@@ -1896,6 +1896,7 @@ Protected Module ZocleeShade
 		  OpPhi
 		  OpReturn
 		  OpSampler
+		  OpSConvert
 		  OpSelectionMerge
 		  OpSLessThan
 		  OpSNegate

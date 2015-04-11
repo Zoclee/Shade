@@ -595,6 +595,9 @@ Protected Class SPIRVVirtualMachine
 		        case 104 // ***** OpUConvert ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUConvert)
 		          
+		        case 105 // ***** OpSConvert ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSConvert)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
@@ -1352,6 +1355,16 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Filter ID out of bounds.", "Filter ID not found.")
 		      // todo: validate that sampler object type is OpTypeFilter
 		      
+		      ' ***** OpSConvert ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSConvert
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Signed Value ID out of bounds.", "Signed Value ID not declared.")
+		      // todo: operand type and result type must have same number of components
+		      // todo: widts of components op operand and result type must be different
+		      
 		      ' ***** OpSelectionMerge ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpSelectionMerge
@@ -1962,7 +1975,7 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Unsigned Value ID out of bounds.", "Unsigned Value ID not declared.")
 		      // todo: operand type and result type must have same number of components
 		      // todo: widts of components op operand and result type must be different
-		      // todo: Result type cannot be integer
+		      // todo: Result type cannot be signed integer
 		      
 		      ' ***** OpUndef ***********************************************************************************
 		      
