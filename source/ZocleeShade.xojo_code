@@ -1951,6 +1951,7 @@ Protected Module ZocleeShade
 		  OpTypeStruct
 		  OpTypeVector
 		  OpTypeVoid
+		  OpUConvert
 		  OpUndef
 		  OpVariable
 		  OpVariableArray
