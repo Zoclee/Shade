@@ -1858,6 +1858,7 @@ Protected Module ZocleeShade
 		  OpConvertFToU
 		  OpConvertFToS
 		  OpConvertSToF
+		  OpConvertUToF
 		  OpCopyMemory
 		  OpCopyMemorySized
 		  OpCopyObject
