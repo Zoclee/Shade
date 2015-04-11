@@ -559,6 +559,12 @@ Protected Class SPIRVOpcode
 			    result.Append "IsNan "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpIsNormal *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpIsNormal
+			    result.Append "IsNormal "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpISub *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpISub
@@ -1347,6 +1353,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpIsFinite, _
 			    SPIRVOpcodeTypeEnum.OpIsInf, _
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
+			    SPIRVOpcodeTypeEnum.OpIsNormal, _
 			    SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
@@ -1445,6 +1452,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpIsFinite, _
 			    SPIRVOpcodeTypeEnum.OpIsInf, _
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
+			    SPIRVOpcodeTypeEnum.OpIsNormal, _
 			    SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpNot, _

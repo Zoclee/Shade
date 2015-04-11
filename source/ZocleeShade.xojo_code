@@ -1890,6 +1890,7 @@ Protected Module ZocleeShade
 		  OpIsFinite
 		  OpIsInf
 		  OpIsNan
+		  OpIsNormal
 		  OpISub
 		  OpLabel
 		  OpLine
