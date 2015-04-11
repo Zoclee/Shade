@@ -580,6 +580,9 @@ Protected Class SPIRVVirtualMachine
 		        case 99 // ***** OpAll ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAll)
 		          
+		        case 100 // ***** OpConvertFToU ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertFToU)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
@@ -865,6 +868,16 @@ Protected Class SPIRVVirtualMachine
 		          logError op, "Expected scalar Boolean type."
 		        end if
 		      end if
+		      
+		      ' ***** OpConvertFToU ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpConvertFToU
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Float Value ID out of bounds.", "Float Value ID not declared.")
+		      // todo: result type cannot be signed integer type
+		      // todo: operand type and result type must have same number of components
 		      
 		      ' ***** OpCopyMemory ***********************************************************************************
 		      
