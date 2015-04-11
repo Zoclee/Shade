@@ -738,6 +738,12 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append SPIRVDescribeSelectionControl(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpSignBitSet *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSignBitSet
+			    result.Append "SignBitSet "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpSLessThan *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSLessThan
@@ -1360,6 +1366,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
 			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSConvert, _
+			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, _
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
@@ -1460,6 +1467,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
 			    SPIRVOpcodeTypeEnum.OpSampler, _
 			    SPIRVOpcodeTypeEnum.OpSConvert, _
+			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _

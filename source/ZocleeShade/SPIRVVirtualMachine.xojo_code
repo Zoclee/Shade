@@ -631,6 +631,9 @@ Protected Class SPIRVVirtualMachine
 		        case 116 // ***** OpIsNormal ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsNormal)
 		          
+		        case 117 // ***** OpSignBitSet ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSignBitSet)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
@@ -1507,6 +1510,16 @@ Protected Class SPIRVVirtualMachine
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
 		        logError op, "Invalid Selection Control enumeration value."
 		      end if
+		      
+		      ' ***** OpSignBitSet ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSignBitSet
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "x ID out of bounds.", "x ID not declared.")
+		      // todo: Result Type must be a scalar or vector of Boolean type, with the same number of components as the operand.
+		      // todo: The operand’s type and Result Type must have the same number of components.
 		      
 		      ' ***** OpSLessThan ***********************************************************************************
 		      

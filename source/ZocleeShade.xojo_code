@@ -1908,6 +1908,7 @@ Protected Module ZocleeShade
 		  OpSampler
 		  OpSConvert
 		  OpSelectionMerge
+		  OpSignBitSet
 		  OpSLessThan
 		  OpSNegate
 		  OpSource
