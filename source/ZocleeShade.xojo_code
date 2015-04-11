@@ -1886,6 +1886,7 @@ Protected Module ZocleeShade
 		  OpMemoryModel
 		  OpName
 		  OpNop
+		  OpNot
 		  OpPhi
 		  OpReturn
 		  OpSampler

@@ -597,6 +597,12 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpNop
 			    result.Append "Nop"
 			    
+			    // ***** OpNot *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpNot
+			    result.Append "Not "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpPhi *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpPhi
@@ -1220,7 +1226,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFunctionCall, SPIRVOpcodeTypeEnum.OpFunctionParameter, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
-			    SPIRVOpcodeTypeEnum.OpLoad, SPIRVOpcodeTypeEnum.OpPhi, _
+			    SPIRVOpcodeTypeEnum.OpLoad, _
+			    SPIRVOpcodeTypeEnum.OpNot, _
+			    SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSLessThan, _
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
@@ -1299,7 +1307,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
-			    SPIRVOpcodeTypeEnum.OpLoad, SPIRVOpcodeTypeEnum.OpPhi, _
+			    SPIRVOpcodeTypeEnum.OpLoad, _
+			    SPIRVOpcodeTypeEnum.OpNot, _
+			    SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpSampler, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, _
