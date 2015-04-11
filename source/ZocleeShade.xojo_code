@@ -1893,6 +1893,7 @@ Protected Module ZocleeShade
 		  OpIsNormal
 		  OpISub
 		  OpLabel
+		  OpLessOrGreater
 		  OpLine
 		  OpLoad
 		  OpLoopMerge

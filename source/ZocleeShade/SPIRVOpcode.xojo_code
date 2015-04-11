@@ -578,6 +578,13 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpLabel
 			    result.Append "Label"
 			    
+			    // ***** OpLessOrGreater *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpLessOrGreater
+			    result.Append "LessOrGreater "
+			    result.Append compose_id(Offset + 12)
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpLine *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpLine
@@ -1361,6 +1368,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
 			    SPIRVOpcodeTypeEnum.OpIsNormal, _
 			    SPIRVOpcodeTypeEnum.OpISub, _
+			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
@@ -1461,6 +1469,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
 			    SPIRVOpcodeTypeEnum.OpIsNormal, _
 			    SPIRVOpcodeTypeEnum.OpISub, _
+			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
