@@ -565,6 +565,9 @@ Protected Class SPIRVVirtualMachine
 		        case 94 // ***** OpInBoundsAccessChain ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpInBoundsAccessChain)
 		          
+		        case 95 // ***** OpSNegate ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSNegate)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
@@ -1256,6 +1259,15 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
+		      
+		      ' ***** OpSNegate ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSNegate
+		      validate_WordCountEqual(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand ID out of bounds.", "Operand ID not found.")
+		      // todo: Result Type must be scalars or vectors of integer types
 		      
 		      ' ***** OpSource ***********************************************************************************
 		      

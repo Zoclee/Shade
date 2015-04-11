@@ -632,6 +632,12 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpSNegate *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSNegate
+			    result.Append "SNegate "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpSource *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSource
@@ -1209,6 +1215,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSLessThan, _
+			    SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
 			    SPIRVOpcodeTypeEnum.OpTextureFetchBuffer, SPIRVOpcodeTypeEnum.OpTextureFetchSample, _
@@ -1285,7 +1292,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLoad, SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpSampler, _
-			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSpecConstant, _
+			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSNegate, _
+			    SPIRVOpcodeTypeEnum.OpSpecConstant, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
 			    SPIRVOpcodeTypeEnum.OpTextureFetchBuffer, _
@@ -1460,44 +1468,52 @@ Protected Class SPIRVOpcode
 				"60 - OpTextureFetchSample"
 				"61 - OpTextureFetchTexel"
 				"62 - OpTextureFetchTexelOffset"
-				"63 - OpTextureSample"
-				"64 - OpTextureSampleDref"
-				"65 - OpTextureSampleGrad"
-				"66 - OpTextureSampleGradOffset"
-				"67 - OpTextureSampleLod"
-				"68 - OpTextureSampleLodOffset"
-				"69 - OpTextureSampleOffset"
-				"70 - OpTextureSampleProj"
-				"71 - OpTextureSampleProjGrad"
-				"72 - OpTextureSampleProjGradOffset"
-				"73 - OpTextureSampleProjLod"
-				"74 - OpTextureSampleProjLodOffset"
-				"75 - OpTextureSampleProjOffset"
-				"76 - OpTypeArray"
-				"77 - OpTypeBool"
-				"78 - OpTypeDeviceEvent"
-				"79 - OpTypeEvent"
-				"80 - OpTypeFilter"
-				"81 - OpTypeFloat"
-				"82 - OpTypeFunction"
-				"83 - OpTypeInt"
-				"84 - OpTypeMatrix"
-				"85 - OpTypeOpaque"
-				"86 - OpTypePipe"
-				"87 - OpTypePointer"
-				"88 - OpTypeQueue"
-				"89 - OpTypeReserveId"
-				"90 - OpTypeRuntimeArray"
-				"91 - OpTypeSampler"
-				"92 - OpTypeStruct"
-				"93 - OpTypeVector"
-				"94 - OpTypeVoid"
-				"95 - OpUndef"
-				"96 - OpVariable"
-				"97 - OpVariableArray"
-				"98 - OpVectorExtractDynamic"
-				"99 - OpVectorInsertDynamic"
-				"100 - OpVectorShuffle"
+				"63 - OpTextureGather"
+				"64 - OpTextureGatherOffset"
+				"65 - OpTextureGatherOffsets"
+				"66 - OpTextureQueryLevels"
+				"67 - OpTextureQueryLod"
+				"68 - OpTextureQuerySamples"
+				"69 - OpTextureQuerySize"
+				"70 - OpTextureQuerySizeLod"
+				"71 - OpTextureSample"
+				"72 - OpTextureSampleDref"
+				"73 - OpTextureSampleGrad"
+				"74 - OpTextureSampleGradOffset"
+				"75 - OpTextureSampleLod"
+				"76 - OpTextureSampleLodOffset"
+				"77 - OpTextureSampleOffset"
+				"78 - OpTextureSampleProj"
+				"79 - OpTextureSampleProjGrad"
+				"80 - OpTextureSampleProjGradOffset"
+				"81 - OpTextureSampleProjLod"
+				"82 - OpTextureSampleProjLodOffset"
+				"83 - OpTextureSampleProjOffset"
+				"84 - OpTypeArray"
+				"85 - OpTypeBool"
+				"86 - OpTypeDeviceEvent"
+				"87 - OpTypeEvent"
+				"88 - OpTypeFilter"
+				"89 - OpTypeFloat"
+				"90 - OpTypeFunction"
+				"91 - OpTypeInt"
+				"92 - OpTypeMatrix"
+				"93 - OpTypeOpaque"
+				"94 - OpTypePipe"
+				"95 - OpTypePointer"
+				"96 - OpTypeQueue"
+				"97 - OpTypeReserveId"
+				"98 - OpTypeRuntimeArray"
+				"99 - OpTypeSampler"
+				"100 - OpTypeStruct"
+				"101 - OpTypeVector"
+				"102 - OpTypeVoid"
+				"103 - OpUndef"
+				"104 - OpVariable"
+				"105 - OpVariableArray"
+				"106 - OpVectorExtractDynamic"
+				"107 - OpVectorInsertDynamic"
+				"108 - OpVectorShuffle"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

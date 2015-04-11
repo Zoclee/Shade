@@ -1890,6 +1890,7 @@ Protected Module ZocleeShade
 		  OpSampler
 		  OpSelectionMerge
 		  OpSLessThan
+		  OpSNegate
 		  OpSource
 		  OpSourceExtension
 		  OpSpecConstant
