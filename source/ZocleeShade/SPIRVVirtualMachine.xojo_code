@@ -574,6 +574,9 @@ Protected Class SPIRVVirtualMachine
 		        case 97 // ***** OpNot ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpNot)
 		          
+		        case 98 // ***** OpAny ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAny)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
@@ -697,6 +700,20 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Base ID out of bounds.", "Base ID not declared.")
+		      
+		      ' ***** OpAny ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpAny
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Vector ID out of bounds.", "Vector ID not declared.")
+		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
+		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
+		        if typ.Type <> SPIRVTypeEnum.Boolean then
+		          logError op, "Result Type must be a Boolean scalar type."
+		        end if
+		      end if
 		      
 		      ' ***** OpBranch ***********************************************************************************
 		      

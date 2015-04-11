@@ -87,6 +87,12 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpAccessChain *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpAny
+			    result.Append "Any "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpBranch *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpBranch
@@ -1213,7 +1219,8 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
-			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpCompositeConstruct, _
+			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAny, _
+			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, _
 			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpCompositeInsert, _
 			    SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
 			    SPIRVOpcodeTypeEnum.OpConstantFalse, SPIRVOpcodeTypeEnum.OpConstantNullObject, _
@@ -1290,7 +1297,7 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
-			  case SPIRVOpcodeTypeEnum.OpAccessChain, _
+			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAny, _
 			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, SPIRVOpcodeTypeEnum.OpCompositeExtract, _
 			    SPIRVOpcodeTypeEnum.OpCompositeInsert, _
 			    SPIRVOpcodeTypeEnum.OpConstant, _
