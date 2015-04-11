@@ -99,6 +99,12 @@ Protected Class SPIRVOpcode
 			    result.Append "Any "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpBitcast *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpBitcast
+			    result.Append "Bitcast "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpBranch *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpBranch
@@ -1293,6 +1299,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAll, _
 			    SPIRVOpcodeTypeEnum.OpAny, _
+			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, _
 			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpCompositeInsert, _
 			    SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
@@ -1383,6 +1390,7 @@ Protected Class SPIRVOpcode
 			    
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAll, _
 			    SPIRVOpcodeTypeEnum.OpAny, _
+			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, SPIRVOpcodeTypeEnum.OpCompositeExtract, _
 			    SPIRVOpcodeTypeEnum.OpCompositeInsert, _
 			    SPIRVOpcodeTypeEnum.OpConstant, _

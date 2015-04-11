@@ -1843,6 +1843,7 @@ Protected Module ZocleeShade
 		  OpAccessChain
 		  OpAll
 		  OpAny
+		  OpBitcast
 		  OpBranch
 		  OpBranchConditional
 		  OpCompositeConstruct

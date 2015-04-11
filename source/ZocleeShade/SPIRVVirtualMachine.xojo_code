@@ -613,6 +613,9 @@ Protected Class SPIRVVirtualMachine
 		        case 110 // ***** OpGenericCastToPtr ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGenericCastToPtr)
 		          
+		        case 111 // ***** OpBitcast ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitcast)
+		          
 		        case 122 // ***** OpIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
@@ -764,6 +767,18 @@ Protected Class SPIRVVirtualMachine
 		          logError op, "Result Type must be a Boolean scalar type."
 		        end if
 		      end if
+		      
+		      ' ***** OpBitcast ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpBitcast
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand ID out of bounds.", "Operand ID not declared.")
+		      // todo: Result Type must be different than the type of Operand.
+		      // todo: Both Result Type and the type of Operand must be Numerical-types or pointer types.
+		      // todo: The components of Operand and Result Type must be same bit width.
+		      // todo: operand type and result type must have same number of components
 		      
 		      ' ***** OpBranch ***********************************************************************************
 		      
