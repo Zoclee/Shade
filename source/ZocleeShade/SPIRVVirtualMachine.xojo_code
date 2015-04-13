@@ -700,6 +700,9 @@ Protected Class SPIRVVirtualMachine
 		        case 139 // ***** OpMatrixTimesVector ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMatrixTimesVector)
 		          
+		        case 140 // ***** OpMatrixTimesMatrix ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMatrixTimesMatrix)
+		          
 		        case 160 // ***** OpSLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
@@ -1468,6 +1471,18 @@ Protected Class SPIRVVirtualMachine
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
 		        logError op, "Invalid Loop Control enumeration value."
 		      end if
+		      
+		      ' ***** OpMatrixTimesMatrix ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpMatrixTimesMatrix
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "LeftMatrix ID out of bounds.", "LeftMatrix ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "RightMatrix ID out of bounds.", "RightMatrix ID not found.")
+		      // todo: LeftMatrix and RightMatrix must both have a floating-point matrix type.
+		      // todo: The number of columns of LeftMatrix must equal the number of rows of RightMatrix.
+		      // todo: Result Type must be a matrix whose number of columns is the number of columns in RightMatrix and whose number of rows is the number of rows of LeftMatrix.
 		      
 		      ' ***** OpMatrixTimesScalar ***********************************************************************************
 		      
