@@ -718,6 +718,9 @@ Protected Class SPIRVVirtualMachine
 		        case 145 // ***** OpShiftLeftLogical ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpShiftLeftLogical)
 		          
+		        case 146 // ***** OpLogicalOr ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLogicalOr)
+		          
 		        case 160 // ***** OpSLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
@@ -1488,6 +1491,17 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Pointer ID out of bounds.", "Pointer ID not found.")
+		      
+		      ' ***** OpLogicalOr ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpLogicalOr
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
+		      // todo: Operand 1 and Operand 2 must both be scalars or vectors of Boolean type.
+		      // todo: Result Type must be a scalar or vector of Boolean type, with the same number of components as the operands.
 		      
 		      ' ***** OpLoopMerge ***********************************************************************************
 		      
