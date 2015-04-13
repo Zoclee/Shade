@@ -752,6 +752,14 @@ Protected Class SPIRVOpcode
 			    result.Append "SConvert "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpSDiv *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSDiv
+			    result.Append "SDiv "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpSelectionMerge *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSelectionMerge
@@ -1406,6 +1414,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
 			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSConvert, _
+			    SPIRVOpcodeTypeEnum.OpSDiv, _
 			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, _
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
@@ -1512,6 +1521,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
 			    SPIRVOpcodeTypeEnum.OpSampler, _
 			    SPIRVOpcodeTypeEnum.OpSConvert, _
+			    SPIRVOpcodeTypeEnum.OpSDiv, _
 			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, _

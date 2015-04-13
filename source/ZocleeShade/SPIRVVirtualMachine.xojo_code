@@ -667,6 +667,9 @@ Protected Class SPIRVVirtualMachine
 		        case 128 // ***** OpUDiv ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUDiv)
 		          
+		        case 129 // ***** OpSDiv ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSDiv)
+		          
 		        case 160 // ***** OpSLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
@@ -1548,6 +1551,16 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Signed Value ID out of bounds.", "Signed Value ID not declared.")
 		      // todo: operand type and result type must have same number of components
 		      // todo: widts of components op operand and result type must be different
+		      
+		      ' ***** OpSDiv ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSDiv
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
+		      // todo: The operands’ types and Result Type must all be scalars or vectors of integer types with the same number of components and the same component widths.
 		      
 		      ' ***** OpSelectionMerge ***********************************************************************************
 		      
