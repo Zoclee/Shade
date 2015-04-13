@@ -694,6 +694,9 @@ Protected Class SPIRVVirtualMachine
 		        case 137 // ***** OpMatrixTimesScalar ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMatrixTimesScalar)
 		          
+		        case 138 // ***** OpVectorTimesMatrix ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorTimesMatrix)
+		          
 		        case 160 // ***** OpSLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
@@ -2374,6 +2377,18 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Vector 2 ID out of bounds.", "Vector 2 ID not declared.")
 		      // todo: validate that vectors has same component type
 		      // todo: validate that components are not out of bounds
+		      
+		      ' ***** OpVectorTimesMatrix ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpVectorTimesMatrix
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Vector ID out of bounds.", "Vector ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Matrix ID out of bounds.", "Matrix ID not found.")
+		      // todo: Vector must have a floating-point vector type.
+		      // todo: Matrix must have a floating-point matrix type.
+		      // todo: Result Type must be a vector whose size is the number of columns in the matrix.
 		      
 		      ' ***** OpVectorTimesScalar ***********************************************************************************
 		      

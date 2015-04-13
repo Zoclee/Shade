@@ -1984,6 +1984,7 @@ Protected Module ZocleeShade
 		  OpVectorExtractDynamic
 		  OpVectorInsertDynamic
 		  OpVectorShuffle
+		  OpVectorTimesMatrix
 		OpVectorTimesScalar
 	#tag EndEnum
 

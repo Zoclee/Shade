@@ -1417,6 +1417,15 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpVectorTimesMatrix *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpVectorTimesMatrix
+			    result.Append "VectorTimesMatrix "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
+			    
 			  case else
 			    result.Append "Unknown"
 			    
@@ -1512,7 +1521,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpUnordered, _
 			    SPIRVOpcodeTypeEnum.OpVariable, SPIRVOpcodeTypeEnum.OpVariableArray, _
 			    SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, _
-			    SPIRVOpcodeTypeEnum.OpVectorShuffle, SPIRVOpcodeTypeEnum.OpVectorTimesScalar
+			    SPIRVOpcodeTypeEnum.OpVectorShuffle, _
+			    SPIRVOpcodeTypeEnum.OpVectorTimesMatrix, _
+			    SPIRVOpcodeTypeEnum.OpVectorTimesScalar
 			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -1630,6 +1641,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpVariable, _
 			    SPIRVOpcodeTypeEnum.OpVariableArray, SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, _
 			    SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, SPIRVOpcodeTypeEnum.OpVectorShuffle, _
+			    SPIRVOpcodeTypeEnum.OpVectorTimesMatrix, _
 			    SPIRVOpcodeTypeEnum.OpVectorTimesScalar
 			    
 			    result = compose_type(Offset + 4)
