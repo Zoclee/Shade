@@ -435,6 +435,14 @@ Protected Class SPIRVOpcode
 			    result.Append "FConvert "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpFDiv *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFDiv
+			    result.Append "FDiv "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpFMul *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFMul
@@ -1396,6 +1404,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpConvertUToPtr, _
 			    SPIRVOpcodeTypeEnum.OpCopyObject, SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, SPIRVOpcodeTypeEnum.OpFConvert, _
+			    SPIRVOpcodeTypeEnum.OpFDiv, _
 			    SPIRVOpcodeTypeEnum.OpFMul, _
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
 			    SPIRVOpcodeTypeEnum.OpFSub, SPIRVOpcodeTypeEnum.OpFunction, _
@@ -1501,6 +1510,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, _
 			    SPIRVOpcodeTypeEnum.OpFConvert, _
+			    SPIRVOpcodeTypeEnum.OpFDiv, _
 			    SPIRVOpcodeTypeEnum.OpFMul, _
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
 			    SPIRVOpcodeTypeEnum.OpFSub, _

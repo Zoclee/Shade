@@ -1875,6 +1875,7 @@ Protected Module ZocleeShade
 		  OpExtInstImport
 		  OpFAdd
 		  OpFConvert
+		  OpFDiv
 		  OpFMul
 		  OpFNegate
 		  OpFSub
