@@ -651,6 +651,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpMatrixTimesVector *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpMatrixTimesVector
+			    result.Append "MatrixTimesVector "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpMemberDecorate *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpMemberDecorate
@@ -1488,6 +1496,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpMatrixTimesScalar, _
+			    SPIRVOpcodeTypeEnum.OpMatrixTimesVector, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
 			    SPIRVOpcodeTypeEnum.OpOrdered, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
@@ -1603,6 +1612,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpMatrixTimesScalar, _
+			    SPIRVOpcodeTypeEnum.OpMatrixTimesVector, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
 			    SPIRVOpcodeTypeEnum.OpOrdered, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _

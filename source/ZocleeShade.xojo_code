@@ -1902,6 +1902,7 @@ Protected Module ZocleeShade
 		  OpLoad
 		  OpLoopMerge
 		  OpMatrixTimesScalar
+		  OpMatrixTimesVector
 		  OpMemberDecorate
 		  OpMemberName
 		  OpMemoryModel
