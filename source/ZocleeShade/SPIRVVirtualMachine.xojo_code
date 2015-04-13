@@ -712,6 +712,9 @@ Protected Class SPIRVVirtualMachine
 		        case 143 // ***** OpDot ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpShiftRightLogical)
 		          
+		        case 144 // ***** OpShiftRightArithmetic ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpShiftRightArithmetic)
+		          
 		        case 160 // ***** OpSLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
@@ -1702,6 +1705,17 @@ Protected Class SPIRVVirtualMachine
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
 		        logError op, "Invalid Selection Control enumeration value."
 		      end if
+		      
+		      ' ***** OpShiftRightArithmetic ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpShiftRightArithmetic
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
+		      // todo: The number of components and bit width of Result Type must match those of Operand 1 type.
+		      // todo: All types must be integer types.
 		      
 		      ' ***** OpShiftRightLogical ***********************************************************************************
 		      
