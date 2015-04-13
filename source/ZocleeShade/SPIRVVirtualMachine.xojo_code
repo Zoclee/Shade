@@ -703,6 +703,9 @@ Protected Class SPIRVVirtualMachine
 		        case 140 // ***** OpMatrixTimesMatrix ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMatrixTimesMatrix)
 		          
+		        case 141 // ***** OpOuterProduct ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpOuterProduct)
+		          
 		        case 160 // ***** OpSLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
@@ -1599,6 +1602,17 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "y ID out of bounds.", "y ID not declared.")
 		      // todo: Result Type must be a scalar or vector of Boolean type, with the same number of components as the operands.
 		      // todo: The operands’ types and Result Type must all have the same number of components.
+		      
+		      ' ***** OpOuterProduct ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpOuterProduct
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Vector 1 ID out of bounds.", "Vector 1 ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Vector 2 ID out of bounds.", "Vector 2 ID not found.")
+		      // todo: The vectors' types must be floating-point vectors with the same component type and the same number of components.
+		      // todo: Result Type must be a matrix type. Its number of columns must equal the number of components in Vector 2. The vector type of its columns must be the same as the type of Vector 1.
 		      
 		      ' ***** OpPhi ***********************************************************************************
 		      

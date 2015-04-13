@@ -1911,6 +1911,7 @@ Protected Module ZocleeShade
 		  OpNop
 		  OpNot
 		  OpOrdered
+		  OpOuterProduct
 		  OpPhi
 		  OpPtrCastToGeneric
 		  OpReturn
