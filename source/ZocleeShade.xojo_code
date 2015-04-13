@@ -1968,6 +1968,7 @@ Protected Module ZocleeShade
 		  OpTypeVector
 		  OpTypeVoid
 		  OpUConvert
+		  OpUDiv
 		  OpUndef
 		  OpUnordered
 		  OpVariable
