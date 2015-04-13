@@ -1920,6 +1920,7 @@ Protected Module ZocleeShade
 		  OpSConvert
 		  OpSDiv
 		  OpSelectionMerge
+		  OpShiftRightLogical
 		  OpSignBitSet
 		  OpSLessThan
 		  OpSNegate

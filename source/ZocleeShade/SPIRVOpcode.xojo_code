@@ -833,6 +833,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append SPIRVDescribeSelectionControl(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpShiftRightLogical *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpShiftRightLogical
+			    result.Append "ShiftRightLogical "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpSignBitSet *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSignBitSet
@@ -1531,6 +1539,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
 			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSDiv, _
+			    SPIRVOpcodeTypeEnum.OpShiftRightLogical, _
 			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, _
 			    SPIRVOpcodeTypeEnum.OpSMod, _
@@ -1651,6 +1660,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpSampler, _
 			    SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSDiv, _
+			    SPIRVOpcodeTypeEnum.OpShiftRightLogical, _
 			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSMod, _
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
