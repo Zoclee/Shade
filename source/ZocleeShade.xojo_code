@@ -1916,6 +1916,7 @@ Protected Module ZocleeShade
 		  OpSignBitSet
 		  OpSLessThan
 		  OpSNegate
+		  OpSMod
 		  OpSource
 		  OpSourceExtension
 		  OpSpecConstant

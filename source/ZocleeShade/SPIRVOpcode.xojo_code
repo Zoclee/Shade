@@ -790,6 +790,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpSMod *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSMod
+			    result.Append "SMod "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpSNegate *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSNegate
@@ -1442,6 +1450,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpSDiv, _
 			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, _
+			    SPIRVOpcodeTypeEnum.OpSMod, _
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
@@ -1551,7 +1560,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSDiv, _
 			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
-			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSNegate, _
+			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSMod, _
+			    SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
