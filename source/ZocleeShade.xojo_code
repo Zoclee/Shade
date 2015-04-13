@@ -1878,6 +1878,7 @@ Protected Module ZocleeShade
 		  OpFDiv
 		  OpFMul
 		  OpFNegate
+		  OpFRem
 		  OpFSub
 		  OpFunction
 		  OpFunctionCall

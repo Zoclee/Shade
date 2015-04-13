@@ -457,6 +457,14 @@ Protected Class SPIRVOpcode
 			    result.Append "FNegate "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpFRem *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFRem
+			    result.Append "FRem "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpFSub *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFSub
@@ -1431,6 +1439,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFDiv, _
 			    SPIRVOpcodeTypeEnum.OpFMul, _
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
+			    SPIRVOpcodeTypeEnum.OpFRem, _
 			    SPIRVOpcodeTypeEnum.OpFSub, SPIRVOpcodeTypeEnum.OpFunction, _
 			    SPIRVOpcodeTypeEnum.OpFunctionCall, SPIRVOpcodeTypeEnum.OpFunctionParameter, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
@@ -1540,6 +1549,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFDiv, _
 			    SPIRVOpcodeTypeEnum.OpFMul, _
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
+			    SPIRVOpcodeTypeEnum.OpFRem, _
 			    SPIRVOpcodeTypeEnum.OpFSub, _
 			    SPIRVOpcodeTypeEnum.OpFunction, SPIRVOpcodeTypeEnum.OpFunctionCall, _
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
