@@ -643,6 +643,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append SPIRVDescribeLoopControl(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpMatrixTimesScalar *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpMatrixTimesScalar
+			    result.Append "MatrixTimesScalar "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpMemberDecorate *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpMemberDecorate
@@ -1470,6 +1478,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
+			    SPIRVOpcodeTypeEnum.OpMatrixTimesScalar, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
 			    SPIRVOpcodeTypeEnum.OpOrdered, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
@@ -1582,6 +1591,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
+			    SPIRVOpcodeTypeEnum.OpMatrixTimesScalar, _
 			    SPIRVOpcodeTypeEnum.OpNot, _
 			    SPIRVOpcodeTypeEnum.OpOrdered, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _

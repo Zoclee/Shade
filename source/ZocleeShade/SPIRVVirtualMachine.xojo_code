@@ -691,6 +691,9 @@ Protected Class SPIRVVirtualMachine
 		        case 136 // ***** OpVectorTimesScalar ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorTimesScalar)
 		          
+		        case 137 // ***** OpMatrixTimesScalar ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMatrixTimesScalar)
+		          
 		        case 160 // ***** OpSLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
@@ -1459,6 +1462,18 @@ Protected Class SPIRVVirtualMachine
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
 		        logError op, "Invalid Loop Control enumeration value."
 		      end if
+		      
+		      ' ***** OpMatrixTimesScalar ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpMatrixTimesScalar
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Matrix ID out of bounds.", "Vector ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Scalar ID out of bounds.", "Scalar ID not found.")
+		      // todo: Matrix must have a floating-point matrix type.
+		      // todo: Scalar must be a floating-point scalar.
+		      // todo: Result Type must be the same as the type of Vector.
 		      
 		      ' ***** OpMemberDecorate ***********************************************************************************
 		      
