@@ -1876,6 +1876,7 @@ Protected Module ZocleeShade
 		  OpFAdd
 		  OpFConvert
 		  OpFDiv
+		  OpFMod
 		  OpFMul
 		  OpFNegate
 		  OpFRem
@@ -1981,7 +1982,8 @@ Protected Module ZocleeShade
 		  OpVariableArray
 		  OpVectorExtractDynamic
 		  OpVectorInsertDynamic
-		OpVectorShuffle
+		  OpVectorShuffle
+		OpVectorTimesScalar
 	#tag EndEnum
 
 	#tag Enum, Name = SPIRVTypeEnum, Type = Integer, Flags = &h0

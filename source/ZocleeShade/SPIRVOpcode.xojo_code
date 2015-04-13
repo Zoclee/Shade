@@ -443,6 +443,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpFMod *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFMod
+			    result.Append "FMod "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpFMul *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFMul
@@ -729,6 +737,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpOrdered
 			    result.Append "Ordered "
 			    result.Append compose_id(Offset + 12)
+			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
 			    // ***** OpPhi *************************************************
@@ -1339,6 +1348,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpUnordered
 			    result.Append "Unordered "
 			    result.Append compose_id(Offset + 12)
+			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
 			    // ***** OpVariable *************************************************
@@ -1391,6 +1401,14 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpVectorTimesScalar *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpVectorTimesScalar
+			    result.Append "VectorTimesScalar "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			  case else
 			    result.Append "Unknown"
 			    
@@ -1437,6 +1455,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpCopyObject, SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, SPIRVOpcodeTypeEnum.OpFConvert, _
 			    SPIRVOpcodeTypeEnum.OpFDiv, _
+			    SPIRVOpcodeTypeEnum.OpFMod, _
 			    SPIRVOpcodeTypeEnum.OpFMul, _
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
 			    SPIRVOpcodeTypeEnum.OpFRem, _
@@ -1484,7 +1503,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpUnordered, _
 			    SPIRVOpcodeTypeEnum.OpVariable, SPIRVOpcodeTypeEnum.OpVariableArray, _
 			    SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, _
-			    SPIRVOpcodeTypeEnum.OpVectorShuffle
+			    SPIRVOpcodeTypeEnum.OpVectorShuffle, SPIRVOpcodeTypeEnum.OpVectorTimesScalar
 			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -1547,6 +1566,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFAdd, _
 			    SPIRVOpcodeTypeEnum.OpFConvert, _
 			    SPIRVOpcodeTypeEnum.OpFDiv, _
+			    SPIRVOpcodeTypeEnum.OpFMod, _
 			    SPIRVOpcodeTypeEnum.OpFMul, _
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
 			    SPIRVOpcodeTypeEnum.OpFRem, _
@@ -1599,7 +1619,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpUnordered, _
 			    SPIRVOpcodeTypeEnum.OpVariable, _
 			    SPIRVOpcodeTypeEnum.OpVariableArray, SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, _
-			    SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, SPIRVOpcodeTypeEnum.OpVectorShuffle
+			    SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, SPIRVOpcodeTypeEnum.OpVectorShuffle, _
+			    SPIRVOpcodeTypeEnum.OpVectorTimesScalar
 			    
 			    result = compose_type(Offset + 4)
 			    

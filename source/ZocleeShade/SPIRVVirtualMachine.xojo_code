@@ -685,6 +685,12 @@ Protected Class SPIRVVirtualMachine
 		        case 134 // ***** OpFRem ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFRem)
 		          
+		        case 135 // ***** OpFMul ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFMul)
+		          
+		        case 136 // ***** OpVectorTimesScalar ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorTimesScalar)
+		          
 		        case 160 // ***** OpSLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
@@ -1185,6 +1191,7 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
+		      // todo: The operands’ types and Result Type must all be scalars or vectors of floating-point types with the same number of components and the same component widths.
 		      
 		      ' ***** OpFConvert ***********************************************************************************
 		      
@@ -1204,7 +1211,17 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
-		      // todo: The operands’ types and Result Type must all be scalars or vectors of integer types with the same number of components and the same component widths.
+		      // todo: The operands’ types and Result Type must all be scalars or vectors of floating-point types with the same number of components and the same component widths.
+		      
+		      ' ***** OpFMod ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpFMod
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
+		      // todo: The operands’ types and Result Type must all be scalars or vectors of floating-point types with the same number of components and the same component widths.
 		      
 		      ' ***** OpFMul ***********************************************************************************
 		      
@@ -1214,6 +1231,7 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
+		      // todo: The operands’ types and Result Type must all be scalars or vectors of floating-point types with the same number of components and the same component widths.
 		      
 		      ' ***** OpFNegate ***********************************************************************************
 		      
@@ -1222,7 +1240,7 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand ID out of bounds.", "Operand ID not found.")
-		      // todo: Result Type must be scalars or vectors of floatint-point types
+		      // todo: The operand type and Result Type must be scalars or vectors of floating-point types with the same number of components and the same component widths.
 		      
 		      ' ***** OpFRem ***********************************************************************************
 		      
@@ -2341,6 +2359,18 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Vector 2 ID out of bounds.", "Vector 2 ID not declared.")
 		      // todo: validate that vectors has same component type
 		      // todo: validate that components are not out of bounds
+		      
+		      ' ***** OpVectorTimesScalar ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpVectorTimesScalar
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Vector ID out of bounds.", "Vector ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Scalar ID out of bounds.", "Scalar ID not found.")
+		      // todo: Vector must have a floating-point vector type.
+		      // todo: Scalar must be a floating-point scalar.
+		      // todo: Result Type must be the same as the type of Vector.
 		      
 		    case else
 		      logError op, "Unknown opcode type."
