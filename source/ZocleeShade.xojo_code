@@ -1922,6 +1922,7 @@ Protected Module ZocleeShade
 		  OpSpecConstantComposite
 		  OpSpecConstantFalse
 		  OpSpecConstantTrue
+		  OpSRem
 		  OpStore
 		  OpString
 		  OpTextureFetchBuffer

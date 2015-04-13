@@ -839,6 +839,14 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpSpecConstantTrue
 			    result.Append "SpecConstantTrue"
 			    
+			    // ***** OpSRem *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSRem
+			    result.Append "SRem "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpStore *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpStore
@@ -1437,6 +1445,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
+			    SPIRVOpcodeTypeEnum.OpSRem, _
 			    SPIRVOpcodeTypeEnum.OpTextureFetchBuffer, SPIRVOpcodeTypeEnum.OpTextureFetchSample, _
 			    SPIRVOpcodeTypeEnum.OpTextureFetchTexel, SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset, _
 			    SPIRVOpcodeTypeEnum.OpTextureGather, SPIRVOpcodeTypeEnum.OpTextureGatherOffset, _
@@ -1546,6 +1555,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
+			    SPIRVOpcodeTypeEnum.OpSRem, _
 			    SPIRVOpcodeTypeEnum.OpTextureFetchBuffer, _
 			    SPIRVOpcodeTypeEnum.OpTextureFetchSample, _
 			    SPIRVOpcodeTypeEnum.OpTextureFetchTexel, SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset, _
