@@ -351,6 +351,14 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpDecorationGroup
 			    result.Append "DecorationGroup"
 			    
+			    // ***** OpDot *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpDot
+			    result.Append "Dot "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpEntryPoint *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpEntryPoint
@@ -1493,7 +1501,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpConvertSToF, _
 			    SPIRVOpcodeTypeEnum.OpConvertUToF, _
 			    SPIRVOpcodeTypeEnum.OpConvertUToPtr, _
-			    SPIRVOpcodeTypeEnum.OpCopyObject, SPIRVOpcodeTypeEnum.OpExtInst, _
+			    SPIRVOpcodeTypeEnum.OpCopyObject, _
+			    SPIRVOpcodeTypeEnum.OpDot, _
+			    SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, SPIRVOpcodeTypeEnum.OpFConvert, _
 			    SPIRVOpcodeTypeEnum.OpFDiv, _
 			    SPIRVOpcodeTypeEnum.OpFMod, _
@@ -1609,6 +1619,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpConvertUToF, _
 			    SPIRVOpcodeTypeEnum.OpConvertUToPtr, _
 			    SPIRVOpcodeTypeEnum.OpCopyObject, _
+			    SPIRVOpcodeTypeEnum.OpDot, _
 			    SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, _
 			    SPIRVOpcodeTypeEnum.OpFConvert, _

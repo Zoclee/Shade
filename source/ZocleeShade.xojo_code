@@ -1868,6 +1868,7 @@ Protected Module ZocleeShade
 		  OpCopyObject
 		  OpDecorate
 		  OpDecorationGroup
+		  OpDot
 		  OpEntryPoint
 		  OpExecutionMode
 		  OpExtension
