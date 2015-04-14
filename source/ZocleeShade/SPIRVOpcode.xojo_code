@@ -643,6 +643,14 @@ Protected Class SPIRVOpcode
 			    result.Append "Load "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpLogicalAnd *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpLogicalAnd
+			    result.Append "LogicalAnd "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpLogicalOr *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpLogicalOr
@@ -1561,6 +1569,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
+			    SPIRVOpcodeTypeEnum.OpLogicalAnd, _
 			    SPIRVOpcodeTypeEnum.OpLogicalOr, _
 			    SPIRVOpcodeTypeEnum.OpLogicalXor, _
 			    SPIRVOpcodeTypeEnum.OpMatrixTimesMatrix, _
@@ -1685,6 +1694,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpISub, _
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
+			    SPIRVOpcodeTypeEnum.OpLogicalAnd, _
 			    SPIRVOpcodeTypeEnum.OpLogicalOr, _
 			    SPIRVOpcodeTypeEnum.OpLogicalXor, _
 			    SPIRVOpcodeTypeEnum.OpMatrixTimesMatrix, _
