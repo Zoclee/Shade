@@ -1902,6 +1902,7 @@ Protected Module ZocleeShade
 		  OpLine
 		  OpLoad
 		  OpLogicalOr
+		  OpLogicalXor
 		  OpLoopMerge
 		  OpMatrixTimesMatrix
 		  OpMatrixTimesScalar
