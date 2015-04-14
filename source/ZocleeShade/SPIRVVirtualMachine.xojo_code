@@ -709,7 +709,7 @@ Protected Class SPIRVVirtualMachine
 		        case 142 // ***** OpDot ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDot)
 		          
-		        case 143 // ***** OpDot ***************************************************
+		        case 143 // ***** OpShiftRightLogical ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpShiftRightLogical)
 		          
 		        case 144 // ***** OpShiftRightArithmetic ***************************************************
