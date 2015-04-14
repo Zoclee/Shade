@@ -1,1 +1,2 @@
 The test files obtained from the LunarGLASS project is released under a BSD-style license.
+See http://www.lunarglass.org for more information.
