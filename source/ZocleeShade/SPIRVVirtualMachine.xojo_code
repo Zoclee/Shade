@@ -769,6 +769,9 @@ Protected Class SPIRVVirtualMachine
 		        case 162 // ***** OpFUnordLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordLessThan)
 		          
+		        case 163 // ***** OpUGreaterThan ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUGreaterThan)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -2601,6 +2604,16 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
 		      // todo: The operands’ types and Result Type must all be scalars or vectors of integer types with the same number of components and the same component widths.
 		      // todo: The operands’ types and Result Type cannot be signed types.
+		      
+		      ' ***** OpUGreaterThan ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpUGreaterThan
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
+		      // todo: Result Type must be a scalar or vector of Boolean type, with the same number of components as the operands.
 		      
 		      ' ***** OpULessThan ***********************************************************************************
 		      

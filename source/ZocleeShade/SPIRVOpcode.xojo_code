@@ -1518,6 +1518,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpUGreaterThan *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpUGreaterThan
+			    result.Append "UGreaterThan "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpULessThan *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpULessThan
@@ -1729,6 +1737,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpTextureSampleProjOffset, SPIRVOpcodeTypeEnum.OpTranspose, _
 			    SPIRVOpcodeTypeEnum.OpUConvert, _
 			    SPIRVOpcodeTypeEnum.OpUDiv, _
+			    SPIRVOpcodeTypeEnum.OpUGreaterThan, _
 			    SPIRVOpcodeTypeEnum.OpULessThan, _
 			    SPIRVOpcodeTypeEnum.OpUMod, _
 			    SPIRVOpcodeTypeEnum.OpUndef, _
@@ -1873,6 +1882,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpTranspose, _
 			    SPIRVOpcodeTypeEnum.OpUConvert, _
 			    SPIRVOpcodeTypeEnum.OpUDiv, _
+			    SPIRVOpcodeTypeEnum.OpUGreaterThan, _
 			    SPIRVOpcodeTypeEnum.OpULessThan, _
 			    SPIRVOpcodeTypeEnum.OpUMod, _
 			    SPIRVOpcodeTypeEnum.OpUndef, _
