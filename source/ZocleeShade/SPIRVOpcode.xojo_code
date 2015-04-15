@@ -554,6 +554,14 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
 			    result.Append "FunctionParameter"
 			    
+			    // ***** OpFUnordEqual *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFUnordEqual
+			    result.Append "FUnordEqual "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpGenericCastToPtr *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGenericCastToPtr
@@ -1616,6 +1624,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFRem, _
 			    SPIRVOpcodeTypeEnum.OpFSub, SPIRVOpcodeTypeEnum.OpFunction, _
 			    SPIRVOpcodeTypeEnum.OpFunctionCall, SPIRVOpcodeTypeEnum.OpFunctionParameter, _
+			    SPIRVOpcodeTypeEnum.OpFOrdEqual, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _
@@ -1747,7 +1756,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFRem, _
 			    SPIRVOpcodeTypeEnum.OpFSub, _
 			    SPIRVOpcodeTypeEnum.OpFunction, SPIRVOpcodeTypeEnum.OpFunctionCall, _
-			    SPIRVOpcodeTypeEnum.OpFunctionParameter, SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
+			    SPIRVOpcodeTypeEnum.OpFunctionParameter, _
+			    SPIRVOpcodeTypeEnum.OpFOrdEqual, _
+			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _
 			    SPIRVOpcodeTypeEnum.OpIMul, _
