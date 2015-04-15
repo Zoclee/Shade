@@ -733,6 +733,9 @@ Protected Class SPIRVVirtualMachine
 		        case 150 // ***** OpBitwiseXor ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitwiseXor)
 		          
+		        case 150 // ***** OpBitwiseAnd ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitwiseAnd)
+		          
 		        case 160 // ***** OpSLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
@@ -889,6 +892,16 @@ Protected Class SPIRVVirtualMachine
 		      // todo: The components of Operand and Result Type must be same bit width.
 		      // todo: operand type and result type must have same number of components
 		      
+		      ' ***** OpBitwiseAnd ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpBitwiseAnd
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
+		      // todo: The operands’ types and Result Type must all be scalars or vectors of integer types with the same number of components and the same component widths.
+		      
 		      ' ***** OpBitwiseOr ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpBitwiseOr
@@ -897,7 +910,7 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
-		      // todo: The operands’ types and Result Type must all be scalars or vectors of integer types with the same number of components and the same component widths
+		      // todo: The operands’ types and Result Type must all be scalars or vectors of integer types with the same number of components and the same component widths.
 		      
 		      ' ***** OpBitwiseXor ***********************************************************************************
 		      

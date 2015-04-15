@@ -1845,6 +1845,7 @@ Protected Module ZocleeShade
 		  OpAny
 		  OpArrayLength
 		  OpBitcast
+		  OpBitwiseAnd
 		  OpBitwiseOr
 		  OpBitwiseXor
 		  OpBranch
