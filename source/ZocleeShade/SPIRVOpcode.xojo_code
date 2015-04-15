@@ -507,6 +507,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpFOrdGreaterThan *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFOrdGreaterThan
+			    result.Append "FOrdGreaterThan "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpFOrdLessThan *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFOrdLessThan
@@ -1686,6 +1694,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFMul, _
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
 			    SPIRVOpcodeTypeEnum.OpFOrdEqual, _
+			    SPIRVOpcodeTypeEnum.OpFOrdGreaterThan, _
 			    SPIRVOpcodeTypeEnum.OpFOrdLessThan, _
 			    SPIRVOpcodeTypeEnum.OpFOrdNotEqual, _
 			    SPIRVOpcodeTypeEnum.OpFRem, _
@@ -1827,6 +1836,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFMul, _
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
 			    SPIRVOpcodeTypeEnum.OpFOrdEqual, _
+			    SPIRVOpcodeTypeEnum.OpFOrdGreaterThan, _
 			    SPIRVOpcodeTypeEnum.OpFOrdLessThan, _
 			    SPIRVOpcodeTypeEnum.OpFOrdNotEqual, _
 			    SPIRVOpcodeTypeEnum.OpFRem, _
