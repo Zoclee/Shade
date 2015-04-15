@@ -507,6 +507,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpFOrdNotEqual *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFOrdNotEqual
+			    result.Append "FOrdNotEqual "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpFRem *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpFRem
@@ -1629,6 +1637,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFMul, _
 			    SPIRVOpcodeTypeEnum.OpFNegate, _
 			    SPIRVOpcodeTypeEnum.OpFOrdEqual, _
+			    SPIRVOpcodeTypeEnum.OpFOrdNotEqual, _
 			    SPIRVOpcodeTypeEnum.OpFRem, _
 			    SPIRVOpcodeTypeEnum.OpFSub, SPIRVOpcodeTypeEnum.OpFunction, _
 			    SPIRVOpcodeTypeEnum.OpFunctionCall, SPIRVOpcodeTypeEnum.OpFunctionParameter, _
@@ -1768,6 +1777,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFunction, SPIRVOpcodeTypeEnum.OpFunctionCall, _
 			    SPIRVOpcodeTypeEnum.OpFunctionParameter, _
 			    SPIRVOpcodeTypeEnum.OpFOrdEqual, _
+			    SPIRVOpcodeTypeEnum.OpFOrdNotEqual, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _
