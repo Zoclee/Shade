@@ -2002,6 +2002,7 @@ Protected Module ZocleeShade
 		  OpUConvert
 		  OpUDiv
 		  OpUGreaterThan
+		  OpULessThanEqual
 		  OpULessThan
 		  OpUMod
 		  OpUndef
