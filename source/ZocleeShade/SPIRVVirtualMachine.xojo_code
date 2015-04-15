@@ -1387,7 +1387,6 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
 		      // todo: Result Type must be a scalar or vector of Boolean type, with the same number of components as the operands.
 		      
-		      
 		      ' ***** OpFOrdLessThan ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpFOrdLessThan
