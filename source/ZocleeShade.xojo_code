@@ -1893,6 +1893,7 @@ Protected Module ZocleeShade
 		  OpGroupDecorate
 		  OpGroupMemberDecorate
 		  OpIAdd
+		  OpIEqual
 		  OpIMul
 		  OpInBoundsAccessChain
 		  OpIsFinite
