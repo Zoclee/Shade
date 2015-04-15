@@ -733,7 +733,7 @@ Protected Class SPIRVVirtualMachine
 		        case 150 // ***** OpBitwiseXor ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitwiseXor)
 		          
-		        case 150 // ***** OpBitwiseAnd ***************************************************
+		        case 151 // ***** OpBitwiseAnd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitwiseAnd)
 		          
 		        case 160 // ***** OpSLessThan ***************************************************
