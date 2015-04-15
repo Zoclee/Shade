@@ -1996,6 +1996,7 @@ Protected Module ZocleeShade
 		  OpTypeVoid
 		  OpUConvert
 		  OpUDiv
+		  OpULessThan
 		  OpUMod
 		  OpUndef
 		  OpUnordered
