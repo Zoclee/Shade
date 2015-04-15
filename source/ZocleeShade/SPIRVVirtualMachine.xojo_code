@@ -1652,9 +1652,6 @@ Protected Class SPIRVVirtualMachine
 		      
 		    case SPIRVOpcodeTypeEnum.OpName
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not found.")
-		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
-		        logError op, "Invalid name."
-		      end if
 		      
 		      ' ***** OpNop ***********************************************************************************
 		      

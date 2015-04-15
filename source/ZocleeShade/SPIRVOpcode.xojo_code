@@ -9,9 +9,11 @@ Protected Class SPIRVOpcode
 		  
 		  result.Append Str(VM.ModuleBinary.UInt32Value(binOffset))
 		  if VM.Names.HasKey(VM.ModuleBinary.UInt32Value(binOffset)) then
-		    result.Append "("
-		    result.Append VM.Names.Value(VM.ModuleBinary.UInt32Value(binOffset))
-		    result.Append ")"
+		    if Trim(VM.Names.Value(VM.ModuleBinary.UInt32Value(binOffset))) <> "" then
+		      result.Append "("
+		      result.Append VM.Names.Value(VM.ModuleBinary.UInt32Value(binOffset))
+		      result.Append ")"
+		    end if
 		  end if
 		  
 		  return Join(result, "")
