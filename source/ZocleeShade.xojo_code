@@ -1883,6 +1883,7 @@ Protected Module ZocleeShade
 		  OpFMod
 		  OpFMul
 		  OpFNegate
+		  OpFOrdEqual
 		  OpFRem
 		  OpFSub
 		  OpFunction
