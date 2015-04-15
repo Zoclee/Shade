@@ -123,6 +123,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpBitwiseXor *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpBitwiseXor
+			    result.Append "BitwiseXor "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpBranch *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpBranch
@@ -1548,6 +1556,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpArrayLength, _
 			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseOr, _
+			    SPIRVOpcodeTypeEnum.OpBitwiseXor, _
 			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, _
 			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpCompositeInsert, _
 			    SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
@@ -1672,6 +1681,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpArrayLength, _
 			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseOr, _
+			    SPIRVOpcodeTypeEnum.OpBitwiseXor, _
 			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, SPIRVOpcodeTypeEnum.OpCompositeExtract, _
 			    SPIRVOpcodeTypeEnum.OpCompositeInsert, _
 			    SPIRVOpcodeTypeEnum.OpConstant, _

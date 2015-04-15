@@ -1846,6 +1846,7 @@ Protected Module ZocleeShade
 		  OpArrayLength
 		  OpBitcast
 		  OpBitwiseOr
+		  OpBitwiseXor
 		  OpBranch
 		  OpBranchConditional
 		  OpCompositeConstruct
