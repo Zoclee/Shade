@@ -631,6 +631,14 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpINotEqual *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpINotEqual
+			    result.Append "INotEqual "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpIsFinite *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpIsFinite
@@ -1629,7 +1637,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _
 			    SPIRVOpcodeTypeEnum.OpIMul, _
-			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpIsFinite, _
+			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, _
+			    SPIRVOpcodeTypeEnum.OpINotEqual, _
+			    SPIRVOpcodeTypeEnum.OpIsFinite, _
 			    SPIRVOpcodeTypeEnum.OpIsInf, _
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
 			    SPIRVOpcodeTypeEnum.OpIsNormal, _
@@ -1762,7 +1772,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _
 			    SPIRVOpcodeTypeEnum.OpIMul, _
-			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, SPIRVOpcodeTypeEnum.OpIsFinite, _
+			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, _
+			    SPIRVOpcodeTypeEnum.OpINotEqual, _
+			    SPIRVOpcodeTypeEnum.OpIsFinite, _
 			    SPIRVOpcodeTypeEnum.OpIsInf, _
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
 			    SPIRVOpcodeTypeEnum.OpIsNormal, _
