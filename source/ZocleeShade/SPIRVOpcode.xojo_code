@@ -1020,6 +1020,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpSLessThanEqual *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSLessThanEqual
+			    result.Append "SLessThanEqual "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpSMod *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSMod
@@ -1753,6 +1761,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
 			    SPIRVOpcodeTypeEnum.OpSGreaterThan, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, _
+			    SPIRVOpcodeTypeEnum.OpSLessThanEqual, _
 			    SPIRVOpcodeTypeEnum.OpSMod, _
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
@@ -1898,7 +1907,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpShiftRightLogical, _
 			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
 			    SPIRVOpcodeTypeEnum.OpSGreaterThan, _
-			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSMod, _
+			    SPIRVOpcodeTypeEnum.OpSLessThan, _
+			    SPIRVOpcodeTypeEnum.OpSLessThanEqual, _
+			    SPIRVOpcodeTypeEnum.OpSMod, _
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
