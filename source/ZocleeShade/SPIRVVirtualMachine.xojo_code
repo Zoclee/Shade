@@ -736,6 +736,9 @@ Protected Class SPIRVVirtualMachine
 		        case 151 // ***** OpBitwiseAnd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitwiseAnd)
 		          
+		        case 152 // ***** OpSelect ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSelect)
+		          
 		        case 160 // ***** OpSLessThan ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
@@ -1777,6 +1780,18 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
 		      // todo: The operands’ types and Result Type must all be scalars or vectors of integer types with the same number of components and the same component widths.
+		      
+		      ' ***** OpSelect ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSelect
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Condtion ID out of bounds.", "Condtion ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Object 1 ID out of bounds.", "Object 1 ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Object 2 ID out of bounds.", "Object 2 ID not found.")
+		      // todo: Result Type, the type of Object 1, and the type of Object 2 must all be the same.
+		      // todo: Condition must have the same number of components as the operands
 		      
 		      ' ***** OpSelectionMerge ***********************************************************************************
 		      

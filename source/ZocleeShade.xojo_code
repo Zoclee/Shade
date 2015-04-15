@@ -1925,6 +1925,7 @@ Protected Module ZocleeShade
 		  OpSampler
 		  OpSConvert
 		  OpSDiv
+		  OpSelect
 		  OpSelectionMerge
 		  OpShiftLeftLogical
 		  OpShiftRightArithmetic
