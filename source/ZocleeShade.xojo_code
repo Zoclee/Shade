@@ -1939,6 +1939,7 @@ Protected Module ZocleeShade
 		  OpShiftRightArithmetic
 		  OpShiftRightLogical
 		  OpSignBitSet
+		  OpSGreaterThan
 		  OpSLessThan
 		  OpSNegate
 		  OpSMod

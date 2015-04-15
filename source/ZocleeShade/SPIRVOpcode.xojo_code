@@ -957,6 +957,15 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append SPIRVDescribeSelectionControl(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpSGreaterThan *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSGreaterThan
+			    result.Append "SGreaterThan "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
+			    
 			    // ***** OpShiftLeftLogical *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpShiftLeftLogical
@@ -1716,6 +1725,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpShiftRightArithmetic, _
 			    SPIRVOpcodeTypeEnum.OpShiftRightLogical, _
 			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
+			    SPIRVOpcodeTypeEnum.OpSGreaterThan, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, _
 			    SPIRVOpcodeTypeEnum.OpSMod, _
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
@@ -1858,6 +1868,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpShiftRightArithmetic, _
 			    SPIRVOpcodeTypeEnum.OpShiftRightLogical, _
 			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
+			    SPIRVOpcodeTypeEnum.OpSGreaterThan, _
 			    SPIRVOpcodeTypeEnum.OpSLessThan, SPIRVOpcodeTypeEnum.OpSMod, _
 			    SPIRVOpcodeTypeEnum.OpSNegate, _
 			    SPIRVOpcodeTypeEnum.OpSpecConstant, _
