@@ -1894,6 +1894,7 @@ Protected Module ZocleeShade
 		  OpFunctionEnd
 		  OpFunctionParameter
 		  OpFUnordEqual
+		  OpFUnordGreaterThan
 		  OpFUnordLessThan
 		  OpFUnordNotEqual
 		  OpGenericCastToPtr
