@@ -1873,6 +1873,7 @@ Protected Module ZocleeShade
 		  OpDecorationGroup
 		  OpDot
 		  OpDPdx
+		  OpDPdy
 		  OpEntryPoint
 		  OpExecutionMode
 		  OpExtension
