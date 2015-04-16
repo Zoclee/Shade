@@ -1944,6 +1944,7 @@ Protected Module ZocleeShade
 		  OpShiftRightLogical
 		  OpSignBitSet
 		  OpSGreaterThan
+		  OpSGreaterThanEqual
 		  OpSLessThan
 		  OpSLessThanEqual
 		  OpSNegate
