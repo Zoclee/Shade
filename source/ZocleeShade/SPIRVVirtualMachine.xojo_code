@@ -820,6 +820,9 @@ Protected Class SPIRVVirtualMachine
 		        case 179 // ***** OpDPdyFine ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdyFine)
 		          
+		        case 180 // ***** OpFwidthFine ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFwidthFine)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -1634,6 +1637,15 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpFwidth ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpFwidth
+		      validate_WordCountEqual(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "P ID out of bounds.", "P ID not found.")
+		      // todo: Result Type must be the same as the type of P. This type must be a floating-point scalar or floating-point vector.
+		      
+		      ' ***** OpFwidthFine ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpFwidthFine
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))

@@ -673,6 +673,12 @@ Protected Class SPIRVOpcode
 			    result.Append "Fwidth "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpFwidthFine *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpFwidthFine
+			    result.Append "FwidthFine "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpGenericCastToPtr *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGenericCastToPtr
@@ -1812,7 +1818,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFUnordLessThan, _
 			    SPIRVOpcodeTypeEnum.OpFUnordLessThanEqual, _
 			    SPIRVOpcodeTypeEnum.OpFUnordNotEqual, _
-			    SPIRVOpcodeTypeEnum.OpFwidth, _
+			    SPIRVOpcodeTypeEnum.OpFwidth, SPIRVOpcodeTypeEnum.OpFwidthFine, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _
@@ -1967,7 +1973,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFUnordLessThan, _
 			    SPIRVOpcodeTypeEnum.OpFUnordLessThanEqual, _
 			    SPIRVOpcodeTypeEnum.OpFUnordNotEqual, _
-			    SPIRVOpcodeTypeEnum.OpFwidth, _
+			    SPIRVOpcodeTypeEnum.OpFwidth, SPIRVOpcodeTypeEnum.OpFwidthFine, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _

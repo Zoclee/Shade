@@ -1906,6 +1906,7 @@ Protected Module ZocleeShade
 		  OpFUnordLessThanEqual
 		  OpFUnordNotEqual
 		  OpFwidth
+		  OpFwidthFine
 		  OpGenericCastToPtr
 		  OpGroupDecorate
 		  OpGroupMemberDecorate
