@@ -1885,6 +1885,7 @@ Protected Module ZocleeShade
 		  OpFNegate
 		  OpFOrdEqual
 		  OpFOrdGreaterThan
+		  OpFOrdGreaterThanEqual
 		  OpFOrdLessThan
 		  OpFOrdLessThanEqual
 		  OpFOrdNotEqual
