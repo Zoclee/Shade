@@ -1873,6 +1873,7 @@ Protected Module ZocleeShade
 		  OpDecorationGroup
 		  OpDot
 		  OpDPdx
+		  OpDPdxCoarse
 		  OpDPdxFine
 		  OpDPdy
 		  OpDPdyFine
