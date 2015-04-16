@@ -1897,6 +1897,7 @@ Protected Module ZocleeShade
 		  OpFunctionParameter
 		  OpFUnordEqual
 		  OpFUnordGreaterThan
+		  OpFUnordGreaterThanEqual
 		  OpFUnordLessThan
 		  OpFUnordLessThanEqual
 		  OpFUnordNotEqual
