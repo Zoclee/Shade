@@ -391,6 +391,12 @@ Protected Class SPIRVOpcode
 			    result.Append "DPdx "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpDPdxFine *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpDPdxFine
+			    result.Append "DPdxFine "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpDPdy *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpDPdy
@@ -1777,7 +1783,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpConvertUToPtr, _
 			    SPIRVOpcodeTypeEnum.OpCopyObject, _
 			    SPIRVOpcodeTypeEnum.OpDot, _
-			    SPIRVOpcodeTypeEnum.OpDPdx, SPIRVOpcodeTypeEnum.OpDPdy, _
+			    SPIRVOpcodeTypeEnum.OpDPdx, SPIRVOpcodeTypeEnum.OpDPdxFine, _
+			    SPIRVOpcodeTypeEnum.OpDPdy, _
 			    SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, SPIRVOpcodeTypeEnum.OpFConvert, _
 			    SPIRVOpcodeTypeEnum.OpFDiv, _
@@ -1929,7 +1936,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpConvertUToPtr, _
 			    SPIRVOpcodeTypeEnum.OpCopyObject, _
 			    SPIRVOpcodeTypeEnum.OpDot, _
-			    SPIRVOpcodeTypeEnum.OpDPdx, SPIRVOpcodeTypeEnum.OpDPdy, _
+			    SPIRVOpcodeTypeEnum.OpDPdx, SPIRVOpcodeTypeEnum.OpDPdxFine, _
+			    SPIRVOpcodeTypeEnum.OpDPdy, _
 			    SPIRVOpcodeTypeEnum.OpExtInst, _
 			    SPIRVOpcodeTypeEnum.OpFAdd, _
 			    SPIRVOpcodeTypeEnum.OpFConvert, _
