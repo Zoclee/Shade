@@ -1875,6 +1875,7 @@ Protected Module ZocleeShade
 		  OpDPdx
 		  OpDPdxFine
 		  OpDPdy
+		  OpDPdyFine
 		  OpEntryPoint
 		  OpExecutionMode
 		  OpExtension
