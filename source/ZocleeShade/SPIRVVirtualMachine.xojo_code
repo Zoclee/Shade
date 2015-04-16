@@ -805,6 +805,9 @@ Protected Class SPIRVVirtualMachine
 		        case 174 // ***** OpFUnordGreaterThanEqual ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordGreaterThanEqual)
 		          
+		        case 175 // ***** OpDPdx ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdx)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -1268,6 +1271,15 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Vector 2 ID out of bounds.", "Vector 2 ID not found.")
 		      // todo: The operands’ types must be floating-point vectors with the same component type and the same number of components.
 		      // todo: Result Type must be a scalar of the same type as the operands’ component type.
+		      
+		      ' ***** OpDPdx ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpDPdx
+		      validate_WordCountEqual(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "P ID out of bounds.", "P ID not found.")
+		      // todo: Result Type must be the same as the type of P. This type must be a floating-point scalar or floating-point vector.
 		      
 		      ' ***** OpEntryPoint ***********************************************************************************
 		      
