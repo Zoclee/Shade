@@ -832,6 +832,9 @@ Protected Class SPIRVVirtualMachine
 		        case 183 // ***** OpFwidthCoarse ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFwidthCoarse)
 		          
+		        case 184 // ***** OpEmitVertex ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEmitVertex)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -1349,6 +1352,11 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "P ID out of bounds.", "P ID not found.")
 		      // todo: Result Type must be the same as the type of P. This type must be a floating-point scalar or floating-point vector.
+		      
+		      ' ***** OpEmitVertex ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpEmitVertex
+		      validate_WordCountEqual(op, 1)
 		      
 		      ' ***** OpEntryPoint ***********************************************************************************
 		      
