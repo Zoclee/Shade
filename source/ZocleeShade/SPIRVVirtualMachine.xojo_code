@@ -838,6 +838,9 @@ Protected Class SPIRVVirtualMachine
 		        case 185 // ***** OpEndPrimitive ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEndPrimitive)
 		          
+		        case 186 // ***** OpEmitStreamVertex ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEmitStreamVertex)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -1355,6 +1358,14 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "P ID out of bounds.", "P ID not found.")
 		      // todo: Result Type must be the same as the type of P. This type must be a floating-point scalar or floating-point vector.
+		      
+		      ' ***** OpEmitStreamVertex ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpEmitStreamVertex
+		      validate_WordCountEqual(op, 2)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Stream ID out of bounds.", "Stream ID not found.")
+		      // todo: Stream must be an <id> of a constant instruction with a scalar integer type.
+		      // todo: This instruction can only be used when multiple streams are present.
 		      
 		      ' ***** OpEmitVertex ***********************************************************************************
 		      

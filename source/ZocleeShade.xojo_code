@@ -1878,6 +1878,7 @@ Protected Module ZocleeShade
 		  OpDPdy
 		  OpDPdyCoarse
 		  OpDPdyFine
+		  OpEmitStreamVertex
 		  OpEmitVertex
 		  OpEndPrimitive
 		  OpEntryPoint

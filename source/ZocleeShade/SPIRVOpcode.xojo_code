@@ -421,6 +421,12 @@ Protected Class SPIRVOpcode
 			    result.Append "DPdyFine "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpEmitStreamVertex *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpEmitStreamVertex
+			    result.Append "EmitStreamVertex "
+			    result.Append compose_id(Offset + 4)
+			    
 			    // ***** OpEmitVertex *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpEmitVertex
