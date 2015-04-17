@@ -847,6 +847,9 @@ Protected Class SPIRVVirtualMachine
 		        case 188 // ***** OpControlBarrier ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpControlBarrier)
 		          
+		        case 189 // ***** OpMemoryBarrier ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemoryBarrier)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          

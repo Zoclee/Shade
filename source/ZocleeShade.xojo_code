@@ -484,22 +484,26 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function SPIRVDescribeFPFastMathMode(value As UInt32) As String
+		Function SPIRVDescribeFPFastMathModeMask(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
 		  Dim result As String
 		  
+		  // todo: This value is a mask; it can be formed by combining the bits from multiple rows in the table below.
+		  
 		  select case value
-		  case 0
+		  case &h00
+		    result = "None"
+		  case &h01
 		    result = "NotNaN"
-		  case 2
+		  case &h02
 		    result = "NotInf"
-		  case 4
+		  case &h04
 		    result = "NSZ"
-		  case 8
+		  case &h08
 		    result = "AllowRecip"
-		  case 16
+		  case &h10
 		    result = "Fast"
 		  case else
 		    result = "Unknown"
@@ -526,41 +530,6 @@ Protected Module ZocleeShade
 		    result = "RTP"
 		  case 3
 		    result = "RTN"
-		  case else
-		    result = "Unknown"
-		  end select
-		  
-		  return result
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function SPIRVDescribeFuncParamAttr(value As UInt32) As String
-		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
-		  ' www.zoclee.com/shade
-		  
-		  Dim result As String
-		  
-		  select case value
-		  case 0
-		    result = "Zext"
-		  case 1
-		    result = "Sext"
-		  case 2
-		    result = "ByVal"
-		  case 3
-		    result = "Sret"
-		  case 4
-		    result = "NoAlias"
-		  case 5
-		    result = "NoCapture"
-		  case 6
-		    result = "SVM"
-		  case 7
-		    result = "NoWrite"
-		  case 8
-		    result = "NoReadWrite"
 		  case else
 		    result = "Unknown"
 		  end select
@@ -600,6 +569,41 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeFunctionParameterAttribute(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "Zext"
+		  case 1
+		    result = "Sext"
+		  case 2
+		    result = "ByVal"
+		  case 3
+		    result = "Sret"
+		  case 4
+		    result = "NoAlias"
+		  case 5
+		    result = "NoCapture"
+		  case 6
+		    result = "SVM"
+		  case 7
+		    result = "NoWrite"
+		  case 8
+		    result = "NoReadWrite"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeLinkageType(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -621,18 +625,20 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function SPIRVDescribeLoopControl(value As UInt32) As String
+		Function SPIRVDescribeLoopControlMask(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
 		  Dim result As String
 		  
+		  // todo: This value is a mask; it can be formed by combining the bits from multiple rows in the table below.
+		  
 		  select case value
-		  case 0
-		    result = "NoControl"
-		  case 1
+		  case &h00
+		    result = "None"
+		  case &h01
 		    result = "Unroll"
-		  case 2
+		  case &h002
 		    result = "DontUnroll"
 		  case else
 		    result = "Unknown"
@@ -644,16 +650,20 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function SPIRVDescribeMemoryAccess(value As UInt32) As String
+		Function SPIRVDescribeMemoryAccessMask(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
 		  Dim result As String
 		  
+		  // todo: This value is a mask; it can be formed by combining the bits from multiple rows in the table below.
+		  
 		  select case value
-		  case 1
+		  case &h00
+		    result = "None"
+		  case &h01
 		    result = "Volatile"
-		  case 2
+		  case &h02
 		    result = "Aligned"
 		  case else
 		    result = "Unknown"
@@ -682,6 +692,47 @@ Protected Module ZocleeShade
 		    result = "OpenCL2.0"
 		  case 4
 		    result = "OpenCL2.1"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SPIRVDescribeMemorySemantics(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  // todo: This value is a mask; it can be formed by combining the bits from multiple rows in the table below.
+		  
+		  select case value
+		  case &h00
+		    result = "None"
+		  case &h01
+		    result = "Relaxed"
+		  case &h02
+		    result = "SequentiallyConsistent"
+		  case &h04
+		    result = "Acquire"
+		  case &h08
+		    result = "Release"
+		  case &h10
+		    result = "UniformMemory"
+		  case &h20
+		    result = "SubgroupMemory"
+		  case &h40
+		    result = "WorkgroupLocalMemory"
+		  case &h80
+		    result = "WorkgroupGlobalMemory"
+		  case &h100
+		    result = "AtomicCounterMemory"
+		  case &h200
+		    result = "ImageMemory"
 		  case else
 		    result = "Unknown"
 		  end select
@@ -743,13 +794,13 @@ Protected Module ZocleeShade
 		  select case value
 		  case 0
 		    result = "None"
-		  case 2
+		  case 1
 		    result = "ClampEdge"
-		  case 4
+		  case 2
 		    result = "Clamp"
-		  case 6
+		  case 3
 		    result = "Repeat"
-		  case 8
+		  case 4
 		    result = "RepeatMirrored"
 		  case else
 		    result = "Unknown"
@@ -768,9 +819,9 @@ Protected Module ZocleeShade
 		  Dim result As String
 		  
 		  select case value
-		  case 16
+		  case 0
 		    result = "Nearest"
-		  case 32
+		  case 1
 		    result = "Linear"
 		  case else
 		    result = "Unknown"
@@ -782,18 +833,20 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function SPIRVDescribeSelectionControl(value As UInt32) As String
+		Function SPIRVDescribeSelectionControlMask(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
 		  Dim result As String
 		  
+		  // todo: This value is a mask; it can be formed by combining the bits from multiple rows in the table below.
+		  
 		  select case value
-		  case 0
-		    result = "NoControl"
-		  case 1
+		  case &h00
+		    result = "None"
+		  case &h01
 		    result = "Flatten"
-		  case 2
+		  case &h02
 		    result = "DontFlatten"
 		  case else
 		    result = "Unknown"
@@ -1968,6 +2021,7 @@ Protected Module ZocleeShade
 		  OpMatrixTimesVector
 		  OpMemberDecorate
 		  OpMemberName
+		  OpMemoryBarrier
 		  OpMemoryModel
 		  OpName
 		  OpNop

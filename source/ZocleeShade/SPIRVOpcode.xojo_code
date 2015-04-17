@@ -303,7 +303,7 @@ Protected Class SPIRVOpcode
 			    i = Offset + 12
 			    while i < ub
 			      result.Append " "
-			      result.Append SPIRVDescribeMemoryAccess(VM.ModuleBinary.UInt32Value(i))
+			      result.Append SPIRVDescribeMemoryAccessMask(VM.ModuleBinary.UInt32Value(i))
 			      i = i + 4
 			    wend
 			    
@@ -320,7 +320,7 @@ Protected Class SPIRVOpcode
 			    i = Offset + 16
 			    while i < ub
 			      result.Append " "
-			      result.Append SPIRVDescribeMemoryAccess(VM.ModuleBinary.UInt32Value(i))
+			      result.Append SPIRVDescribeMemoryAccessMask(VM.ModuleBinary.UInt32Value(i))
 			      i = i + 4
 			    wend
 			    
@@ -364,13 +364,13 @@ Protected Class SPIRVOpcode
 			      result.Append SPIRVDescribeBuiltIn(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 40 // FuncParamAttr
 			      result.Append " "
-			      result.Append SPIRVDescribeFuncParamAttr(VM.ModuleBinary.UInt32Value(Offset + 12))
+			      result.Append SPIRVDescribeFunctionParameterAttribute(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 41 // FP Rounding Mode
 			      result.Append " "
 			      result.Append SPIRVDescribeFPRoundingMode(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 42 // FP Fast Math Mode
 			      result.Append " "
-			      result.Append SPIRVDescribeFPFastMathMode(VM.ModuleBinary.UInt32Value(Offset + 12))
+			      result.Append SPIRVDescribeFPFastMathModeMask(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 43 // Linkage Type
 			      result.Append " "
 			      result.Append SPIRVDescribeLinkageType(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -894,7 +894,7 @@ Protected Class SPIRVOpcode
 			    result.Append "LoopMerge "
 			    result.Append compose_id(Offset + 4)
 			    result.Append " "
-			    result.Append SPIRVDescribeLoopControl(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append SPIRVDescribeLoopControlMask(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
 			    // ***** OpMatrixTimesMatrix *************************************************
 			    
@@ -956,13 +956,13 @@ Protected Class SPIRVOpcode
 			      result.Append SPIRVDescribeBuiltIn(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    case 40 // FuncParamAttr
 			      result.Append " "
-			      result.Append SPIRVDescribeFuncParamAttr(VM.ModuleBinary.UInt32Value(Offset + 16))
+			      result.Append SPIRVDescribeFunctionParameterAttribute(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    case 41 // FP Rounding Mode
 			      result.Append " "
 			      result.Append SPIRVDescribeFPRoundingMode(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    case 42 // FP Fast Math Mode
 			      result.Append " "
-			      result.Append SPIRVDescribeFPFastMathMode(VM.ModuleBinary.UInt32Value(Offset + 16))
+			      result.Append SPIRVDescribeFPFastMathModeMask(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    case 43 // Linkage Type
 			      result.Append " "
 			      result.Append SPIRVDescribeLinkageType(VM.ModuleBinary.UInt32Value(Offset + 16))
@@ -980,6 +980,14 @@ Protected Class SPIRVOpcode
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 12)
 			    result.Append """"
+			    
+			    // ***** OpMemoryBarrier *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpMemoryBarrier
+			    result.Append "MemoryBarrier "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append " "
+			    result.Append SPIRVDescribeMemorySemantics(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
 			    // ***** OpMemoryModel *************************************************
 			    
@@ -1086,7 +1094,7 @@ Protected Class SPIRVOpcode
 			    result.Append "SelectionMerge "
 			    result.Append compose_id(Offset + 4)
 			    result.Append " "
-			    result.Append SPIRVDescribeSelectionControl(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append SPIRVDescribeSelectionControlMask(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
 			    // ***** OpSGreaterThan *************************************************
 			    
@@ -1226,7 +1234,7 @@ Protected Class SPIRVOpcode
 			    i = Offset + 12
 			    while i < ub
 			      result.Append " "
-			      result.Append SPIRVDescribeMemoryAccess(VM.ModuleBinary.UInt32Value(i))
+			      result.Append SPIRVDescribeMemoryAccessMask(VM.ModuleBinary.UInt32Value(i))
 			      i = i + 4
 			    wend
 			    
