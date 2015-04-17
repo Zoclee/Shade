@@ -117,6 +117,16 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 8)
 			    
+			    // ***** OpAtomicLoad *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpAtomicLoad
+			    result.Append "AtomicLoad "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append " "
+			    result.Append SPIRVDescribeMemorySemantics(VM.ModuleBinary.UInt32Value(Offset + 20))
+			    
 			    // ***** OpBitcast *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpBitcast
@@ -1849,6 +1859,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAll, _
 			    SPIRVOpcodeTypeEnum.OpAny, _
 			    SPIRVOpcodeTypeEnum.OpArrayLength, _
+			    SPIRVOpcodeTypeEnum.OpAtomicLoad, _
 			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseAnd, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseOr, _
@@ -2007,6 +2018,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAll, _
 			    SPIRVOpcodeTypeEnum.OpAny, _
 			    SPIRVOpcodeTypeEnum.OpArrayLength, _
+			    SPIRVOpcodeTypeEnum.OpAtomicLoad, _
 			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseAnd, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseOr, _

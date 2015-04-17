@@ -856,6 +856,9 @@ Protected Class SPIRVVirtualMachine
 		        case 191 // ***** OpAtomicInit ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicInit)
 		          
+		        case 192 // ***** OpAtomicLoad ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicLoad)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -1004,6 +1007,21 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Pointer ID out of bounds.", "Pointer ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Value ID out of bounds.", "Value ID not found.")
 		      // todo: The type of Value and the type pointed to by Pointer must be the same type.
+		      
+		      ' ***** OpAtomicLoad ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpAtomicLoad
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Pointer ID out of bounds.", "Pointer ID not found.")
+		      if ModuleBinary.UInt32Value(op.Offset + 16) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 20) > 1023 then
+		        logError op, "Invalid Memory Semantics enumeration value."
+		      end if
+		      // todo: Result Type must be the same type as the type pointed to by Pointer.
 		      
 		      ' ***** OpBitcast ***********************************************************************************
 		      
