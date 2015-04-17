@@ -109,6 +109,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    
+			    // ***** OpAtomicInit *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpAtomicInit
+			    result.Append "AtomicInit "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append compose_id(Offset + 8)
+			    
 			    // ***** OpBitcast *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpBitcast

@@ -853,6 +853,9 @@ Protected Class SPIRVVirtualMachine
 		        case 190 // ***** OpImagePointer ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpImagePointer)
 		          
+		        case 191 // ***** OpAtomicInit ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicInit)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -993,6 +996,14 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Structure ID out of bounds.", "Structure ID not declared.")
 		      // todo: Structure must be an object of type OpTypeStruct that contains a member that is a run-time array.
 		      // todo: Array member is a member number of Structure that must have a type from OpTypeRuntimeArray.
+		      
+		      ' ***** OpAtomicInit ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpAtomicInit
+		      validate_WordCountEqual(op, 3)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Pointer ID out of bounds.", "Pointer ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Value ID out of bounds.", "Value ID not found.")
+		      // todo: The type of Value and the type pointed to by Pointer must be the same type.
 		      
 		      ' ***** OpBitcast ***********************************************************************************
 		      
