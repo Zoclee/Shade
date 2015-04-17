@@ -835,6 +835,9 @@ Protected Class SPIRVVirtualMachine
 		        case 184 // ***** OpEmitVertex ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEmitVertex)
 		          
+		        case 185 // ***** OpEndPrimitive ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEndPrimitive)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -1356,6 +1359,11 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpEmitVertex ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpEmitVertex
+		      validate_WordCountEqual(op, 1)
+		      
+		      ' ***** OpEndPrimitive ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpEndPrimitive
 		      validate_WordCountEqual(op, 1)
 		      
 		      ' ***** OpEntryPoint ***********************************************************************************
