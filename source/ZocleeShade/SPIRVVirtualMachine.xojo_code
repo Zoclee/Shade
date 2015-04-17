@@ -862,6 +862,9 @@ Protected Class SPIRVVirtualMachine
 		        case 193 // ***** OpAtomicStore ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicStore)
 		          
+		        case 194 // ***** OpAtomicExchange ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicExchange)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -1002,6 +1005,22 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Structure ID out of bounds.", "Structure ID not declared.")
 		      // todo: Structure must be an object of type OpTypeStruct that contains a member that is a run-time array.
 		      // todo: Array member is a member number of Structure that must have a type from OpTypeRuntimeArray.
+		      
+		      ' ***** OpAtomicExchange ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpAtomicExchange
+		      validate_WordCountEqual(op, 7)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Pointer ID out of bounds.", "Pointer ID not found.")
+		      if ModuleBinary.UInt32Value(op.Offset + 16) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 20) > 1023 then
+		        logError op, "Invalid Memory Semantics enumeration value."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 24), "Value ID out of bounds.", "Value ID not found.")
+		      // todo: Result Type, the type of Value, and the type pointed to by Pointer must all be same type.
 		      
 		      ' ***** OpAtomicInit ***********************************************************************************
 		      
