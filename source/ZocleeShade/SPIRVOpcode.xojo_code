@@ -773,6 +773,16 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpImagePointer *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpImagePointer
+			    result.Append "ImagePointer "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
+			    
 			    // ***** OpIMul *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpIMul
@@ -1094,7 +1104,7 @@ Protected Class SPIRVOpcode
 			    result.Append "SelectionMerge "
 			    result.Append compose_id(Offset + 4)
 			    result.Append " "
-			    result.Append SPIRVDescribeSelectionControl(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append SPIRVDescribeSelectionControlMask(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
 			    // ***** OpSGreaterThan *************************************************
 			    
@@ -1879,6 +1889,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _
+			    SPIRVOpcodeTypeEnum.OpImagePointer, _
 			    SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, _
 			    SPIRVOpcodeTypeEnum.OpINotEqual, _
@@ -2038,6 +2049,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _
+			    SPIRVOpcodeTypeEnum.OpImagePointer, _
 			    SPIRVOpcodeTypeEnum.OpIMul, _
 			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, _
 			    SPIRVOpcodeTypeEnum.OpINotEqual, _

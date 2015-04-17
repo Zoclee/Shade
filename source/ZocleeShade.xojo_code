@@ -2000,6 +2000,7 @@ Protected Module ZocleeShade
 		  OpGroupMemberDecorate
 		  OpIAdd
 		  OpIEqual
+		  OpImagePointer
 		  OpIMul
 		  OpINotEqual
 		  OpInBoundsAccessChain
