@@ -1094,7 +1094,7 @@ Protected Class SPIRVOpcode
 			    result.Append "SelectionMerge "
 			    result.Append compose_id(Offset + 4)
 			    result.Append " "
-			    result.Append SPIRVDescribeSelectionControlMask(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append SPIRVDescribeSelectionControl(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
 			    // ***** OpSGreaterThan *************************************************
 			    

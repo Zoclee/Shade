@@ -1408,7 +1408,7 @@ Protected Class SPIRVVirtualMachine
 		    case SPIRVOpcodeTypeEnum.OpEntryPoint
 		      validate_WordCountEqual(op, 3)
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 6 then
-		        logError op, "Execution Model enumeration value."
+		        logError op, "Invalid Execution Model enumeration value."
 		      end if
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Entry Point ID out of bounds.", "Entry Point ID not declared.")
 		      
@@ -2034,6 +2034,17 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      if Trim(ModuleBinary.CString(op.Offset + 12)) = "" then
 		        logError op, "Invalid name."
+		      end if
+		      
+		      ' ***** OpMemoryBarrier ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpMemoryBarrier
+		      validate_WordCountEqual(op, 3)
+		      if ModuleBinary.UInt32Value(op.Offset + 3) > 6 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 3) > 1023 then
+		        logError op, "Invalid Memory Semantics enumeration value."
 		      end if
 		      
 		      ' ***** OpMemoryModel ***********************************************************************************
