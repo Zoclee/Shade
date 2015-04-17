@@ -577,9 +577,11 @@ Protected Module ZocleeShade
 		  
 		  Dim result As String
 		  
+		  // todo: formed by combining the bits from multiple rows in the table below
+		  
 		  select case value
 		  case 0
-		    result = "NoControl"
+		    result = "None"
 		  case 1
 		    result = "InLine"
 		  case 2
@@ -1999,9 +2001,9 @@ Protected Module ZocleeShade
 		  OpSRem
 		  OpStore
 		  OpString
-		  OpTextureFetchBuffer
 		  OpTextureFetchSample
 		  OpTextureFetchTexel
+		  OpTextureFetchTexelLod
 		  OpTextureFetchTexelOffset
 		  OpTextureGather
 		  OpTextureGatherOffset

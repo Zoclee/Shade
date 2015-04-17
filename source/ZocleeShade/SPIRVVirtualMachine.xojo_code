@@ -523,8 +523,8 @@ Protected Class SPIRVVirtualMachine
 		        case 80 // ***** OpTextureSampleProjGradOffset ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjGradOffset)
 		          
-		        case 81 // ***** OpTextureFetchTexel ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchTexel)
+		        case 81 // ***** OpTextureFetchTexelLod ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchTexelLod)
 		          
 		        case 82 // ***** OpTextureFetchTexelOffset ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset)
@@ -532,8 +532,8 @@ Protected Class SPIRVVirtualMachine
 		        case 83 // ***** OpTextureFetchSample ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchSample)
 		          
-		        case 84 // ***** OpTextureFetchBuffer ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchBuffer)
+		        case 84 // ***** OpTextureFetchTexel ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchTexel)
 		          
 		        case 85 // ***** OpTextureGather ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureGather)
@@ -2378,15 +2378,6 @@ Protected Class SPIRVVirtualMachine
 		        logError op, "Invalid string."
 		      end if
 		      
-		      ' ***** OpTextureFetchBuffer ***********************************************************************************
-		      
-		    case SPIRVOpcodeTypeEnum.OpTextureFetchBuffer
-		      validate_WordCountEqual(op, 5)
-		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
-		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
-		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Sampler ID out of bounds.", "Sampler ID not found.")
-		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Element ID out of bounds.", "Element ID not found.")
-		      
 		      ' ***** OpTextureFetchSample ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTextureFetchSample
@@ -2400,6 +2391,18 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpTextureFetchTexel ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpTextureFetchTexel
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Sampler ID out of bounds.", "Sampler ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Element ID out of bounds.", "Element ID not found.")
+		      // todo: Sampler must be an object of a type made by OpTypeSampler.
+		      // todo: Its type must have its Content operand set to 2, indicating both a texture and a filter.
+		      // todo: It must have a Dimensionality of Rect or Buffer.
+		      
+		      ' ***** OpTextureFetchTexelLod ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpTextureFetchTexelLod
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
