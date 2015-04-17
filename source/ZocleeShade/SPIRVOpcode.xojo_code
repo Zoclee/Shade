@@ -427,6 +427,12 @@ Protected Class SPIRVOpcode
 			    result.Append "EmitStreamVertex "
 			    result.Append compose_id(Offset + 4)
 			    
+			    // ***** OpEndStreamPrimitive *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpEndStreamPrimitive
+			    result.Append "EndStreamPrimitive "
+			    result.Append compose_id(Offset + 4)
+			    
 			    // ***** OpEmitVertex *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpEmitVertex

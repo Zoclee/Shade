@@ -1881,6 +1881,7 @@ Protected Module ZocleeShade
 		  OpEmitStreamVertex
 		  OpEmitVertex
 		  OpEndPrimitive
+		  OpEndStreamPrimitive
 		  OpEntryPoint
 		  OpExecutionMode
 		  OpExtension
