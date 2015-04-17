@@ -859,6 +859,9 @@ Protected Class SPIRVVirtualMachine
 		        case 192 // ***** OpAtomicLoad ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicLoad)
 		          
+		        case 193 // ***** OpAtomicStore ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicStore)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -1022,6 +1025,20 @@ Protected Class SPIRVVirtualMachine
 		        logError op, "Invalid Memory Semantics enumeration value."
 		      end if
 		      // todo: Result Type must be the same type as the type pointed to by Pointer.
+		      
+		      ' ***** OpAtomicStore ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpAtomicStore
+		      validate_WordCountEqual(op, 5)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Pointer ID out of bounds.", "Pointer ID not found.")
+		      if ModuleBinary.UInt32Value(op.Offset + 8) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 1023 then
+		        logError op, "Invalid Memory Semantics enumeration value."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Value ID out of bounds.", "Value ID not found.")
+		      // todo: The type pointed to by Pointer must be the same type as the type of Value.
 		      
 		      ' ***** OpBitcast ***********************************************************************************
 		      

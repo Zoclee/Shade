@@ -1926,6 +1926,7 @@ Protected Module ZocleeShade
 		  OpArrayLength
 		  OpAtomicInit
 		  OpAtomicLoad
+		  OpAtomicStore
 		  OpBitcast
 		  OpBitwiseAnd
 		  OpBitwiseOr

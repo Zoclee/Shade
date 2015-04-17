@@ -127,6 +127,18 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append SPIRVDescribeMemorySemantics(VM.ModuleBinary.UInt32Value(Offset + 20))
 			    
+			    // ***** OpAtomicStore *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpAtomicStore
+			    result.Append "AtomicStore "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append " "
+			    result.Append SPIRVDescribeMemorySemantics(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			    // ***** OpBitcast *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpBitcast
