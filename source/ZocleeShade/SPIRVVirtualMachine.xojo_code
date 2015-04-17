@@ -844,6 +844,9 @@ Protected Class SPIRVVirtualMachine
 		        case 187 // ***** OpEndStreamPrimitive ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEndStreamPrimitive)
 		          
+		        case 188 // ***** OpControlBarrier ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpControlBarrier)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -1160,6 +1163,15 @@ Protected Class SPIRVVirtualMachine
 		          logError op, "Expected scalar Boolean type."
 		        end if
 		      end if
+		      
+		      ' ***** OpControlBarrier ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpControlBarrier
+		      validate_WordCountEqual(op, 2)
+		      if ModuleBinary.UInt32Value(op.Offset + 4) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      // todo: It is only valid to use this instruction with TessellationControl, GLCompute, or Kernel execution models.
 		      
 		      ' ***** OpConvertFToS ***********************************************************************************
 		      

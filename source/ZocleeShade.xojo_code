@@ -459,6 +459,31 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeExecutionScope(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "CorssDevice"
+		  case 1
+		    result = "Device"
+		  case 2
+		    result = "Workgroup"
+		  case 3
+		    result = "Subgroup"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeFPFastMathMode(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -1860,6 +1885,7 @@ Protected Module ZocleeShade
 		  OpConstantSampler
 		  OpConstantTrue
 		  OpConstantComposite
+		  OpControlBarrier
 		  OpConvertFToU
 		  OpConvertFToS
 		  OpConvertPtrToU

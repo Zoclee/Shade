@@ -250,6 +250,12 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpConstantTrue
 			    result.Append "ConstantTrue"
 			    
+			    // ***** OpControlBarrier *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpControlBarrier
+			    result.Append "ControlBarrier "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    
 			    // ***** OpConvertFToS *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpConvertFToS
