@@ -913,6 +913,9 @@ Protected Class SPIRVVirtualMachine
 		        case 210 // ***** OpBranchConditional ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBranchConditional)
 		          
+		        case 211 // ***** OpSwitch ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSwitch)
+		          
 		        case 213 // ***** OpReturn ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReturn)
 		          
@@ -2679,6 +2682,20 @@ Protected Class SPIRVVirtualMachine
 		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
 		        logError op, "Invalid string."
 		      end if
+		      
+		      ' ***** OpSwitch ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSwitch
+		      validate_WordCountMinimum(op, 3)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Selector ID out of bounds.", "Selector ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Default ID out of bounds.", "Default ID not declared.")
+		      k = 0
+		      j = op.Offset + 12
+		      while (j + 4) < ub
+		        validate_Id(op, ModuleBinary.UInt32Value(op.Offset + j + 4), "Target Label " + Str(k) + " ID out of bounds.", "Target Label " + Str(k) + " ID not declared.")
+		        k = k + 1
+		        j = j + 8
+		      wend
 		      
 		      ' ***** OpTextureFetchSample ***********************************************************************************
 		      

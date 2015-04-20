@@ -1429,6 +1429,24 @@ Protected Class SPIRVOpcode
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
 			    result.Append """"
 			    
+			    // ***** OpSwitch *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSwitch
+			    result.Append "Switch "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append compose_id(Offset + 8)
+			    ub = offset + WordCount * 4
+			    i = Offset + 12
+			    while (i + 4) < ub
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(i))
+			      i = i + 4
+			      result.Append " "
+			      result.Append compose_id(i)
+			      i = i + 4
+			    wend
+			    
 			    // ***** OpTextureFetchSample *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpTextureFetchSample

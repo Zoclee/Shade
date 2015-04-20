@@ -2071,6 +2071,7 @@ Protected Module ZocleeShade
 		  OpSRem
 		  OpStore
 		  OpString
+		  OpSwitch
 		  OpTextureFetchSample
 		  OpTextureFetchTexel
 		  OpTextureFetchTexelLod
