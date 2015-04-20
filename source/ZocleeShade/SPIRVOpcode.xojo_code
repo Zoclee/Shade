@@ -109,6 +109,18 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    
+			    // ***** OpAtomicAnd *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpAtomicAnd
+			    result.Append "AtomicAnd "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append " "
+			    result.Append SPIRVDescribeMemorySemantics(VM.ModuleBinary.UInt32Value(Offset + 20))
+			    result.Append " "
+			    result.Append compose_id(Offset + 24)
+			    
 			    // ***** OpAtomicCompareExchange *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpAtomicCompareExchange
@@ -1980,6 +1992,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAll, _
 			    SPIRVOpcodeTypeEnum.OpAny, _
 			    SPIRVOpcodeTypeEnum.OpArrayLength, _
+			    SPIRVOpcodeTypeEnum.OpAtomicAnd, _
 			    SPIRVOpcodeTypeEnum.OpAtomicCompareExchange, SPIRVOpcodeTypeEnum.OpAtomicCompareExchangeWeak, _
 			    SPIRVOpcodeTypeEnum.OpAtomicExchange, _
 			    SPIRVOpcodeTypeEnum.OpAtomicIAdd, _
@@ -2146,6 +2159,7 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAll, _
 			    SPIRVOpcodeTypeEnum.OpAny, _
 			    SPIRVOpcodeTypeEnum.OpArrayLength, _
+			    SPIRVOpcodeTypeEnum.OpAtomicAnd, _
 			    SPIRVOpcodeTypeEnum.OpAtomicCompareExchange, SPIRVOpcodeTypeEnum.OpAtomicCompareExchangeWeak, _
 			    SPIRVOpcodeTypeEnum.OpAtomicExchange, _
 			    SPIRVOpcodeTypeEnum.OpAtomicIAdd, _
