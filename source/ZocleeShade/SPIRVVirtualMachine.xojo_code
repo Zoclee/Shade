@@ -931,6 +931,9 @@ Protected Class SPIRVVirtualMachine
 		        case 216 // ***** OpLifetimeStart ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLifetimeStart)
 		          
+		        case 217 // ***** OpLifetimeStop ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLifetimeStop)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2206,6 +2209,12 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpLifetimeStart ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpLifetimeStart
+		      validate_WordCountEqual(op, 3)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "ID out of bounds.", "ID not found.")
+		      
+		      ' ***** OpLifetimeStop ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpLifetimeStop
 		      validate_WordCountEqual(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "ID out of bounds.", "ID not found.")
 		      

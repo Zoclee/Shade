@@ -1043,6 +1043,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpLifetimeStop *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpLifetimeStop
+			    result.Append "LifetimeStop "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    
 			    // ***** OpLine *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpLine
