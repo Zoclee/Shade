@@ -928,6 +928,9 @@ Protected Class SPIRVVirtualMachine
 		        case 215 // ***** OpUnreachable ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUnreachable)
 		          
+		        case 216 // ***** OpLifetimeStart ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLifetimeStart)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2199,6 +2202,12 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "y ID out of bounds.", "y ID not declared.")
 		      // todo: Result Type must be a scalar or vector of Boolean type, with the same number of components as the operands.
 		      // todo: The operands’ types and Result Type must all have the same number of components.
+		      
+		      ' ***** OpLifetimeStart ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpLifetimeStart
+		      validate_WordCountEqual(op, 3)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "ID out of bounds.", "ID not found.")
 		      
 		      ' ***** OpLine ***********************************************************************************
 		      

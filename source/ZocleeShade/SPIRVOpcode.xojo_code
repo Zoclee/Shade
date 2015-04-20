@@ -1035,6 +1035,14 @@ Protected Class SPIRVOpcode
 			    result.Append compose_id(Offset + 12)
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpLifetimeStart *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpLifetimeStart
+			    result.Append "LifetimeStart "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    
 			    // ***** OpLine *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpLine

@@ -2027,6 +2027,7 @@ Protected Module ZocleeShade
 		  OpKill
 		  OpLabel
 		  OpLessOrGreater
+		  OpLifetimeStart
 		  OpLine
 		  OpLoad
 		  OpLogicalAnd
