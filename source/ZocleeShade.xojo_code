@@ -1938,6 +1938,7 @@ Protected Module ZocleeShade
 		  OpAtomicStore
 		  OpAtomicUMax
 		  OpAtomicUMin
+		  OpAtomicXor
 		  OpBitcast
 		  OpBitwiseAnd
 		  OpBitwiseOr
