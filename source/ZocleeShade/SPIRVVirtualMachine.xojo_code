@@ -868,6 +868,9 @@ Protected Class SPIRVVirtualMachine
 		        case 195 // ***** OpAtomicCompareExchange ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicCompareExchange)
 		          
+		        case 196 // ***** OpAtomicCompareExchangeWeak ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicCompareExchangeWeak)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -1025,6 +1028,23 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 24), "Value ID out of bounds.", "Value ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 28), "Comparator ID out of bounds.", "Comparator ID not found.")
 		      // todo: Result Type, the type of Value, and the type pointed to by Pointer must all be same type.
+		      
+		      ' ***** OpAtomicCompareExchangeWeak ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpAtomicCompareExchangeWeak
+		      validate_WordCountEqual(op, 8)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Pointer ID out of bounds.", "Pointer ID not found.")
+		      if ModuleBinary.UInt32Value(op.Offset + 16) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 20) > 1023 then
+		        logError op, "Invalid Memory Semantics enumeration value."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 24), "Value ID out of bounds.", "Value ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 28), "Comparator ID out of bounds.", "Comparator ID not found.")
+		      // todo: Result Type, the type of Value, and the type pointed to by Pointer must all be same type. This type must also match the type of Comparator.
 		      
 		      ' ***** OpAtomicExchange ***********************************************************************************
 		      
