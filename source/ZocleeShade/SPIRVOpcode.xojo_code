@@ -1018,6 +1018,11 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpKill *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpKill
+			    result.Append "Kill"
+			    
 			    // ***** OpLabel *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpLabel

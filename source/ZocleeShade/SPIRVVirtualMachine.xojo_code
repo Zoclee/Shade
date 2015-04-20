@@ -916,6 +916,9 @@ Protected Class SPIRVVirtualMachine
 		        case 211 // ***** OpSwitch ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSwitch)
 		          
+		        case 212 // ***** OpKill ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpKill)
+		          
 		        case 213 // ***** OpReturn ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReturn)
 		          
@@ -2168,6 +2171,11 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
 		      // todo: The operands’ types and Result Type must all be scalars or vectors of integer types with the same number of components and the same component widths.
+		      
+		      ' ***** OpKill ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpKill
+		      validate_WordCountEqual(op, 1)
 		      
 		      ' ***** OpLabel ***********************************************************************************
 		      
