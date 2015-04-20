@@ -1934,6 +1934,7 @@ Protected Module ZocleeShade
 		  OpAtomicISub
 		  OpAtomicInit
 		  OpAtomicLoad
+		  OpAtomicOr
 		  OpAtomicStore
 		  OpAtomicUMax
 		  OpAtomicUMin

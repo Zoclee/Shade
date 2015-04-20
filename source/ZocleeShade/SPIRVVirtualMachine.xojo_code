@@ -892,6 +892,9 @@ Protected Class SPIRVVirtualMachine
 		        case 203 // ***** OpAtomicAnd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicAnd)
 		          
+		        case 204 // ***** OpAtomicOr ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicOr)
+		          
 		        case 206 // ***** OpLoopMerge ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
@@ -1183,6 +1186,22 @@ Protected Class SPIRVVirtualMachine
 		        logError op, "Invalid Memory Semantics enumeration value."
 		      end if
 		      // todo: Result Type must be the same type as the type pointed to by Pointer.
+		      
+		      ' ***** OpAtomicOr ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpAtomicOr
+		      validate_WordCountEqual(op, 7)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Pointer ID out of bounds.", "Pointer ID not found.")
+		      if ModuleBinary.UInt32Value(op.Offset + 16) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 20) > 1023 then
+		        logError op, "Invalid Memory Semantics enumeration value."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 24), "Value ID out of bounds.", "Value ID not found.")
+		      // todo: Result Type, the type of Value, and the type pointed to by Pointer must all be same type.
 		      
 		      ' ***** OpAtomicStore ***********************************************************************************
 		      
