@@ -922,6 +922,9 @@ Protected Class SPIRVVirtualMachine
 		        case 213 // ***** OpReturn ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReturn)
 		          
+		        case 214 // ***** OpReturnValue ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReturnValue)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2429,6 +2432,13 @@ Protected Class SPIRVVirtualMachine
 		      
 		    case SPIRVOpcodeTypeEnum.OpReturn
 		      validate_WordCountEqual(op, 1)
+		      
+		      ' ***** OpReturnValue ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpReturnValue
+		      validate_WordCountEqual(op, 2)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Value ID out of bounds.", "Value ID not declared.")
+		      // todo: Value must match the Return Type operand of the OpTypeFunction type of the OpFunction body this return instruction is in.
 		      
 		      ' ***** OpSampler ***********************************************************************************
 		      

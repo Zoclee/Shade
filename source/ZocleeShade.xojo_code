@@ -2048,6 +2048,7 @@ Protected Module ZocleeShade
 		  OpPhi
 		  OpPtrCastToGeneric
 		  OpReturn
+		  OpReturnValue
 		  OpSampler
 		  OpSConvert
 		  OpSDiv
