@@ -1924,6 +1924,7 @@ Protected Module ZocleeShade
 		  OpAll
 		  OpAny
 		  OpArrayLength
+		  OpAtomicCompareExchange
 		  OpAtomicExchange
 		  OpAtomicInit
 		  OpAtomicLoad
