@@ -147,6 +147,16 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append SPIRVDescribeMemorySemantics(VM.ModuleBinary.UInt32Value(Offset + 20))
 			    
+			    // ***** OpAtomicIIncrement *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpAtomicIIncrement
+			    result.Append "AtomicIIncrement "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append " "
+			    result.Append SPIRVDescribeMemorySemantics(VM.ModuleBinary.UInt32Value(Offset + 20))
+			    
 			    // ***** OpAtomicInit *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpAtomicInit
@@ -1913,6 +1923,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpArrayLength, _
 			    SPIRVOpcodeTypeEnum.OpAtomicCompareExchange, SPIRVOpcodeTypeEnum.OpAtomicCompareExchangeWeak, _
 			    SPIRVOpcodeTypeEnum.OpAtomicExchange, _
+			    SPIRVOpcodeTypeEnum.OpAtomicIIncrement, _
 			    SPIRVOpcodeTypeEnum.OpAtomicLoad, _
 			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseAnd, _
@@ -2074,6 +2085,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpArrayLength, _
 			    SPIRVOpcodeTypeEnum.OpAtomicCompareExchange, SPIRVOpcodeTypeEnum.OpAtomicCompareExchangeWeak, _
 			    SPIRVOpcodeTypeEnum.OpAtomicExchange, _
+			    SPIRVOpcodeTypeEnum.OpAtomicIIncrement, _
 			    SPIRVOpcodeTypeEnum.OpAtomicLoad, _
 			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseAnd, _

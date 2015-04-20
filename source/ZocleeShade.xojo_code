@@ -1927,6 +1927,7 @@ Protected Module ZocleeShade
 		  OpAtomicCompareExchange
 		  OpAtomicCompareExchangeWeak
 		  OpAtomicExchange
+		  OpAtomicIIncrement
 		  OpAtomicInit
 		  OpAtomicLoad
 		  OpAtomicStore
