@@ -2128,6 +2128,7 @@ Protected Module ZocleeShade
 		  OpUMod
 		  OpUndef
 		  OpUnordered
+		  OpUnreachable
 		  OpVariable
 		  OpVariableArray
 		  OpVectorExtractDynamic

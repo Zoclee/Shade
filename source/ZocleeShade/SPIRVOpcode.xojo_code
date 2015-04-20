@@ -1947,6 +1947,11 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpUnreachable *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpUnreachable
+			    result.Append "Unreachable"
+			    
 			    // ***** OpVariable *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpVariable
