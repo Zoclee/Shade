@@ -223,6 +223,18 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpAtomicUMax *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpAtomicUMax
+			    result.Append "AtomicUMax "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append " "
+			    result.Append SPIRVDescribeMemorySemantics(VM.ModuleBinary.UInt32Value(Offset + 20))
+			    result.Append " "
+			    result.Append compose_id(Offset + 24)
+			    
 			    // ***** OpAtomicUMin *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpAtomicUMin
@@ -1974,6 +1986,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpAtomicIDecrement, SPIRVOpcodeTypeEnum.OpAtomicIIncrement, _
 			    SPIRVOpcodeTypeEnum.OpAtomicISub, _
 			    SPIRVOpcodeTypeEnum.OpAtomicLoad, _
+			    SPIRVOpcodeTypeEnum.OpAtomicUMax, _
 			    SPIRVOpcodeTypeEnum.OpAtomicUMin, _
 			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseAnd, _
@@ -2139,6 +2152,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpAtomicIDecrement, SPIRVOpcodeTypeEnum.OpAtomicIIncrement, _
 			    SPIRVOpcodeTypeEnum.OpAtomicISub, _
 			    SPIRVOpcodeTypeEnum.OpAtomicLoad, _
+			    SPIRVOpcodeTypeEnum.OpAtomicUMax, _
 			    SPIRVOpcodeTypeEnum.OpAtomicUMin, _
 			    SPIRVOpcodeTypeEnum.OpBitcast, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseAnd, _
