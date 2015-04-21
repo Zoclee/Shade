@@ -2058,6 +2058,16 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpWaitGroupEvents *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpWaitGroupEvents
+			    result.Append "WaitGroupEvents "
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
 			    
 			  case else
 			    result.Append "Unknown"
@@ -2214,7 +2224,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, _
 			    SPIRVOpcodeTypeEnum.OpVectorShuffle, _
 			    SPIRVOpcodeTypeEnum.OpVectorTimesMatrix, _
-			    SPIRVOpcodeTypeEnum.OpVectorTimesScalar
+			    SPIRVOpcodeTypeEnum.OpVectorTimesScalar, _
+			    SPIRVOpcodeTypeEnum.OpWaitGroupEvents
 			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -2390,7 +2401,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpVariableArray, SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, _
 			    SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, SPIRVOpcodeTypeEnum.OpVectorShuffle, _
 			    SPIRVOpcodeTypeEnum.OpVectorTimesMatrix, _
-			    SPIRVOpcodeTypeEnum.OpVectorTimesScalar
+			    SPIRVOpcodeTypeEnum.OpVectorTimesScalar, _
+			    SPIRVOpcodeTypeEnum.OpWaitGroupEvents
 			    
 			    result = compose_type(Offset + 4)
 			    

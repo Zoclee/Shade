@@ -940,6 +940,8 @@ Protected Class SPIRVVirtualMachine
 		        case 219 // ***** OpAsyncGroupCopy ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAsyncGroupCopy)
 		          
+		        case 220 // ***** OpWaitGroupEvents ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpWaitGroupEvents)
 		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
@@ -3437,6 +3439,23 @@ Protected Class SPIRVVirtualMachine
 		      // todo: Vector must have a floating-point vector type.
 		      // todo: Scalar must be a floating-point scalar.
 		      // todo: Result Type must be the same as the type of Vector.
+		      
+		      ' ***** OpWaitGroupEvents ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpWaitGroupEvents
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if not ((ModuleBinary.UInt32Value(op.Offset + 12) = 2) or (ModuleBinary.UInt32Value(op.Offset + 12) = 3)) then
+		        logError op, "Execution Scope must be Workgroup or Subgroup."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Num Events ID out of bounds.", "Num Events ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Events List ID out of bounds.", "Events List ID not found.")
+		      // todo: Events List must be a pointer to OpTypeEvent.
+		      // todo: Num Events must be a 32 bits wide OpTypeInt.
 		      
 		    case else
 		      logError op, "Unknown opcode type."
