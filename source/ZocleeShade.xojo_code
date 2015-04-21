@@ -604,6 +604,29 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeGroupOperation(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  select case value
+		  case 0
+		    result = "Reduce"
+		  case 1
+		    result = "InclusiveScan"
+		  case 2
+		    result = "ExclusiveScan"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeLinkageType(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -2017,6 +2040,7 @@ Protected Module ZocleeShade
 		  OpGroupAny
 		  OpGroupBroadcast
 		  OpGroupDecorate
+		  OpGroupIAdd
 		  OpGroupMemberDecorate
 		  OpIAdd
 		  OpIEqual
