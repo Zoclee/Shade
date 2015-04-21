@@ -1945,6 +1945,7 @@ Protected Module ZocleeShade
 		  OpBitwiseXor
 		  OpBranch
 		  OpBranchConditional
+		  OpCompileFlag
 		  OpCompositeConstruct
 		  OpCompositeExtract
 		  OpCompositeInsert

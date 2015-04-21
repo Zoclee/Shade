@@ -934,6 +934,9 @@ Protected Class SPIRVVirtualMachine
 		        case 217 // ***** OpLifetimeStop ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLifetimeStop)
 		          
+		        case 218 // ***** OpCompileFlag ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompileFlag)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -1341,6 +1344,12 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Condition ID out of bounds.", "Condition ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "True Label ID out of bounds.", "True Label ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "False Label ID out of bounds.", "False Label ID not declared.")
+		      
+		      ' ***** OpCompileFlag ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpCompileFlag
+		      validate_WordCountMinimum(op, 1)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not found.")
 		      
 		      ' ***** OpCompositeConstruct ***********************************************************************************
 		      
@@ -2384,6 +2393,7 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpName ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpName
+		      validate_WordCountMinimum(op, 2)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not found.")
 		      
 		      ' ***** OpNop ***********************************************************************************
