@@ -2040,6 +2040,7 @@ Protected Module ZocleeShade
 		  OpGroupAny
 		  OpGroupBroadcast
 		  OpGroupDecorate
+		  OpGroupFAdd
 		  OpGroupIAdd
 		  OpGroupMemberDecorate
 		  OpIAdd

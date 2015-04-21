@@ -971,6 +971,17 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpGroupFAdd *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGroupFAdd
+			    result.Append "GroupFAdd "
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append SPIRVDescribeGroupOperation(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
+			    
 			    // ***** OpGroupIAdd *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGroupIAdd
@@ -2200,6 +2211,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGroupAll, _
 			    SPIRVOpcodeTypeEnum.OpGroupAny, _
 			    SPIRVOpcodeTypeEnum.OpGroupBroadcast, _
+			    SPIRVOpcodeTypeEnum.OpGroupFAdd, _
 			    SPIRVOpcodeTypeEnum.OpGroupIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _
@@ -2377,6 +2389,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGroupAll, _
 			    SPIRVOpcodeTypeEnum.OpGroupAny, _
 			    SPIRVOpcodeTypeEnum.OpGroupBroadcast, _
+			    SPIRVOpcodeTypeEnum.OpGroupFAdd, _
 			    SPIRVOpcodeTypeEnum.OpGroupIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _

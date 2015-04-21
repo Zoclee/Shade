@@ -955,6 +955,9 @@ Protected Class SPIRVVirtualMachine
 		        case 224 // ***** OpGroupIAdd ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupIAdd)
 		          
+		        case 225 // ***** OpGroupFAdd ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupFAdd)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2159,6 +2162,24 @@ Protected Class SPIRVVirtualMachine
 		        j = j + 4
 		        k = k + 1
 		      wend
+		      
+		      ' ***** OpGroupFAdd ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGroupFAdd
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if not ((ModuleBinary.UInt32Value(op.Offset + 12) = 2) or (ModuleBinary.UInt32Value(op.Offset + 12) = 3)) then
+		        logError op, "Execution Scope must be Workgroup or Subgroup."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 16) > 2 then
+		        logError op, "Invalid Group Operation enumeration value."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "X ID out of bounds.", "X ID not found.")
+		      // todo: Both X and Result Type must be a 16, 32 or 64 bits wide OpTypeFloat data type.
 		      
 		      ' ***** OpGroupIAdd ***********************************************************************************
 		      
