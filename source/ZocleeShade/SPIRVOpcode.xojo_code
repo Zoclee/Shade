@@ -1015,6 +1015,18 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 20)
 			    
+			    // ***** OpGroupSMax *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGroupSMax
+			    result.Append "GroupSMax "
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append SPIRVDescribeGroupOperation(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
+			    // todo: X and Result Type must be a 32 or 64 bits wide OpTypeInt data type.
+			    
 			    // ***** OpGroupSMin *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGroupSMin
@@ -1025,6 +1037,7 @@ Protected Class SPIRVOpcode
 			    result.Append SPIRVDescribeGroupOperation(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    result.Append " "
 			    result.Append compose_id(Offset + 20)
+			    // todo: X and Result Type must be a 32 or 64 bits wide OpTypeInt data type.
 			    
 			    // ***** OpGroupUMax *************************************************
 			    
@@ -1036,7 +1049,6 @@ Protected Class SPIRVOpcode
 			    result.Append SPIRVDescribeGroupOperation(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    result.Append " "
 			    result.Append compose_id(Offset + 20)
-			    
 			    
 			    // ***** OpGroupUMin *************************************************
 			    
@@ -2271,6 +2283,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGroupFMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupFMin, _
 			    SPIRVOpcodeTypeEnum.OpGroupIAdd, _
+			    SPIRVOpcodeTypeEnum.OpGroupSMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupSMin, _
 			    SPIRVOpcodeTypeEnum.OpGroupUMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupUMin, _
@@ -2454,6 +2467,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGroupFMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupFMin, _
 			    SPIRVOpcodeTypeEnum.OpGroupIAdd, _
+			    SPIRVOpcodeTypeEnum.OpGroupSMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupSMin, _
 			    SPIRVOpcodeTypeEnum.OpGroupUMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupUMin, _

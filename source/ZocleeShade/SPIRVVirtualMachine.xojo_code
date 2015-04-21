@@ -973,6 +973,8 @@ Protected Class SPIRVVirtualMachine
 		        case 230 // ***** OpGroupUMax ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupUMax)
 		          
+		        case 231 // ***** OpGroupSMax ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupSMax)
 		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)

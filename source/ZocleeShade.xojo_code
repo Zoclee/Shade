@@ -2045,6 +2045,7 @@ Protected Module ZocleeShade
 		  OpGroupFMin
 		  OpGroupIAdd
 		  OpGroupMemberDecorate
+		  OpGroupSMax
 		  OpGroupSMin
 		  OpGroupUMax
 		  OpGroupUMin
