@@ -947,6 +947,17 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpGroupBroadcast *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGroupBroadcast
+			    result.Append "GroupBroadcast "
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
+			    
 			    // ***** OpGroupDecorate *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGroupDecorate
@@ -2177,6 +2188,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpGroupAll, _
 			    SPIRVOpcodeTypeEnum.OpGroupAny, _
+			    SPIRVOpcodeTypeEnum.OpGroupBroadcast, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _
 			    SPIRVOpcodeTypeEnum.OpImagePointer, _
@@ -2352,6 +2364,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpGroupAll, _
 			    SPIRVOpcodeTypeEnum.OpGroupAny, _
+			    SPIRVOpcodeTypeEnum.OpGroupBroadcast, _
 			    SPIRVOpcodeTypeEnum.OpIAdd, _
 			    SPIRVOpcodeTypeEnum.OpIEqual, _
 			    SPIRVOpcodeTypeEnum.OpImagePointer, _

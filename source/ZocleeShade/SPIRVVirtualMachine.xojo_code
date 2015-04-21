@@ -949,6 +949,9 @@ Protected Class SPIRVVirtualMachine
 		        case 222 // ***** OpGroupAny ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupAny)
 		          
+		        case 223 // ***** OpGroupBroadcast ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupBroadcast)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2121,6 +2124,24 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Predicate ID out of bounds.", "Predicate ID not found.")
 		      // todo: Both the Predicate and the Result Type must be of OpTypeBool.
+		      
+		      ' ***** OpGroupBroadcast ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGroupBroadcast
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if not ((ModuleBinary.UInt32Value(op.Offset + 12) = 2) or (ModuleBinary.UInt32Value(op.Offset + 12) = 3)) then
+		        logError op, "Execution Scope must be Workgroup or Subgroup."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Value ID out of bounds.", "Value ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "LocalId ID out of bounds.", "LocalId ID not found.")
+		      // todo: Value and Result Type must be a 32 or 64 bits wise OpTypeInt or a 16, 32 or 64 OpTypeFloat floating-point scalar datatype.
+		      // todo: LocalId must be an integer datatype. It can be a scalar, or a vector with 2 components or a vector with 3 components.
+		      // todo: LocalId must be the same for all work-items in the group.
 		      
 		      ' ***** OpGroupDecorate ***********************************************************************************
 		      

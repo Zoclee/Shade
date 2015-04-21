@@ -2015,6 +2015,7 @@ Protected Module ZocleeShade
 		  OpGenericCastToPtr
 		  OpGroupAll
 		  OpGroupAny
+		  OpGroupBroadcast
 		  OpGroupDecorate
 		  OpGroupMemberDecorate
 		  OpIAdd
