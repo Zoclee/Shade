@@ -937,6 +937,10 @@ Protected Class SPIRVVirtualMachine
 		        case 218 // ***** OpCompileFlag ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompileFlag)
 		          
+		        case 219 // ***** OpAsyncGroupCopy ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAsyncGroupCopy)
+		          
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -1059,6 +1063,30 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Structure ID out of bounds.", "Structure ID not declared.")
 		      // todo: Structure must be an object of type OpTypeStruct that contains a member that is a run-time array.
 		      // todo: Array member is a member number of Structure that must have a type from OpTypeRuntimeArray.
+		      
+		      ' ***** OpAsyncGroupCopy ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpAsyncGroupCopy
+		      validate_WordCountEqual(op, 9)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if not ((ModuleBinary.UInt32Value(op.Offset + 12) = 2) or (ModuleBinary.UInt32Value(op.Offset + 12) = 3)) then
+		        logError op, "Execution Scope must be Workgroup or Subgroup."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Destination ID out of bounds.", "Destination ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Source ID out of bounds.", "Source ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 24), "Num Elements ID out of bounds.", "Num Elements ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 28), "Stride ID out of bounds.", "Stride ID not found.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 32), "Event ID out of bounds.", "Event ID not found.")
+		      // todo: Event must be OpTypeEvent.
+		      // todo: Event can be used to associate the copy with a previous copy allowing an event to be shared by multiple copies. Otherwise Event should be a OpConstantNullObject.
+		      // todo: Destination and Source should both be pointers to the same integer or floating point scalar or vector data type.
+		      // todo: Destination and Source pointer storage class can be eitherWorkgroupLocal or WorkgroupGlobal.
+		      // todo: When Destination pointer storage class isWorkgroupLocal, the Source pointer storage class must be WorkgroupGlobal.
+		      // todo: When Destination pointer storage class isWorkgroupGlobal, the Source pointer storage class must be WorkgroupLocal.
 		      
 		      ' ***** OpAtomicAnd ***********************************************************************************
 		      
