@@ -946,6 +946,9 @@ Protected Class SPIRVVirtualMachine
 		        case 221 // ***** OpGroupAll ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupAll)
 		          
+		        case 222 // ***** OpGroupAny ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupAny)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2092,6 +2095,21 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpGroupAll ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpGroupAll
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if not ((ModuleBinary.UInt32Value(op.Offset + 12) = 2) or (ModuleBinary.UInt32Value(op.Offset + 12) = 3)) then
+		        logError op, "Execution Scope must be Workgroup or Subgroup."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Predicate ID out of bounds.", "Predicate ID not found.")
+		      // todo: Both the Predicate and the Result Type must be of OpTypeBool.
+		      
+		      ' ***** OpGroupAny ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGroupAny
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
