@@ -982,6 +982,17 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 20)
 			    
+			    // ***** OpGroupFMax *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGroupFMax
+			    result.Append "GroupFMax "
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append SPIRVDescribeGroupOperation(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
+			    
 			    // ***** OpGroupFMin *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGroupFMin
@@ -2245,6 +2256,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGroupAny, _
 			    SPIRVOpcodeTypeEnum.OpGroupBroadcast, _
 			    SPIRVOpcodeTypeEnum.OpGroupFAdd, _
+			    SPIRVOpcodeTypeEnum.OpGroupFMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupFMin, _
 			    SPIRVOpcodeTypeEnum.OpGroupIAdd, _
 			    SPIRVOpcodeTypeEnum.OpGroupSMin, _
@@ -2426,6 +2438,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGroupAny, _
 			    SPIRVOpcodeTypeEnum.OpGroupBroadcast, _
 			    SPIRVOpcodeTypeEnum.OpGroupFAdd, _
+			    SPIRVOpcodeTypeEnum.OpGroupFMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupFMin, _
 			    SPIRVOpcodeTypeEnum.OpGroupIAdd, _
 			    SPIRVOpcodeTypeEnum.OpGroupSMin, _

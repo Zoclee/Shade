@@ -2041,6 +2041,7 @@ Protected Module ZocleeShade
 		  OpGroupBroadcast
 		  OpGroupDecorate
 		  OpGroupFAdd
+		  OpGroupFMax
 		  OpGroupFMin
 		  OpGroupIAdd
 		  OpGroupMemberDecorate
