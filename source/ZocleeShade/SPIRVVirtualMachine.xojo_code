@@ -2147,7 +2147,7 @@ Protected Class SPIRVVirtualMachine
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
-		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Source Pointer ID out of bounds.", "Source Pointer ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "ptr ID out of bounds.", "ptr ID not declared.")
 		      // todo: Result Type must be a 32-bits wide OpTypeInt value.
 		      // todo: ptr must point to Generic.
 		      
