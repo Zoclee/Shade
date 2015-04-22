@@ -2040,6 +2040,7 @@ Protected Module ZocleeShade
 		  OpGenericCastToPtr
 		  OpGenericCastToPtrExplicit
 		  OpGenericPtrMemSemantics
+		  OpGetNumPipePackets
 		  OpGroupAll
 		  OpGroupAny
 		  OpGroupBroadcast
