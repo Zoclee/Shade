@@ -974,7 +974,7 @@ Protected Class SPIRVOpcode
 			    // ***** OpGroupAll *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGroupAll
-			    result.Append "GroupAll "
+			    result.Append "GroupAll"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    result.Append " "
@@ -983,7 +983,7 @@ Protected Class SPIRVOpcode
 			    // ***** OpGroupAll *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGroupAny
-			    result.Append "GroupAny "
+			    result.Append "GroupAny"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    result.Append " "
@@ -992,13 +992,24 @@ Protected Class SPIRVOpcode
 			    // ***** OpGroupBroadcast *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGroupBroadcast
-			    result.Append "GroupBroadcast "
+			    result.Append "GroupBroadcast"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    result.Append " "
 			    result.Append compose_id(Offset + 20)
+			    
+			    // ***** OpGroupCommitReadPipe *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGroupCommitReadPipe
+			    result.Append "GroupCommitReadPipe"
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append " "
+			    result.Append compose_id(Offset + 8)
+			    result.Append " "
+			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGroupDecorate *************************************************
 			    

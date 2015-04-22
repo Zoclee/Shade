@@ -2045,6 +2045,7 @@ Protected Module ZocleeShade
 		  OpGroupAll
 		  OpGroupAny
 		  OpGroupBroadcast
+		  OpGroupCommitReadPipe
 		  OpGroupDecorate
 		  OpGroupFAdd
 		  OpGroupFMax
