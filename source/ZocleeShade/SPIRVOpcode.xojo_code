@@ -1039,7 +1039,6 @@ Protected Class SPIRVOpcode
 			    result.Append SPIRVDescribeGroupOperation(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    result.Append " "
 			    result.Append compose_id(Offset + 20)
-			    // todo: X and Result Type must be a 32 or 64 bits wide OpTypeInt data type.
 			    
 			    // ***** OpGroupSMin *************************************************
 			    
@@ -1444,6 +1443,14 @@ Protected Class SPIRVOpcode
 			    result.Append compose_id(Offset + 20)
 			    result.Append " "
 			    result.Append compose_id(Offset + 24)
+			    
+			    // ***** OpReserveReadPipePackets *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpReserveReadPipePackets
+			    result.Append "ReserveReadPipePackets "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
 			    
 			    // ***** OpReturn *************************************************
 			    
@@ -2370,6 +2377,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpReadPipe, _
 			    SPIRVOpcodeTypeEnum.OpReservedReadPipe, _
 			    SPIRVOpcodeTypeEnum.OpReservedWritePipe, _
+			    SPIRVOpcodeTypeEnum.OpReserveReadPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSDiv, _
 			    SPIRVOpcodeTypeEnum.OpSelect, _
@@ -2560,6 +2568,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpReadPipe, _
 			    SPIRVOpcodeTypeEnum.OpReservedReadPipe, _
 			    SPIRVOpcodeTypeEnum.OpReservedWritePipe, _
+			    SPIRVOpcodeTypeEnum.OpReserveReadPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpSampler, _
 			    SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSDiv, _

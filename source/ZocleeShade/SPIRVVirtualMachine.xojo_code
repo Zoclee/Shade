@@ -994,6 +994,9 @@ Protected Class SPIRVVirtualMachine
 		        case 237 // ***** OpReservedWritePipe ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReservedWritePipe)
 		          
+		        case 238 // ***** OpReserveReadPipePackets ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReserveReadPipePackets)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2140,7 +2143,7 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpGenericCastToPtrExplicit ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit
-		      validate_WordCountMinimum(op, 5)
+		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Source Pointer ID out of bounds.", "Source Pointer ID not declared.")
@@ -2153,7 +2156,7 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpGenericPtrMemSemantics ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics
-		      validate_WordCountMinimum(op, 4)
+		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "ptr ID out of bounds.", "ptr ID not declared.")
@@ -2279,6 +2282,24 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpGroupIAdd ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpGroupIAdd
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if not ((ModuleBinary.UInt32Value(op.Offset + 12) = 2) or (ModuleBinary.UInt32Value(op.Offset + 12) = 3)) then
+		        logError op, "Execution Scope must be Workgroup or Subgroup."
+		      end if
+		      if ModuleBinary.UInt32Value(op.Offset + 16) > 2 then
+		        logError op, "Invalid Group Operation enumeration value."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "X ID out of bounds.", "X ID not found.")
+		      // todo: X and Result Type must be a 32 or 64 bits wide OpTypeInt data type.
+		      
+		      ' ***** OpGroupSMax ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGroupSMax
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2740,7 +2761,7 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpReadPipe ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpReadPipe
-		      validate_WordCountMinimum(op, 5)
+		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "p ID out of bounds.", "p ID not declared.")
@@ -2751,7 +2772,7 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpReservedReadPipe ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpReservedReadPipe
-		      validate_WordCountMinimum(op, 7)
+		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "p ID out of bounds.", "p ID not declared.")
@@ -2767,7 +2788,7 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpReservedWritePipe ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpReservedWritePipe
-		      validate_WordCountMinimum(op, 7)
+		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "p ID out of bounds.", "p ID not declared.")
@@ -2779,6 +2800,15 @@ Protected Class SPIRVVirtualMachine
 		      // todo: index must be a 32-bits OpTypeInt which is treated as unsigned value.
 		      // todo: ptr must be a OpTypePointer with the same data type as p and a Generic storage class.
 		      // todo: Result Type must be a 32-bits OpTypeInt.
+		      
+		      ' ***** OpReserveReadPipePackets ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpReserveReadPipePackets
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "p ID out of bounds.", "p ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "num_packets ID out of bounds.", "num_packets ID not declared.")
 		      
 		      ' ***** OpReturn ***********************************************************************************
 		      
@@ -3751,7 +3781,7 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpWritePipe ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpWritePipe
-		      validate_WordCountMinimum(op, 5)
+		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "p ID out of bounds.", "p ID not declared.")

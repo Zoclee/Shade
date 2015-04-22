@@ -2090,6 +2090,7 @@ Protected Module ZocleeShade
 		  OpReadPipe
 		  OpReservedReadPipe
 		  OpReservedWritePipe
+		  OpReserveReadPipePackets
 		  OpReturn
 		  OpReturnValue
 		  OpSampler
