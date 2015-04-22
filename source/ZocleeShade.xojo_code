@@ -1970,6 +1970,7 @@ Protected Module ZocleeShade
 		  OpBranch
 		  OpBranchConditional
 		  OpCommitReadPipe
+		  OpCommitWritePipe
 		  OpCompileFlag
 		  OpCompositeConstruct
 		  OpCompositeExtract

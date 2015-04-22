@@ -361,6 +361,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 8)
 			    
+			    // ***** OpCommitWritePipe *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpCommitWritePipe
+			    result.Append "CommitWritePipe "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append compose_id(Offset + 8)
+			    
 			    // ***** OpCompileFlag ************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpCompileFlag
