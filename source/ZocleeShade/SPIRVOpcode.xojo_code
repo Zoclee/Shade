@@ -1011,6 +1011,17 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpGroupCommitWritePipe *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGroupCommitWritePipe
+			    result.Append "GroupCommitWritePipe"
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
+			    result.Append " "
+			    result.Append compose_id(Offset + 8)
+			    result.Append " "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpGroupDecorate *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGroupDecorate

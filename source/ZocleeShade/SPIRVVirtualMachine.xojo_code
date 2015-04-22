@@ -1024,6 +1024,9 @@ Protected Class SPIRVVirtualMachine
 		        case 247 // ***** OpGroupCommitReadPipe ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupCommitReadPipe)
 		          
+		        case 248 // ***** OpGroupCommitWritePipe ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupCommitWritePipe)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2289,6 +2292,21 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "p ID out of bounds.", "p ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "reserve_id ID out of bounds.", "reserve_id ID not declared.")
 		      // todo: p must be a OpTypePipe with ReadOnly Access Qualifier.
+		      // todo: reserve_id must be a OpTypeReserveId.
+		      
+		      ' ***** OpGroupCommitWritePipe ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGroupCommitWritePipe
+		      validate_WordCountEqual(op, 4)
+		      if ModuleBinary.UInt32Value(op.Offset + 4) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if not ((ModuleBinary.UInt32Value(op.Offset + 4) = 2) or (ModuleBinary.UInt32Value(op.Offset + 4) = 3)) then
+		        logError op, "Execution Scope must be Workgroup or Subgroup."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "p ID out of bounds.", "p ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "reserve_id ID out of bounds.", "reserve_id ID not declared.")
+		      // todo: p must be a OpTypePipe with WriteOnly Access Qualifier.
 		      // todo: reserve_id must be a OpTypeReserveId.
 		      
 		      ' ***** OpGroupDecorate ***********************************************************************************
