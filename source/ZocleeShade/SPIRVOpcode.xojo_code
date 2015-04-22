@@ -2210,6 +2210,14 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 20)
 			    
+			    // ***** OpWritePipe *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpWritePipe
+			    result.Append "WritePipe "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    
 			  case else
 			    result.Append "Unknown"
 			    
@@ -2380,7 +2388,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpVectorShuffle, _
 			    SPIRVOpcodeTypeEnum.OpVectorTimesMatrix, _
 			    SPIRVOpcodeTypeEnum.OpVectorTimesScalar, _
-			    SPIRVOpcodeTypeEnum.OpWaitGroupEvents
+			    SPIRVOpcodeTypeEnum.OpWaitGroupEvents, _
+			    SPIRVOpcodeTypeEnum.OpWritePipe
 			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
@@ -2571,7 +2580,8 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, SPIRVOpcodeTypeEnum.OpVectorShuffle, _
 			    SPIRVOpcodeTypeEnum.OpVectorTimesMatrix, _
 			    SPIRVOpcodeTypeEnum.OpVectorTimesScalar, _
-			    SPIRVOpcodeTypeEnum.OpWaitGroupEvents
+			    SPIRVOpcodeTypeEnum.OpWaitGroupEvents, _
+			    SPIRVOpcodeTypeEnum.OpWritePipe
 			    
 			    result = compose_type(Offset + 4)
 			    

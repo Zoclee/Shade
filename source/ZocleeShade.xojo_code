@@ -2177,7 +2177,8 @@ Protected Module ZocleeShade
 		  OpVectorShuffle
 		  OpVectorTimesMatrix
 		  OpVectorTimesScalar
-		OpWaitGroupEvents
+		  OpWaitGroupEvents
+		OpWritePipe
 	#tag EndEnum
 
 	#tag Enum, Name = SPIRVTypeEnum, Type = Integer, Flags = &h0
