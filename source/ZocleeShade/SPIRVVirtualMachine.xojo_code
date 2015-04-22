@@ -997,6 +997,9 @@ Protected Class SPIRVVirtualMachine
 		        case 238 // ***** OpReserveReadPipePackets ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReserveReadPipePackets)
 		          
+		        case 239 // ***** OpReserveWritePipePackets ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReserveWritePipePackets)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2804,6 +2807,15 @@ Protected Class SPIRVVirtualMachine
 		      ' ***** OpReserveReadPipePackets ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpReserveReadPipePackets
+		      validate_WordCountEqual(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "p ID out of bounds.", "p ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "num_packets ID out of bounds.", "num_packets ID not declared.")
+		      
+		      ' ***** OpReserveWritePipePackets ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpReserveWritePipePackets
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
