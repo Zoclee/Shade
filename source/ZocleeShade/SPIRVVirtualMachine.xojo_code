@@ -1015,6 +1015,9 @@ Protected Class SPIRVVirtualMachine
 		        case 244 // ***** OpGetMaxPipePackets ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetMaxPipePackets)
 		          
+		        case 245 // ***** OpGroupReserveReadPipePackets ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupReserveReadPipePackets)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2352,6 +2355,24 @@ Protected Class SPIRVVirtualMachine
 		      end if
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "X ID out of bounds.", "X ID not found.")
 		      // todo: X and Result Type must be a 32 or 64 bits wide OpTypeInt data type.
+		      
+		      ' ***** OpGroupReserveReadPipePackets ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGroupReserveReadPipePackets
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      if ModuleBinary.UInt32Value(op.Offset + 12) > 3 then
+		        logError op, "Invalid Execution Scope enumeration value."
+		      end if
+		      if not ((ModuleBinary.UInt32Value(op.Offset + 12) = 2) or (ModuleBinary.UInt32Value(op.Offset + 12) = 3)) then
+		        logError op, "Execution Scope must be Workgroup or Subgroup."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "p ID out of bounds.", "p ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "num_packets ID out of bounds.", "num_packets ID not declared.")
+		      // todo: p must be a OpTypePipe with ReadOnly Access Qualifier.
+		      // todo: num_packets must be a 32-bits OpTypeInt which is treated as unsigned value.
+		      // todo: Result Type must be a OpTypeReserveId.
 		      
 		      ' ***** OpGroupSMax ***********************************************************************************
 		      

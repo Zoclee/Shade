@@ -1057,6 +1057,17 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 20)
 			    
+			    // ***** OpGroupReserveReadPipePackets *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGroupReserveReadPipePackets
+			    result.Append "GroupReserveReadPipePackets "
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
+			    
 			    // ***** OpGroupSMax *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGroupSMax
@@ -2390,6 +2401,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGroupFMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupFMin, _
 			    SPIRVOpcodeTypeEnum.OpGroupIAdd, _
+			    SPIRVOpcodeTypeEnum.OpGroupReserveReadPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpGroupSMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupSMin, _
 			    SPIRVOpcodeTypeEnum.OpGroupUMax, _
@@ -2585,6 +2597,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGroupFMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupFMin, _
 			    SPIRVOpcodeTypeEnum.OpGroupIAdd, _
+			    SPIRVOpcodeTypeEnum.OpGroupReserveReadPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpGroupSMax, _
 			    SPIRVOpcodeTypeEnum.OpGroupSMin, _
 			    SPIRVOpcodeTypeEnum.OpGroupUMax, _

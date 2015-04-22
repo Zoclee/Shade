@@ -2051,6 +2051,7 @@ Protected Module ZocleeShade
 		  OpGroupFMin
 		  OpGroupIAdd
 		  OpGroupMemberDecorate
+		  OpGroupReserveReadPipePackets
 		  OpGroupSMax
 		  OpGroupSMin
 		  OpGroupUMax
