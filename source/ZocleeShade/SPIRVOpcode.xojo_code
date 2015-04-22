@@ -1433,6 +1433,18 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 24)
 			    
+			    // ***** OpReservedWritePipe *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpReservedWritePipe
+			    result.Append "ReservedWritePipe "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
+			    result.Append " "
+			    result.Append compose_id(Offset + 24)
+			    
 			    // ***** OpReturn *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpReturn
@@ -2357,6 +2369,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
 			    SPIRVOpcodeTypeEnum.OpReadPipe, _
 			    SPIRVOpcodeTypeEnum.OpReservedReadPipe, _
+			    SPIRVOpcodeTypeEnum.OpReservedWritePipe, _
 			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSDiv, _
 			    SPIRVOpcodeTypeEnum.OpSelect, _
@@ -2546,6 +2559,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
 			    SPIRVOpcodeTypeEnum.OpReadPipe, _
 			    SPIRVOpcodeTypeEnum.OpReservedReadPipe, _
+			    SPIRVOpcodeTypeEnum.OpReservedWritePipe, _
 			    SPIRVOpcodeTypeEnum.OpSampler, _
 			    SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSDiv, _
