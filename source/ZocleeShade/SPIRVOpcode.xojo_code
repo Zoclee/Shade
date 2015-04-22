@@ -353,7 +353,15 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
-			    // ***** OpCompileFlag *************************************************
+			    // ***** OpCommitReadPipe *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpCommitReadPipe
+			    result.Append "CommitReadPipe "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append compose_id(Offset + 8)
+			    
+			    // ***** OpCompileFlag ************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpCompileFlag
 			    result.Append "CompileFlag """

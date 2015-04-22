@@ -1000,6 +1000,9 @@ Protected Class SPIRVVirtualMachine
 		        case 239 // ***** OpReserveWritePipePackets ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReserveWritePipePackets)
 		          
+		        case 240 // ***** OpCommitReadPipe ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCommitReadPipe)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -1431,6 +1434,15 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Condition ID out of bounds.", "Condition ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "True Label ID out of bounds.", "True Label ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "False Label ID out of bounds.", "False Label ID not declared.")
+		      
+		      ' ***** OpCommitReadPipe ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpCommitReadPipe
+		      validate_WordCountEqual(op, 3)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "p ID out of bounds.", "p ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "reserve_id ID out of bounds.", "reserve_id ID not declared.")
+		      // todo: p must be a OpTypePipe with ReadOnly Access Qualifier.
+		      // todo: reserve_id must be a OpTypeReserveId.
 		      
 		      ' ***** OpCompileFlag ***********************************************************************************
 		      

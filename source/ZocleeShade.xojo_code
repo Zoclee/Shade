@@ -1969,6 +1969,7 @@ Protected Module ZocleeShade
 		  OpBitwiseXor
 		  OpBranch
 		  OpBranchConditional
+		  OpCommitReadPipe
 		  OpCompileFlag
 		  OpCompositeConstruct
 		  OpCompositeExtract
