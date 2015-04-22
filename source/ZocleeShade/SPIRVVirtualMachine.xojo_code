@@ -988,6 +988,9 @@ Protected Class SPIRVVirtualMachine
 		        case 235 // ***** OpWritePipe ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpWritePipe)
 		          
+		        case 236 // ***** OpReservedReadPipe ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReservedReadPipe)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2740,6 +2743,21 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "p ID out of bounds.", "p ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "ptr ID out of bounds.", "ptr ID not declared.")
 		      // todo: p must be a OpTypePipe with ReadOnly Access Qualifier.
+		      // todo: ptr must be a OpTypePointer with the same data type as p and a Generic storage class.
+		      
+		      ' ***** OpReservedReadPipe ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpReservedReadPipe
+		      validate_WordCountMinimum(op, 7)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "p ID out of bounds.", "p ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "reserve_id ID out of bounds.", "reserve_id ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "index ID out of bounds.", "index ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 24), "ptr ID out of bounds.", "ptr ID not declared.")
+		      // todo: p must be a OpTypePipe with ReadOnly Access Qualifier.
+		      // todo: reserve_id must be a OpTypeReserveId.
+		      // todo: index must be a 32-bits OpTypeInt which is treated as unsigned value.
 		      // todo: ptr must be a OpTypePointer with the same data type as p and a Generic storage class.
 		      
 		      ' ***** OpReturn ***********************************************************************************

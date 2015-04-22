@@ -2088,6 +2088,7 @@ Protected Module ZocleeShade
 		  OpPhi
 		  OpPtrCastToGeneric
 		  OpReadPipe
+		  OpReservedReadPipe
 		  OpReturn
 		  OpReturnValue
 		  OpSampler
