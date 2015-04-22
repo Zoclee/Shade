@@ -1012,6 +1012,9 @@ Protected Class SPIRVVirtualMachine
 		        case 243 // ***** OpGetNumPipePackets ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetNumPipePackets)
 		          
+		        case 244 // ***** OpGetMaxPipePackets ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetMaxPipePackets)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2195,6 +2198,16 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "ptr ID out of bounds.", "ptr ID not declared.")
 		      // todo: Result Type must be a 32-bits wide OpTypeInt value.
 		      // todo: ptr must point to Generic.
+		      
+		      ' ***** OpGetMaxPipePackets ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGetMaxPipePackets
+		      validate_WordCountEqual(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "p ID out of bounds.", "p ID not declared.")
+		      // todo: p must be a OpTypePipe with ReadOnly or WriteOnly Access Qualifier.
+		      // todo: Result Type must be a 32-bits OpTypeInt which should be treated as unsigned value.
 		      
 		      ' ***** OpGetNumPipePackets ***********************************************************************************
 		      

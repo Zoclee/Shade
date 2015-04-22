@@ -959,6 +959,12 @@ Protected Class SPIRVOpcode
 			    result.Append "GenericPtrMemSemantics "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpGetMaxPipePackets *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGetMaxPipePackets
+			    result.Append "GetMaxPipePackets "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpGetNumPipePackets *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGetNumPipePackets
@@ -2375,6 +2381,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit, _
 			    SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics, _
+			    SPIRVOpcodeTypeEnum.OpGetMaxPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpGetNumPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpGroupAll, _
 			    SPIRVOpcodeTypeEnum.OpGroupAny, _
@@ -2569,6 +2576,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit, _
 			    SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics, _
+			    SPIRVOpcodeTypeEnum.OpGetMaxPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpGetNumPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpGroupAll, _
 			    SPIRVOpcodeTypeEnum.OpGroupAny, _
