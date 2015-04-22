@@ -976,6 +976,9 @@ Protected Class SPIRVVirtualMachine
 		        case 231 // ***** OpGroupSMax ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupSMax)
 		          
+		        case 232 // ***** OpGenericCastToPtrExplicit ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2117,6 +2120,19 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Source Pointer ID out of bounds.", "Source Pointer ID not declared.")
 		      // todo: Result Type must point to storage class WorkgroupLocal, WorkgroupGlobal or Private
 		      // todo: Result Type must be a pointer type pointing to storage class Generic
+		      // todo: Result Type and Source pointer must point to the same type.
+		      
+		      ' ***** OpGenericCastToPtrExplicit ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit
+		      validate_WordCountMinimum(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Source Pointer ID out of bounds.", "Source Pointer ID not declared.")
+		      if ModuleBinary.UInt32Value(op.Offset + 16) > 10 then
+		        logError op, "Invalid Storage Class enumeration value."
+		      end if
+		      // todo: Result Type must point to storage class WorkgroupLocal, WorkgroupGlobal or Private
 		      // todo: Result Type and Source pointer must point to the same type.
 		      
 		      ' ***** OpGroupAll ***********************************************************************************

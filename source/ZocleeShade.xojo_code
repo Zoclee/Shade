@@ -2036,6 +2036,7 @@ Protected Module ZocleeShade
 		  OpFwidthCoarse
 		  OpFwidthFine
 		  OpGenericCastToPtr
+		  OpGenericCastToPtrExplicit
 		  OpGroupAll
 		  OpGroupAny
 		  OpGroupBroadcast
