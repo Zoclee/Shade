@@ -2037,6 +2037,7 @@ Protected Module ZocleeShade
 		  OpFwidthFine
 		  OpGenericCastToPtr
 		  OpGenericCastToPtrExplicit
+		  OpGenericPtrMemSemantics
 		  OpGroupAll
 		  OpGroupAny
 		  OpGroupBroadcast
@@ -2086,6 +2087,7 @@ Protected Module ZocleeShade
 		  OpOuterProduct
 		  OpPhi
 		  OpPtrCastToGeneric
+		  OpReadPipe
 		  OpReturn
 		  OpReturnValue
 		  OpSampler

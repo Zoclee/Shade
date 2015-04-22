@@ -979,6 +979,12 @@ Protected Class SPIRVVirtualMachine
 		        case 232 // ***** OpGenericCastToPtrExplicit ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit)
 		          
+		        case 233 // ***** OpGenericPtrMemSemantics ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics)
+		          
+		        case 234 // ***** OpReadPipe ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReadPipe)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2135,6 +2141,16 @@ Protected Class SPIRVVirtualMachine
 		      // todo: Result Type must point to storage class WorkgroupLocal, WorkgroupGlobal or Private
 		      // todo: Result Type and Source pointer must point to the same type.
 		      
+		      ' ***** OpGenericPtrMemSemantics ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics
+		      validate_WordCountMinimum(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Source Pointer ID out of bounds.", "Source Pointer ID not declared.")
+		      // todo: Result Type must be a 32-bits wide OpTypeInt value.
+		      // todo: ptr must point to Generic.
+		      
 		      ' ***** OpGroupAll ***********************************************************************************
 		      
 		    case SPIRVOpcodeTypeEnum.OpGroupAll
@@ -2711,6 +2727,17 @@ Protected Class SPIRVVirtualMachine
 		      // todo: Source pointer must point to storage class WorkgroupLocal, WorkgroupGlobal or Private
 		      // todo: Result Type must be a pointer type pointing to storage class Generic
 		      // todo: Result Type and Source pointer must point to the same type.
+		      
+		      ' ***** OpReadPipe ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpReadPipe
+		      validate_WordCountMinimum(op, 5)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "p ID out of bounds.", "p ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "ptr ID out of bounds.", "ptr ID not declared.")
+		      // todo: p must be a OpTypePipe with ReadOnly Access Qualifier.
+		      // todo: ptr must be a OpTypePointer with the same data type as p and a Generic storage class.
 		      
 		      ' ***** OpReturn ***********************************************************************************
 		      

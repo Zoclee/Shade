@@ -937,6 +937,12 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 16))
 			    
+			    // ***** OpGenericPtrMemSemantics *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics
+			    result.Append "GenericPtrMemSemantics "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpGroupAll *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGroupAll
@@ -1406,6 +1412,14 @@ Protected Class SPIRVOpcode
 			  case SPIRVOpcodeTypeEnum.OpPtrCastToGeneric
 			    result.Append "PtrCastToGeneric "
 			    result.Append compose_id(Offset + 12)
+			    
+			    // ***** OpReadPipe *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpReadPipe
+			    result.Append "ReadPipe "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
 			    
 			    // ***** OpReturn *************************************************
 			    
@@ -2285,6 +2299,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFwidthFine, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit, _
+			    SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics, _
 			    SPIRVOpcodeTypeEnum.OpGroupAll, _
 			    SPIRVOpcodeTypeEnum.OpGroupAny, _
 			    SPIRVOpcodeTypeEnum.OpGroupBroadcast, _
@@ -2320,6 +2335,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpOuterProduct, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
+			    SPIRVOpcodeTypeEnum.OpReadPipe, _
 			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSDiv, _
 			    SPIRVOpcodeTypeEnum.OpSelect, _
@@ -2470,6 +2486,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpFwidthFine, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit, _
+			    SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics, _
 			    SPIRVOpcodeTypeEnum.OpGroupAll, _
 			    SPIRVOpcodeTypeEnum.OpGroupAny, _
 			    SPIRVOpcodeTypeEnum.OpGroupBroadcast, _
@@ -2505,6 +2522,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpOuterProduct, _
 			    SPIRVOpcodeTypeEnum.OpPhi, _
 			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
+			    SPIRVOpcodeTypeEnum.OpReadPipe, _
 			    SPIRVOpcodeTypeEnum.OpSampler, _
 			    SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSDiv, _
