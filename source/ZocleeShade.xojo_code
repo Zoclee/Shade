@@ -2005,6 +2005,7 @@ Protected Module ZocleeShade
 		  OpEmitVertex
 		  OpEndPrimitive
 		  OpEndStreamPrimitive
+		  OpEnqueueMarker
 		  OpEntryPoint
 		  OpExecutionMode
 		  OpExtension

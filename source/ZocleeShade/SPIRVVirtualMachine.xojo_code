@@ -1027,6 +1027,9 @@ Protected Class SPIRVVirtualMachine
 		        case 248 // ***** OpGroupCommitWritePipe ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupCommitWritePipe)
 		          
+		        case 249 // ***** OpEnqueueMarker ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEnqueueMarker)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -1838,6 +1841,21 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Stream ID out of bounds.", "Stream ID not found.")
 		      // todo: Stream must be an <id> of a constant instruction with a scalar integer type.
 		      // todo: This instruction can only be used when multiple streams are present.
+		      
+		      ' ***** OpEnqueueMarker ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpEnqueueMarker
+		      validate_WordCountEqual(op, 7)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "q ID out of bounds.", "q ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Num Events ID out of bounds.", "Num Events ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "Wait Events ID out of bounds.", "Wait Events ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 24), "Ret Event ID out of bounds.", "Ret Event ID not declared.")
+		      // todo: Num Events specifies the number of event objects in the wait list pointed Wait Events and must be 32 bit OpTypeInt treated as unsigned integer.
+		      // todo: Wait Events specifies the list of wait event objects and must be a OpTypePointer to OpTypeDeviceEvent.
+		      // todo: Ret Event is OpTypePointer to OpTypeDeviceEvent which gets implictly retained by this instruction. must be a OpTypePointer to OpTypeDeviceEvent.
+		      // todo: Result Type must be a 32 bit OpTypeInt.
 		      
 		      ' ***** OpEntryPoint ***********************************************************************************
 		      
