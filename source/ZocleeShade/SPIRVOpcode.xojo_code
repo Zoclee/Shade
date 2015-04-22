@@ -1190,6 +1190,12 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpIsValidReserveId *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpIsValidReserveId
+			    result.Append "IsValidReserveId "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpKill *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpKill
@@ -2385,6 +2391,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
 			    SPIRVOpcodeTypeEnum.OpIsNormal, _
 			    SPIRVOpcodeTypeEnum.OpISub, _
+			    SPIRVOpcodeTypeEnum.OpIsValidReserveId, _
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpLogicalAnd, _
@@ -2577,6 +2584,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
 			    SPIRVOpcodeTypeEnum.OpIsNormal, _
 			    SPIRVOpcodeTypeEnum.OpISub, _
+			    SPIRVOpcodeTypeEnum.OpIsValidReserveId, _
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
 			    SPIRVOpcodeTypeEnum.OpLogicalAnd, _

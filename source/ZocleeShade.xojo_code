@@ -2064,6 +2064,7 @@ Protected Module ZocleeShade
 		  OpIsNan
 		  OpIsNormal
 		  OpISub
+		  OpIsValidReserveId
 		  OpKill
 		  OpLabel
 		  OpLessOrGreater

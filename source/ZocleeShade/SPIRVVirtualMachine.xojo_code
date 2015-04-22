@@ -1006,6 +1006,9 @@ Protected Class SPIRVVirtualMachine
 		        case 241 // ***** OpCommitWritePipe ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCommitWritePipe)
 		          
+		        case 242 // ***** OpIsValidReserveId ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsValidReserveId)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2518,6 +2521,16 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
 		      // todo: The operands’ types and Result Type must all be scalars or vectors of integer types with the same number of components and the same component widths.
+		      
+		      ' ***** OpIsValidReserveId ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpIsValidReserveId
+		      validate_WordCountEqual(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "reserve_id ID out of bounds.", "reserve_id ID not declared.")
+		      // todo: reserve_id must be a OpTypeReserveId.
+		      // todo: Result Type must be a OpTypeBool.
 		      
 		      ' ***** OpKill ***********************************************************************************
 		      
