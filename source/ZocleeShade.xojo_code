@@ -2141,6 +2141,7 @@ Protected Module ZocleeShade
 		  OpSDiv
 		  OpSelect
 		  OpSelectionMerge
+		  OpSetUserEventStatus
 		  OpShiftLeftLogical
 		  OpShiftRightArithmetic
 		  OpShiftRightLogical

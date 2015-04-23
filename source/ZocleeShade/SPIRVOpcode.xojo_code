@@ -1825,6 +1825,15 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append SPIRVDescribeSelectionControlMask(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
+			    // ***** OpSetUserEventStatus *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSetUserEventStatus
+			    result.Append "SetUserEventStatus"
+			    result.Append " "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append compose_id(Offset + 8)
+			    
 			    // ***** OpSGreaterThan *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSGreaterThan

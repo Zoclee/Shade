@@ -1057,6 +1057,9 @@ Protected Class SPIRVVirtualMachine
 		        case 258 // ***** OpIsValidEvent ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsValidEvent
 		          
+		        case 259 // ***** OpSetUserEventStatus ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSetUserEventStatus
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -3200,6 +3203,15 @@ Protected Class SPIRVVirtualMachine
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
 		        logError op, "Invalid Selection Control enumeration value."
 		      end if
+		      
+		      ' ***** OpSetUserEventStatus ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSetUserEventStatus
+		      validate_WordCountEqual(op, 3)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "event ID out of bounds.", "event ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "status ID out of bounds.", "status ID not declared.")
+		      // todo: event must be a OpTypeDeviceEvent that was produced by OpCreateUserEvent.
+		      // todo: status must be a 32-bit OpTypeInt treated as a signed integer.
 		      
 		      ' ***** OpSGreaterThan ***********************************************************************************
 		      
