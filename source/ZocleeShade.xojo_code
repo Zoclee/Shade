@@ -2065,6 +2065,7 @@ Protected Module ZocleeShade
 		  OpGenericCastToPtr
 		  OpGenericCastToPtrExplicit
 		  OpGenericPtrMemSemantics
+		  OpGetKernelNDrangeMaxSubGroupSize
 		  OpGetKernelNDrangeSubGroupCount
 		  OpGetMaxPipePackets
 		  OpGetNumPipePackets
