@@ -1045,6 +1045,9 @@ Protected Class SPIRVVirtualMachine
 		        case 254 // ***** OpGetKernelPreferredWorkGroupSizeMultiple ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple)
 		          
+		        case 255 // ***** OpRetainEvent ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpRetainEvent
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -3092,6 +3095,13 @@ Protected Class SPIRVVirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "p ID out of bounds.", "p ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "num_packets ID out of bounds.", "num_packets ID not declared.")
+		      
+		      ' ***** OpRetainEvent ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpRetainEvent
+		      validate_WordCountEqual(op, 2)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "event ID out of bounds.", "event ID not declared.")
+		      //todo: event must be an event that was produced by OpEnqueueKernel, OpEnqueueMarker or OpCreateUserEvent.
 		      
 		      ' ***** OpReturn ***********************************************************************************
 		      

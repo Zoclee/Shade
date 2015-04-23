@@ -1742,6 +1742,13 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpRetainEvent *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpRetainEvent
+			    result.Append "RetainEvent"
+			    result.Append " "
+			    result.Append compose_id(Offset + 4)
+			    
 			    // ***** OpReturn *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpReturn
