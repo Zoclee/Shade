@@ -219,6 +219,19 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append SPIRVDescribeMemorySemantics(VM.ModuleBinary.UInt32Value(Offset + 20))
 			    
+			    // ***** OpAtomicIMin *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpAtomicIMin
+			    result.Append "AtomicIMin"
+			    result.Append " "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 16))
+			    result.Append " "
+			    result.Append SPIRVDescribeMemorySemantics(VM.ModuleBinary.UInt32Value(Offset + 20))
+			    result.Append " "
+			    result.Append compose_id(Offset + 24)
+			    
 			    // ***** OpAtomicISub *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpAtomicISub
@@ -2728,6 +2741,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpAtomicExchange, _
 			    SPIRVOpcodeTypeEnum.OpAtomicIAdd, _
 			    SPIRVOpcodeTypeEnum.OpAtomicIDecrement, SPIRVOpcodeTypeEnum.OpAtomicIIncrement, _
+			    SPIRVOpcodeTypeEnum.OpAtomicIMin, _
 			    SPIRVOpcodeTypeEnum.OpAtomicISub, _
 			    SPIRVOpcodeTypeEnum.OpAtomicLoad, _
 			    SPIRVOpcodeTypeEnum.OpAtomicOr, _
@@ -2936,6 +2950,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpAtomicExchange, _
 			    SPIRVOpcodeTypeEnum.OpAtomicIAdd, _
 			    SPIRVOpcodeTypeEnum.OpAtomicIDecrement, SPIRVOpcodeTypeEnum.OpAtomicIIncrement, _
+			    SPIRVOpcodeTypeEnum.OpAtomicIMin, _
 			    SPIRVOpcodeTypeEnum.OpAtomicISub, _
 			    SPIRVOpcodeTypeEnum.OpAtomicLoad, _
 			    SPIRVOpcodeTypeEnum.OpAtomicOr, _

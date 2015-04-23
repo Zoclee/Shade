@@ -2001,6 +2001,7 @@ Protected Module ZocleeShade
 		  OpAtomicIAdd
 		  OpAtomicIDecrement
 		  OpAtomicIIncrement
+		  OpAtomicIMin
 		  OpAtomicISub
 		  OpAtomicInit
 		  OpAtomicLoad
