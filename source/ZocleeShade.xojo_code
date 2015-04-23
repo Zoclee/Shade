@@ -2015,6 +2015,7 @@ Protected Module ZocleeShade
 		  OpBitwiseXor
 		  OpBranch
 		  OpBranchConditional
+		  OpBuildNDRange
 		  OpCaptureEventProfilingInfo
 		  OpCommitReadPipe
 		  OpCommitWritePipe

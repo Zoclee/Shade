@@ -378,6 +378,17 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpBuildNDRange *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpBuildNDRange
+			    result.Append "BuildNDRange"
+			    result.Append " "
+			    result.Append compose_id(Offset + 12)
+			    result.Append " "
+			    result.Append compose_id(Offset + 16)
+			    result.Append " "
+			    result.Append compose_id(Offset + 20)
+			    
 			    // ***** OpCaptureEventProfilingInfo *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpCaptureEventProfilingInfo
@@ -2713,6 +2724,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpBitwiseAnd, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseOr, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseXor, _
+			    SPIRVOpcodeTypeEnum.OpBuildNDRange, _
 			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, _
 			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpCompositeInsert, _
 			    SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
@@ -2917,6 +2929,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpBitwiseAnd, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseOr, _
 			    SPIRVOpcodeTypeEnum.OpBitwiseXor, _
+			    SPIRVOpcodeTypeEnum.OpBuildNDRange, _
 			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, SPIRVOpcodeTypeEnum.OpCompositeExtract, _
 			    SPIRVOpcodeTypeEnum.OpCompositeInsert, _
 			    SPIRVOpcodeTypeEnum.OpConstant, _

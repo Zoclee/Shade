@@ -1066,6 +1066,9 @@ Protected Class SPIRVVirtualMachine
 		        case 261 // ***** OpGetDefaultQueue ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetDefaultQueue)
 		          
+		        case 262 // ***** OpBuildNDRange ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBuildNDRange)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -1497,6 +1500,22 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Condition ID out of bounds.", "Condition ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "True Label ID out of bounds.", "True Label ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "False Label ID out of bounds.", "False Label ID not declared.")
+		      
+		      ' ***** OpBuildNDRange ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpBuildNDRange
+		      validate_WordCountEqual(op, 6)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "GlobalWorkSize ID out of bounds.", "GlobalWorkSize ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "LocalWorkSize ID out of bounds.", "LocalWorkSize ID not declared.")
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "GlobalWorkOffset ID out of bounds.", "GlobalWorkOffset ID not declared.")
+		      // todo: GlobalWorkSize, LocalWorkSize and GlobalWorkOffset must be a scalar or an array with 2 or 3 components. Where the type of each element in the array is 32 bit OpTypeInt when the Addressing Model is Physical32 or 64 bit OpTypeInt when the Addressing Model is Physical64.
+		      // todo: Result Type is the descriptor and must be a OpTypeStruct with the following ordered list of members, starting from the first to last:
+		      //  - 32 bit OpTypeInt
+		      //  - OpTypeArray with 3 elements, where each element is 32 bit OpTypeInt when the Addressing Model is Physical32 and 64 bit OpTypeInt when the Addressing Model is Physical64.
+		      //  - OpTypeArray with 3 elements, where each element is 32 bit OpTypeInt when the Addressing Model is Physical32 and 64 bit OpTypeInt when the Addressing Model is Physical64.
+		      //  - OpTypeArray with 3 elements, where each element is 32 bit OpTypeInt when the Addressing Model is Physical32 and 64 bit OpTypeInt when the Addressing Model is Physical64.
 		      
 		      ' ***** OpCaptureEventProfilingInfo ***********************************************************************************
 		      
