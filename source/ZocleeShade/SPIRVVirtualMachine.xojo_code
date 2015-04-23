@@ -1854,7 +1854,9 @@ Protected Class SPIRVVirtualMachine
 		        end if
 		      case 42 // FP Fast Math Mode
 		        validate_WordCountEqual(op, 4)
-		        break // todo
+		        if ModuleBinary.UInt32Value(op.Offset + 16) > 31 then
+		          logError op, "Invalid FP Fast Math Mode mask value."
+		        end if
 		      case 43 // Linkage Type
 		        validate_WordCountEqual(op, 4)
 		        if ModuleBinary.UInt32Value(op.Offset + 12) > 1 then
@@ -3043,7 +3045,9 @@ Protected Class SPIRVVirtualMachine
 		        end if
 		      case 42 // FP Fast Math Mode
 		        validate_WordCountEqual(op, 4)
-		        break // todo
+		        if ModuleBinary.UInt32Value(op.Offset + 16) > 31 then
+		          logError op, "Invalid FP Fast Math Mode mask value."
+		        end if
 		      case 43 // Linkage Type
 		        validate_WordCountEqual(op, 4)
 		        if ModuleBinary.UInt32Value(op.Offset + 16) > 1 then
