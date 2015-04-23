@@ -3071,10 +3071,10 @@ Protected Class SPIRVVirtualMachine
 		      
 		    case SPIRVOpcodeTypeEnum.OpMemoryBarrier
 		      validate_WordCountEqual(op, 3)
-		      if ModuleBinary.UInt32Value(op.Offset + 3) > 6 then
+		      if ModuleBinary.UInt32Value(op.Offset + 4) > 6 then
 		        logError op, "Invalid Execution Scope enumeration value."
 		      end if
-		      if ModuleBinary.UInt32Value(op.Offset + 3) > 1023 then
+		      if ModuleBinary.UInt32Value(op.Offset + 8) > 1023 then
 		        logError op, "Invalid Memory Semantics enumeration value."
 		      end if
 		      
