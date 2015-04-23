@@ -659,7 +659,8 @@ Protected Class SPIRVOpcode
 			    case 32 // Index
 			      break
 			    case 33 // Binding
-			      break
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 34 // DescriptorSet
 			      break
 			    case 35 // Offset
