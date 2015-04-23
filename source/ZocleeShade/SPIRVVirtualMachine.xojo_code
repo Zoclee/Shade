@@ -1790,7 +1790,7 @@ Protected Class SPIRVVirtualMachine
 		      j = op.Offset + 12
 		      while j < ub
 		        if (ModuleBinary.UInt32Value(j) < 1) or (ModuleBinary.UInt32Value(j) > 2) then
-		          logError op, "Invalid Memory Access enumeration value."
+		          logError op, "Invalid Memory Access mask value."
 		        end if
 		        j = j + 4
 		      wend
@@ -1805,7 +1805,7 @@ Protected Class SPIRVVirtualMachine
 		      j = op.Offset + 16
 		      while j < ub
 		        if (ModuleBinary.UInt32Value(j) < 1) or (ModuleBinary.UInt32Value(j) > 2) then
-		          logError op, "Invalid Memory Access enumeration value."
+		          logError op, "Invalid Memory Access mask value."
 		        end if
 		        j = j + 4
 		      wend
@@ -2231,7 +2231,7 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      if ModuleBinary.UInt32Value(op.Offset + 12) > 15 then
-		        logError op, "Invalid Function Control Mask value."
+		        logError op, "Invalid Function Control mask value."
 		      end if
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 16), "Function Type ID out of bounds.", "Function TypeID not declared.")
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 16)) then
@@ -2978,7 +2978,7 @@ Protected Class SPIRVVirtualMachine
 		      validate_WordCountEqual(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Label ID out of bounds.", "Label ID not found.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
-		        logError op, "Invalid Loop Control enumeration value."
+		        logError op, "Invalid Loop Control mask value."
 		      end if
 		      
 		      ' ***** OpMatrixTimesMatrix ***********************************************************************************
@@ -3312,7 +3312,7 @@ Protected Class SPIRVVirtualMachine
 		      validate_WordCountEqual(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Label ID out of bounds.", "Label ID not found.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
-		        logError op, "Invalid Selection Control enumeration value."
+		        logError op, "Invalid Selection Control mask value."
 		      end if
 		      
 		      ' ***** OpSetUserEventStatus ***********************************************************************************
@@ -3519,7 +3519,7 @@ Protected Class SPIRVVirtualMachine
 		      j = op.Offset + 12
 		      while j < ub
 		        if (ModuleBinary.UInt32Value(j) < 1) or (ModuleBinary.UInt32Value(j) > 2) then
-		          logError op, "Invalid Memory Access enumeration value."
+		          logError op, "Invalid Memory Access mask value."
 		        end if
 		        j = j + 4
 		      wend
