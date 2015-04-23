@@ -1048,6 +1048,12 @@ Protected Class SPIRVVirtualMachine
 		        case 255 // ***** OpRetainEvent ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpRetainEvent
 		          
+		        case 256 // ***** OpReleaseEvent ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReleaseEvent
+		          
+		        case 257 // ***** OpCreateUserEvent ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCreateUserEvent
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -1724,6 +1730,14 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand ID out of bounds.", "Operand ID not declared.")
+		      
+		      ' ***** OpCreateUserEvent ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpCreateUserEvent
+		      validate_WordCountEqual(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      // todo: Result Type must be OpTypeDeviceEvent.
 		      
 		      ' ***** OpDecorate ***********************************************************************************
 		      
@@ -3045,6 +3059,13 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "ptr ID out of bounds.", "ptr ID not declared.")
 		      // todo: p must be a OpTypePipe with ReadOnly Access Qualifier.
 		      // todo: ptr must be a OpTypePointer with the same data type as p and a Generic storage class.
+		      
+		      ' ***** OpReleaseEvent ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpReleaseEvent
+		      validate_WordCountEqual(op, 2)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "event ID out of bounds.", "event ID not declared.")
+		      //todo: event must be an event that was produced by OpEnqueueKernel, OpEnqueueMarker or OpCreateUserEvent.
 		      
 		      ' ***** OpReservedReadPipe ***********************************************************************************
 		      

@@ -586,6 +586,11 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpCreateUserEvent *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpCreateUserEvent
+			    result.Append "CreateUserEvent"
+			    
 			    // ***** OpDecorate *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpDecorate
@@ -1698,6 +1703,13 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpReleaseEvent *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpReleaseEvent
+			    result.Append "ReleaseEvent"
+			    result.Append " "
+			    result.Append compose_id(Offset + 4)
+			    
 			    // ***** OpReservedReadPipe *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpReservedReadPipe
@@ -2682,6 +2694,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpConvertUToF, _
 			    SPIRVOpcodeTypeEnum.OpConvertUToPtr, _
 			    SPIRVOpcodeTypeEnum.OpCopyObject, _
+			    SPIRVOpcodeTypeEnum.OpCreateUserEvent, _
 			    SPIRVOpcodeTypeEnum.OpDot, _
 			    SPIRVOpcodeTypeEnum.OpDPdx, SPIRVOpcodeTypeEnum.OpDPdxCoarse, _
 			    SPIRVOpcodeTypeEnum.OpDPdxFine, _
@@ -2883,6 +2896,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpConvertUToF, _
 			    SPIRVOpcodeTypeEnum.OpConvertUToPtr, _
 			    SPIRVOpcodeTypeEnum.OpCopyObject, _
+			    SPIRVOpcodeTypeEnum.OpCreateUserEvent, _
 			    SPIRVOpcodeTypeEnum.OpDot, _
 			    SPIRVOpcodeTypeEnum.OpDPdx, SPIRVOpcodeTypeEnum.OpDPdxCoarse, _
 			    SPIRVOpcodeTypeEnum.OpDPdxFine, _

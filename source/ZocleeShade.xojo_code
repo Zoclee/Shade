@@ -2015,6 +2015,7 @@ Protected Module ZocleeShade
 		  OpCopyMemory
 		  OpCopyMemorySized
 		  OpCopyObject
+		  OpCreateUserEvent
 		  OpDecorate
 		  OpDecorationGroup
 		  OpDot
@@ -2126,6 +2127,7 @@ Protected Module ZocleeShade
 		  OpPhi
 		  OpPtrCastToGeneric
 		  OpReadPipe
+		  OpReleaseEvent
 		  OpReservedReadPipe
 		  OpReservedWritePipe
 		  OpReserveReadPipePackets
