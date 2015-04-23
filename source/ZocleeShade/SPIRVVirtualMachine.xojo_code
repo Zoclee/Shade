@@ -1069,6 +1069,9 @@ Protected Class SPIRVVirtualMachine
 		        case 262 // ***** OpBuildNDRange ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBuildNDRange)
 		          
+		        case 263 // ***** OpSatConvertSToU ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSatConvertSToU)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -3204,9 +3207,18 @@ Protected Class SPIRVVirtualMachine
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Sampler ID out of bounds.", "Sampler ID not found.")
-		      // todo: validate that sampler object type is OpTypeSampler
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Filter ID out of bounds.", "Filter ID not found.")
+		      // todo: validate that sampler object type is OpTypeSampler
 		      // todo: validate that sampler object type is OpTypeFilter
+		      
+		      ' ***** OpSatConvertSToU ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpSatConvertSToU
+		      validate_WordCountEqual(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Signed Value ID out of bounds.", "Signed Value ID not found.")
+		      // todo: The operand’s type and Result Type must have the same number of components.
 		      
 		      ' ***** OpSConvert ***********************************************************************************
 		      

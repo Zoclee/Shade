@@ -1816,6 +1816,13 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpSatConvertSToU *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpSatConvertSToU
+			    result.Append "SatConvertSToU"
+			    result.Append " "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpSConvert *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpSConvert
@@ -2823,7 +2830,9 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpReservedWritePipe, _
 			    SPIRVOpcodeTypeEnum.OpReserveReadPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpReserveWritePipePackets, _
-			    SPIRVOpcodeTypeEnum.OpSampler, SPIRVOpcodeTypeEnum.OpSConvert, _
+			    SPIRVOpcodeTypeEnum.OpSampler, _
+			    SPIRVOpcodeTypeEnum.OpSatConvertSToU, _
+			    SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSDiv, _
 			    SPIRVOpcodeTypeEnum.OpSelect, _
 			    SPIRVOpcodeTypeEnum.OpShiftLeftLogical, _
@@ -3031,6 +3040,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpReserveReadPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpReserveWritePipePackets, _
 			    SPIRVOpcodeTypeEnum.OpSampler, _
+			    SPIRVOpcodeTypeEnum.OpSatConvertSToU, _
 			    SPIRVOpcodeTypeEnum.OpSConvert, _
 			    SPIRVOpcodeTypeEnum.OpSDiv, _
 			    SPIRVOpcodeTypeEnum.OpSelect, _

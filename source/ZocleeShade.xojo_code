@@ -2163,6 +2163,7 @@ Protected Module ZocleeShade
 		  OpReturn
 		  OpReturnValue
 		  OpSampler
+		  OpSatConvertSToU
 		  OpSConvert
 		  OpSDiv
 		  OpSelect
