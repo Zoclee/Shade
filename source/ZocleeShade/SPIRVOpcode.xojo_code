@@ -1428,6 +1428,13 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpIsValidEvent *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpIsValidEvent
+			    result.Append "IsValidEvent"
+			    result.Append " "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpIsValidReserveId *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpIsValidReserveId
@@ -2758,6 +2765,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
 			    SPIRVOpcodeTypeEnum.OpIsNormal, _
 			    SPIRVOpcodeTypeEnum.OpISub, _
+			    SPIRVOpcodeTypeEnum.OpIsValidEvent, _
 			    SPIRVOpcodeTypeEnum.OpIsValidReserveId, _
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _
@@ -2962,6 +2970,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpIsNan, _
 			    SPIRVOpcodeTypeEnum.OpIsNormal, _
 			    SPIRVOpcodeTypeEnum.OpISub, _
+			    SPIRVOpcodeTypeEnum.OpIsValidEvent, _
 			    SPIRVOpcodeTypeEnum.OpIsValidReserveId, _
 			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
 			    SPIRVOpcodeTypeEnum.OpLoad, _

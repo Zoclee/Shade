@@ -1054,6 +1054,9 @@ Protected Class SPIRVVirtualMachine
 		        case 257 // ***** OpCreateUserEvent ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCreateUserEvent
 		          
+		        case 258 // ***** OpIsValidEvent ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsValidEvent
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2772,6 +2775,16 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Operand 1 ID out of bounds.", "Operand 1 ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Operand 2 ID out of bounds.", "Operand 2 ID not found.")
 		      // todo: The operands’ types and Result Type must all be scalars or vectors of integer types with the same number of components and the same component widths.
+		      
+		      ' ***** OpIsValidEvent ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpIsValidEvent
+		      validate_WordCountEqual(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "event ID out of bounds.", "event ID not declared.")
+		      // todo: event must be a OpTypeDeviceEvent
+		      // todo: Result Type must be a OpTypeBool.
 		      
 		      ' ***** OpIsValidReserveId ***********************************************************************************
 		      

@@ -2100,6 +2100,7 @@ Protected Module ZocleeShade
 		  OpIsNan
 		  OpIsNormal
 		  OpISub
+		  OpIsValidEvent
 		  OpIsValidReserveId
 		  OpKill
 		  OpLabel
