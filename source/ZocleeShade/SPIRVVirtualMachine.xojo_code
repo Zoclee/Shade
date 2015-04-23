@@ -1039,6 +1039,10 @@ Protected Class SPIRVVirtualMachine
 		        case 252 // ***** OpGetKernelNDrangeMaxSubGroupSize ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize)
 		          
+		        case 253 // ***** OpGetKernelWorkGroupSize ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelWorkGroupSize)
+		          
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2303,6 +2307,19 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "ND Range ID out of bounds.", "ND Range ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Invoke ID out of bounds.", "Invoke ID not declared.")
 		      // todo: ND Range must be a OpTypeStruct created by OpBuildNDRange.
+		      // todo: Invoke must be a OpTypeFunction with the following signature:
+		      //      - Result Type must be OpTypeVoid.
+		      //      - The first parameter must be OpTypePointer to 8 bits OpTypeInt.
+		      //      - Optional list of parameters that must be OpTypePointer with WorkgroupLocal storage class.
+		      // todo: Result Type must be a 32 bit OpTypeInt.
+		      
+		      ' ***** OpGetKernelWorkGroupSize ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGetKernelWorkGroupSize
+		      validate_WordCountEqual(op, 4)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Invoke ID out of bounds.", "Invoke ID not declared.")
 		      // todo: Invoke must be a OpTypeFunction with the following signature:
 		      //      - Result Type must be OpTypeVoid.
 		      //      - The first parameter must be OpTypePointer to 8 bits OpTypeInt.

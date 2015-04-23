@@ -1107,6 +1107,13 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 16)
 			    
+			    // ***** OpGetKernelWorkGroupSize *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGetKernelWorkGroupSize
+			    result.Append "GetKernelWorkGroupSize"
+			    result.Append " "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpGetMaxPipePackets *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGetMaxPipePackets
@@ -2696,6 +2703,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics, _
 			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
 			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount, _
+			    SPIRVOpcodeTypeEnum.OpGetKernelWorkGroupSize, _
 			    SPIRVOpcodeTypeEnum.OpGetMaxPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpGetNumPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpGroupAll, _
@@ -2897,6 +2905,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics, _
 			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount, _
 			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
+			    SPIRVOpcodeTypeEnum.OpGetKernelWorkGroupSize, _
 			    SPIRVOpcodeTypeEnum.OpGetMaxPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpGetNumPipePackets, _
 			    SPIRVOpcodeTypeEnum.OpGroupAll, _

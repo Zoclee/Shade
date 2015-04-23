@@ -2067,6 +2067,7 @@ Protected Module ZocleeShade
 		  OpGenericPtrMemSemantics
 		  OpGetKernelNDrangeMaxSubGroupSize
 		  OpGetKernelNDrangeSubGroupCount
+		  OpGetKernelWorkGroupSize
 		  OpGetMaxPipePackets
 		  OpGetNumPipePackets
 		  OpGroupAll
