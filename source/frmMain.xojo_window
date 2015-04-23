@@ -198,8 +198,8 @@ End
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
-		  Me.Title = "{Zoclee}™ Shade v" + Str(App.MajorVersion) + "." + Str(App.MinorVersion)+ "." + Str(App.BugVersion)
-		  Me.Maximize
+		  Self.Title = "{Zoclee}™ Shade v" + Str(App.MajorVersion) + "." + Str(App.MinorVersion)+ "." + Str(App.BugVersion)
+		  Self.Maximize
 		  
 		End Sub
 	#tag EndEvent
@@ -250,6 +250,8 @@ End
 		  f = dlg.ShowModal()
 		  
 		  if f <> nil then
+		    
+		    CurrentFile = f
 		    
 		    lstErrors.DeleteAllRows
 		    lstInfo.DeleteAllRows
@@ -353,9 +355,16 @@ End
 		      i = i + 1
 		    wend
 		    
+		    Self.Title = "{Zoclee}™ Shade v" + Str(App.MajorVersion) + "." + Str(App.MinorVersion)+ "." + Str(App.BugVersion) + " - " + CurrentFile.NativePath
+		    
 		  end if
 		End Sub
 	#tag EndMethod
+
+
+	#tag Property, Flags = &h0
+		CurrentFile As FolderItem
+	#tag EndProperty
 
 
 #tag EndWindowCode
