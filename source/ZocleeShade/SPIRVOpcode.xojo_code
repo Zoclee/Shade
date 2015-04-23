@@ -652,7 +652,8 @@ Protected Class SPIRVOpcode
 			      result.Append " "
 			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 30 // Location
-			      break
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 31 // Component
 			      break
 			    case 32 // Index
