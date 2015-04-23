@@ -655,23 +655,29 @@ Protected Class SPIRVOpcode
 			      result.Append " "
 			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 31 // Component
-			      break
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 32 // Index
-			      break
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 33 // Binding
 			      result.Append " "
 			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 34 // DescriptorSet
-			      break
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 35 // Offset
-			      break
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 36 // Alignment
 			      result.Append " "
 			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 37 // XfbBuffer
-			      break
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 38 // Stride
-			      break
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 39 // Built-In
 			      result.Append " "
 			      result.Append SPIRVDescribeBuiltIn(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -688,7 +694,8 @@ Protected Class SPIRVOpcode
 			      result.Append " "
 			      result.Append SPIRVDescribeLinkageType(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    case 44 // SpecId
-			      break
+			      result.Append " "
+			      result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    end select
 			    
 			    // ***** OpDecorationGroup *************************************************
