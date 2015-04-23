@@ -1105,6 +1105,11 @@ Protected Class SPIRVOpcode
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
+			    // ***** OpGetDefaultQueue *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpGetDefaultQueue
+			    result.Append "GetDefaultQueue"
+			    
 			    // ***** OpGetKernelNDrangeMaxSubGroupSize *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize
@@ -2755,6 +2760,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit, _
 			    SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics, _
+			    SPIRVOpcodeTypeEnum.OpGetDefaultQueue, _
 			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
 			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount, _
 			    SPIRVOpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple, _
@@ -2960,6 +2966,7 @@ Protected Class SPIRVOpcode
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
 			    SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit, _
 			    SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics, _
+			    SPIRVOpcodeTypeEnum.OpGetDefaultQueue, _
 			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount, _
 			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
 			    SPIRVOpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple, _

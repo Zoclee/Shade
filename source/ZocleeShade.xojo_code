@@ -2090,6 +2090,7 @@ Protected Module ZocleeShade
 		  OpGenericCastToPtr
 		  OpGenericCastToPtrExplicit
 		  OpGenericPtrMemSemantics
+		  OpGetDefaultQueue
 		  OpGetKernelNDrangeMaxSubGroupSize
 		  OpGetKernelNDrangeSubGroupCount
 		  OpGetKernelPreferredWorkGroupSizeMultiple

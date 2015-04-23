@@ -1063,6 +1063,9 @@ Protected Class SPIRVVirtualMachine
 		        case 260 // ***** OpCaptureEventProfilingInfo ***************************************************
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCaptureEventProfilingInfo)
 		          
+		        case 261 // ***** OpGetDefaultQueue ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetDefaultQueue)
+		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
@@ -2322,6 +2325,14 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "ptr ID out of bounds.", "ptr ID not declared.")
 		      // todo: Result Type must be a 32-bits wide OpTypeInt value.
 		      // todo: ptr must point to Generic.
+		      
+		      ' ***** OpGetDefaultQueue ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpGetDefaultQueue
+		      validate_WordCountEqual(op, 3)
+		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
+		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
+		      // todo: Result Type must be a OpTypeQueue.
 		      
 		      ' ***** OpGetKernelNDrangeMaxSubGroupSize ***********************************************************************************
 		      
