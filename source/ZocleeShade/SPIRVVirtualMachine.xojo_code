@@ -1046,19 +1046,22 @@ Protected Class SPIRVVirtualMachine
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple)
 		          
 		        case 255 // ***** OpRetainEvent ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpRetainEvent
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpRetainEvent)
 		          
 		        case 256 // ***** OpReleaseEvent ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReleaseEvent
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReleaseEvent)
 		          
 		        case 257 // ***** OpCreateUserEvent ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCreateUserEvent
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCreateUserEvent)
 		          
 		        case 258 // ***** OpIsValidEvent ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsValidEvent
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsValidEvent)
 		          
 		        case 259 // ***** OpSetUserEventStatus ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSetUserEventStatus
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSetUserEventStatus)
+		          
+		        case 260 // ***** OpCaptureEventProfilingInfo ***************************************************
+		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCaptureEventProfilingInfo)
 		          
 		        case else
 		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
@@ -1491,6 +1494,18 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Condition ID out of bounds.", "Condition ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "True Label ID out of bounds.", "True Label ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "False Label ID out of bounds.", "False Label ID not declared.")
+		      
+		      ' ***** OpCaptureEventProfilingInfo ***********************************************************************************
+		      
+		    case SPIRVOpcodeTypeEnum.OpCaptureEventProfilingInfo
+		      validate_WordCountEqual(op, 4)
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "event ID out of bounds.", "event ID not declared.")
+		      if ModuleBinary.UInt32Value(op.Offset + 8) > 1 then
+		        logError op, "Invalid Kernel Profiling Info mask value."
+		      end if
+		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "value ID out of bounds.", "value ID not declared.")
+		      // todo: event must be a OpTypeDeviceEvent that was produced by OpEnqueueKernel or OpEnqueueMarker.
+		      // todo: When info is CmdExecTime value must be a OpTypePointer with WorkgroupGlobal storage class, to two 64-bit OpTypeInt values.
 		      
 		      ' ***** OpCommitReadPipe ***********************************************************************************
 		      

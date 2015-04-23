@@ -650,6 +650,29 @@ Protected Module ZocleeShade
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function SPIRVDescribeKernelProfilingInfoMask(value As UInt32) As String
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim result As String
+		  
+		  // todo: This value is a mask; it can be formed by combining the bits from multiple rows in the table below.
+		  
+		  select case value
+		  case &h00
+		    result = "None"
+		  case &h01
+		    result = "CmdExecTime"
+		  case else
+		    result = "Unknown"
+		  end select
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SPIRVDescribeLinkageType(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -1992,6 +2015,7 @@ Protected Module ZocleeShade
 		  OpBitwiseXor
 		  OpBranch
 		  OpBranchConditional
+		  OpCaptureEventProfilingInfo
 		  OpCommitReadPipe
 		  OpCommitWritePipe
 		  OpCompileFlag

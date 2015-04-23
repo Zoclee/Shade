@@ -378,6 +378,17 @@ Protected Class SPIRVOpcode
 			      i = i + 4
 			    wend
 			    
+			    // ***** OpCaptureEventProfilingInfo *************************************************
+			    
+			  case SPIRVOpcodeTypeEnum.OpCaptureEventProfilingInfo
+			    result.Append "CaptureEventProfilingInfo"
+			    result.Append " "
+			    result.Append compose_id(Offset + 4)
+			    result.Append " "
+			    result.Append SPIRVDescribeKernelProfilingInfoMask(VM.ModuleBinary.UInt32Value(Offset + 8))
+			    result.Append " "
+			    result.Append compose_id(Offset + 12)
+			    
 			    // ***** OpCommitReadPipe *************************************************
 			    
 			  case SPIRVOpcodeTypeEnum.OpCommitReadPipe
