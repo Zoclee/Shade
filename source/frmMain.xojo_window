@@ -218,7 +218,81 @@ End
 	#tag EndMenuHandler
 
 	#tag MenuHandler
+		Function mnuExit() As Boolean Handles mnuExit.Action
+			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			' www.zoclee.com/shade
+			
+			Quit()
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
+		Function mnuOpen() As Boolean Handles mnuOpen.Action
+			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			' www.zoclee.com/shade
+			
+			actionOpen()
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
+		Function mnuSave() As Boolean Handles mnuSave.Action
+			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			' www.zoclee.com/shade
+			
+			actionSave()
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
+		Function mnuSaveAs() As Boolean Handles mnuSaveAs.Action
+			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			' www.zoclee.com/shade
+			
+			Dim dlg As new SaveAsDialog
+			Dim spirvType As new FileType
+			Dim f As FolderItem
+			
+			if CurrentFile <> nil then
+			
+			spirvType.Name = "SPIR-V Binary Modules"
+			spirvType.MacType = "SPIRV;SPV"
+			spirvType.MacCreator = "spirv;spv"
+			spirvType.Extensions = ".spirv;.spv"
+			
+			dlg.Filter = spirvType
+			
+			f = dlg.ShowModal()
+			
+			if f <> nil then
+			
+			CurrentFile = f
+			actionSave()
+			Self.Title = "{Zoclee}™ Shade v" + Str(App.MajorVersion) + "." + Str(App.MinorVersion)+ "." + Str(App.BugVersion) + " - " + CurrentFile.NativePath
+			
+			end if
+			
+			end if
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
 		Function mnuVacuumOpcodes() As Boolean Handles mnuVacuumOpcodes.Action
+			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			' www.zoclee.com/shade
+			
 			actionVacuumOpcodes()
 			
 			Return True
@@ -272,8 +346,9 @@ End
 		    
 		    refreshModule()
 		    
+		    mnuSave.AutoEnable = True
+		    mnuSaveAs.AutoEnable = True
 		    mnuVacuumOpcodes.AutoEnable = True
-		    
 		    toolMain.Item(2).Enabled = true
 		    
 		  end if
