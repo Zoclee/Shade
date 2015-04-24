@@ -45,7 +45,7 @@ Protected Class Opcode
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor(initVM As SPIRV.VirtualMachine, initType As OpcodeTypeEnum)
+		Sub Constructor(initVM As SPIRV.VirtualMachine, initType As OpcodeEnum)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -77,7 +77,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAccessChain *************************************************
 			    
-			  case OpcodeTypeEnum.OpAccessChain
+			  case OpcodeEnum.OpAccessChain
 			    result.Append "AccessChain"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -92,21 +92,21 @@ Protected Class Opcode
 			    
 			    // ***** OpAll *************************************************
 			    
-			  case OpcodeTypeEnum.OpAll
+			  case OpcodeEnum.OpAll
 			    result.Append "All"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpAny *************************************************
 			    
-			  case OpcodeTypeEnum.OpAny
+			  case OpcodeEnum.OpAny
 			    result.Append "Any"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpArrayLength *************************************************
 			    
-			  case OpcodeTypeEnum.OpArrayLength
+			  case OpcodeEnum.OpArrayLength
 			    result.Append "ArrayLength"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -115,7 +115,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAsyncGroupCopy *************************************************
 			    
-			  case OpcodeTypeEnum.OpAsyncGroupCopy
+			  case OpcodeEnum.OpAsyncGroupCopy
 			    result.Append "AsyncGroupCopy"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -132,7 +132,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicAnd *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicAnd
+			  case OpcodeEnum.OpAtomicAnd
 			    result.Append "AtomicAnd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -145,7 +145,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicCompareExchange *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicCompareExchange
+			  case OpcodeEnum.OpAtomicCompareExchange
 			    result.Append "AtomicCompareExchange"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -160,7 +160,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicCompareExchangeWeak *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicCompareExchangeWeak
+			  case OpcodeEnum.OpAtomicCompareExchangeWeak
 			    result.Append "AtomicCompareExchangeWeak"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -175,7 +175,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicExchange *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicExchange
+			  case OpcodeEnum.OpAtomicExchange
 			    result.Append "AtomicExchange"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -186,7 +186,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicIAdd *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicIAdd
+			  case OpcodeEnum.OpAtomicIAdd
 			    result.Append "AtomicIAdd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -199,7 +199,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicIDecrement *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicIDecrement
+			  case OpcodeEnum.OpAtomicIDecrement
 			    result.Append "AtomicIDecrement"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -210,7 +210,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicIIncrement *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicIIncrement
+			  case OpcodeEnum.OpAtomicIIncrement
 			    result.Append "AtomicIIncrement"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -221,7 +221,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicIMax *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicIMax
+			  case OpcodeEnum.OpAtomicIMax
 			    result.Append "AtomicIMax"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -234,7 +234,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicIMin *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicIMin
+			  case OpcodeEnum.OpAtomicIMin
 			    result.Append "AtomicIMin"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -247,7 +247,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicISub *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicISub
+			  case OpcodeEnum.OpAtomicISub
 			    result.Append "AtomicISub"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -260,7 +260,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicInit *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicInit
+			  case OpcodeEnum.OpAtomicInit
 			    result.Append "AtomicInit"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -269,7 +269,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicLoad *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicLoad
+			  case OpcodeEnum.OpAtomicLoad
 			    result.Append "AtomicLoad"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -282,7 +282,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicOr *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicOr
+			  case OpcodeEnum.OpAtomicOr
 			    result.Append "AtomicOr"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -295,7 +295,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicStore *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicStore
+			  case OpcodeEnum.OpAtomicStore
 			    result.Append "AtomicStore"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -308,7 +308,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicUMax *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicUMax
+			  case OpcodeEnum.OpAtomicUMax
 			    result.Append "AtomicUMax"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -321,7 +321,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicUMin *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicUMin
+			  case OpcodeEnum.OpAtomicUMin
 			    result.Append "AtomicUMin"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -334,7 +334,7 @@ Protected Class Opcode
 			    
 			    // ***** OpAtomicXor *************************************************
 			    
-			  case OpcodeTypeEnum.OpAtomicXor
+			  case OpcodeEnum.OpAtomicXor
 			    result.Append "OpAtomicXor"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -347,14 +347,14 @@ Protected Class Opcode
 			    
 			    // ***** OpBitcast *************************************************
 			    
-			  case OpcodeTypeEnum.OpBitcast
+			  case OpcodeEnum.OpBitcast
 			    result.Append "Bitcast"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpBitwiseAnd *************************************************
 			    
-			  case OpcodeTypeEnum.OpBitwiseAnd
+			  case OpcodeEnum.OpBitwiseAnd
 			    result.Append "BitwiseAnd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -363,7 +363,7 @@ Protected Class Opcode
 			    
 			    // ***** OpBitwiseOr *************************************************
 			    
-			  case OpcodeTypeEnum.OpBitwiseOr
+			  case OpcodeEnum.OpBitwiseOr
 			    result.Append "BitwiseOr"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -372,7 +372,7 @@ Protected Class Opcode
 			    
 			    // ***** OpBitwiseXor *************************************************
 			    
-			  case OpcodeTypeEnum.OpBitwiseXor
+			  case OpcodeEnum.OpBitwiseXor
 			    result.Append "BitwiseXor"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -381,14 +381,14 @@ Protected Class Opcode
 			    
 			    // ***** OpBranch *************************************************
 			    
-			  case OpcodeTypeEnum.OpBranch
+			  case OpcodeEnum.OpBranch
 			    result.Append "Branch"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpBranchConditional *************************************************
 			    
-			  case OpcodeTypeEnum.OpBranchConditional
+			  case OpcodeEnum.OpBranchConditional
 			    result.Append "BranchConditional"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -406,7 +406,7 @@ Protected Class Opcode
 			    
 			    // ***** OpBuildNDRange *************************************************
 			    
-			  case OpcodeTypeEnum.OpBuildNDRange
+			  case OpcodeEnum.OpBuildNDRange
 			    result.Append "BuildNDRange"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -417,7 +417,7 @@ Protected Class Opcode
 			    
 			    // ***** OpCaptureEventProfilingInfo *************************************************
 			    
-			  case OpcodeTypeEnum.OpCaptureEventProfilingInfo
+			  case OpcodeEnum.OpCaptureEventProfilingInfo
 			    result.Append "CaptureEventProfilingInfo"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -428,7 +428,7 @@ Protected Class Opcode
 			    
 			    // ***** OpCommitReadPipe *************************************************
 			    
-			  case OpcodeTypeEnum.OpCommitReadPipe
+			  case OpcodeEnum.OpCommitReadPipe
 			    result.Append "CommitReadPipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -437,7 +437,7 @@ Protected Class Opcode
 			    
 			    // ***** OpCommitWritePipe *************************************************
 			    
-			  case OpcodeTypeEnum.OpCommitWritePipe
+			  case OpcodeEnum.OpCommitWritePipe
 			    result.Append "CommitWritePipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -446,7 +446,7 @@ Protected Class Opcode
 			    
 			    // ***** OpCompileFlag ************************************************
 			    
-			  case OpcodeTypeEnum.OpCompileFlag
+			  case OpcodeEnum.OpCompileFlag
 			    result.Append "CompileFlag"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 4)
@@ -454,7 +454,7 @@ Protected Class Opcode
 			    
 			    // ***** OpCompositeConstruct *************************************************
 			    
-			  case OpcodeTypeEnum.OpCompositeConstruct
+			  case OpcodeEnum.OpCompositeConstruct
 			    result.Append "CompositeConstruct"
 			    ub = offset + WordCount * 4
 			    i = Offset + 12
@@ -466,7 +466,7 @@ Protected Class Opcode
 			    
 			    // ***** OpCompositeExtract *************************************************
 			    
-			  case OpcodeTypeEnum.OpCompositeExtract
+			  case OpcodeEnum.OpCompositeExtract
 			    result.Append "CompositeExtract"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -480,7 +480,7 @@ Protected Class Opcode
 			    
 			    // ***** OpCompositeInsert *************************************************
 			    
-			  case OpcodeTypeEnum.OpCompositeInsert
+			  case OpcodeEnum.OpCompositeInsert
 			    result.Append "CompositeInsert"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -496,14 +496,14 @@ Protected Class Opcode
 			    
 			    // ***** OpConstant *************************************************
 			    
-			  case OpcodeTypeEnum.OpConstant
+			  case OpcodeEnum.OpConstant
 			    result.Append "Constant"
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
 			    // ***** OpConstantComposite *************************************************
 			    
-			  case OpcodeTypeEnum.OpConstantComposite
+			  case OpcodeEnum.OpConstantComposite
 			    result.Append "ConstantComposite"
 			    ub = offset + WordCount * 4
 			    i = Offset + 12
@@ -515,22 +515,22 @@ Protected Class Opcode
 			    
 			    // ***** OpConstantFalse *************************************************
 			    
-			  case OpcodeTypeEnum.OpConstantFalse
+			  case OpcodeEnum.OpConstantFalse
 			    result.Append "ConstantFalse"
 			    
 			    // ***** OpConstantNullObject *************************************************
 			    
-			  case OpcodeTypeEnum.OpConstantNullObject
+			  case OpcodeEnum.OpConstantNullObject
 			    result.Append "ConstantNullObject"
 			    
 			    // ***** OpConstantNullPointer *************************************************
 			    
-			  case OpcodeTypeEnum.OpConstantNullPointer
+			  case OpcodeEnum.OpConstantNullPointer
 			    result.Append "ConstantNullPointer"
 			    
 			    // ***** OpConstantSampler *************************************************
 			    
-			  case OpcodeTypeEnum.OpConstantSampler
+			  case OpcodeEnum.OpConstantSampler
 			    result.Append "ConstantSampler"
 			    result.Append " "
 			    result.Append SPIRVDescribeSamplerAddressingMode(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -541,61 +541,61 @@ Protected Class Opcode
 			    
 			    // ***** OpConstantTrue *************************************************
 			    
-			  case OpcodeTypeEnum.OpConstantTrue
+			  case OpcodeEnum.OpConstantTrue
 			    result.Append "ConstantTrue"
 			    
 			    // ***** OpControlBarrier *************************************************
 			    
-			  case OpcodeTypeEnum.OpControlBarrier
+			  case OpcodeEnum.OpControlBarrier
 			    result.Append "ControlBarrier"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
 			    
 			    // ***** OpConvertFToS *************************************************
 			    
-			  case OpcodeTypeEnum.OpConvertFToS
+			  case OpcodeEnum.OpConvertFToS
 			    result.Append "ConvertFToS"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpConvertFToU *************************************************
 			    
-			  case OpcodeTypeEnum.OpConvertFToU
+			  case OpcodeEnum.OpConvertFToU
 			    result.Append "ConvertFToU"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpConvertPtrToU *************************************************
 			    
-			  case OpcodeTypeEnum.OpConvertPtrToU
+			  case OpcodeEnum.OpConvertPtrToU
 			    result.Append "ConvertPtrToU"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpConvertSToF *************************************************
 			    
-			  case OpcodeTypeEnum.OpConvertSToF
+			  case OpcodeEnum.OpConvertSToF
 			    result.Append "ConvertSToF"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpConvertUToF *************************************************
 			    
-			  case OpcodeTypeEnum.OpConvertUToF
+			  case OpcodeEnum.OpConvertUToF
 			    result.Append "ConvertUToF"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** ConvertUToPtr *************************************************
 			    
-			  case OpcodeTypeEnum.OpConvertUToPtr
+			  case OpcodeEnum.OpConvertUToPtr
 			    result.Append "ConvertUToPtr"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpCopyMemory *************************************************
 			    
-			  case OpcodeTypeEnum.OpCopyMemory
+			  case OpcodeEnum.OpCopyMemory
 			    result.Append "CopyMemory"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -611,7 +611,7 @@ Protected Class Opcode
 			    
 			    // ***** OpCopyMemorySized *************************************************
 			    
-			  case OpcodeTypeEnum.OpCopyMemorySized
+			  case OpcodeEnum.OpCopyMemorySized
 			    result.Append "CopyMemorySized"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -629,19 +629,19 @@ Protected Class Opcode
 			    
 			    // ***** OpCopyObject *************************************************
 			    
-			  case OpcodeTypeEnum.OpCopyObject
+			  case OpcodeEnum.OpCopyObject
 			    result.Append "CopyObject"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpCreateUserEvent *************************************************
 			    
-			  case OpcodeTypeEnum.OpCreateUserEvent
+			  case OpcodeEnum.OpCreateUserEvent
 			    result.Append "CreateUserEvent"
 			    
 			    // ***** OpDecorate *************************************************
 			    
-			  case OpcodeTypeEnum.OpDecorate
+			  case OpcodeEnum.OpDecorate
 			    result.Append "Decorate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -700,12 +700,12 @@ Protected Class Opcode
 			    
 			    // ***** OpDecorationGroup *************************************************
 			    
-			  case OpcodeTypeEnum.OpDecorationGroup
+			  case OpcodeEnum.OpDecorationGroup
 			    result.Append "DecorationGroup"
 			    
 			    // ***** OpDot *************************************************
 			    
-			  case OpcodeTypeEnum.OpDot
+			  case OpcodeEnum.OpDot
 			    result.Append "Dot"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -714,73 +714,73 @@ Protected Class Opcode
 			    
 			    // ***** OpDPdx *************************************************
 			    
-			  case OpcodeTypeEnum.OpDPdx
+			  case OpcodeEnum.OpDPdx
 			    result.Append "DPdx"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpDPdxCoarse *************************************************
 			    
-			  case OpcodeTypeEnum.OpDPdxCoarse
+			  case OpcodeEnum.OpDPdxCoarse
 			    result.Append "DPdxCoarse"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpDPdxFine *************************************************
 			    
-			  case OpcodeTypeEnum.OpDPdxFine
+			  case OpcodeEnum.OpDPdxFine
 			    result.Append "DPdxFine"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpDPdy *************************************************
 			    
-			  case OpcodeTypeEnum.OpDPdy
+			  case OpcodeEnum.OpDPdy
 			    result.Append "DPdy"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpDPdyCoarse *************************************************
 			    
-			  case OpcodeTypeEnum.OpDPdyCoarse
+			  case OpcodeEnum.OpDPdyCoarse
 			    result.Append "DPdyCoarse"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpDPdyFine *************************************************
 			    
-			  case OpcodeTypeEnum.OpDPdyFine
+			  case OpcodeEnum.OpDPdyFine
 			    result.Append "DPdyFine"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpEmitStreamVertex *************************************************
 			    
-			  case OpcodeTypeEnum.OpEmitStreamVertex
+			  case OpcodeEnum.OpEmitStreamVertex
 			    result.Append "EmitStreamVertex"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpEndStreamPrimitive *************************************************
 			    
-			  case OpcodeTypeEnum.OpEndStreamPrimitive
+			  case OpcodeEnum.OpEndStreamPrimitive
 			    result.Append "EndStreamPrimitive"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpEmitVertex *************************************************
 			    
-			  case OpcodeTypeEnum.OpEmitVertex
+			  case OpcodeEnum.OpEmitVertex
 			    result.Append "EmitVertex"
 			    
 			    // ***** OpEndPrimitive *************************************************
 			    
-			  case OpcodeTypeEnum.OpEndPrimitive
+			  case OpcodeEnum.OpEndPrimitive
 			    result.Append "EndPrimitive"
 			    
 			    // ***** OpEnqueueKernel *************************************************
 			    
-			  case OpcodeTypeEnum.OpEnqueueKernel
+			  case OpcodeEnum.OpEnqueueKernel
 			    result.Append "EnqueueKernel"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -812,7 +812,7 @@ Protected Class Opcode
 			    
 			    // ***** OpEnqueueMarker *************************************************
 			    
-			  case OpcodeTypeEnum.OpEnqueueMarker
+			  case OpcodeEnum.OpEnqueueMarker
 			    result.Append "EnqueueMarker"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -825,7 +825,7 @@ Protected Class Opcode
 			    
 			    // ***** OpEntryPoint *************************************************
 			    
-			  case OpcodeTypeEnum.OpEntryPoint
+			  case OpcodeEnum.OpEntryPoint
 			    result.Append "EntryPoint"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionModel(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -834,7 +834,7 @@ Protected Class Opcode
 			    
 			    // ***** OpExecutionMode *************************************************
 			    
-			  case OpcodeTypeEnum.OpExecutionMode
+			  case OpcodeEnum.OpExecutionMode
 			    result.Append "ExecutionMode"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -868,7 +868,7 @@ Protected Class Opcode
 			    
 			    // ***** OpExtension *************************************************
 			    
-			  case OpcodeTypeEnum.OpExtension
+			  case OpcodeEnum.OpExtension
 			    result.Append "Extension"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 4)
@@ -876,7 +876,7 @@ Protected Class Opcode
 			    
 			    // ***** OpExtInst *************************************************
 			    
-			  case OpcodeTypeEnum.OpExtInst
+			  case OpcodeEnum.OpExtInst
 			    result.Append "ExtInst"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -892,7 +892,7 @@ Protected Class Opcode
 			    
 			    // ***** OpExtInstImport *************************************************
 			    
-			  case OpcodeTypeEnum.OpExtInstImport
+			  case OpcodeEnum.OpExtInstImport
 			    result.Append "ExtInstImport"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
@@ -900,7 +900,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFAdd *************************************************
 			    
-			  case OpcodeTypeEnum.OpFAdd
+			  case OpcodeEnum.OpFAdd
 			    result.Append "FAdd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -909,14 +909,14 @@ Protected Class Opcode
 			    
 			    // ***** OpFConvert *************************************************
 			    
-			  case OpcodeTypeEnum.OpFConvert
+			  case OpcodeEnum.OpFConvert
 			    result.Append "FConvert"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpFDiv *************************************************
 			    
-			  case OpcodeTypeEnum.OpFDiv
+			  case OpcodeEnum.OpFDiv
 			    result.Append "FDiv"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -925,7 +925,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFMod *************************************************
 			    
-			  case OpcodeTypeEnum.OpFMod
+			  case OpcodeEnum.OpFMod
 			    result.Append "FMod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -934,7 +934,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFMul *************************************************
 			    
-			  case OpcodeTypeEnum.OpFMul
+			  case OpcodeEnum.OpFMul
 			    result.Append "FMul"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -943,14 +943,14 @@ Protected Class Opcode
 			    
 			    // ***** OpFNegate *************************************************
 			    
-			  case OpcodeTypeEnum.OpFNegate
+			  case OpcodeEnum.OpFNegate
 			    result.Append "FNegate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpFOrdEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpFOrdEqual
+			  case OpcodeEnum.OpFOrdEqual
 			    result.Append "FOrdEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -959,7 +959,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFOrdGreaterThan *************************************************
 			    
-			  case OpcodeTypeEnum.OpFOrdGreaterThan
+			  case OpcodeEnum.OpFOrdGreaterThan
 			    result.Append "FOrdGreaterThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -968,7 +968,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFOrdGreaterThanEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpFOrdGreaterThanEqual
+			  case OpcodeEnum.OpFOrdGreaterThanEqual
 			    result.Append "FOrdGreaterThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -978,7 +978,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFOrdLessThan *************************************************
 			    
-			  case OpcodeTypeEnum.OpFOrdLessThan
+			  case OpcodeEnum.OpFOrdLessThan
 			    result.Append "FOrdLessThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -987,7 +987,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFOrdLessThanEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpFOrdLessThanEqual
+			  case OpcodeEnum.OpFOrdLessThanEqual
 			    result.Append "FOrdLessThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -996,7 +996,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFOrdNotEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpFOrdNotEqual
+			  case OpcodeEnum.OpFOrdNotEqual
 			    result.Append "FOrdNotEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1005,7 +1005,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFRem *************************************************
 			    
-			  case OpcodeTypeEnum.OpFRem
+			  case OpcodeEnum.OpFRem
 			    result.Append "FRem"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1014,7 +1014,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFSub *************************************************
 			    
-			  case OpcodeTypeEnum.OpFSub
+			  case OpcodeEnum.OpFSub
 			    result.Append "FSub"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1023,7 +1023,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFunction *************************************************
 			    
-			  case OpcodeTypeEnum.OpFunction
+			  case OpcodeEnum.OpFunction
 			    result.Append "Function"
 			    result.Append " "
 			    result.Append SPIRVDescribeFunctionControlMask(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1032,7 +1032,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFunctionCall *************************************************
 			    
-			  case OpcodeTypeEnum.OpFunctionCall
+			  case OpcodeEnum.OpFunctionCall
 			    result.Append "FunctionCall"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1046,17 +1046,17 @@ Protected Class Opcode
 			    
 			    // ***** OpFunctionEnd *************************************************
 			    
-			  case OpcodeTypeEnum.OpFunctionEnd
+			  case OpcodeEnum.OpFunctionEnd
 			    result.Append "FunctionEnd"
 			    
 			    // ***** OpFunctionParameter *************************************************
 			    
-			  case OpcodeTypeEnum.OpFunctionParameter
+			  case OpcodeEnum.OpFunctionParameter
 			    result.Append "FunctionParameter"
 			    
 			    // ***** OpFUnordEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpFUnordEqual
+			  case OpcodeEnum.OpFUnordEqual
 			    result.Append "FUnordEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1065,7 +1065,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFUnordGreaterThan *************************************************
 			    
-			  case OpcodeTypeEnum.OpFUnordGreaterThan
+			  case OpcodeEnum.OpFUnordGreaterThan
 			    result.Append "FUnordGreaterThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1074,7 +1074,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFUnordGreaterThanEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpFUnordGreaterThanEqual
+			  case OpcodeEnum.OpFUnordGreaterThanEqual
 			    result.Append "FUnordGreaterThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1083,7 +1083,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFUnordLessThan *************************************************
 			    
-			  case OpcodeTypeEnum.OpFUnordLessThan
+			  case OpcodeEnum.OpFUnordLessThan
 			    result.Append "FUnordLessThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1092,7 +1092,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFUnordLessThanEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpFUnordLessThanEqual
+			  case OpcodeEnum.OpFUnordLessThanEqual
 			    result.Append "FUnordLessThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1101,7 +1101,7 @@ Protected Class Opcode
 			    
 			    // ***** OpFUnordNotEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpFUnordNotEqual
+			  case OpcodeEnum.OpFUnordNotEqual
 			    result.Append "FUnordNotEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1110,35 +1110,35 @@ Protected Class Opcode
 			    
 			    // ***** OpFwidth *************************************************
 			    
-			  case OpcodeTypeEnum.OpFwidth
+			  case OpcodeEnum.OpFwidth
 			    result.Append "Fwidth"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpFwidthCoarse *************************************************
 			    
-			  case OpcodeTypeEnum.OpFwidthCoarse
+			  case OpcodeEnum.OpFwidthCoarse
 			    result.Append "FwidthCoarse"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpFwidthFine *************************************************
 			    
-			  case OpcodeTypeEnum.OpFwidthFine
+			  case OpcodeEnum.OpFwidthFine
 			    result.Append "FwidthFine"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGenericCastToPtr *************************************************
 			    
-			  case OpcodeTypeEnum.OpGenericCastToPtr
+			  case OpcodeEnum.OpGenericCastToPtr
 			    result.Append "GenericCastToPtr"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGenericCastToPtrExplicit *************************************************
 			    
-			  case OpcodeTypeEnum.OpGenericCastToPtrExplicit
+			  case OpcodeEnum.OpGenericCastToPtrExplicit
 			    result.Append "GenericCastToPtrExplicit"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1147,19 +1147,19 @@ Protected Class Opcode
 			    
 			    // ***** OpGenericPtrMemSemantics *************************************************
 			    
-			  case OpcodeTypeEnum.OpGenericPtrMemSemantics
+			  case OpcodeEnum.OpGenericPtrMemSemantics
 			    result.Append "GenericPtrMemSemantics"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGetDefaultQueue *************************************************
 			    
-			  case OpcodeTypeEnum.OpGetDefaultQueue
+			  case OpcodeEnum.OpGetDefaultQueue
 			    result.Append "GetDefaultQueue"
 			    
 			    // ***** OpGetKernelNDrangeMaxSubGroupSize *************************************************
 			    
-			  case OpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize
+			  case OpcodeEnum.OpGetKernelNDrangeMaxSubGroupSize
 			    result.Append "GetKernelNDrangeMaxSubGroupSize"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1168,7 +1168,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGetKernelNDrangeSubGroupCount *************************************************
 			    
-			  case OpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount
+			  case OpcodeEnum.OpGetKernelNDrangeSubGroupCount
 			    result.Append "GetKernelNDrangeSubGroupCount"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1177,35 +1177,35 @@ Protected Class Opcode
 			    
 			    // ***** OpGetKernelPreferredWorkGroupSizeMultiple *************************************************
 			    
-			  case OpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple
+			  case OpcodeEnum.OpGetKernelPreferredWorkGroupSizeMultiple
 			    result.Append "GetKernelPreferredWorkGroupSizeMultiple"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGetKernelWorkGroupSize *************************************************
 			    
-			  case OpcodeTypeEnum.OpGetKernelWorkGroupSize
+			  case OpcodeEnum.OpGetKernelWorkGroupSize
 			    result.Append "GetKernelWorkGroupSize"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGetMaxPipePackets *************************************************
 			    
-			  case OpcodeTypeEnum.OpGetMaxPipePackets
+			  case OpcodeEnum.OpGetMaxPipePackets
 			    result.Append "GetMaxPipePackets"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGetNumPipePackets *************************************************
 			    
-			  case OpcodeTypeEnum.OpGetNumPipePackets
+			  case OpcodeEnum.OpGetNumPipePackets
 			    result.Append "GetNumPipePackets"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGroupAll *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupAll
+			  case OpcodeEnum.OpGroupAll
 			    result.Append "GroupAll"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1214,7 +1214,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupAll *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupAny
+			  case OpcodeEnum.OpGroupAny
 			    result.Append "GroupAny"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1223,7 +1223,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupBroadcast *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupBroadcast
+			  case OpcodeEnum.OpGroupBroadcast
 			    result.Append "GroupBroadcast"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1234,7 +1234,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupCommitReadPipe *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupCommitReadPipe
+			  case OpcodeEnum.OpGroupCommitReadPipe
 			    result.Append "GroupCommitReadPipe"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -1245,7 +1245,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupCommitWritePipe *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupCommitWritePipe
+			  case OpcodeEnum.OpGroupCommitWritePipe
 			    result.Append "GroupCommitWritePipe"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -1256,7 +1256,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupDecorate *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupDecorate
+			  case OpcodeEnum.OpGroupDecorate
 			    result.Append "GroupDecorate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1270,7 +1270,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupFAdd *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupFAdd
+			  case OpcodeEnum.OpGroupFAdd
 			    result.Append "GroupFAdd"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1281,7 +1281,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupFMax *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupFMax
+			  case OpcodeEnum.OpGroupFMax
 			    result.Append "GroupFMax"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1292,7 +1292,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupFMin *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupFMin
+			  case OpcodeEnum.OpGroupFMin
 			    result.Append "GroupFMin"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1303,7 +1303,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupIAdd *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupIAdd
+			  case OpcodeEnum.OpGroupIAdd
 			    result.Append "GroupIAdd"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1314,7 +1314,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupReserveReadPipePackets *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupReserveReadPipePackets
+			  case OpcodeEnum.OpGroupReserveReadPipePackets
 			    result.Append "GroupReserveReadPipePackets"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1325,7 +1325,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupReserveWritePipePackets *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupReserveWritePipePackets
+			  case OpcodeEnum.OpGroupReserveWritePipePackets
 			    result.Append "GroupReserveWritePipePackets"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1336,7 +1336,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupSMax *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupSMax
+			  case OpcodeEnum.OpGroupSMax
 			    result.Append "GroupSMax"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1347,7 +1347,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupSMin *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupSMin
+			  case OpcodeEnum.OpGroupSMin
 			    result.Append "GroupSMin"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1359,7 +1359,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupUMax *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupUMax
+			  case OpcodeEnum.OpGroupUMax
 			    result.Append "GroupUMax"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1370,7 +1370,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupUMin *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupUMin
+			  case OpcodeEnum.OpGroupUMin
 			    result.Append "GroupUMin"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1381,7 +1381,7 @@ Protected Class Opcode
 			    
 			    // ***** OpGroupMemberDecorate *************************************************
 			    
-			  case OpcodeTypeEnum.OpGroupMemberDecorate
+			  case OpcodeEnum.OpGroupMemberDecorate
 			    result.Append "GroupMemberDecorate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1395,7 +1395,7 @@ Protected Class Opcode
 			    
 			    // ***** OpIAdd *************************************************
 			    
-			  case OpcodeTypeEnum.OpIAdd
+			  case OpcodeEnum.OpIAdd
 			    result.Append "IAdd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1404,7 +1404,7 @@ Protected Class Opcode
 			    
 			    // ***** OpIEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpIEqual
+			  case OpcodeEnum.OpIEqual
 			    result.Append "IEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1413,7 +1413,7 @@ Protected Class Opcode
 			    
 			    // ***** OpImagePointer *************************************************
 			    
-			  case OpcodeTypeEnum.OpImagePointer
+			  case OpcodeEnum.OpImagePointer
 			    result.Append "ImagePointer"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1424,7 +1424,7 @@ Protected Class Opcode
 			    
 			    // ***** OpIMul *************************************************
 			    
-			  case OpcodeTypeEnum.OpIMul
+			  case OpcodeEnum.OpIMul
 			    result.Append "IMul"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1433,7 +1433,7 @@ Protected Class Opcode
 			    
 			    // ***** OpInBoundsAccessChain *************************************************
 			    
-			  case OpcodeTypeEnum.OpInBoundsAccessChain
+			  case OpcodeEnum.OpInBoundsAccessChain
 			    result.Append "InBoundsAccessChain"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1447,7 +1447,7 @@ Protected Class Opcode
 			    
 			    // ***** OpINotEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpINotEqual
+			  case OpcodeEnum.OpINotEqual
 			    result.Append "INotEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1456,35 +1456,35 @@ Protected Class Opcode
 			    
 			    // ***** OpIsFinite *************************************************
 			    
-			  case OpcodeTypeEnum.OpIsFinite
+			  case OpcodeEnum.OpIsFinite
 			    result.Append "IsFinite"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpIsInf *************************************************
 			    
-			  case OpcodeTypeEnum.OpIsInf
+			  case OpcodeEnum.OpIsInf
 			    result.Append "IsInf"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpIsNan *************************************************
 			    
-			  case OpcodeTypeEnum.OpIsNan
+			  case OpcodeEnum.OpIsNan
 			    result.Append "IsNan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpIsNormal *************************************************
 			    
-			  case OpcodeTypeEnum.OpIsNormal
+			  case OpcodeEnum.OpIsNormal
 			    result.Append "IsNormal"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpISub *************************************************
 			    
-			  case OpcodeTypeEnum.OpISub
+			  case OpcodeEnum.OpISub
 			    result.Append "ISub"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1493,31 +1493,31 @@ Protected Class Opcode
 			    
 			    // ***** OpIsValidEvent *************************************************
 			    
-			  case OpcodeTypeEnum.OpIsValidEvent
+			  case OpcodeEnum.OpIsValidEvent
 			    result.Append "IsValidEvent"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpIsValidReserveId *************************************************
 			    
-			  case OpcodeTypeEnum.OpIsValidReserveId
+			  case OpcodeEnum.OpIsValidReserveId
 			    result.Append "IsValidReserveId"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpKill *************************************************
 			    
-			  case OpcodeTypeEnum.OpKill
+			  case OpcodeEnum.OpKill
 			    result.Append "Kill"
 			    
 			    // ***** OpLabel *************************************************
 			    
-			  case OpcodeTypeEnum.OpLabel
+			  case OpcodeEnum.OpLabel
 			    result.Append "Label"
 			    
 			    // ***** OpLessOrGreater *************************************************
 			    
-			  case OpcodeTypeEnum.OpLessOrGreater
+			  case OpcodeEnum.OpLessOrGreater
 			    result.Append "LessOrGreater"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1526,7 +1526,7 @@ Protected Class Opcode
 			    
 			    // ***** OpLifetimeStart *************************************************
 			    
-			  case OpcodeTypeEnum.OpLifetimeStart
+			  case OpcodeEnum.OpLifetimeStart
 			    result.Append "LifetimeStart"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1535,7 +1535,7 @@ Protected Class Opcode
 			    
 			    // ***** OpLifetimeStop *************************************************
 			    
-			  case OpcodeTypeEnum.OpLifetimeStop
+			  case OpcodeEnum.OpLifetimeStop
 			    result.Append "LifetimeStop"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1544,7 +1544,7 @@ Protected Class Opcode
 			    
 			    // ***** OpLine *************************************************
 			    
-			  case OpcodeTypeEnum.OpLine
+			  case OpcodeEnum.OpLine
 			    result.Append "Line"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1557,14 +1557,14 @@ Protected Class Opcode
 			    
 			    // ***** OpLoad *************************************************
 			    
-			  case OpcodeTypeEnum.OpLoad
+			  case OpcodeEnum.OpLoad
 			    result.Append "Load"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpLogicalAnd *************************************************
 			    
-			  case OpcodeTypeEnum.OpLogicalAnd
+			  case OpcodeEnum.OpLogicalAnd
 			    result.Append "LogicalAnd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1573,7 +1573,7 @@ Protected Class Opcode
 			    
 			    // ***** OpLogicalOr *************************************************
 			    
-			  case OpcodeTypeEnum.OpLogicalOr
+			  case OpcodeEnum.OpLogicalOr
 			    result.Append "LogicalOr"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1582,7 +1582,7 @@ Protected Class Opcode
 			    
 			    // ***** OpLogicalXor *************************************************
 			    
-			  case OpcodeTypeEnum.OpLogicalXor
+			  case OpcodeEnum.OpLogicalXor
 			    result.Append "LogicalXor"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1591,7 +1591,7 @@ Protected Class Opcode
 			    
 			    // ***** OpLoopMerge *************************************************
 			    
-			  case OpcodeTypeEnum.OpLoopMerge
+			  case OpcodeEnum.OpLoopMerge
 			    result.Append "LoopMerge"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1600,7 +1600,7 @@ Protected Class Opcode
 			    
 			    // ***** OpMatrixTimesMatrix *************************************************
 			    
-			  case OpcodeTypeEnum.OpMatrixTimesMatrix
+			  case OpcodeEnum.OpMatrixTimesMatrix
 			    result.Append "MatrixTimesMatrix"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1609,7 +1609,7 @@ Protected Class Opcode
 			    
 			    // ***** OpMatrixTimesScalar *************************************************
 			    
-			  case OpcodeTypeEnum.OpMatrixTimesScalar
+			  case OpcodeEnum.OpMatrixTimesScalar
 			    result.Append "MatrixTimesScalar"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1618,7 +1618,7 @@ Protected Class Opcode
 			    
 			    // ***** OpMatrixTimesVector *************************************************
 			    
-			  case OpcodeTypeEnum.OpMatrixTimesVector
+			  case OpcodeEnum.OpMatrixTimesVector
 			    result.Append "MatrixTimesVector"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1627,7 +1627,7 @@ Protected Class Opcode
 			    
 			    // ***** OpMemberDecorate *************************************************
 			    
-			  case OpcodeTypeEnum.OpMemberDecorate
+			  case OpcodeEnum.OpMemberDecorate
 			    result.Append "MemberDecorate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1678,7 +1678,7 @@ Protected Class Opcode
 			    
 			    // ***** OpMemberName *************************************************
 			    
-			  case OpcodeTypeEnum.OpMemberName
+			  case OpcodeEnum.OpMemberName
 			    result.Append "MemberName"
 			    result.Append " "
 			    result.Append compose_type(Offset + 4)
@@ -1690,7 +1690,7 @@ Protected Class Opcode
 			    
 			    // ***** OpMemoryBarrier *************************************************
 			    
-			  case OpcodeTypeEnum.OpMemoryBarrier
+			  case OpcodeEnum.OpMemoryBarrier
 			    result.Append "MemoryBarrier"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -1699,7 +1699,7 @@ Protected Class Opcode
 			    
 			    // ***** OpMemoryModel *************************************************
 			    
-			  case OpcodeTypeEnum.OpMemoryModel
+			  case OpcodeEnum.OpMemoryModel
 			    result.Append "MemoryModel"
 			    result.Append " "
 			    result.Append SPIRVDescribeAddressingModel(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -1708,7 +1708,7 @@ Protected Class Opcode
 			    
 			    // ***** OpName *************************************************
 			    
-			  case OpcodeTypeEnum.OpName
+			  case OpcodeEnum.OpName
 			    result.Append "Name"
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -1718,18 +1718,18 @@ Protected Class Opcode
 			    
 			    // ***** OpNop *************************************************
 			    
-			  case OpcodeTypeEnum.OpNop
+			  case OpcodeEnum.OpNop
 			    result.Append "Nop"
 			    
 			    // ***** OpNot *************************************************
 			    
-			  case OpcodeTypeEnum.OpNot
+			  case OpcodeEnum.OpNot
 			    result.Append "Not "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpOrdered *************************************************
 			    
-			  case OpcodeTypeEnum.OpOrdered
+			  case OpcodeEnum.OpOrdered
 			    result.Append "Ordered"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1738,7 +1738,7 @@ Protected Class Opcode
 			    
 			    // ***** OpOuterProduct *************************************************
 			    
-			  case OpcodeTypeEnum.OpOuterProduct
+			  case OpcodeEnum.OpOuterProduct
 			    result.Append "OuterProduct"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1747,7 +1747,7 @@ Protected Class Opcode
 			    
 			    // ***** OpPhi *************************************************
 			    
-			  case OpcodeTypeEnum.OpPhi
+			  case OpcodeEnum.OpPhi
 			    result.Append "Phi"
 			    ub = offset + WordCount * 4
 			    i = Offset + 12
@@ -1759,14 +1759,14 @@ Protected Class Opcode
 			    
 			    // ***** OpPtrCastToGeneric *************************************************
 			    
-			  case OpcodeTypeEnum.OpPtrCastToGeneric
+			  case OpcodeEnum.OpPtrCastToGeneric
 			    result.Append "PtrCastToGeneric"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpReadPipe *************************************************
 			    
-			  case OpcodeTypeEnum.OpReadPipe
+			  case OpcodeEnum.OpReadPipe
 			    result.Append "ReadPipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1775,14 +1775,14 @@ Protected Class Opcode
 			    
 			    // ***** OpReleaseEvent *************************************************
 			    
-			  case OpcodeTypeEnum.OpReleaseEvent
+			  case OpcodeEnum.OpReleaseEvent
 			    result.Append "ReleaseEvent"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpReservedReadPipe *************************************************
 			    
-			  case OpcodeTypeEnum.OpReservedReadPipe
+			  case OpcodeEnum.OpReservedReadPipe
 			    result.Append "ReservedReadPipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1795,7 +1795,7 @@ Protected Class Opcode
 			    
 			    // ***** OpReservedWritePipe *************************************************
 			    
-			  case OpcodeTypeEnum.OpReservedWritePipe
+			  case OpcodeEnum.OpReservedWritePipe
 			    result.Append "ReservedWritePipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1808,7 +1808,7 @@ Protected Class Opcode
 			    
 			    // ***** OpReserveReadPipePackets *************************************************
 			    
-			  case OpcodeTypeEnum.OpReserveReadPipePackets
+			  case OpcodeEnum.OpReserveReadPipePackets
 			    result.Append "ReserveReadPipePackets"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1817,7 +1817,7 @@ Protected Class Opcode
 			    
 			    // ***** OpReserveWritePipePackets *************************************************
 			    
-			  case OpcodeTypeEnum.OpReserveWritePipePackets
+			  case OpcodeEnum.OpReserveWritePipePackets
 			    result.Append "ReserveWritePipePackets"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1826,26 +1826,26 @@ Protected Class Opcode
 			    
 			    // ***** OpRetainEvent *************************************************
 			    
-			  case OpcodeTypeEnum.OpRetainEvent
+			  case OpcodeEnum.OpRetainEvent
 			    result.Append "RetainEvent"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpReturn *************************************************
 			    
-			  case OpcodeTypeEnum.OpReturn
+			  case OpcodeEnum.OpReturn
 			    result.Append "Return"
 			    
 			    // ***** OpReturnValue *************************************************
 			    
-			  case OpcodeTypeEnum.OpReturnValue
+			  case OpcodeEnum.OpReturnValue
 			    result.Append "ReturnValue"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpSampler *************************************************
 			    
-			  case OpcodeTypeEnum.OpSampler
+			  case OpcodeEnum.OpSampler
 			    result.Append "Sampler"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1854,28 +1854,28 @@ Protected Class Opcode
 			    
 			    // ***** OpSatConvertSToU *************************************************
 			    
-			  case OpcodeTypeEnum.OpSatConvertSToU
+			  case OpcodeEnum.OpSatConvertSToU
 			    result.Append "SatConvertSToU"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpSatConvertUToS *************************************************
 			    
-			  case OpcodeTypeEnum.OpSatConvertUToS
+			  case OpcodeEnum.OpSatConvertUToS
 			    result.Append "SatConvertUToS"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpSConvert *************************************************
 			    
-			  case OpcodeTypeEnum.OpSConvert
+			  case OpcodeEnum.OpSConvert
 			    result.Append "SConvert"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpSDiv *************************************************
 			    
-			  case OpcodeTypeEnum.OpSDiv
+			  case OpcodeEnum.OpSDiv
 			    result.Append "SDiv"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1884,7 +1884,7 @@ Protected Class Opcode
 			    
 			    // ***** OpSelect *************************************************
 			    
-			  case OpcodeTypeEnum.OpSelect
+			  case OpcodeEnum.OpSelect
 			    result.Append "Select"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1895,7 +1895,7 @@ Protected Class Opcode
 			    
 			    // ***** OpSelectionMerge *************************************************
 			    
-			  case OpcodeTypeEnum.OpSelectionMerge
+			  case OpcodeEnum.OpSelectionMerge
 			    result.Append "SelectionMerge"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1904,7 +1904,7 @@ Protected Class Opcode
 			    
 			    // ***** OpSetUserEventStatus *************************************************
 			    
-			  case OpcodeTypeEnum.OpSetUserEventStatus
+			  case OpcodeEnum.OpSetUserEventStatus
 			    result.Append "SetUserEventStatus"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1913,7 +1913,7 @@ Protected Class Opcode
 			    
 			    // ***** OpSGreaterThan *************************************************
 			    
-			  case OpcodeTypeEnum.OpSGreaterThan
+			  case OpcodeEnum.OpSGreaterThan
 			    result.Append "SGreaterThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1922,7 +1922,7 @@ Protected Class Opcode
 			    
 			    // ***** OpSGreaterThanEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpSGreaterThanEqual
+			  case OpcodeEnum.OpSGreaterThanEqual
 			    result.Append "SGreaterThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1931,7 +1931,7 @@ Protected Class Opcode
 			    
 			    // ***** OpShiftLeftLogical *************************************************
 			    
-			  case OpcodeTypeEnum.OpShiftLeftLogical
+			  case OpcodeEnum.OpShiftLeftLogical
 			    result.Append "ShiftLeftLogical"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1940,7 +1940,7 @@ Protected Class Opcode
 			    
 			    // ***** OpShiftRightArithmetic *************************************************
 			    
-			  case OpcodeTypeEnum.OpShiftRightArithmetic
+			  case OpcodeEnum.OpShiftRightArithmetic
 			    result.Append "ShiftRightArithmetic"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1949,7 +1949,7 @@ Protected Class Opcode
 			    
 			    // ***** OpShiftRightLogical *************************************************
 			    
-			  case OpcodeTypeEnum.OpShiftRightLogical
+			  case OpcodeEnum.OpShiftRightLogical
 			    result.Append "ShiftRightLogical"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1958,14 +1958,14 @@ Protected Class Opcode
 			    
 			    // ***** OpSignBitSet *************************************************
 			    
-			  case OpcodeTypeEnum.OpSignBitSet
+			  case OpcodeEnum.OpSignBitSet
 			    result.Append "SignBitSet"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpSLessThan *************************************************
 			    
-			  case OpcodeTypeEnum.OpSLessThan
+			  case OpcodeEnum.OpSLessThan
 			    result.Append "SLessThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1974,7 +1974,7 @@ Protected Class Opcode
 			    
 			    // ***** OpSLessThanEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpSLessThanEqual
+			  case OpcodeEnum.OpSLessThanEqual
 			    result.Append "SLessThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1983,7 +1983,7 @@ Protected Class Opcode
 			    
 			    // ***** OpSMod *************************************************
 			    
-			  case OpcodeTypeEnum.OpSMod
+			  case OpcodeEnum.OpSMod
 			    result.Append "SMod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1992,14 +1992,14 @@ Protected Class Opcode
 			    
 			    // ***** OpSNegate *************************************************
 			    
-			  case OpcodeTypeEnum.OpSNegate
+			  case OpcodeEnum.OpSNegate
 			    result.Append "SNegate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpSource *************************************************
 			    
-			  case OpcodeTypeEnum.OpSource
+			  case OpcodeEnum.OpSource
 			    result.Append "Source"
 			    result.Append " "
 			    result.Append SPIRVDescribeSourceLanguage(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -2008,7 +2008,7 @@ Protected Class Opcode
 			    
 			    // ***** OpSourceExtension *************************************************
 			    
-			  case OpcodeTypeEnum.OpSourceExtension
+			  case OpcodeEnum.OpSourceExtension
 			    result.Append "SourceExtension"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 4)
@@ -2016,14 +2016,14 @@ Protected Class Opcode
 			    
 			    // ***** OpSpecConstant *************************************************
 			    
-			  case OpcodeTypeEnum.OpSpecConstant
+			  case OpcodeEnum.OpSpecConstant
 			    result.Append "SpecConstant"
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
 			    // ***** OpSpecConstantComposite *************************************************
 			    
-			  case OpcodeTypeEnum.OpSpecConstantComposite
+			  case OpcodeEnum.OpSpecConstantComposite
 			    result.Append "SpecConstantComposite"
 			    ub = offset + WordCount * 4
 			    i = Offset + 12
@@ -2035,17 +2035,17 @@ Protected Class Opcode
 			    
 			    // ***** OpSpecConstantFalse *************************************************
 			    
-			  case OpcodeTypeEnum.OpSpecConstantFalse
+			  case OpcodeEnum.OpSpecConstantFalse
 			    result.Append "SpecConstantFalse"
 			    
 			    // ***** OpSpecConstantTrue *************************************************
 			    
-			  case OpcodeTypeEnum.OpSpecConstantTrue
+			  case OpcodeEnum.OpSpecConstantTrue
 			    result.Append "SpecConstantTrue"
 			    
 			    // ***** OpSRem *************************************************
 			    
-			  case OpcodeTypeEnum.OpSRem
+			  case OpcodeEnum.OpSRem
 			    result.Append "SRem"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2054,7 +2054,7 @@ Protected Class Opcode
 			    
 			    // ***** OpStore *************************************************
 			    
-			  case OpcodeTypeEnum.OpStore
+			  case OpcodeEnum.OpStore
 			    result.Append "Store"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -2070,7 +2070,7 @@ Protected Class Opcode
 			    
 			    // ***** OpString *************************************************
 			    
-			  case OpcodeTypeEnum.OpString
+			  case OpcodeEnum.OpString
 			    result.Append "String"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
@@ -2078,7 +2078,7 @@ Protected Class Opcode
 			    
 			    // ***** OpSwitch *************************************************
 			    
-			  case OpcodeTypeEnum.OpSwitch
+			  case OpcodeEnum.OpSwitch
 			    result.Append "Switch"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -2097,7 +2097,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureFetchSample *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureFetchSample
+			  case OpcodeEnum.OpTextureFetchSample
 			    result.Append "TextureFetchSample"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2108,7 +2108,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureFetchTexel *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureFetchTexel
+			  case OpcodeEnum.OpTextureFetchTexel
 			    result.Append "TextureFetchTexel"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2117,7 +2117,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureFetchTexelLod *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureFetchTexelLod
+			  case OpcodeEnum.OpTextureFetchTexelLod
 			    result.Append "TextureFetchTexelLod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2128,7 +2128,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureFetchTexel *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureFetchTexelOffset
+			  case OpcodeEnum.OpTextureFetchTexelOffset
 			    result.Append "TextureFetchTexelOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2139,7 +2139,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureGather *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureGather
+			  case OpcodeEnum.OpTextureGather
 			    result.Append "TextureGather"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2150,7 +2150,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureGatherOffset *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureGatherOffset
+			  case OpcodeEnum.OpTextureGatherOffset
 			    result.Append "TextureGatherOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2163,7 +2163,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureGatherOffsets *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureGatherOffsets
+			  case OpcodeEnum.OpTextureGatherOffsets
 			    result.Append "TextureGatherOffsets"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2176,14 +2176,14 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureQueryLevels *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureQueryLevels
+			  case OpcodeEnum.OpTextureQueryLevels
 			    result.Append "TextureQueryLevels"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpTextureQueryLod *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureQueryLod
+			  case OpcodeEnum.OpTextureQueryLod
 			    result.Append "TextureQueryLod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2192,21 +2192,21 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureQuerySamples *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureQuerySamples
+			  case OpcodeEnum.OpTextureQuerySamples
 			    result.Append "TextureQuerySamples"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpTextureQuerySize *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureQuerySize
+			  case OpcodeEnum.OpTextureQuerySize
 			    result.Append "TextureQuerySize"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpTextureQuerySizeLod *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureQuerySizeLod
+			  case OpcodeEnum.OpTextureQuerySizeLod
 			    result.Append "TextureQuerySizeLod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2215,7 +2215,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSample *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSample
+			  case OpcodeEnum.OpTextureSample
 			    result.Append "TextureSample"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2228,7 +2228,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleDref *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleDref
+			  case OpcodeEnum.OpTextureSampleDref
 			    result.Append "TextureSampleDref"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2239,7 +2239,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleGrad *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleGrad
+			  case OpcodeEnum.OpTextureSampleGrad
 			    result.Append "TextureSampleGrad"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2252,7 +2252,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleGradOffset *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleGradOffset
+			  case OpcodeEnum.OpTextureSampleGradOffset
 			    result.Append "TextureSampleGradOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2267,7 +2267,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleLod *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleLod
+			  case OpcodeEnum.OpTextureSampleLod
 			    result.Append "TextureSampleLod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2278,7 +2278,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleLodOffset *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleLodOffset
+			  case OpcodeEnum.OpTextureSampleLodOffset
 			    result.Append "TextureSampleLodOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2291,7 +2291,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleOffset *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleOffset
+			  case OpcodeEnum.OpTextureSampleOffset
 			    result.Append "TextureSampleOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2306,7 +2306,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleProj *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleProj
+			  case OpcodeEnum.OpTextureSampleProj
 			    result.Append "TextureSampleProj"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2319,7 +2319,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleProjGrad *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleProjGrad
+			  case OpcodeEnum.OpTextureSampleProjGrad
 			    result.Append "TextureSampleProjGrad"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2332,7 +2332,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleProjGradOffset *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleProjGradOffset
+			  case OpcodeEnum.OpTextureSampleProjGradOffset
 			    result.Append "TextureSampleProjGradOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2347,7 +2347,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleProjLod *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleProjLod
+			  case OpcodeEnum.OpTextureSampleProjLod
 			    result.Append "TextureSampleProjLod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2358,7 +2358,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleProjLodOffset *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleProjLodOffset
+			  case OpcodeEnum.OpTextureSampleProjLodOffset
 			    result.Append "TextureSampleProjLodOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2371,7 +2371,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTextureSampleProjOffset *************************************************
 			    
-			  case OpcodeTypeEnum.OpTextureSampleProjOffset
+			  case OpcodeEnum.OpTextureSampleProjOffset
 			    result.Append "TextureSampleProjOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2386,14 +2386,14 @@ Protected Class Opcode
 			    
 			    // ***** OpTranspose *************************************************
 			    
-			  case OpcodeTypeEnum.OpTranspose
+			  case OpcodeEnum.OpTranspose
 			    result.Append "Transpose"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpTypeArray *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeArray
+			  case OpcodeEnum.OpTypeArray
 			    result.Append "TypeArray"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2402,34 +2402,34 @@ Protected Class Opcode
 			    
 			    // ***** OpTypeBool *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeBool
+			  case OpcodeEnum.OpTypeBool
 			    result.Append "TypeBool"
 			    
 			    // ***** OpTypeDeviceEvent *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeDeviceEvent
+			  case OpcodeEnum.OpTypeDeviceEvent
 			    result.Append "TypeDeviceEvent"
 			    
 			    // ***** OpTypeEvent *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeEvent
+			  case OpcodeEnum.OpTypeEvent
 			    result.Append "TypeEvent"
 			    
 			    // ***** OpTypeFilter *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeFilter
+			  case OpcodeEnum.OpTypeFilter
 			    result.Append "TypeFilter"
 			    
 			    // ***** OpTypeFloat *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeFloat
+			  case OpcodeEnum.OpTypeFloat
 			    result.Append "TypeFloat"
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
 			    // ***** OpTypeFunction *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeFunction
+			  case OpcodeEnum.OpTypeFunction
 			    result.Append "TypeFunction"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2443,7 +2443,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTypeInt *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeInt
+			  case OpcodeEnum.OpTypeInt
 			    result.Append "TypeInt"
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
@@ -2455,7 +2455,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTypeMatrix *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeMatrix
+			  case OpcodeEnum.OpTypeMatrix
 			    result.Append "TypeMatrix"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2464,7 +2464,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTypeOpaque *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeOpaque
+			  case OpcodeEnum.OpTypeOpaque
 			    result.Append "TypeOpaque"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
@@ -2472,7 +2472,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTypePipe *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypePipe
+			  case OpcodeEnum.OpTypePipe
 			    result.Append "TypePipe"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2481,7 +2481,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTypePointer *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypePointer
+			  case OpcodeEnum.OpTypePointer
 			    result.Append "TypePointer"
 			    result.Append " "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 8))
@@ -2490,24 +2490,24 @@ Protected Class Opcode
 			    
 			    // ***** OpTypeQueue *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeQueue
+			  case OpcodeEnum.OpTypeQueue
 			    result.Append "TypeQueue"
 			    
 			    // ***** OpTypeReserveId *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeReserveId
+			  case OpcodeEnum.OpTypeReserveId
 			    result.Append "TypeReserveId"
 			    
 			    // ***** OpTypeRuntimeArray *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeRuntimeArray
+			  case OpcodeEnum.OpTypeRuntimeArray
 			    result.Append "TypeRuntimeArray"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
 			    
 			    // ***** OpTypeSampler *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeSampler
+			  case OpcodeEnum.OpTypeSampler
 			    result.Append "TypeSampler"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2530,7 +2530,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTypeStruct *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeStruct
+			  case OpcodeEnum.OpTypeStruct
 			    result.Append "TypeStruct"
 			    result.Append " "
 			    ub = offset + WordCount * 4
@@ -2543,7 +2543,7 @@ Protected Class Opcode
 			    
 			    // ***** OpTypeVector *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeVector
+			  case OpcodeEnum.OpTypeVector
 			    result.Append "TypeVector"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2552,19 +2552,19 @@ Protected Class Opcode
 			    
 			    // ***** OpTypeVoid *************************************************
 			    
-			  case OpcodeTypeEnum.OpTypeVoid
+			  case OpcodeEnum.OpTypeVoid
 			    result.Append "TypeVoid"
 			    
 			    // ***** OpUConvert *************************************************
 			    
-			  case OpcodeTypeEnum.OpUConvert
+			  case OpcodeEnum.OpUConvert
 			    result.Append "UConvert"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpUDiv *************************************************
 			    
-			  case OpcodeTypeEnum.OpUDiv
+			  case OpcodeEnum.OpUDiv
 			    result.Append "UDiv"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2573,7 +2573,7 @@ Protected Class Opcode
 			    
 			    // ***** OpUGreaterThan *************************************************
 			    
-			  case OpcodeTypeEnum.OpUGreaterThan
+			  case OpcodeEnum.OpUGreaterThan
 			    result.Append "UGreaterThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2582,7 +2582,7 @@ Protected Class Opcode
 			    
 			    // ***** OpUGreaterThanEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpUGreaterThanEqual
+			  case OpcodeEnum.OpUGreaterThanEqual
 			    result.Append "UGreaterThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2591,7 +2591,7 @@ Protected Class Opcode
 			    
 			    // ***** OpULessThan *************************************************
 			    
-			  case OpcodeTypeEnum.OpULessThan
+			  case OpcodeEnum.OpULessThan
 			    result.Append "ULessThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2600,7 +2600,7 @@ Protected Class Opcode
 			    
 			    // ***** OpULessThanEqual *************************************************
 			    
-			  case OpcodeTypeEnum.OpULessThanEqual
+			  case OpcodeEnum.OpULessThanEqual
 			    result.Append "ULessThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2609,7 +2609,7 @@ Protected Class Opcode
 			    
 			    // ***** OpUMod *************************************************
 			    
-			  case OpcodeTypeEnum.OpUMod
+			  case OpcodeEnum.OpUMod
 			    result.Append "UMod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2618,12 +2618,12 @@ Protected Class Opcode
 			    
 			    // ***** OpUndef *************************************************
 			    
-			  case OpcodeTypeEnum.OpUndef
+			  case OpcodeEnum.OpUndef
 			    result.Append "Undef"
 			    
 			    // ***** OpUnordered *************************************************
 			    
-			  case OpcodeTypeEnum.OpUnordered
+			  case OpcodeEnum.OpUnordered
 			    result.Append "Unordered"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2632,12 +2632,12 @@ Protected Class Opcode
 			    
 			    // ***** OpUnreachable *************************************************
 			    
-			  case OpcodeTypeEnum.OpUnreachable
+			  case OpcodeEnum.OpUnreachable
 			    result.Append "Unreachable"
 			    
 			    // ***** OpVariable *************************************************
 			    
-			  case OpcodeTypeEnum.OpVariable
+			  case OpcodeEnum.OpVariable
 			    result.Append "Variable"
 			    result.Append " "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -2647,7 +2647,7 @@ Protected Class Opcode
 			    
 			    // ***** OpVariableArray *************************************************
 			    
-			  case OpcodeTypeEnum.OpVariableArray
+			  case OpcodeEnum.OpVariableArray
 			    result.Append "VariableArray"
 			    result.Append " "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -2656,7 +2656,7 @@ Protected Class Opcode
 			    
 			    // ***** OpVectorExtractDynamic *************************************************
 			    
-			  case OpcodeTypeEnum.OpVectorExtractDynamic
+			  case OpcodeEnum.OpVectorExtractDynamic
 			    result.Append "VectorExtractDynamic"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2665,7 +2665,7 @@ Protected Class Opcode
 			    
 			    // ***** OpVectorInsertDynamic *************************************************
 			    
-			  case OpcodeTypeEnum.OpVectorInsertDynamic
+			  case OpcodeEnum.OpVectorInsertDynamic
 			    result.Append "VectorInsertDynamic"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2676,7 +2676,7 @@ Protected Class Opcode
 			    
 			    // ***** OpVectorShuffle *************************************************
 			    
-			  case OpcodeTypeEnum.OpVectorShuffle
+			  case OpcodeEnum.OpVectorShuffle
 			    result.Append "VectorShuffle"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2692,7 +2692,7 @@ Protected Class Opcode
 			    
 			    // ***** OpVectorTimesScalar *************************************************
 			    
-			  case OpcodeTypeEnum.OpVectorTimesScalar
+			  case OpcodeEnum.OpVectorTimesScalar
 			    result.Append "VectorTimesScalar"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2701,7 +2701,7 @@ Protected Class Opcode
 			    
 			    // ***** OpVectorTimesMatrix *************************************************
 			    
-			  case OpcodeTypeEnum.OpVectorTimesMatrix
+			  case OpcodeEnum.OpVectorTimesMatrix
 			    result.Append "VectorTimesMatrix"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2710,7 +2710,7 @@ Protected Class Opcode
 			    
 			    // ***** OpWaitGroupEvents *************************************************
 			    
-			  case OpcodeTypeEnum.OpWaitGroupEvents
+			  case OpcodeEnum.OpWaitGroupEvents
 			    result.Append "WaitGroupEvents"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -2721,7 +2721,7 @@ Protected Class Opcode
 			    
 			    // ***** OpWritePipe *************************************************
 			    
-			  case OpcodeTypeEnum.OpWritePipe
+			  case OpcodeEnum.OpWritePipe
 			    result.Append "WritePipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2755,191 +2755,191 @@ Protected Class Opcode
 			  
 			  select case Type
 			    
-			  case OpcodeTypeEnum.OpAccessChain, OpcodeTypeEnum.OpAll, _
-			    OpcodeTypeEnum.OpAny, _
-			    OpcodeTypeEnum.OpArrayLength, _
-			    OpcodeTypeEnum.OpAsyncGroupCopy, _
-			    OpcodeTypeEnum.OpAtomicAnd, _
-			    OpcodeTypeEnum.OpAtomicCompareExchange, OpcodeTypeEnum.OpAtomicCompareExchangeWeak, _
-			    OpcodeTypeEnum.OpAtomicExchange, _
-			    OpcodeTypeEnum.OpAtomicIAdd, _
-			    OpcodeTypeEnum.OpAtomicIDecrement, OpcodeTypeEnum.OpAtomicIIncrement, _
-			    OpcodeTypeEnum.OpAtomicIMax, _
-			    OpcodeTypeEnum.OpAtomicIMin, _
-			    OpcodeTypeEnum.OpAtomicISub, _
-			    OpcodeTypeEnum.OpAtomicLoad, _
-			    OpcodeTypeEnum.OpAtomicOr, _
-			    OpcodeTypeEnum.OpAtomicUMax, _
-			    OpcodeTypeEnum.OpAtomicUMin, _
-			    OpcodeTypeEnum.OpAtomicXor, _
-			    OpcodeTypeEnum.OpBitcast, _
-			    OpcodeTypeEnum.OpBitwiseAnd, _
-			    OpcodeTypeEnum.OpBitwiseOr, _
-			    OpcodeTypeEnum.OpBitwiseXor, _
-			    OpcodeTypeEnum.OpBuildNDRange, _
-			    OpcodeTypeEnum.OpCompositeConstruct, _
-			    OpcodeTypeEnum.OpCompositeExtract, OpcodeTypeEnum.OpCompositeInsert, _
-			    OpcodeTypeEnum.OpConstant, OpcodeTypeEnum.OpConstantComposite, _
-			    OpcodeTypeEnum.OpConstantFalse, OpcodeTypeEnum.OpConstantNullObject, _
-			    OpcodeTypeEnum.OpConstantNullPointer, _
-			    OpcodeTypeEnum.OpConstantSampler, OpcodeTypeEnum.OpConstantTrue, _
-			    OpcodeTypeEnum.OpConvertFToS, _
-			    OpcodeTypeEnum.OpConvertFToU, _
-			    OpcodeTypeEnum.OpConvertPtrToU, _
-			    OpcodeTypeEnum.OpConvertSToF, _
-			    OpcodeTypeEnum.OpConvertUToF, _
-			    OpcodeTypeEnum.OpConvertUToPtr, _
-			    OpcodeTypeEnum.OpCopyObject, _
-			    OpcodeTypeEnum.OpCreateUserEvent, _
-			    OpcodeTypeEnum.OpDot, _
-			    OpcodeTypeEnum.OpDPdx, OpcodeTypeEnum.OpDPdxCoarse, _
-			    OpcodeTypeEnum.OpDPdxFine, _
-			    OpcodeTypeEnum.OpDPdy, OpcodeTypeEnum.OpDPdyCoarse, _
-			    OpcodeTypeEnum.OpDPdyFine, _
-			    OpcodeTypeEnum.OpEnqueueKernel, _
-			    OpcodeTypeEnum.OpEnqueueMarker, _
-			    OpcodeTypeEnum.OpExtInst, _
-			    OpcodeTypeEnum.OpFAdd, OpcodeTypeEnum.OpFConvert, _
-			    OpcodeTypeEnum.OpFDiv, _
-			    OpcodeTypeEnum.OpFMod, _
-			    OpcodeTypeEnum.OpFMul, _
-			    OpcodeTypeEnum.OpFNegate, _
-			    OpcodeTypeEnum.OpFOrdEqual, _
-			    OpcodeTypeEnum.OpFOrdGreaterThan, _
-			    OpcodeTypeEnum.OpFOrdGreaterThanEqual, _
-			    OpcodeTypeEnum.OpFOrdLessThan, _
-			    OpcodeTypeEnum.OpFOrdLessThanEqual, _
-			    OpcodeTypeEnum.OpFOrdNotEqual, _
-			    OpcodeTypeEnum.OpFRem, _
-			    OpcodeTypeEnum.OpFSub, OpcodeTypeEnum.OpFunction, _
-			    OpcodeTypeEnum.OpFunctionCall, OpcodeTypeEnum.OpFunctionParameter, _
-			    OpcodeTypeEnum.OpFUnordEqual, _
-			    OpcodeTypeEnum.OpFUnordGreaterThan, _
-			    OpcodeTypeEnum.OpFUnordGreaterThanEqual, _
-			    OpcodeTypeEnum.OpFUnordLessThan, _
-			    OpcodeTypeEnum.OpFUnordLessThanEqual, _
-			    OpcodeTypeEnum.OpFUnordNotEqual, _
-			    OpcodeTypeEnum.OpFwidth, OpcodeTypeEnum.OpFwidthCoarse, _
-			    OpcodeTypeEnum.OpFwidthFine, _
-			    OpcodeTypeEnum.OpGenericCastToPtr, _
-			    OpcodeTypeEnum.OpGenericCastToPtrExplicit, _
-			    OpcodeTypeEnum.OpGenericPtrMemSemantics, _
-			    OpcodeTypeEnum.OpGetDefaultQueue, _
-			    OpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
-			    OpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount, _
-			    OpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple, _
-			    OpcodeTypeEnum.OpGetKernelWorkGroupSize, _
-			    OpcodeTypeEnum.OpGetMaxPipePackets, _
-			    OpcodeTypeEnum.OpGetNumPipePackets, _
-			    OpcodeTypeEnum.OpGroupAll, _
-			    OpcodeTypeEnum.OpGroupAny, _
-			    OpcodeTypeEnum.OpGroupBroadcast, _
-			    OpcodeTypeEnum.OpGroupFAdd, _
-			    OpcodeTypeEnum.OpGroupFMax, _
-			    OpcodeTypeEnum.OpGroupFMin, _
-			    OpcodeTypeEnum.OpGroupIAdd, _
-			    OpcodeTypeEnum.OpGroupReserveReadPipePackets, _
-			    OpcodeTypeEnum.OpGroupReserveWritePipePackets, _
-			    OpcodeTypeEnum.OpGroupSMax, _
-			    OpcodeTypeEnum.OpGroupSMin, _
-			    OpcodeTypeEnum.OpGroupUMax, _
-			    OpcodeTypeEnum.OpGroupUMin, _
-			    OpcodeTypeEnum.OpIAdd, _
-			    OpcodeTypeEnum.OpIEqual, _
-			    OpcodeTypeEnum.OpImagePointer, _
-			    OpcodeTypeEnum.OpIMul, _
-			    OpcodeTypeEnum.OpInBoundsAccessChain, _
-			    OpcodeTypeEnum.OpINotEqual, _
-			    OpcodeTypeEnum.OpIsFinite, _
-			    OpcodeTypeEnum.OpIsInf, _
-			    OpcodeTypeEnum.OpIsNan, _
-			    OpcodeTypeEnum.OpIsNormal, _
-			    OpcodeTypeEnum.OpISub, _
-			    OpcodeTypeEnum.OpIsValidEvent, _
-			    OpcodeTypeEnum.OpIsValidReserveId, _
-			    OpcodeTypeEnum.OpLessOrGreater, _
-			    OpcodeTypeEnum.OpLoad, _
-			    OpcodeTypeEnum.OpLogicalAnd, _
-			    OpcodeTypeEnum.OpLogicalOr, _
-			    OpcodeTypeEnum.OpLogicalXor, _
-			    OpcodeTypeEnum.OpMatrixTimesMatrix, _
-			    OpcodeTypeEnum.OpMatrixTimesScalar, _
-			    OpcodeTypeEnum.OpMatrixTimesVector, _
-			    OpcodeTypeEnum.OpNot, _
-			    OpcodeTypeEnum.OpOrdered, _
-			    OpcodeTypeEnum.OpOuterProduct, _
-			    OpcodeTypeEnum.OpPhi, _
-			    OpcodeTypeEnum.OpPtrCastToGeneric, _
-			    OpcodeTypeEnum.OpReadPipe, _
-			    OpcodeTypeEnum.OpReservedReadPipe, _
-			    OpcodeTypeEnum.OpReservedWritePipe, _
-			    OpcodeTypeEnum.OpReserveReadPipePackets, _
-			    OpcodeTypeEnum.OpReserveWritePipePackets, _
-			    OpcodeTypeEnum.OpSampler, _
-			    OpcodeTypeEnum.OpSatConvertSToU, _
-			    OpcodeTypeEnum.OpSatConvertUToS, _
-			    OpcodeTypeEnum.OpSConvert, _
-			    OpcodeTypeEnum.OpSDiv, _
-			    OpcodeTypeEnum.OpSelect, _
-			    OpcodeTypeEnum.OpShiftLeftLogical, _
-			    OpcodeTypeEnum.OpShiftRightArithmetic, _
-			    OpcodeTypeEnum.OpShiftRightLogical, _
-			    OpcodeTypeEnum.OpSignBitSet, _
-			    OpcodeTypeEnum.OpSGreaterThan, _
-			    OpcodeTypeEnum.OpSGreaterThanEqual, _
-			    OpcodeTypeEnum.OpSLessThan, _
-			    OpcodeTypeEnum.OpSLessThanEqual, _
-			    OpcodeTypeEnum.OpSMod, _
-			    OpcodeTypeEnum.OpSNegate, _
-			    OpcodeTypeEnum.OpSpecConstant, OpcodeTypeEnum.OpSpecConstantFalse, _
-			    OpcodeTypeEnum.OpSpecConstantComposite, OpcodeTypeEnum.OpSpecConstantTrue, _
-			    OpcodeTypeEnum.OpSRem, _
-			    OpcodeTypeEnum.OpTextureFetchSample, _
-			    OpcodeTypeEnum.OpTextureFetchTexel, _
-			    OpcodeTypeEnum.OpTextureFetchTexelLod, OpcodeTypeEnum.OpTextureFetchTexelOffset, _
-			    OpcodeTypeEnum.OpTextureGather, OpcodeTypeEnum.OpTextureGatherOffset, _
-			    OpcodeTypeEnum.OpTextureGatherOffsets, OpcodeTypeEnum.OpTextureQueryLevels, _
-			    OpcodeTypeEnum.OpTextureQueryLod, OpcodeTypeEnum.OpTextureQuerySamples, _
-			    OpcodeTypeEnum.OpTextureQuerySize, OpcodeTypeEnum.OpTextureQuerySizeLod, _
-			    OpcodeTypeEnum.OpTextureSample, OpcodeTypeEnum.OpTextureSampleDref, _
-			    OpcodeTypeEnum.OpTextureSampleGrad, OpcodeTypeEnum.OpTextureSampleGradOffset, _
-			    OpcodeTypeEnum.OpTextureSampleLod, OpcodeTypeEnum.OpTextureSampleLodOffset, _
-			    OpcodeTypeEnum.OpTextureSampleOffset, OpcodeTypeEnum.OpTextureSampleProj, _
-			    OpcodeTypeEnum.OpTextureSampleProjGrad, OpcodeTypeEnum.OpTextureSampleProjGradOffset, _
-			    OpcodeTypeEnum.OpTextureSampleProjLod, OpcodeTypeEnum.OpTextureSampleProjLodOffset, _
-			    OpcodeTypeEnum.OpTextureSampleProjOffset, OpcodeTypeEnum.OpTranspose, _
-			    OpcodeTypeEnum.OpUConvert, _
-			    OpcodeTypeEnum.OpUDiv, _
-			    OpcodeTypeEnum.OpUGreaterThan, _
-			    OpcodeTypeEnum.OpUGreaterThanEqual, _
-			    OpcodeTypeEnum.OpULessThan, _
-			    OpcodeTypeEnum.OpULessThanEqual, _
-			    OpcodeTypeEnum.OpUMod, _
-			    OpcodeTypeEnum.OpUndef, _
-			    OpcodeTypeEnum.OpUnordered, _
-			    OpcodeTypeEnum.OpVariable, OpcodeTypeEnum.OpVariableArray, _
-			    OpcodeTypeEnum.OpVectorExtractDynamic, OpcodeTypeEnum.OpVectorInsertDynamic, _
-			    OpcodeTypeEnum.OpVectorShuffle, _
-			    OpcodeTypeEnum.OpVectorTimesMatrix, _
-			    OpcodeTypeEnum.OpVectorTimesScalar, _
-			    OpcodeTypeEnum.OpWaitGroupEvents, _
-			    OpcodeTypeEnum.OpWritePipe
+			  case OpcodeEnum.OpAccessChain, OpcodeEnum.OpAll, _
+			    OpcodeEnum.OpAny, _
+			    OpcodeEnum.OpArrayLength, _
+			    OpcodeEnum.OpAsyncGroupCopy, _
+			    OpcodeEnum.OpAtomicAnd, _
+			    OpcodeEnum.OpAtomicCompareExchange, OpcodeEnum.OpAtomicCompareExchangeWeak, _
+			    OpcodeEnum.OpAtomicExchange, _
+			    OpcodeEnum.OpAtomicIAdd, _
+			    OpcodeEnum.OpAtomicIDecrement, OpcodeEnum.OpAtomicIIncrement, _
+			    OpcodeEnum.OpAtomicIMax, _
+			    OpcodeEnum.OpAtomicIMin, _
+			    OpcodeEnum.OpAtomicISub, _
+			    OpcodeEnum.OpAtomicLoad, _
+			    OpcodeEnum.OpAtomicOr, _
+			    OpcodeEnum.OpAtomicUMax, _
+			    OpcodeEnum.OpAtomicUMin, _
+			    OpcodeEnum.OpAtomicXor, _
+			    OpcodeEnum.OpBitcast, _
+			    OpcodeEnum.OpBitwiseAnd, _
+			    OpcodeEnum.OpBitwiseOr, _
+			    OpcodeEnum.OpBitwiseXor, _
+			    OpcodeEnum.OpBuildNDRange, _
+			    OpcodeEnum.OpCompositeConstruct, _
+			    OpcodeEnum.OpCompositeExtract, OpcodeEnum.OpCompositeInsert, _
+			    OpcodeEnum.OpConstant, OpcodeEnum.OpConstantComposite, _
+			    OpcodeEnum.OpConstantFalse, OpcodeEnum.OpConstantNullObject, _
+			    OpcodeEnum.OpConstantNullPointer, _
+			    OpcodeEnum.OpConstantSampler, OpcodeEnum.OpConstantTrue, _
+			    OpcodeEnum.OpConvertFToS, _
+			    OpcodeEnum.OpConvertFToU, _
+			    OpcodeEnum.OpConvertPtrToU, _
+			    OpcodeEnum.OpConvertSToF, _
+			    OpcodeEnum.OpConvertUToF, _
+			    OpcodeEnum.OpConvertUToPtr, _
+			    OpcodeEnum.OpCopyObject, _
+			    OpcodeEnum.OpCreateUserEvent, _
+			    OpcodeEnum.OpDot, _
+			    OpcodeEnum.OpDPdx, OpcodeEnum.OpDPdxCoarse, _
+			    OpcodeEnum.OpDPdxFine, _
+			    OpcodeEnum.OpDPdy, OpcodeEnum.OpDPdyCoarse, _
+			    OpcodeEnum.OpDPdyFine, _
+			    OpcodeEnum.OpEnqueueKernel, _
+			    OpcodeEnum.OpEnqueueMarker, _
+			    OpcodeEnum.OpExtInst, _
+			    OpcodeEnum.OpFAdd, OpcodeEnum.OpFConvert, _
+			    OpcodeEnum.OpFDiv, _
+			    OpcodeEnum.OpFMod, _
+			    OpcodeEnum.OpFMul, _
+			    OpcodeEnum.OpFNegate, _
+			    OpcodeEnum.OpFOrdEqual, _
+			    OpcodeEnum.OpFOrdGreaterThan, _
+			    OpcodeEnum.OpFOrdGreaterThanEqual, _
+			    OpcodeEnum.OpFOrdLessThan, _
+			    OpcodeEnum.OpFOrdLessThanEqual, _
+			    OpcodeEnum.OpFOrdNotEqual, _
+			    OpcodeEnum.OpFRem, _
+			    OpcodeEnum.OpFSub, OpcodeEnum.OpFunction, _
+			    OpcodeEnum.OpFunctionCall, OpcodeEnum.OpFunctionParameter, _
+			    OpcodeEnum.OpFUnordEqual, _
+			    OpcodeEnum.OpFUnordGreaterThan, _
+			    OpcodeEnum.OpFUnordGreaterThanEqual, _
+			    OpcodeEnum.OpFUnordLessThan, _
+			    OpcodeEnum.OpFUnordLessThanEqual, _
+			    OpcodeEnum.OpFUnordNotEqual, _
+			    OpcodeEnum.OpFwidth, OpcodeEnum.OpFwidthCoarse, _
+			    OpcodeEnum.OpFwidthFine, _
+			    OpcodeEnum.OpGenericCastToPtr, _
+			    OpcodeEnum.OpGenericCastToPtrExplicit, _
+			    OpcodeEnum.OpGenericPtrMemSemantics, _
+			    OpcodeEnum.OpGetDefaultQueue, _
+			    OpcodeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
+			    OpcodeEnum.OpGetKernelNDrangeSubGroupCount, _
+			    OpcodeEnum.OpGetKernelPreferredWorkGroupSizeMultiple, _
+			    OpcodeEnum.OpGetKernelWorkGroupSize, _
+			    OpcodeEnum.OpGetMaxPipePackets, _
+			    OpcodeEnum.OpGetNumPipePackets, _
+			    OpcodeEnum.OpGroupAll, _
+			    OpcodeEnum.OpGroupAny, _
+			    OpcodeEnum.OpGroupBroadcast, _
+			    OpcodeEnum.OpGroupFAdd, _
+			    OpcodeEnum.OpGroupFMax, _
+			    OpcodeEnum.OpGroupFMin, _
+			    OpcodeEnum.OpGroupIAdd, _
+			    OpcodeEnum.OpGroupReserveReadPipePackets, _
+			    OpcodeEnum.OpGroupReserveWritePipePackets, _
+			    OpcodeEnum.OpGroupSMax, _
+			    OpcodeEnum.OpGroupSMin, _
+			    OpcodeEnum.OpGroupUMax, _
+			    OpcodeEnum.OpGroupUMin, _
+			    OpcodeEnum.OpIAdd, _
+			    OpcodeEnum.OpIEqual, _
+			    OpcodeEnum.OpImagePointer, _
+			    OpcodeEnum.OpIMul, _
+			    OpcodeEnum.OpInBoundsAccessChain, _
+			    OpcodeEnum.OpINotEqual, _
+			    OpcodeEnum.OpIsFinite, _
+			    OpcodeEnum.OpIsInf, _
+			    OpcodeEnum.OpIsNan, _
+			    OpcodeEnum.OpIsNormal, _
+			    OpcodeEnum.OpISub, _
+			    OpcodeEnum.OpIsValidEvent, _
+			    OpcodeEnum.OpIsValidReserveId, _
+			    OpcodeEnum.OpLessOrGreater, _
+			    OpcodeEnum.OpLoad, _
+			    OpcodeEnum.OpLogicalAnd, _
+			    OpcodeEnum.OpLogicalOr, _
+			    OpcodeEnum.OpLogicalXor, _
+			    OpcodeEnum.OpMatrixTimesMatrix, _
+			    OpcodeEnum.OpMatrixTimesScalar, _
+			    OpcodeEnum.OpMatrixTimesVector, _
+			    OpcodeEnum.OpNot, _
+			    OpcodeEnum.OpOrdered, _
+			    OpcodeEnum.OpOuterProduct, _
+			    OpcodeEnum.OpPhi, _
+			    OpcodeEnum.OpPtrCastToGeneric, _
+			    OpcodeEnum.OpReadPipe, _
+			    OpcodeEnum.OpReservedReadPipe, _
+			    OpcodeEnum.OpReservedWritePipe, _
+			    OpcodeEnum.OpReserveReadPipePackets, _
+			    OpcodeEnum.OpReserveWritePipePackets, _
+			    OpcodeEnum.OpSampler, _
+			    OpcodeEnum.OpSatConvertSToU, _
+			    OpcodeEnum.OpSatConvertUToS, _
+			    OpcodeEnum.OpSConvert, _
+			    OpcodeEnum.OpSDiv, _
+			    OpcodeEnum.OpSelect, _
+			    OpcodeEnum.OpShiftLeftLogical, _
+			    OpcodeEnum.OpShiftRightArithmetic, _
+			    OpcodeEnum.OpShiftRightLogical, _
+			    OpcodeEnum.OpSignBitSet, _
+			    OpcodeEnum.OpSGreaterThan, _
+			    OpcodeEnum.OpSGreaterThanEqual, _
+			    OpcodeEnum.OpSLessThan, _
+			    OpcodeEnum.OpSLessThanEqual, _
+			    OpcodeEnum.OpSMod, _
+			    OpcodeEnum.OpSNegate, _
+			    OpcodeEnum.OpSpecConstant, OpcodeEnum.OpSpecConstantFalse, _
+			    OpcodeEnum.OpSpecConstantComposite, OpcodeEnum.OpSpecConstantTrue, _
+			    OpcodeEnum.OpSRem, _
+			    OpcodeEnum.OpTextureFetchSample, _
+			    OpcodeEnum.OpTextureFetchTexel, _
+			    OpcodeEnum.OpTextureFetchTexelLod, OpcodeEnum.OpTextureFetchTexelOffset, _
+			    OpcodeEnum.OpTextureGather, OpcodeEnum.OpTextureGatherOffset, _
+			    OpcodeEnum.OpTextureGatherOffsets, OpcodeEnum.OpTextureQueryLevels, _
+			    OpcodeEnum.OpTextureQueryLod, OpcodeEnum.OpTextureQuerySamples, _
+			    OpcodeEnum.OpTextureQuerySize, OpcodeEnum.OpTextureQuerySizeLod, _
+			    OpcodeEnum.OpTextureSample, OpcodeEnum.OpTextureSampleDref, _
+			    OpcodeEnum.OpTextureSampleGrad, OpcodeEnum.OpTextureSampleGradOffset, _
+			    OpcodeEnum.OpTextureSampleLod, OpcodeEnum.OpTextureSampleLodOffset, _
+			    OpcodeEnum.OpTextureSampleOffset, OpcodeEnum.OpTextureSampleProj, _
+			    OpcodeEnum.OpTextureSampleProjGrad, OpcodeEnum.OpTextureSampleProjGradOffset, _
+			    OpcodeEnum.OpTextureSampleProjLod, OpcodeEnum.OpTextureSampleProjLodOffset, _
+			    OpcodeEnum.OpTextureSampleProjOffset, OpcodeEnum.OpTranspose, _
+			    OpcodeEnum.OpUConvert, _
+			    OpcodeEnum.OpUDiv, _
+			    OpcodeEnum.OpUGreaterThan, _
+			    OpcodeEnum.OpUGreaterThanEqual, _
+			    OpcodeEnum.OpULessThan, _
+			    OpcodeEnum.OpULessThanEqual, _
+			    OpcodeEnum.OpUMod, _
+			    OpcodeEnum.OpUndef, _
+			    OpcodeEnum.OpUnordered, _
+			    OpcodeEnum.OpVariable, OpcodeEnum.OpVariableArray, _
+			    OpcodeEnum.OpVectorExtractDynamic, OpcodeEnum.OpVectorInsertDynamic, _
+			    OpcodeEnum.OpVectorShuffle, _
+			    OpcodeEnum.OpVectorTimesMatrix, _
+			    OpcodeEnum.OpVectorTimesScalar, _
+			    OpcodeEnum.OpWaitGroupEvents, _
+			    OpcodeEnum.OpWritePipe
 			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			    
-			  case OpcodeTypeEnum.OpDecorationGroup, OpcodeTypeEnum.OpExtInstImport, _
-			    OpcodeTypeEnum.OpLabel, OpcodeTypeEnum.OpString, _
-			    OpcodeTypeEnum.OpTypeArray, OpcodeTypeEnum.OpTypeBool, _
-			    OpcodeTypeEnum.OpTypeDeviceEvent, OpcodeTypeEnum.OpTypeEvent, _
-			    OpcodeTypeEnum.OpTypeFilter, OpcodeTypeEnum.OpTypeFloat, _
-			    OpcodeTypeEnum.OpTypeFunction, OpcodeTypeEnum.OpTypeInt, _
-			    OpcodeTypeEnum.OpTypeMatrix, OpcodeTypeEnum.OpTypeOpaque, _
-			    OpcodeTypeEnum.OpTypePipe, OpcodeTypeEnum.OpTypePointer, _
-			    OpcodeTypeEnum.OpTypeQueue, OpcodeTypeEnum.OpTypeReserveId, _
-			    OpcodeTypeEnum.OpTypeRuntimeArray, OpcodeTypeEnum.OpTypeSampler, _
-			    OpcodeTypeEnum.OpTypeStruct, OpcodeTypeEnum.OpTypeVector, _
-			    OpcodeTypeEnum.OpTypeVoid
+			  case OpcodeEnum.OpDecorationGroup, OpcodeEnum.OpExtInstImport, _
+			    OpcodeEnum.OpLabel, OpcodeEnum.OpString, _
+			    OpcodeEnum.OpTypeArray, OpcodeEnum.OpTypeBool, _
+			    OpcodeEnum.OpTypeDeviceEvent, OpcodeEnum.OpTypeEvent, _
+			    OpcodeEnum.OpTypeFilter, OpcodeEnum.OpTypeFloat, _
+			    OpcodeEnum.OpTypeFunction, OpcodeEnum.OpTypeInt, _
+			    OpcodeEnum.OpTypeMatrix, OpcodeEnum.OpTypeOpaque, _
+			    OpcodeEnum.OpTypePipe, OpcodeEnum.OpTypePointer, _
+			    OpcodeEnum.OpTypeQueue, OpcodeEnum.OpTypeReserveId, _
+			    OpcodeEnum.OpTypeRuntimeArray, OpcodeEnum.OpTypeSampler, _
+			    OpcodeEnum.OpTypeStruct, OpcodeEnum.OpTypeVector, _
+			    OpcodeEnum.OpTypeVoid
 			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
@@ -2965,180 +2965,180 @@ Protected Class Opcode
 			  
 			  select case Type
 			    
-			  case OpcodeTypeEnum.OpAccessChain, OpcodeTypeEnum.OpAll, _
-			    OpcodeTypeEnum.OpAny, _
-			    OpcodeTypeEnum.OpArrayLength, _
-			    OpcodeTypeEnum.OpAsyncGroupCopy, _
-			    OpcodeTypeEnum.OpAtomicAnd, _
-			    OpcodeTypeEnum.OpAtomicCompareExchange, OpcodeTypeEnum.OpAtomicCompareExchangeWeak, _
-			    OpcodeTypeEnum.OpAtomicExchange, _
-			    OpcodeTypeEnum.OpAtomicIAdd, _
-			    OpcodeTypeEnum.OpAtomicIDecrement, OpcodeTypeEnum.OpAtomicIIncrement, _
-			    OpcodeTypeEnum.OpAtomicIMax, _
-			    OpcodeTypeEnum.OpAtomicIMin, _
-			    OpcodeTypeEnum.OpAtomicISub, _
-			    OpcodeTypeEnum.OpAtomicLoad, _
-			    OpcodeTypeEnum.OpAtomicOr, _
-			    OpcodeTypeEnum.OpAtomicUMax, _
-			    OpcodeTypeEnum.OpAtomicUMin, _
-			    OpcodeTypeEnum.OpAtomicXor, _
-			    OpcodeTypeEnum.OpBitcast, _
-			    OpcodeTypeEnum.OpBitwiseAnd, _
-			    OpcodeTypeEnum.OpBitwiseOr, _
-			    OpcodeTypeEnum.OpBitwiseXor, _
-			    OpcodeTypeEnum.OpBuildNDRange, _
-			    OpcodeTypeEnum.OpCompositeConstruct, OpcodeTypeEnum.OpCompositeExtract, _
-			    OpcodeTypeEnum.OpCompositeInsert, _
-			    OpcodeTypeEnum.OpConstant, _
-			    OpcodeTypeEnum.OpConstantComposite, OpcodeTypeEnum.OpConstantFalse, _
-			    OpcodeTypeEnum.OpConstantNullObject, OpcodeTypeEnum.OpConstantNullPointer, _
-			    OpcodeTypeEnum.OpConstantSampler, OpcodeTypeEnum.OpConstantTrue, _
-			    OpcodeTypeEnum.OpConvertFToS, _
-			    OpcodeTypeEnum.OpConvertFToU, _
-			    OpcodeTypeEnum.OpConvertPtrToU, _
-			    OpcodeTypeEnum.OpConvertSToF, _
-			    OpcodeTypeEnum.OpConvertUToF, _
-			    OpcodeTypeEnum.OpConvertUToPtr, _
-			    OpcodeTypeEnum.OpCopyObject, _
-			    OpcodeTypeEnum.OpCreateUserEvent, _
-			    OpcodeTypeEnum.OpDot, _
-			    OpcodeTypeEnum.OpDPdx, OpcodeTypeEnum.OpDPdxCoarse, _
-			    OpcodeTypeEnum.OpDPdxFine, _
-			    OpcodeTypeEnum.OpDPdy, OpcodeTypeEnum.OpDPdyCoarse, _
-			    OpcodeTypeEnum.OpDPdyFine, _
-			    OpcodeTypeEnum.OpEnqueueKernel, _
-			    OpcodeTypeEnum.OpEnqueueMarker, _
-			    OpcodeTypeEnum.OpExtInst, _
-			    OpcodeTypeEnum.OpFAdd, _
-			    OpcodeTypeEnum.OpFConvert, _
-			    OpcodeTypeEnum.OpFDiv, _
-			    OpcodeTypeEnum.OpFMod, _
-			    OpcodeTypeEnum.OpFMul, _
-			    OpcodeTypeEnum.OpFNegate, _
-			    OpcodeTypeEnum.OpFOrdEqual, _
-			    OpcodeTypeEnum.OpFOrdGreaterThan, _
-			    OpcodeTypeEnum.OpFOrdGreaterThanEqual, _
-			    OpcodeTypeEnum.OpFOrdLessThan, _
-			    OpcodeTypeEnum.OpFOrdLessThanEqual, _
-			    OpcodeTypeEnum.OpFOrdNotEqual, _
-			    OpcodeTypeEnum.OpFRem, _
-			    OpcodeTypeEnum.OpFSub, _
-			    OpcodeTypeEnum.OpFunction, OpcodeTypeEnum.OpFunctionCall, _
-			    OpcodeTypeEnum.OpFunctionParameter, _
-			    OpcodeTypeEnum.OpFUnordEqual, _
-			    OpcodeTypeEnum.OpFUnordGreaterThan, _
-			    OpcodeTypeEnum.OpFUnordGreaterThanEqual, _
-			    OpcodeTypeEnum.OpFUnordLessThan, _
-			    OpcodeTypeEnum.OpFUnordLessThanEqual, _
-			    OpcodeTypeEnum.OpFUnordNotEqual, _
-			    OpcodeTypeEnum.OpFwidth, OpcodeTypeEnum.OpFwidthCoarse, _
-			    OpcodeTypeEnum.OpFwidthFine, _
-			    OpcodeTypeEnum.OpGenericCastToPtr, _
-			    OpcodeTypeEnum.OpGenericCastToPtrExplicit, _
-			    OpcodeTypeEnum.OpGenericPtrMemSemantics, _
-			    OpcodeTypeEnum.OpGetDefaultQueue, _
-			    OpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount, _
-			    OpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
-			    OpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple, _
-			    OpcodeTypeEnum.OpGetKernelWorkGroupSize, _
-			    OpcodeTypeEnum.OpGetMaxPipePackets, _
-			    OpcodeTypeEnum.OpGetNumPipePackets, _
-			    OpcodeTypeEnum.OpGroupAll, _
-			    OpcodeTypeEnum.OpGroupAny, _
-			    OpcodeTypeEnum.OpGroupBroadcast, _
-			    OpcodeTypeEnum.OpGroupFAdd, _
-			    OpcodeTypeEnum.OpGroupFMax, _
-			    OpcodeTypeEnum.OpGroupFMin, _
-			    OpcodeTypeEnum.OpGroupIAdd, _
-			    OpcodeTypeEnum.OpGroupReserveReadPipePackets, _
-			    OpcodeTypeEnum.OpGroupReserveWritePipePackets, _
-			    OpcodeTypeEnum.OpGroupSMax, _
-			    OpcodeTypeEnum.OpGroupSMin, _
-			    OpcodeTypeEnum.OpGroupUMax, _
-			    OpcodeTypeEnum.OpGroupUMin, _
-			    OpcodeTypeEnum.OpIAdd, _
-			    OpcodeTypeEnum.OpIEqual, _
-			    OpcodeTypeEnum.OpImagePointer, _
-			    OpcodeTypeEnum.OpIMul, _
-			    OpcodeTypeEnum.OpInBoundsAccessChain, _
-			    OpcodeTypeEnum.OpINotEqual, _
-			    OpcodeTypeEnum.OpIsFinite, _
-			    OpcodeTypeEnum.OpIsInf, _
-			    OpcodeTypeEnum.OpIsNan, _
-			    OpcodeTypeEnum.OpIsNormal, _
-			    OpcodeTypeEnum.OpISub, _
-			    OpcodeTypeEnum.OpIsValidEvent, _
-			    OpcodeTypeEnum.OpIsValidReserveId, _
-			    OpcodeTypeEnum.OpLessOrGreater, _
-			    OpcodeTypeEnum.OpLoad, _
-			    OpcodeTypeEnum.OpLogicalAnd, _
-			    OpcodeTypeEnum.OpLogicalOr, _
-			    OpcodeTypeEnum.OpLogicalXor, _
-			    OpcodeTypeEnum.OpMatrixTimesMatrix, _
-			    OpcodeTypeEnum.OpMatrixTimesScalar, _
-			    OpcodeTypeEnum.OpMatrixTimesVector, _
-			    OpcodeTypeEnum.OpNot, _
-			    OpcodeTypeEnum.OpOrdered, _
-			    OpcodeTypeEnum.OpOuterProduct, _
-			    OpcodeTypeEnum.OpPhi, _
-			    OpcodeTypeEnum.OpPtrCastToGeneric, _
-			    OpcodeTypeEnum.OpReadPipe, _
-			    OpcodeTypeEnum.OpReservedReadPipe, _
-			    OpcodeTypeEnum.OpReservedWritePipe, _
-			    OpcodeTypeEnum.OpReserveReadPipePackets, _
-			    OpcodeTypeEnum.OpReserveWritePipePackets, _
-			    OpcodeTypeEnum.OpSampler, _
-			    OpcodeTypeEnum.OpSatConvertSToU, _
-			    OpcodeTypeEnum.OpSatConvertUToS, _
-			    OpcodeTypeEnum.OpSConvert, _
-			    OpcodeTypeEnum.OpSDiv, _
-			    OpcodeTypeEnum.OpSelect, _
-			    OpcodeTypeEnum.OpShiftLeftLogical, _
-			    OpcodeTypeEnum.OpShiftRightArithmetic, _
-			    OpcodeTypeEnum.OpShiftRightLogical, _
-			    OpcodeTypeEnum.OpSignBitSet, _
-			    OpcodeTypeEnum.OpSGreaterThan, _
-			    OpcodeTypeEnum.OpSGreaterThanEqual, _
-			    OpcodeTypeEnum.OpSLessThan, _
-			    OpcodeTypeEnum.OpSLessThanEqual, _
-			    OpcodeTypeEnum.OpSMod, _
-			    OpcodeTypeEnum.OpSNegate, _
-			    OpcodeTypeEnum.OpSpecConstant, _
-			    OpcodeTypeEnum.OpSpecConstantComposite, OpcodeTypeEnum.OpSpecConstantFalse, _
-			    OpcodeTypeEnum.OpSpecConstantTrue, _
-			    OpcodeTypeEnum.OpSRem, _
-			    OpcodeTypeEnum.OpTextureFetchSample, _
-			    OpcodeTypeEnum.OpTextureFetchTexel, _
-			    OpcodeTypeEnum.OpTextureFetchTexelLod, OpcodeTypeEnum.OpTextureFetchTexelOffset, _
-			    OpcodeTypeEnum.OpTextureGather, OpcodeTypeEnum.OpTextureGatherOffset, _
-			    OpcodeTypeEnum.OpTextureGatherOffsets, OpcodeTypeEnum.OpTextureQueryLevels, _
-			    OpcodeTypeEnum.OpTextureQueryLod, OpcodeTypeEnum.OpTextureQuerySamples, _
-			    OpcodeTypeEnum.OpTextureQuerySize, OpcodeTypeEnum.OpTextureQuerySizeLod, _
-			    OpcodeTypeEnum.OpTextureSample, OpcodeTypeEnum.OpTextureSampleDref, _
-			    OpcodeTypeEnum.OpTextureSampleGrad, OpcodeTypeEnum.OpTextureSampleGradOffset, _
-			    OpcodeTypeEnum.OpTextureSampleLod, OpcodeTypeEnum.OpTextureSampleLodOffset, _
-			    OpcodeTypeEnum.OpTextureSampleOffset, _
-			    OpcodeTypeEnum.OpTextureSampleProj, OpcodeTypeEnum.OpTextureSampleProjGrad, _
-			    OpcodeTypeEnum.OpTextureSampleProjGradOffset, _
-			    OpcodeTypeEnum.OpTextureSampleProjLod, OpcodeTypeEnum.OpTextureSampleProjLodOffset, _
-			    OpcodeTypeEnum.OpTextureSampleProjOffset, _
-			    OpcodeTypeEnum.OpTranspose, _
-			    OpcodeTypeEnum.OpUConvert, _
-			    OpcodeTypeEnum.OpUDiv, _
-			    OpcodeTypeEnum.OpUGreaterThan, _
-			    OpcodeTypeEnum.OpUGreaterThanEqual, _
-			    OpcodeTypeEnum.OpULessThan, _
-			    OpcodeTypeEnum.OpULessThanEqual, _
-			    OpcodeTypeEnum.OpUMod, _
-			    OpcodeTypeEnum.OpUndef, _
-			    OpcodeTypeEnum.OpUnordered, _
-			    OpcodeTypeEnum.OpVariable, _
-			    OpcodeTypeEnum.OpVariableArray, OpcodeTypeEnum.OpVectorExtractDynamic, _
-			    OpcodeTypeEnum.OpVectorInsertDynamic, OpcodeTypeEnum.OpVectorShuffle, _
-			    OpcodeTypeEnum.OpVectorTimesMatrix, _
-			    OpcodeTypeEnum.OpVectorTimesScalar, _
-			    OpcodeTypeEnum.OpWaitGroupEvents, _
-			    OpcodeTypeEnum.OpWritePipe
+			  case OpcodeEnum.OpAccessChain, OpcodeEnum.OpAll, _
+			    OpcodeEnum.OpAny, _
+			    OpcodeEnum.OpArrayLength, _
+			    OpcodeEnum.OpAsyncGroupCopy, _
+			    OpcodeEnum.OpAtomicAnd, _
+			    OpcodeEnum.OpAtomicCompareExchange, OpcodeEnum.OpAtomicCompareExchangeWeak, _
+			    OpcodeEnum.OpAtomicExchange, _
+			    OpcodeEnum.OpAtomicIAdd, _
+			    OpcodeEnum.OpAtomicIDecrement, OpcodeEnum.OpAtomicIIncrement, _
+			    OpcodeEnum.OpAtomicIMax, _
+			    OpcodeEnum.OpAtomicIMin, _
+			    OpcodeEnum.OpAtomicISub, _
+			    OpcodeEnum.OpAtomicLoad, _
+			    OpcodeEnum.OpAtomicOr, _
+			    OpcodeEnum.OpAtomicUMax, _
+			    OpcodeEnum.OpAtomicUMin, _
+			    OpcodeEnum.OpAtomicXor, _
+			    OpcodeEnum.OpBitcast, _
+			    OpcodeEnum.OpBitwiseAnd, _
+			    OpcodeEnum.OpBitwiseOr, _
+			    OpcodeEnum.OpBitwiseXor, _
+			    OpcodeEnum.OpBuildNDRange, _
+			    OpcodeEnum.OpCompositeConstruct, OpcodeEnum.OpCompositeExtract, _
+			    OpcodeEnum.OpCompositeInsert, _
+			    OpcodeEnum.OpConstant, _
+			    OpcodeEnum.OpConstantComposite, OpcodeEnum.OpConstantFalse, _
+			    OpcodeEnum.OpConstantNullObject, OpcodeEnum.OpConstantNullPointer, _
+			    OpcodeEnum.OpConstantSampler, OpcodeEnum.OpConstantTrue, _
+			    OpcodeEnum.OpConvertFToS, _
+			    OpcodeEnum.OpConvertFToU, _
+			    OpcodeEnum.OpConvertPtrToU, _
+			    OpcodeEnum.OpConvertSToF, _
+			    OpcodeEnum.OpConvertUToF, _
+			    OpcodeEnum.OpConvertUToPtr, _
+			    OpcodeEnum.OpCopyObject, _
+			    OpcodeEnum.OpCreateUserEvent, _
+			    OpcodeEnum.OpDot, _
+			    OpcodeEnum.OpDPdx, OpcodeEnum.OpDPdxCoarse, _
+			    OpcodeEnum.OpDPdxFine, _
+			    OpcodeEnum.OpDPdy, OpcodeEnum.OpDPdyCoarse, _
+			    OpcodeEnum.OpDPdyFine, _
+			    OpcodeEnum.OpEnqueueKernel, _
+			    OpcodeEnum.OpEnqueueMarker, _
+			    OpcodeEnum.OpExtInst, _
+			    OpcodeEnum.OpFAdd, _
+			    OpcodeEnum.OpFConvert, _
+			    OpcodeEnum.OpFDiv, _
+			    OpcodeEnum.OpFMod, _
+			    OpcodeEnum.OpFMul, _
+			    OpcodeEnum.OpFNegate, _
+			    OpcodeEnum.OpFOrdEqual, _
+			    OpcodeEnum.OpFOrdGreaterThan, _
+			    OpcodeEnum.OpFOrdGreaterThanEqual, _
+			    OpcodeEnum.OpFOrdLessThan, _
+			    OpcodeEnum.OpFOrdLessThanEqual, _
+			    OpcodeEnum.OpFOrdNotEqual, _
+			    OpcodeEnum.OpFRem, _
+			    OpcodeEnum.OpFSub, _
+			    OpcodeEnum.OpFunction, OpcodeEnum.OpFunctionCall, _
+			    OpcodeEnum.OpFunctionParameter, _
+			    OpcodeEnum.OpFUnordEqual, _
+			    OpcodeEnum.OpFUnordGreaterThan, _
+			    OpcodeEnum.OpFUnordGreaterThanEqual, _
+			    OpcodeEnum.OpFUnordLessThan, _
+			    OpcodeEnum.OpFUnordLessThanEqual, _
+			    OpcodeEnum.OpFUnordNotEqual, _
+			    OpcodeEnum.OpFwidth, OpcodeEnum.OpFwidthCoarse, _
+			    OpcodeEnum.OpFwidthFine, _
+			    OpcodeEnum.OpGenericCastToPtr, _
+			    OpcodeEnum.OpGenericCastToPtrExplicit, _
+			    OpcodeEnum.OpGenericPtrMemSemantics, _
+			    OpcodeEnum.OpGetDefaultQueue, _
+			    OpcodeEnum.OpGetKernelNDrangeSubGroupCount, _
+			    OpcodeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
+			    OpcodeEnum.OpGetKernelPreferredWorkGroupSizeMultiple, _
+			    OpcodeEnum.OpGetKernelWorkGroupSize, _
+			    OpcodeEnum.OpGetMaxPipePackets, _
+			    OpcodeEnum.OpGetNumPipePackets, _
+			    OpcodeEnum.OpGroupAll, _
+			    OpcodeEnum.OpGroupAny, _
+			    OpcodeEnum.OpGroupBroadcast, _
+			    OpcodeEnum.OpGroupFAdd, _
+			    OpcodeEnum.OpGroupFMax, _
+			    OpcodeEnum.OpGroupFMin, _
+			    OpcodeEnum.OpGroupIAdd, _
+			    OpcodeEnum.OpGroupReserveReadPipePackets, _
+			    OpcodeEnum.OpGroupReserveWritePipePackets, _
+			    OpcodeEnum.OpGroupSMax, _
+			    OpcodeEnum.OpGroupSMin, _
+			    OpcodeEnum.OpGroupUMax, _
+			    OpcodeEnum.OpGroupUMin, _
+			    OpcodeEnum.OpIAdd, _
+			    OpcodeEnum.OpIEqual, _
+			    OpcodeEnum.OpImagePointer, _
+			    OpcodeEnum.OpIMul, _
+			    OpcodeEnum.OpInBoundsAccessChain, _
+			    OpcodeEnum.OpINotEqual, _
+			    OpcodeEnum.OpIsFinite, _
+			    OpcodeEnum.OpIsInf, _
+			    OpcodeEnum.OpIsNan, _
+			    OpcodeEnum.OpIsNormal, _
+			    OpcodeEnum.OpISub, _
+			    OpcodeEnum.OpIsValidEvent, _
+			    OpcodeEnum.OpIsValidReserveId, _
+			    OpcodeEnum.OpLessOrGreater, _
+			    OpcodeEnum.OpLoad, _
+			    OpcodeEnum.OpLogicalAnd, _
+			    OpcodeEnum.OpLogicalOr, _
+			    OpcodeEnum.OpLogicalXor, _
+			    OpcodeEnum.OpMatrixTimesMatrix, _
+			    OpcodeEnum.OpMatrixTimesScalar, _
+			    OpcodeEnum.OpMatrixTimesVector, _
+			    OpcodeEnum.OpNot, _
+			    OpcodeEnum.OpOrdered, _
+			    OpcodeEnum.OpOuterProduct, _
+			    OpcodeEnum.OpPhi, _
+			    OpcodeEnum.OpPtrCastToGeneric, _
+			    OpcodeEnum.OpReadPipe, _
+			    OpcodeEnum.OpReservedReadPipe, _
+			    OpcodeEnum.OpReservedWritePipe, _
+			    OpcodeEnum.OpReserveReadPipePackets, _
+			    OpcodeEnum.OpReserveWritePipePackets, _
+			    OpcodeEnum.OpSampler, _
+			    OpcodeEnum.OpSatConvertSToU, _
+			    OpcodeEnum.OpSatConvertUToS, _
+			    OpcodeEnum.OpSConvert, _
+			    OpcodeEnum.OpSDiv, _
+			    OpcodeEnum.OpSelect, _
+			    OpcodeEnum.OpShiftLeftLogical, _
+			    OpcodeEnum.OpShiftRightArithmetic, _
+			    OpcodeEnum.OpShiftRightLogical, _
+			    OpcodeEnum.OpSignBitSet, _
+			    OpcodeEnum.OpSGreaterThan, _
+			    OpcodeEnum.OpSGreaterThanEqual, _
+			    OpcodeEnum.OpSLessThan, _
+			    OpcodeEnum.OpSLessThanEqual, _
+			    OpcodeEnum.OpSMod, _
+			    OpcodeEnum.OpSNegate, _
+			    OpcodeEnum.OpSpecConstant, _
+			    OpcodeEnum.OpSpecConstantComposite, OpcodeEnum.OpSpecConstantFalse, _
+			    OpcodeEnum.OpSpecConstantTrue, _
+			    OpcodeEnum.OpSRem, _
+			    OpcodeEnum.OpTextureFetchSample, _
+			    OpcodeEnum.OpTextureFetchTexel, _
+			    OpcodeEnum.OpTextureFetchTexelLod, OpcodeEnum.OpTextureFetchTexelOffset, _
+			    OpcodeEnum.OpTextureGather, OpcodeEnum.OpTextureGatherOffset, _
+			    OpcodeEnum.OpTextureGatherOffsets, OpcodeEnum.OpTextureQueryLevels, _
+			    OpcodeEnum.OpTextureQueryLod, OpcodeEnum.OpTextureQuerySamples, _
+			    OpcodeEnum.OpTextureQuerySize, OpcodeEnum.OpTextureQuerySizeLod, _
+			    OpcodeEnum.OpTextureSample, OpcodeEnum.OpTextureSampleDref, _
+			    OpcodeEnum.OpTextureSampleGrad, OpcodeEnum.OpTextureSampleGradOffset, _
+			    OpcodeEnum.OpTextureSampleLod, OpcodeEnum.OpTextureSampleLodOffset, _
+			    OpcodeEnum.OpTextureSampleOffset, _
+			    OpcodeEnum.OpTextureSampleProj, OpcodeEnum.OpTextureSampleProjGrad, _
+			    OpcodeEnum.OpTextureSampleProjGradOffset, _
+			    OpcodeEnum.OpTextureSampleProjLod, OpcodeEnum.OpTextureSampleProjLodOffset, _
+			    OpcodeEnum.OpTextureSampleProjOffset, _
+			    OpcodeEnum.OpTranspose, _
+			    OpcodeEnum.OpUConvert, _
+			    OpcodeEnum.OpUDiv, _
+			    OpcodeEnum.OpUGreaterThan, _
+			    OpcodeEnum.OpUGreaterThanEqual, _
+			    OpcodeEnum.OpULessThan, _
+			    OpcodeEnum.OpULessThanEqual, _
+			    OpcodeEnum.OpUMod, _
+			    OpcodeEnum.OpUndef, _
+			    OpcodeEnum.OpUnordered, _
+			    OpcodeEnum.OpVariable, _
+			    OpcodeEnum.OpVariableArray, OpcodeEnum.OpVectorExtractDynamic, _
+			    OpcodeEnum.OpVectorInsertDynamic, OpcodeEnum.OpVectorShuffle, _
+			    OpcodeEnum.OpVectorTimesMatrix, _
+			    OpcodeEnum.OpVectorTimesScalar, _
+			    OpcodeEnum.OpWaitGroupEvents, _
+			    OpcodeEnum.OpWritePipe
 			    
 			    result = compose_type(Offset + 4)
 			    
@@ -3152,7 +3152,7 @@ Protected Class Opcode
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0
-		Type As OpcodeTypeEnum
+		Type As OpcodeEnum
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

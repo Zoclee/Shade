@@ -1987,7 +1987,7 @@ Protected Module SPIRV
 		SpecConstant
 	#tag EndEnum
 
-	#tag Enum, Name = OpcodeTypeEnum, Type = Integer, Flags = &h0
+	#tag Enum, Name = OpcodeEnum, Type = Integer, Flags = &h0
 		Unknown
 		  OpAccessChain
 		  OpAll

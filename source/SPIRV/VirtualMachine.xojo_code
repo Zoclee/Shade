@@ -67,51 +67,51 @@ Protected Class VirtualMachine
 		        select case ModuleBinary.UInt16Value(ip)
 		          
 		        case 0 // ***** OpNop ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpNop)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpNop)
 		          
 		        case 1 // ***** OpSource ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSource)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSource)
 		          SourceLanguage = ModuleBinary.UInt32Value(ip + 4)
 		          SourceVersion = ModuleBinary.UInt32Value(ip + 8)
 		          
 		        case 2 // ***** OpSourceExtension ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSourceExtension)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSourceExtension)
 		          
 		        case 3 // ***** OpExtension ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpExtension)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpExtension)
 		          
 		        case 4 // ***** OpExtInstImport ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpExtInstImport)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpExtInstImport)
 		          
 		        case 5 // ***** OpMemoryModel ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpMemoryModel)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpMemoryModel)
 		          AddressingModel = ModuleBinary.UInt32Value(ip + 4)
 		          MemoryModel = ModuleBinary.UInt32Value(ip + 8)
 		          
 		        case 6 // ***** OpEntryPoint ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpEntryPoint)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpEntryPoint)
 		          ep = new SPIRV.EntryPoint
 		          ep.ExecutionModel = ModuleBinary.UInt32Value(ip + 4)
 		          ep.EntryPointID = ModuleBinary.UInt32Value(ip + 8)
 		          EntryPoints.Value(ep.EntryPointID) = ep
 		          
 		        case 7 // ***** OpExecutionMode ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpExecutionMode)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpExecutionMode)
 		          
 		        case 8 // ***** OpTypeVoid ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeVoid)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeVoid)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Void
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 9 // ***** OpTypeBool ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeBool)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeBool)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Boolean
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 10 // ***** OpTypeInt ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeInt)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeInt)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Integer
 		          typ.Width = ModuleBinary.UInt32Value(ip + 8)
@@ -123,14 +123,14 @@ Protected Class VirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 11 // ***** OpTypeFloat ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeFloat)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeFloat)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Float
 		          typ.Width = ModuleBinary.UInt32Value(ip + 8)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 12 // ***** OpTypeVector ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeVector)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeVector)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Vector
 		          typ.ComponentTypeID = ModuleBinary.UInt32Value(ip + 8)
@@ -138,7 +138,7 @@ Protected Class VirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 13 // ***** OpTypeMatrix ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeMatrix)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeMatrix)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Matrix
 		          typ.ColumnTypeID = ModuleBinary.UInt32Value(ip + 8)
@@ -146,7 +146,7 @@ Protected Class VirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 14 // ***** OpTypeSampler ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeSampler)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeSampler)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Sampler
 		          typ.SampledTypeID = ModuleBinary.UInt32Value(ip + 8)
@@ -163,13 +163,13 @@ Protected Class VirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 15 // ***** OpTypeFilter ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeFilter)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeFilter)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Filter
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 16 // ***** OpTypeArray ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeArray)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeArray)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Array_
 		          typ.ElementTypeID = ModuleBinary.UInt32Value(ip + 8)
@@ -177,14 +177,14 @@ Protected Class VirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 17 // ***** OpTypeRuntimeArray ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeRuntimeArray)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeRuntimeArray)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.RuntimeArray
 		          typ.ElementTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 18 // ***** OpTypeStruct ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeStruct)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeStruct)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Struct
 		          tempIP = ip + 8
@@ -196,14 +196,14 @@ Protected Class VirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 19 // ***** OpTypeOpaque ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeOpaque)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeOpaque)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Opaque
 		          typ.Name = ModuleBinary.CString(ip + 8)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 20 // ***** OpTypePointer ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypePointer)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypePointer)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Pointer
 		          typ.StorageClass = ModuleBinary.UInt32Value(ip + 8)
@@ -211,7 +211,7 @@ Protected Class VirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 21 // ***** OpTypeFunction ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeFunction)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeFunction)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Function_
 		          typ.ReturnTypeID = ModuleBinary.UInt32Value(ip + 8)
@@ -224,31 +224,31 @@ Protected Class VirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 22 // ***** OpTypeEvent ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeEvent)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeEvent)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Event_
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 23 // ***** OpTypeDeviceEvent ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeDeviceEvent)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeDeviceEvent)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.DeviceEvent
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 24 // ***** OpTypeReserveId ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeReserveId)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeReserveId)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.ReservedId
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 25 // ***** OpTypeQueue ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeQueue)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypeQueue)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Queue
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 26 // ***** OpTypePipe ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypePipe)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTypePipe)
 		          typ = new SPIRV.Type(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRV.TypeEnum.Pipe
 		          typ.DataTypeID = ModuleBinary.UInt32Value(ip + 8)
@@ -256,7 +256,7 @@ Protected Class VirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 27 // ***** OpConstantTrue ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantTrue)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConstantTrue)
 		          cnst = new SPIRV.Constant
 		          cnst.Type = ConstantEnum.BooleanTrue
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
@@ -264,7 +264,7 @@ Protected Class VirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 28 // ***** OpConstantFalse ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantFalse)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConstantFalse)
 		          cnst = new SPIRV.Constant
 		          cnst.Type = ConstantEnum.BooleanFalse
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
@@ -272,7 +272,7 @@ Protected Class VirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 29 // ***** OpConstant ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstant)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConstant)
 		          
 		          cnst = new SPIRV.Constant
 		          cnst.Type = ConstantEnum.Constant
@@ -290,7 +290,7 @@ Protected Class VirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 30 // ***** OpConstantComposite ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantComposite)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConstantComposite)
 		          cnst = new SPIRV.Constant
 		          cnst.Type = ConstantEnum.Composite
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
@@ -304,7 +304,7 @@ Protected Class VirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 31 // ***** OpConstantSampler ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantSampler)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConstantSampler)
 		          cnst = new SPIRV.Constant
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
@@ -314,7 +314,7 @@ Protected Class VirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 32 // ***** OpConstantNullPointer ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantNullPointer)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConstantNullPointer)
 		          cnst = new SPIRV.Constant
 		          cnst.Type = ConstantEnum.NullPointer
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
@@ -322,7 +322,7 @@ Protected Class VirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 33 // ***** OpConstantNullObject ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantNullObject)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConstantNullObject)
 		          cnst = new SPIRV.Constant
 		          cnst.Type = ConstantEnum.NullObject
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
@@ -330,7 +330,7 @@ Protected Class VirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 34 // ***** OpSpecConstantTrue ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstantTrue)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSpecConstantTrue)
 		          cnst = new SPIRV.Constant
 		          cnst.Type = ConstantEnum.SpecBooleanTrue
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
@@ -338,7 +338,7 @@ Protected Class VirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 35 // ***** OpSpecConstantFalse ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstantFalse)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSpecConstantFalse)
 		          cnst = new SPIRV.Constant
 		          cnst.Type = ConstantEnum.SpecBooleanFalse
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
@@ -346,7 +346,7 @@ Protected Class VirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 36 // ***** OpSpecConstant ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstant)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSpecConstant)
 		          cnst = new SPIRV.Constant
 		          cnst.Type = ConstantEnum.SpecConstant
 		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
@@ -363,7 +363,7 @@ Protected Class VirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 37 // ***** OpSpecConstantComposite ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstantComposite)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSpecConstantComposite)
 		          cnst = new SPIRV.Constant
 		          cnst.Type = ConstantEnum.SpecComposite
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
@@ -377,45 +377,45 @@ Protected Class VirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 38 // ***** OpVariable ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpVariable)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpVariable)
 		          
 		        case 39 // ***** OpVariableArray ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpVariableArray)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpVariableArray)
 		          
 		        case 40 // ***** OpFunction ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFunction)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFunction)
 		          Functions.Value(ModuleBinary.UInt32Value(ip + 8)) = op
 		          
 		        case 41 // ***** OpFunctionParameter ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFunctionParameter)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFunctionParameter)
 		          
 		        case 42 // ***** OpFunctionEnd ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFunctionEnd)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFunctionEnd)
 		          
 		        case 43 // ***** OpFunctionCall ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFunctionCall)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFunctionCall)
 		          
 		        case 44 // ***** OpExtInst ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpExtInst)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpExtInst)
 		          
 		        case 45 // ***** OpUndef ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpUndef)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpUndef)
 		          
 		        case 46 // ***** OpLoad ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpLoad)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpLoad)
 		          
 		        case 47 // ***** OpStore ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpStore)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpStore)
 		          
 		        case 48 // ***** OpPhi ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpPhi)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpPhi)
 		          
 		        case 49 // ***** OpDecorationGroup ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpDecorationGroup)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpDecorationGroup)
 		          
 		        case 50 // ***** OpDecorate ***************************************************
 		          
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpDecorate)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpDecorate)
 		          dec = new SPIRV.Decoration
 		          dec.TargetID = ModuleBinary.UInt32Value(ip + 4)
 		          dec.Decoration = ModuleBinary.UInt32Value(ip + 8)
@@ -433,656 +433,656 @@ Protected Class VirtualMachine
 		          Decorations.Append dec
 		          
 		        case 51 // ***** OpMemberDecorate ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpMemberDecorate)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpMemberDecorate)
 		          
 		        case 52 // ***** OpGroupDecorate ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupDecorate)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupDecorate)
 		          
 		        case 53 // ***** OpGroupMemberDecorate ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupMemberDecorate)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupMemberDecorate)
 		          
 		        case 54 // ***** OpName ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpName)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpName)
 		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
 		          
 		        case 55 // ***** OpMemberName ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpMemberName)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpMemberName)
 		          
 		        case 56 // ***** OpString ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpString)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpString)
 		          
 		        case 57 // ***** OpLine ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpLine)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpLine)
 		          
 		        case 58 // ***** OpVectorExtractDynamic ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpVectorExtractDynamic)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpVectorExtractDynamic)
 		          
 		        case 59 // ***** OpVectorInsertDynamic ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpVectorInsertDynamic)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpVectorInsertDynamic)
 		          
 		        case 60 // ***** OpVectorShuffle ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpVectorShuffle)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpVectorShuffle)
 		          
 		        case 61 // ***** OpCompositeConstruct ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpCompositeConstruct)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpCompositeConstruct)
 		          
 		        case 62 // ***** OpCompositeExtract ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpCompositeExtract)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpCompositeExtract)
 		          
 		        case 63 // ***** OpCompositeInsert ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpCompositeInsert)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpCompositeInsert)
 		          
 		        case 64 // ***** OpCopyObject ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpCopyObject)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpCopyObject)
 		          
 		        case 65 // ***** OpCopyMemory ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpCopyMemory)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpCopyMemory)
 		          
 		        case 66 // ***** OpCopyMemorySized ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpCopyMemorySized)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpCopyMemorySized)
 		          
 		        case 67 // ***** OpSampler ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSampler)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSampler)
 		          
 		        case 68 // ***** OpTextureSample ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSample)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSample)
 		          
 		        case 69 // ***** OpTextureSampleDref ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleDref)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleDref)
 		          
 		        case 70 // ***** OpTextureSampleLod ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleLod)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleLod)
 		          
 		        case 71 // ***** OpTextureSampleProj ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleProj)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleProj)
 		          
 		        case 72 // ***** OpTextureSampleGrad ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleGrad)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleGrad)
 		          
 		        case 73 // ***** OpTextureSampleOffset ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleOffset)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleOffset)
 		          
 		        case 74 // ***** OpTextureSampleProjGrad ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleProjGrad)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleProjGrad)
 		          
 		        case 75 // ***** OpTextureSampleProjLod ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleProjLod)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleProjLod)
 		          
 		        case 76 // ***** OpTextureSampleLodOffset ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleLodOffset)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleLodOffset)
 		          
 		        case 77 // ***** OpTextureSampleProjOffset ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleProjOffset)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleProjOffset)
 		          
 		        case 78 // ***** OpTextureSampleGradOffset ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleGradOffset)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleGradOffset)
 		          
 		        case 79 // ***** OpTextureSampleProjLodOffset ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleProjLodOffset)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleProjLodOffset)
 		          
 		        case 80 // ***** OpTextureSampleProjGradOffset ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureSampleProjGradOffset)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleProjGradOffset)
 		          
 		        case 81 // ***** OpTextureFetchTexelLod ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureFetchTexelLod)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureFetchTexelLod)
 		          
 		        case 82 // ***** OpTextureFetchTexelOffset ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureFetchTexelOffset)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureFetchTexelOffset)
 		          
 		        case 83 // ***** OpTextureFetchSample ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureFetchSample)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureFetchSample)
 		          
 		        case 84 // ***** OpTextureFetchTexel ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureFetchTexel)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureFetchTexel)
 		          
 		        case 85 // ***** OpTextureGather ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureGather)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureGather)
 		          
 		        case 86 // ***** OpTextureGatherOffset ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureGatherOffset)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureGatherOffset)
 		          
 		        case 87 // ***** OpTextureGatherOffsets ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureGatherOffsets)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureGatherOffsets)
 		          
 		        case 88 // ***** OpTextureQuerySizeLod ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureQuerySizeLod)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureQuerySizeLod)
 		          
 		        case 89 // ***** OpTextureQuerySize ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureQuerySize)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureQuerySize)
 		          
 		        case 90 // ***** OpTextureQueryLod ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureQueryLod)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureQueryLod)
 		          
 		        case 91 // ***** OpTextureQueryLevels ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureQueryLevels)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureQueryLevels)
 		          
 		        case 92 // ***** OpTextureQuerySamples ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTextureQuerySamples)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureQuerySamples)
 		          
 		        case 93 // ***** OpAccessChain ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAccessChain)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAccessChain)
 		          
 		        case 94 // ***** OpInBoundsAccessChain ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpInBoundsAccessChain)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpInBoundsAccessChain)
 		          
 		        case 95 // ***** OpSNegate ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSNegate)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSNegate)
 		          
 		        case 96 // ***** OpFNegate ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFNegate)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFNegate)
 		          
 		        case 97 // ***** OpNot ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpNot)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpNot)
 		          
 		        case 98 // ***** OpAny ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAny)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAny)
 		          
 		        case 99 // ***** OpAll ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAll)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAll)
 		          
 		        case 100 // ***** OpConvertFToU ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConvertFToU)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConvertFToU)
 		          
 		        case 101 // ***** OpConvertFToS ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConvertFToS)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConvertFToS)
 		          
 		        case 102 // ***** OpConvertSToF ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConvertSToF)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConvertSToF)
 		          
 		        case 103 // ***** OpConvertUToF ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConvertUToF)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConvertUToF)
 		          
 		        case 104 // ***** OpUConvert ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpUConvert)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpUConvert)
 		          
 		        case 105 // ***** OpSConvert ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSConvert)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSConvert)
 		          
 		        case 106 // ***** OpFConvert ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFConvert)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFConvert)
 		          
 		        case 107 // ***** OpConvertPtrToU ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConvertPtrToU)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConvertPtrToU)
 		          
 		        case 108 // ***** OpConvertUToPtr ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConvertUToPtr)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpConvertUToPtr)
 		          
 		        case 109 // ***** OpPtrCastToGeneric ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpPtrCastToGeneric)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpPtrCastToGeneric)
 		          
 		        case 110 // ***** OpGenericCastToPtr ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGenericCastToPtr)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGenericCastToPtr)
 		          
 		        case 111 // ***** OpBitcast ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpBitcast)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpBitcast)
 		          
 		        case 112 // ***** OpTranspose ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTranspose)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTranspose)
 		          
 		        case 113 // ***** OpIsNan ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpIsNan)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpIsNan)
 		          
 		        case 114 // ***** OpIsInf ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpIsInf)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpIsInf)
 		          
 		        case 115 // ***** OpIsFinite ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpIsFinite)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpIsFinite)
 		          
 		        case 116 // ***** OpIsNormal ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpIsNormal)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpIsNormal)
 		          
 		        case 117 // ***** OpSignBitSet ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSignBitSet)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSignBitSet)
 		          
 		        case 118 // ***** OpLessOrGreater ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpLessOrGreater)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpLessOrGreater)
 		          
 		        case 119 // ***** OpOrdered ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpOrdered)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpOrdered)
 		          
 		        case 120 // ***** OpUnordered ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpUnordered)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpUnordered)
 		          
 		        case 121 // ***** OpArrayLength ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpArrayLength)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpArrayLength)
 		          
 		        case 122 // ***** OpIAdd ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpIAdd)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpIAdd)
 		          
 		        case 123 // ***** OpFAdd ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFAdd)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFAdd)
 		          
 		        case 124 // ***** OpISub ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpISub)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpISub)
 		          
 		        case 125 // ***** OpFSub ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFSub)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFSub)
 		          
 		        case 126 // ***** OpIMul ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpIMul)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpIMul)
 		          
 		        case 127 // ***** OpFMul ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFMul)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFMul)
 		          
 		        case 128 // ***** OpUDiv ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpUDiv)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpUDiv)
 		          
 		        case 129 // ***** OpSDiv ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSDiv)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSDiv)
 		          
 		        case 130 // ***** OpFDiv ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFDiv)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFDiv)
 		          
 		        case 131 // ***** OpUMod ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpUMod)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpUMod)
 		          
 		        case 132 // ***** OpSRem ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSRem)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSRem)
 		          
 		        case 133 // ***** OpSMod ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSMod)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSMod)
 		          
 		        case 134 // ***** OpFRem ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFRem)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFRem)
 		          
 		        case 135 // ***** OpFMul ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFMul)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFMul)
 		          
 		        case 136 // ***** OpVectorTimesScalar ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpVectorTimesScalar)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpVectorTimesScalar)
 		          
 		        case 137 // ***** OpMatrixTimesScalar ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpMatrixTimesScalar)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpMatrixTimesScalar)
 		          
 		        case 138 // ***** OpVectorTimesMatrix ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpVectorTimesMatrix)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpVectorTimesMatrix)
 		          
 		        case 139 // ***** OpMatrixTimesVector ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpMatrixTimesVector)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpMatrixTimesVector)
 		          
 		        case 140 // ***** OpMatrixTimesMatrix ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpMatrixTimesMatrix)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpMatrixTimesMatrix)
 		          
 		        case 141 // ***** OpOuterProduct ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpOuterProduct)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpOuterProduct)
 		          
 		        case 142 // ***** OpDot ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpDot)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpDot)
 		          
 		        case 143 // ***** OpShiftRightLogical ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpShiftRightLogical)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpShiftRightLogical)
 		          
 		        case 144 // ***** OpShiftRightArithmetic ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpShiftRightArithmetic)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpShiftRightArithmetic)
 		          
 		        case 145 // ***** OpShiftLeftLogical ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpShiftLeftLogical)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpShiftLeftLogical)
 		          
 		        case 146 // ***** OpLogicalOr ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpLogicalOr)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpLogicalOr)
 		          
 		        case 147 // ***** OpLogicalXor ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpLogicalXor)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpLogicalXor)
 		          
 		        case 148 // ***** OpLogicalAnd ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpLogicalAnd)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpLogicalAnd)
 		          
 		        case 149 // ***** OpBitwiseOr ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpBitwiseOr)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpBitwiseOr)
 		          
 		        case 150 // ***** OpBitwiseXor ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpBitwiseXor)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpBitwiseXor)
 		          
 		        case 151 // ***** OpBitwiseAnd ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpBitwiseAnd)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpBitwiseAnd)
 		          
 		        case 152 // ***** OpSelect ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSelect)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSelect)
 		          
 		        case 153 // ***** OpIEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpIEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpIEqual)
 		          
 		        case 154 // ***** OpFOrdEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFOrdEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFOrdEqual)
 		          
 		        case 155 // ***** OpFUnordEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFUnordEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFUnordEqual)
 		          
 		        case 156 // ***** OpINotEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpINotEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpINotEqual)
 		          
 		        case 157 // ***** OpFOrdNotEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFOrdNotEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFOrdNotEqual)
 		          
 		        case 158 // ***** OpFUnordNotEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFUnordNotEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFUnordNotEqual)
 		          
 		        case 159 // ***** OpULessThan ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpULessThan)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpULessThan)
 		          
 		        case 160 // ***** OpSLessThan ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSLessThan)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSLessThan)
 		          
 		        case 161 // ***** OpFOrdLessThan ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFOrdLessThan)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFOrdLessThan)
 		          
 		        case 162 // ***** OpFUnordLessThan ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFUnordLessThan)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFUnordLessThan)
 		          
 		        case 163 // ***** OpUGreaterThan ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpUGreaterThan)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpUGreaterThan)
 		          
 		        case 164 // ***** OpSGreaterThan ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSGreaterThan)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSGreaterThan)
 		          
 		        case 165 // ***** OpFOrdGreaterThan ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFOrdGreaterThan)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFOrdGreaterThan)
 		          
 		        case 166 // ***** OpFUnordGreaterThan ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFUnordGreaterThan)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFUnordGreaterThan)
 		          
 		        case 167 // ***** OpULessThanEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpULessThanEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpULessThanEqual)
 		          
 		        case 168 // ***** OpSLessThanEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSLessThanEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSLessThanEqual)
 		          
 		        case 169 // ***** OpFOrdLessThanEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFOrdLessThanEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFOrdLessThanEqual)
 		          
 		        case 170 // ***** OpFUnordLessThanEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFUnordLessThanEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFUnordLessThanEqual)
 		          
 		        case 171 // ***** OpUGreaterThanEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpUGreaterThanEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpUGreaterThanEqual)
 		          
 		        case 172 // ***** OpSGreaterThanEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSGreaterThanEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSGreaterThanEqual)
 		          
 		        case 173 // ***** OpFOrdGreaterThanEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFOrdGreaterThanEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFOrdGreaterThanEqual)
 		          
 		        case 174 // ***** OpFUnordGreaterThanEqual ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFUnordGreaterThanEqual)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFUnordGreaterThanEqual)
 		          
 		        case 175 // ***** OpDPdx ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpDPdx)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpDPdx)
 		          
 		        case 176 // ***** OpDPdy ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpDPdy)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpDPdy)
 		          
 		        case 177 // ***** OpFwidth ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFwidth)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFwidth)
 		          
 		        case 178 // ***** OpDPdxFine ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpDPdxFine)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpDPdxFine)
 		          
 		        case 179 // ***** OpDPdyFine ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpDPdyFine)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpDPdyFine)
 		          
 		        case 180 // ***** OpFwidthFine ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFwidthFine)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFwidthFine)
 		          
 		        case 181 // ***** OpDPdxCoarse ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpDPdxCoarse)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpDPdxCoarse)
 		          
 		        case 182 // ***** OpDPdyCoarse ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpDPdyCoarse)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpDPdyCoarse)
 		          
 		        case 183 // ***** OpFwidthCoarse ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpFwidthCoarse)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpFwidthCoarse)
 		          
 		        case 184 // ***** OpEmitVertex ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpEmitVertex)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpEmitVertex)
 		          
 		        case 185 // ***** OpEndPrimitive ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpEndPrimitive)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpEndPrimitive)
 		          
 		        case 186 // ***** OpEmitStreamVertex ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpEmitStreamVertex)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpEmitStreamVertex)
 		          
 		        case 187 // ***** OpEndStreamPrimitive ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpEndStreamPrimitive)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpEndStreamPrimitive)
 		          
 		        case 188 // ***** OpControlBarrier ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpControlBarrier)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpControlBarrier)
 		          
 		        case 189 // ***** OpMemoryBarrier ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpMemoryBarrier)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpMemoryBarrier)
 		          
 		        case 190 // ***** OpImagePointer ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpImagePointer)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpImagePointer)
 		          
 		        case 191 // ***** OpAtomicInit ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicInit)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicInit)
 		          
 		        case 192 // ***** OpAtomicLoad ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicLoad)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicLoad)
 		          
 		        case 193 // ***** OpAtomicStore ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicStore)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicStore)
 		          
 		        case 194 // ***** OpAtomicExchange ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicExchange)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicExchange)
 		          
 		        case 195 // ***** OpAtomicCompareExchange ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicCompareExchange)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicCompareExchange)
 		          
 		        case 196 // ***** OpAtomicCompareExchangeWeak ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicCompareExchangeWeak)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicCompareExchangeWeak)
 		          
 		        case 197 // ***** OpAtomicIIncrement ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicIIncrement)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicIIncrement)
 		          
 		        case 198 // ***** OpAtomicIDecrement ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicIDecrement)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicIDecrement)
 		          
 		        case 199 // ***** OpAtomicIAdd ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicIAdd)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicIAdd)
 		          
 		        case 200 // ***** OpAtomicISub ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicISub)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicISub)
 		          
 		        case 201 // ***** OpAtomicUMin ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicUMin)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicUMin)
 		          
 		        case 202 // ***** OpAtomicUMax ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicUMax)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicUMax)
 		          
 		        case 203 // ***** OpAtomicAnd ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicAnd)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicAnd)
 		          
 		        case 204 // ***** OpAtomicOr ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicOr)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicOr)
 		          
 		        case 205 // ***** OpAtomicXor ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicXor)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicXor)
 		          
 		        case 206 // ***** OpLoopMerge ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpLoopMerge)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpLoopMerge)
 		          
 		        case 207 // ***** OpSelectionMerge ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSelectionMerge)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSelectionMerge)
 		          
 		        case 208 // ***** OpLabel ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpLabel)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpLabel)
 		          
 		        case 209 // ***** OpBranch ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpBranch)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpBranch)
 		          
 		        case 210 // ***** OpBranchConditional ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpBranchConditional)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpBranchConditional)
 		          
 		        case 211 // ***** OpSwitch ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSwitch)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSwitch)
 		          
 		        case 212 // ***** OpKill ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpKill)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpKill)
 		          
 		        case 213 // ***** OpReturn ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpReturn)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpReturn)
 		          
 		        case 214 // ***** OpReturnValue ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpReturnValue)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpReturnValue)
 		          
 		        case 215 // ***** OpUnreachable ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpUnreachable)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpUnreachable)
 		          
 		        case 216 // ***** OpLifetimeStart ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpLifetimeStart)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpLifetimeStart)
 		          
 		        case 217 // ***** OpLifetimeStop ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpLifetimeStop)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpLifetimeStop)
 		          
 		        case 218 // ***** OpCompileFlag ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpCompileFlag)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpCompileFlag)
 		          
 		        case 219 // ***** OpAsyncGroupCopy ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAsyncGroupCopy)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAsyncGroupCopy)
 		          
 		        case 220 // ***** OpWaitGroupEvents ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpWaitGroupEvents)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpWaitGroupEvents)
 		          
 		        case 221 // ***** OpGroupAll ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupAll)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupAll)
 		          
 		        case 222 // ***** OpGroupAny ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupAny)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupAny)
 		          
 		        case 223 // ***** OpGroupBroadcast ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupBroadcast)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupBroadcast)
 		          
 		        case 224 // ***** OpGroupIAdd ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupIAdd)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupIAdd)
 		          
 		        case 225 // ***** OpGroupFAdd ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupFAdd)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupFAdd)
 		          
 		        case 226 // ***** OpGroupFMin ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupFMin)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupFMin)
 		          
 		        case 227 // ***** OpGroupUMin ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupUMin)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupUMin)
 		          
 		        case 228 // ***** OpGroupSMin ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupSMin)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupSMin)
 		          
 		        case 229 // ***** OpGroupFMax ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupFMax)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupFMax)
 		          
 		        case 230 // ***** OpGroupUMax ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupUMax)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupUMax)
 		          
 		        case 231 // ***** OpGroupSMax ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupSMax)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupSMax)
 		          
 		        case 232 // ***** OpGenericCastToPtrExplicit ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGenericCastToPtrExplicit)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGenericCastToPtrExplicit)
 		          
 		        case 233 // ***** OpGenericPtrMemSemantics ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGenericPtrMemSemantics)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGenericPtrMemSemantics)
 		          
 		        case 234 // ***** OpReadPipe ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpReadPipe)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpReadPipe)
 		          
 		        case 235 // ***** OpWritePipe ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpWritePipe)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpWritePipe)
 		          
 		        case 236 // ***** OpReservedReadPipe ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpReservedReadPipe)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpReservedReadPipe)
 		          
 		        case 237 // ***** OpReservedWritePipe ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpReservedWritePipe)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpReservedWritePipe)
 		          
 		        case 238 // ***** OpReserveReadPipePackets ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpReserveReadPipePackets)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpReserveReadPipePackets)
 		          
 		        case 239 // ***** OpReserveWritePipePackets ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpReserveWritePipePackets)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpReserveWritePipePackets)
 		          
 		        case 240 // ***** OpCommitReadPipe ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpCommitReadPipe)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpCommitReadPipe)
 		          
 		        case 241 // ***** OpCommitWritePipe ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpCommitWritePipe)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpCommitWritePipe)
 		          
 		        case 242 // ***** OpIsValidReserveId ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpIsValidReserveId)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpIsValidReserveId)
 		          
 		        case 243 // ***** OpGetNumPipePackets ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGetNumPipePackets)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGetNumPipePackets)
 		          
 		        case 244 // ***** OpGetMaxPipePackets ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGetMaxPipePackets)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGetMaxPipePackets)
 		          
 		        case 245 // ***** OpGroupReserveReadPipePackets ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupReserveReadPipePackets)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupReserveReadPipePackets)
 		          
 		        case 246 // ***** OpGroupReserveWritePipePackets ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupReserveWritePipePackets)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupReserveWritePipePackets)
 		          
 		        case 247 // ***** OpGroupCommitReadPipe ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupCommitReadPipe)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupCommitReadPipe)
 		          
 		        case 248 // ***** OpGroupCommitWritePipe ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGroupCommitWritePipe)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGroupCommitWritePipe)
 		          
 		        case 249 // ***** OpEnqueueMarker ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpEnqueueMarker)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpEnqueueMarker)
 		          
 		        case 250 // ***** OpEnqueueKernel ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpEnqueueKernel)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpEnqueueKernel)
 		          
 		        case 251 // ***** OpGetKernelNDrangeSubGroupCount ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGetKernelNDrangeSubGroupCount)
 		          
 		        case 252 // ***** OpGetKernelNDrangeMaxSubGroupSize ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGetKernelNDrangeMaxSubGroupSize)
 		          
 		        case 253 // ***** OpGetKernelWorkGroupSize ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGetKernelWorkGroupSize)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGetKernelWorkGroupSize)
 		          
 		        case 254 // ***** OpGetKernelPreferredWorkGroupSizeMultiple ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGetKernelPreferredWorkGroupSizeMultiple)
 		          
 		        case 255 // ***** OpRetainEvent ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpRetainEvent)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpRetainEvent)
 		          
 		        case 256 // ***** OpReleaseEvent ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpReleaseEvent)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpReleaseEvent)
 		          
 		        case 257 // ***** OpCreateUserEvent ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpCreateUserEvent)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpCreateUserEvent)
 		          
 		        case 258 // ***** OpIsValidEvent ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpIsValidEvent)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpIsValidEvent)
 		          
 		        case 259 // ***** OpSetUserEventStatus ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSetUserEventStatus)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSetUserEventStatus)
 		          
 		        case 260 // ***** OpCaptureEventProfilingInfo ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpCaptureEventProfilingInfo)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpCaptureEventProfilingInfo)
 		          
 		        case 261 // ***** OpGetDefaultQueue ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpGetDefaultQueue)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpGetDefaultQueue)
 		          
 		        case 262 // ***** OpBuildNDRange ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpBuildNDRange)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpBuildNDRange)
 		          
 		        case 263 // ***** OpSatConvertSToU ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSatConvertSToU)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSatConvertSToU)
 		          
 		        case 264 // ***** OpSatConvertUToS ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSatConvertUToS)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpSatConvertUToS)
 		          
 		        case 265 // ***** OpAtomicIMin ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicIMin)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicIMin)
 		          
 		        case 266 // ***** OpAtomicIMax ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpAtomicIMax)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpAtomicIMax)
 		          
 		        case else
-		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.Unknown)
+		          op = new SPIRV.Opcode(self, OpcodeEnum.Unknown)
 		          
 		          Errors.Append ("ERROR [" + Str(ip) + "]: Unknown opcode.")
 		          
@@ -1160,7 +1160,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAccessChain ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAccessChain
+		    case OpcodeEnum.OpAccessChain
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1168,7 +1168,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAll ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAll
+		    case OpcodeEnum.OpAll
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1182,7 +1182,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAny ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAny
+		    case OpcodeEnum.OpAny
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1196,7 +1196,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpArrayLength ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpArrayLength
+		    case OpcodeEnum.OpArrayLength
 		      validate_WordCountMinimum(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1206,7 +1206,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAsyncGroupCopy ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAsyncGroupCopy
+		    case OpcodeEnum.OpAsyncGroupCopy
 		      validate_WordCountEqual(op, 9)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1230,7 +1230,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicAnd ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicAnd
+		    case OpcodeEnum.OpAtomicAnd
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1246,7 +1246,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicCompareExchange ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicCompareExchange
+		    case OpcodeEnum.OpAtomicCompareExchange
 		      validate_WordCountEqual(op, 8)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1263,7 +1263,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicCompareExchangeWeak ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicCompareExchangeWeak
+		    case OpcodeEnum.OpAtomicCompareExchangeWeak
 		      validate_WordCountEqual(op, 8)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1280,7 +1280,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicExchange ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicExchange
+		    case OpcodeEnum.OpAtomicExchange
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1296,7 +1296,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicIAdd ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicIAdd
+		    case OpcodeEnum.OpAtomicIAdd
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1312,7 +1312,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicIDecrement ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicIDecrement
+		    case OpcodeEnum.OpAtomicIDecrement
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1327,7 +1327,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicIIncrement ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicIIncrement
+		    case OpcodeEnum.OpAtomicIIncrement
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1342,7 +1342,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicInit ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicInit
+		    case OpcodeEnum.OpAtomicInit
 		      validate_WordCountEqual(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Pointer ID out of bounds.", "Pointer ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Value ID out of bounds.", "Value ID not found.")
@@ -1350,7 +1350,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicIMax ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicIMax
+		    case OpcodeEnum.OpAtomicIMax
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1366,7 +1366,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicIMin ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicIMin
+		    case OpcodeEnum.OpAtomicIMin
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1382,7 +1382,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicISub ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicISub
+		    case OpcodeEnum.OpAtomicISub
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1398,7 +1398,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicLoad ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicLoad
+		    case OpcodeEnum.OpAtomicLoad
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1413,7 +1413,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicOr ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicOr
+		    case OpcodeEnum.OpAtomicOr
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1429,7 +1429,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicStore ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicStore
+		    case OpcodeEnum.OpAtomicStore
 		      validate_WordCountEqual(op, 5)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Pointer ID out of bounds.", "Pointer ID not found.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 3 then
@@ -1443,7 +1443,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicUMax ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicUMax
+		    case OpcodeEnum.OpAtomicUMax
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1459,7 +1459,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicUMin ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicUMin
+		    case OpcodeEnum.OpAtomicUMin
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1475,7 +1475,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpAtomicXor ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpAtomicXor
+		    case OpcodeEnum.OpAtomicXor
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1491,7 +1491,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpBitcast ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpBitcast
+		    case OpcodeEnum.OpBitcast
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1503,7 +1503,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpBitwiseAnd ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpBitwiseAnd
+		    case OpcodeEnum.OpBitwiseAnd
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1513,7 +1513,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpBitwiseOr ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpBitwiseOr
+		    case OpcodeEnum.OpBitwiseOr
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1523,7 +1523,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpBitwiseXor ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpBitwiseXor
+		    case OpcodeEnum.OpBitwiseXor
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1533,13 +1533,13 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpBranch ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpBranch
+		    case OpcodeEnum.OpBranch
 		      validate_WordCountEqual(op, 2)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target Label ID out of bounds.", "Target Label ID not declared.")
 		      
 		      ' ***** OpBranchConditional ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpBranchConditional
+		    case OpcodeEnum.OpBranchConditional
 		      validate_WordCountMinimum(op, 4)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Condition ID out of bounds.", "Condition ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "True Label ID out of bounds.", "True Label ID not declared.")
@@ -1547,7 +1547,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpBuildNDRange ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpBuildNDRange
+		    case OpcodeEnum.OpBuildNDRange
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1563,7 +1563,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpCaptureEventProfilingInfo ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpCaptureEventProfilingInfo
+		    case OpcodeEnum.OpCaptureEventProfilingInfo
 		      validate_WordCountEqual(op, 4)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "event ID out of bounds.", "event ID not declared.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 1 then
@@ -1575,7 +1575,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpCommitReadPipe ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpCommitReadPipe
+		    case OpcodeEnum.OpCommitReadPipe
 		      validate_WordCountEqual(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "p ID out of bounds.", "p ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "reserve_id ID out of bounds.", "reserve_id ID not declared.")
@@ -1584,7 +1584,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpCommitWritePipe ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpCommitWritePipe
+		    case OpcodeEnum.OpCommitWritePipe
 		      validate_WordCountEqual(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "p ID out of bounds.", "p ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "reserve_id ID out of bounds.", "reserve_id ID not declared.")
@@ -1593,13 +1593,13 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpCompileFlag ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpCompileFlag
+		    case OpcodeEnum.OpCompileFlag
 		      validate_WordCountMinimum(op, 1)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not found.")
 		      
 		      ' ***** OpCompositeConstruct ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpCompositeConstruct
+		    case OpcodeEnum.OpCompositeConstruct
 		      validate_WordCountMinimum(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1614,7 +1614,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpCompositeExtract ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpCompositeExtract
+		    case OpcodeEnum.OpCompositeExtract
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1623,7 +1623,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpCompositeInsert ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpCompositeInsert
+		    case OpcodeEnum.OpCompositeInsert
 		      validate_WordCountMinimum(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1632,7 +1632,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpConstant ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConstant
+		    case OpcodeEnum.OpConstant
 		      validate_WordCountMinimum(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
@@ -1648,7 +1648,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpConstantComposite ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConstantComposite
+		    case OpcodeEnum.OpConstantComposite
 		      validate_WordCountMinimum(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1663,7 +1663,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpConstantFalse ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConstantFalse
+		    case OpcodeEnum.OpConstantFalse
 		      validate_WordCountEqual(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1676,21 +1676,21 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpConstantNullObject ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConstantNullObject
+		    case OpcodeEnum.OpConstantNullObject
 		      validate_WordCountEqual(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      
 		      ' ***** OpConstantNullPointer ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConstantNullPointer
+		    case OpcodeEnum.OpConstantNullPointer
 		      validate_WordCountEqual(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      
 		      ' ***** OpConstantSampler ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConstantSampler
+		    case OpcodeEnum.OpConstantSampler
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1706,7 +1706,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpConstantTrue ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConstantTrue
+		    case OpcodeEnum.OpConstantTrue
 		      validate_WordCountEqual(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1719,7 +1719,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpControlBarrier ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpControlBarrier
+		    case OpcodeEnum.OpControlBarrier
 		      validate_WordCountEqual(op, 2)
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 3 then
 		        logError op, "Invalid Execution Scope enumeration value."
@@ -1728,7 +1728,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpConvertFToS ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConvertFToS
+		    case OpcodeEnum.OpConvertFToS
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1737,7 +1737,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpConvertFToU ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConvertFToU
+		    case OpcodeEnum.OpConvertFToU
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1747,7 +1747,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpConvertPtrToU ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConvertPtrToU
+		    case OpcodeEnum.OpConvertPtrToU
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1756,7 +1756,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpConvertSToF ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConvertSToF
+		    case OpcodeEnum.OpConvertSToF
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1765,7 +1765,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpConvertUToF ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConvertUToF
+		    case OpcodeEnum.OpConvertUToF
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1774,7 +1774,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpConvertUToPtr ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpConvertUToPtr
+		    case OpcodeEnum.OpConvertUToPtr
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1782,7 +1782,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpCopyMemory ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpCopyMemory
+		    case OpcodeEnum.OpCopyMemory
 		      validate_WordCountMinimum(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Source ID out of bounds.", "Source ID not declared.")
@@ -1797,7 +1797,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpCopyMemorySized ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpCopyMemorySized
+		    case OpcodeEnum.OpCopyMemorySized
 		      validate_WordCountMinimum(op, 4)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Source ID out of bounds.", "Source ID not declared.")
@@ -1812,7 +1812,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpCopyObject ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpCopyObject
+		    case OpcodeEnum.OpCopyObject
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1820,7 +1820,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpCreateUserEvent ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpCreateUserEvent
+		    case OpcodeEnum.OpCreateUserEvent
 		      validate_WordCountEqual(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1828,7 +1828,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpDecorate ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpDecorate
+		    case OpcodeEnum.OpDecorate
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not declared.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 44 then
 		        logError op, "Invalid Decoration enumeration value."
@@ -1868,13 +1868,13 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpDecorationGroup ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpDecorationGroup
+		    case OpcodeEnum.OpDecorationGroup
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpDot ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpDot
+		    case OpcodeEnum.OpDot
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1885,7 +1885,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpDPdx ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpDPdx
+		    case OpcodeEnum.OpDPdx
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1894,7 +1894,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpDPdxCoarse ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpDPdxCoarse
+		    case OpcodeEnum.OpDPdxCoarse
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1903,7 +1903,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpDPdxFine ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpDPdxFine
+		    case OpcodeEnum.OpDPdxFine
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1912,7 +1912,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpDPdy ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpDPdy
+		    case OpcodeEnum.OpDPdy
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1921,7 +1921,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpDPdyCoarse ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpDPdyCoarse
+		    case OpcodeEnum.OpDPdyCoarse
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1930,7 +1930,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpDPdyFine ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpDPdyFine
+		    case OpcodeEnum.OpDPdyFine
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -1939,7 +1939,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpEmitStreamVertex ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpEmitStreamVertex
+		    case OpcodeEnum.OpEmitStreamVertex
 		      validate_WordCountEqual(op, 2)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Stream ID out of bounds.", "Stream ID not found.")
 		      // todo: Stream must be an <id> of a constant instruction with a scalar integer type.
@@ -1947,17 +1947,17 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpEmitVertex ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpEmitVertex
+		    case OpcodeEnum.OpEmitVertex
 		      validate_WordCountEqual(op, 1)
 		      
 		      ' ***** OpEndPrimitive ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpEndPrimitive
+		    case OpcodeEnum.OpEndPrimitive
 		      validate_WordCountEqual(op, 1)
 		      
 		      ' ***** OpEndStreamPrimitive ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpEndStreamPrimitive
+		    case OpcodeEnum.OpEndStreamPrimitive
 		      validate_WordCountEqual(op, 2)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Stream ID out of bounds.", "Stream ID not found.")
 		      // todo: Stream must be an <id> of a constant instruction with a scalar integer type.
@@ -1965,7 +1965,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpEnqueueKernel ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpEnqueueKernel
+		    case OpcodeEnum.OpEnqueueKernel
 		      validate_WordCountMinimum(op, 13)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2006,7 +2006,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpEnqueueMarker ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpEnqueueMarker
+		    case OpcodeEnum.OpEnqueueMarker
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2021,7 +2021,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpEntryPoint ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpEntryPoint
+		    case OpcodeEnum.OpEntryPoint
 		      validate_WordCountEqual(op, 3)
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 6 then
 		        logError op, "Invalid Execution Model enumeration value."
@@ -2030,7 +2030,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpExecutionMode ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpExecutionMode
+		    case OpcodeEnum.OpExecutionMode
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Entry Point ID out of bounds.", "Entry Point ID not declared.")
 		      if not EntryPoints.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
 		        logError op, "Entry Point not declared."
@@ -2054,7 +2054,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpExtension ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpExtension
+		    case OpcodeEnum.OpExtension
 		      validate_WordCountMinimum(op, 1)
 		      if Trim(ModuleBinary.CString(op.Offset + 4)) = "" then
 		        logError op, "Invalid name."
@@ -2062,7 +2062,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpExtInst ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpExtInst
+		    case OpcodeEnum.OpExtInst
 		      validate_WordCountMinimum(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2078,7 +2078,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpExtInstImport ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpExtInstImport
+		    case OpcodeEnum.OpExtInstImport
 		      validate_WordCountMinimum(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
@@ -2087,7 +2087,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFAdd ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFAdd
+		    case OpcodeEnum.OpFAdd
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2097,7 +2097,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFConvert ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFConvert
+		    case OpcodeEnum.OpFConvert
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2107,7 +2107,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFDiv ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFDiv
+		    case OpcodeEnum.OpFDiv
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2117,7 +2117,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFMod ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFMod
+		    case OpcodeEnum.OpFMod
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2127,7 +2127,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFMul ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFMul
+		    case OpcodeEnum.OpFMul
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2137,7 +2137,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFNegate ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFNegate
+		    case OpcodeEnum.OpFNegate
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2146,7 +2146,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFOrdEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFOrdEqual
+		    case OpcodeEnum.OpFOrdEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2156,7 +2156,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFOrdGreaterThan ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFOrdGreaterThan
+		    case OpcodeEnum.OpFOrdGreaterThan
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2166,7 +2166,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFOrdGreaterThanEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFOrdGreaterThanEqual
+		    case OpcodeEnum.OpFOrdGreaterThanEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2177,7 +2177,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFOrdLessThan ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFOrdLessThan
+		    case OpcodeEnum.OpFOrdLessThan
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2187,7 +2187,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFOrdLessThanEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFOrdLessThanEqual
+		    case OpcodeEnum.OpFOrdLessThanEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2197,7 +2197,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFOrdNotEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFOrdNotEqual
+		    case OpcodeEnum.OpFOrdNotEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2207,7 +2207,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFRem ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFRem
+		    case OpcodeEnum.OpFRem
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2217,7 +2217,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFSub ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFSub
+		    case OpcodeEnum.OpFSub
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2226,7 +2226,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFunction ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFunction
+		    case OpcodeEnum.OpFunction
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2243,7 +2243,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFunctionCall ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFunctionCall
+		    case OpcodeEnum.OpFunctionCall
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2259,19 +2259,19 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFunctionEnd ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFunctionEnd
+		    case OpcodeEnum.OpFunctionEnd
 		      validate_WordCountEqual(op, 1)
 		      
 		      ' ***** OpFunctionParameter ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFunctionParameter
+		    case OpcodeEnum.OpFunctionParameter
 		      validate_WordCountEqual(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      
 		      ' ***** OpFUnordEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFUnordEqual
+		    case OpcodeEnum.OpFUnordEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2281,7 +2281,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFUnordGreaterThan ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFUnordGreaterThan
+		    case OpcodeEnum.OpFUnordGreaterThan
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2291,7 +2291,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFUnordGreaterThanEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFUnordGreaterThanEqual
+		    case OpcodeEnum.OpFUnordGreaterThanEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2301,7 +2301,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFUnordLessThan ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFUnordLessThan
+		    case OpcodeEnum.OpFUnordLessThan
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2311,7 +2311,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFUnordLessThanEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFUnordLessThanEqual
+		    case OpcodeEnum.OpFUnordLessThanEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2322,7 +2322,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFUnordNotEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFUnordNotEqual
+		    case OpcodeEnum.OpFUnordNotEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2332,7 +2332,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFwidth ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFwidth
+		    case OpcodeEnum.OpFwidth
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2341,7 +2341,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFwidthCoarse ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFwidthCoarse
+		    case OpcodeEnum.OpFwidthCoarse
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2350,7 +2350,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpFwidthFine ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpFwidthFine
+		    case OpcodeEnum.OpFwidthFine
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2359,7 +2359,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGenericCastToPtr ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGenericCastToPtr
+		    case OpcodeEnum.OpGenericCastToPtr
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2370,7 +2370,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGenericCastToPtrExplicit ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGenericCastToPtrExplicit
+		    case OpcodeEnum.OpGenericCastToPtrExplicit
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2383,7 +2383,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGenericPtrMemSemantics ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGenericPtrMemSemantics
+		    case OpcodeEnum.OpGenericPtrMemSemantics
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2393,7 +2393,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGetDefaultQueue ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGetDefaultQueue
+		    case OpcodeEnum.OpGetDefaultQueue
 		      validate_WordCountEqual(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2401,7 +2401,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGetKernelNDrangeMaxSubGroupSize ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize
+		    case OpcodeEnum.OpGetKernelNDrangeMaxSubGroupSize
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2416,7 +2416,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGetKernelNDrangeSubGroupCount ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount
+		    case OpcodeEnum.OpGetKernelNDrangeSubGroupCount
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2431,7 +2431,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGetKernelPreferredWorkGroupSizeMultiple ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple
+		    case OpcodeEnum.OpGetKernelPreferredWorkGroupSizeMultiple
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2444,7 +2444,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGetKernelWorkGroupSize ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGetKernelWorkGroupSize
+		    case OpcodeEnum.OpGetKernelWorkGroupSize
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2457,7 +2457,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGetMaxPipePackets ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGetMaxPipePackets
+		    case OpcodeEnum.OpGetMaxPipePackets
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2467,7 +2467,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGetNumPipePackets ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGetNumPipePackets
+		    case OpcodeEnum.OpGetNumPipePackets
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2477,7 +2477,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupAll ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupAll
+		    case OpcodeEnum.OpGroupAll
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2492,7 +2492,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupAny ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupAny
+		    case OpcodeEnum.OpGroupAny
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2507,7 +2507,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupBroadcast ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupBroadcast
+		    case OpcodeEnum.OpGroupBroadcast
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2525,7 +2525,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupCommitReadPipe ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupCommitReadPipe
+		    case OpcodeEnum.OpGroupCommitReadPipe
 		      validate_WordCountEqual(op, 4)
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 3 then
 		        logError op, "Invalid Execution Scope enumeration value."
@@ -2540,7 +2540,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupCommitWritePipe ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupCommitWritePipe
+		    case OpcodeEnum.OpGroupCommitWritePipe
 		      validate_WordCountEqual(op, 4)
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 3 then
 		        logError op, "Invalid Execution Scope enumeration value."
@@ -2555,7 +2555,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupDecorate ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupDecorate
+		    case OpcodeEnum.OpGroupDecorate
 		      validate_WordCountMinimum(op, 2)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Decoration Group ID out of bounds.", "Decoration Group ID not found.")
 		      ub = op.Offset + (op.WordCount * 4)
@@ -2569,7 +2569,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupFAdd ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupFAdd
+		    case OpcodeEnum.OpGroupFAdd
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2587,7 +2587,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupFMax ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupFMax
+		    case OpcodeEnum.OpGroupFMax
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2605,7 +2605,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupFMin ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupFMin
+		    case OpcodeEnum.OpGroupFMin
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2623,7 +2623,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupIAdd ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupIAdd
+		    case OpcodeEnum.OpGroupIAdd
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2641,7 +2641,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupReserveReadPipePackets ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupReserveReadPipePackets
+		    case OpcodeEnum.OpGroupReserveReadPipePackets
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2659,7 +2659,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupReserveWritePipePackets ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupReserveWritePipePackets
+		    case OpcodeEnum.OpGroupReserveWritePipePackets
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2677,7 +2677,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupSMax ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupSMax
+		    case OpcodeEnum.OpGroupSMax
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2695,7 +2695,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupSMin ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupSMin
+		    case OpcodeEnum.OpGroupSMin
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2713,7 +2713,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupUMax ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupUMax
+		    case OpcodeEnum.OpGroupUMax
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2731,7 +2731,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupUMin ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupUMin
+		    case OpcodeEnum.OpGroupUMin
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2749,7 +2749,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpGroupMemberDecorate ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpGroupMemberDecorate
+		    case OpcodeEnum.OpGroupMemberDecorate
 		      validate_WordCountMinimum(op, 2)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Decoration Group ID out of bounds.", "Decoration Group ID not found.")
 		      j = op.Offset + 8
@@ -2762,7 +2762,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpIAdd ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpIAdd
+		    case OpcodeEnum.OpIAdd
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2772,7 +2772,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpIEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpIEqual
+		    case OpcodeEnum.OpIEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2782,7 +2782,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpImagePointer ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpImagePointer
+		    case OpcodeEnum.OpImagePointer
 		      validate_WordCountMinimum(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2793,7 +2793,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpIMul ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpIMul
+		    case OpcodeEnum.OpIMul
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2803,7 +2803,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpInBoundsAccessChain ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpInBoundsAccessChain
+		    case OpcodeEnum.OpInBoundsAccessChain
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2811,7 +2811,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpINotEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpINotEqual
+		    case OpcodeEnum.OpINotEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2822,7 +2822,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpIsFinite ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpIsFinite
+		    case OpcodeEnum.OpIsFinite
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2832,7 +2832,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpIsInf ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpIsInf
+		    case OpcodeEnum.OpIsInf
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2842,7 +2842,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpIsNan ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpIsNan
+		    case OpcodeEnum.OpIsNan
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2852,7 +2852,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpIsNormal ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpIsNormal
+		    case OpcodeEnum.OpIsNormal
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2862,7 +2862,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpISub ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpISub
+		    case OpcodeEnum.OpISub
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2872,7 +2872,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpIsValidEvent ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpIsValidEvent
+		    case OpcodeEnum.OpIsValidEvent
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2882,7 +2882,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpIsValidReserveId ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpIsValidReserveId
+		    case OpcodeEnum.OpIsValidReserveId
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2892,18 +2892,18 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpKill ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpKill
+		    case OpcodeEnum.OpKill
 		      validate_WordCountEqual(op, 1)
 		      
 		      ' ***** OpLabel ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpLabel
+		    case OpcodeEnum.OpLabel
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpLessOrGreater ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpLessOrGreater
+		    case OpcodeEnum.OpLessOrGreater
 		      validate_WordCountMinimum(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2914,26 +2914,26 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpLifetimeStart ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpLifetimeStart
+		    case OpcodeEnum.OpLifetimeStart
 		      validate_WordCountEqual(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "ID out of bounds.", "ID not found.")
 		      
 		      ' ***** OpLifetimeStop ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpLifetimeStop
+		    case OpcodeEnum.OpLifetimeStop
 		      validate_WordCountEqual(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "ID out of bounds.", "ID not found.")
 		      
 		      ' ***** OpLine ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpLine
+		    case OpcodeEnum.OpLine
 		      validate_WordCountEqual(op, 5)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "File ID out of bounds.", "File ID not found.")
 		      
 		      ' ***** OpLoad ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpLoad
+		    case OpcodeEnum.OpLoad
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2941,7 +2941,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpLogicalAnd ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpLogicalAnd
+		    case OpcodeEnum.OpLogicalAnd
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2952,7 +2952,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpLogicalOr ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpLogicalOr
+		    case OpcodeEnum.OpLogicalOr
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2963,7 +2963,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpLogicalXor ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpLogicalXor
+		    case OpcodeEnum.OpLogicalXor
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2974,7 +2974,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpLoopMerge ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpLoopMerge
+		    case OpcodeEnum.OpLoopMerge
 		      validate_WordCountEqual(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Label ID out of bounds.", "Label ID not found.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
@@ -2983,7 +2983,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpMatrixTimesMatrix ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpMatrixTimesMatrix
+		    case OpcodeEnum.OpMatrixTimesMatrix
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -2995,7 +2995,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpMatrixTimesScalar ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpMatrixTimesScalar
+		    case OpcodeEnum.OpMatrixTimesScalar
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3007,7 +3007,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpMatrixTimesVector ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpMatrixTimesVector
+		    case OpcodeEnum.OpMatrixTimesVector
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3019,7 +3019,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpMemberDecorate ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpMemberDecorate
+		    case OpcodeEnum.OpMemberDecorate
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not declared.")
 		      if ModuleBinary.UInt32Value(op.Offset + 12) > 44 then
 		        logError op, "Invalid Decoration enumeration value."
@@ -3060,7 +3060,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpMemberName ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpMemberName
+		    case OpcodeEnum.OpMemberName
 		      validate_WordCountMinimum(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      if Trim(ModuleBinary.CString(op.Offset + 12)) = "" then
@@ -3069,7 +3069,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpMemoryBarrier ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpMemoryBarrier
+		    case OpcodeEnum.OpMemoryBarrier
 		      validate_WordCountEqual(op, 3)
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 6 then
 		        logError op, "Invalid Execution Scope enumeration value."
@@ -3080,7 +3080,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpMemoryModel ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpMemoryModel
+		    case OpcodeEnum.OpMemoryModel
 		      validate_WordCountEqual(op, 3)
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 2 then
 		        logError op, "Invalid Addressing Model enumeration value."
@@ -3091,18 +3091,18 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpName ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpName
+		    case OpcodeEnum.OpName
 		      validate_WordCountMinimum(op, 2)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Target ID out of bounds.", "Target ID not found.")
 		      
 		      ' ***** OpNop ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpNop
+		    case OpcodeEnum.OpNop
 		      logError op, "Use of OpNop is invalid."
 		      
 		      ' ***** OpNot ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpNot
+		    case OpcodeEnum.OpNot
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3111,7 +3111,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpOrdered ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpOrdered
+		    case OpcodeEnum.OpOrdered
 		      validate_WordCountMinimum(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3122,7 +3122,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpOuterProduct ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpOuterProduct
+		    case OpcodeEnum.OpOuterProduct
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3133,7 +3133,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpPhi ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpPhi
+		    case OpcodeEnum.OpPhi
 		      validate_WordCountMinimum(op, 3)
 		      if ((op.WordCount mod 2) <> 1) then
 		        logError op, "Operands need to be in pairs."
@@ -3149,7 +3149,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpPtrCastToGeneric ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpPtrCastToGeneric
+		    case OpcodeEnum.OpPtrCastToGeneric
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3160,7 +3160,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpReadPipe ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpReadPipe
+		    case OpcodeEnum.OpReadPipe
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3171,14 +3171,14 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpReleaseEvent ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpReleaseEvent
+		    case OpcodeEnum.OpReleaseEvent
 		      validate_WordCountEqual(op, 2)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "event ID out of bounds.", "event ID not declared.")
 		      //todo: event must be an event that was produced by OpEnqueueKernel, OpEnqueueMarker or OpCreateUserEvent.
 		      
 		      ' ***** OpReservedReadPipe ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpReservedReadPipe
+		    case OpcodeEnum.OpReservedReadPipe
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3194,7 +3194,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpReservedWritePipe ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpReservedWritePipe
+		    case OpcodeEnum.OpReservedWritePipe
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3210,7 +3210,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpReserveReadPipePackets ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpReserveReadPipePackets
+		    case OpcodeEnum.OpReserveReadPipePackets
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3219,7 +3219,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpReserveWritePipePackets ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpReserveWritePipePackets
+		    case OpcodeEnum.OpReserveWritePipePackets
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3228,26 +3228,26 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpRetainEvent ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpRetainEvent
+		    case OpcodeEnum.OpRetainEvent
 		      validate_WordCountEqual(op, 2)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "event ID out of bounds.", "event ID not declared.")
 		      //todo: event must be an event that was produced by OpEnqueueKernel, OpEnqueueMarker or OpCreateUserEvent.
 		      
 		      ' ***** OpReturn ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpReturn
+		    case OpcodeEnum.OpReturn
 		      validate_WordCountEqual(op, 1)
 		      
 		      ' ***** OpReturnValue ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpReturnValue
+		    case OpcodeEnum.OpReturnValue
 		      validate_WordCountEqual(op, 2)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Value ID out of bounds.", "Value ID not declared.")
 		      // todo: Value must match the Return Type operand of the OpTypeFunction type of the OpFunction body this return instruction is in.
 		      
 		      ' ***** OpSampler ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSampler
+		    case OpcodeEnum.OpSampler
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3258,7 +3258,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSatConvertSToU ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSatConvertSToU
+		    case OpcodeEnum.OpSatConvertSToU
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3267,7 +3267,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSatConvertUToS ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSatConvertUToS
+		    case OpcodeEnum.OpSatConvertUToS
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3276,7 +3276,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSConvert ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSConvert
+		    case OpcodeEnum.OpSConvert
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3286,7 +3286,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSDiv ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSDiv
+		    case OpcodeEnum.OpSDiv
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3296,7 +3296,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSelect ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSelect
+		    case OpcodeEnum.OpSelect
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3308,7 +3308,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSelectionMerge ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSelectionMerge
+		    case OpcodeEnum.OpSelectionMerge
 		      validate_WordCountEqual(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Label ID out of bounds.", "Label ID not found.")
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 2 then
@@ -3317,7 +3317,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSetUserEventStatus ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSetUserEventStatus
+		    case OpcodeEnum.OpSetUserEventStatus
 		      validate_WordCountEqual(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "event ID out of bounds.", "event ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "status ID out of bounds.", "status ID not declared.")
@@ -3326,7 +3326,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSGreaterThan ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSGreaterThan
+		    case OpcodeEnum.OpSGreaterThan
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3336,7 +3336,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSGreaterThanEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSGreaterThanEqual
+		    case OpcodeEnum.OpSGreaterThanEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3346,7 +3346,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpShiftLeftLogical ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpShiftLeftLogical
+		    case OpcodeEnum.OpShiftLeftLogical
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3357,7 +3357,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpShiftRightArithmetic ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpShiftRightArithmetic
+		    case OpcodeEnum.OpShiftRightArithmetic
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3368,7 +3368,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpShiftRightLogical ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpShiftRightLogical
+		    case OpcodeEnum.OpShiftRightLogical
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3379,7 +3379,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSignBitSet ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSignBitSet
+		    case OpcodeEnum.OpSignBitSet
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3389,7 +3389,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSLessThan ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSLessThan
+		    case OpcodeEnum.OpSLessThan
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3399,7 +3399,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSLessThanEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSLessThanEqual
+		    case OpcodeEnum.OpSLessThanEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3409,7 +3409,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSMod ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSMod
+		    case OpcodeEnum.OpSMod
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3419,7 +3419,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSNegate ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSNegate
+		    case OpcodeEnum.OpSNegate
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3428,7 +3428,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSource ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSource
+		    case OpcodeEnum.OpSource
 		      validate_WordCountEqual(op, 3)
 		      if ModuleBinary.UInt32Value(op.Offset + 4) > 4 then
 		        logError op, "Invalid Source Language enumeration value."
@@ -3436,7 +3436,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSourceExtension ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSourceExtension
+		    case OpcodeEnum.OpSourceExtension
 		      validate_WordCountMinimum(op, 1)
 		      if Trim(ModuleBinary.CString(op.Offset + 4)) = "" then
 		        logError op, "Invalid extension."
@@ -3444,7 +3444,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSpecConstant ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSpecConstant
+		    case OpcodeEnum.OpSpecConstant
 		      validate_WordCountMinimum(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
@@ -3460,7 +3460,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSpecConstantComposite ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSpecConstantComposite
+		    case OpcodeEnum.OpSpecConstantComposite
 		      validate_WordCountMinimum(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3475,7 +3475,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSpecConstantFalse ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSpecConstantFalse
+		    case OpcodeEnum.OpSpecConstantFalse
 		      validate_WordCountEqual(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3488,7 +3488,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSpecConstantTrue ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSpecConstantTrue
+		    case OpcodeEnum.OpSpecConstantTrue
 		      validate_WordCountEqual(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3501,7 +3501,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSRem ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSRem
+		    case OpcodeEnum.OpSRem
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3511,7 +3511,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpStore ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpStore
+		    case OpcodeEnum.OpStore
 		      validate_WordCountMinimum(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Pointer ID out of bounds.", "Pointer ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Object ID out of bounds.", "Object ID not found.")
@@ -3526,7 +3526,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpString ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpString
+		    case OpcodeEnum.OpString
 		      validate_WordCountMinimum(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
@@ -3535,7 +3535,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpSwitch ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpSwitch
+		    case OpcodeEnum.OpSwitch
 		      validate_WordCountMinimum(op, 3)
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 4), "Selector ID out of bounds.", "Selector ID not declared.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 8), "Default ID out of bounds.", "Default ID not declared.")
@@ -3549,7 +3549,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureFetchSample ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureFetchSample
+		    case OpcodeEnum.OpTextureFetchSample
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3559,7 +3559,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureFetchTexel ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureFetchTexel
+		    case OpcodeEnum.OpTextureFetchTexel
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3571,7 +3571,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureFetchTexelLod ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureFetchTexelLod
+		    case OpcodeEnum.OpTextureFetchTexelLod
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3581,7 +3581,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureFetchTexelOffset ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureFetchTexelOffset
+		    case OpcodeEnum.OpTextureFetchTexelOffset
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3591,7 +3591,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureGather ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureGather
+		    case OpcodeEnum.OpTextureGather
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3603,7 +3603,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureGatherOffset ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureGatherOffset
+		    case OpcodeEnum.OpTextureGatherOffset
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3616,7 +3616,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureGatherOffsets ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureGatherOffsets
+		    case OpcodeEnum.OpTextureGatherOffsets
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3629,7 +3629,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureQueryLevels ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureQueryLevels
+		    case OpcodeEnum.OpTextureQueryLevels
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3637,7 +3637,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureQueryLod ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureQuerySizeLod
+		    case OpcodeEnum.OpTextureQuerySizeLod
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3646,7 +3646,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureQuerySamples ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureQuerySamples
+		    case OpcodeEnum.OpTextureQuerySamples
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3654,7 +3654,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureQuerySize ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureQuerySize
+		    case OpcodeEnum.OpTextureQuerySize
 		      validate_WordCountEqual(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3662,7 +3662,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureQuerySizeLod ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureQuerySizeLod
+		    case OpcodeEnum.OpTextureQuerySizeLod
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3671,7 +3671,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSample ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSample
+		    case OpcodeEnum.OpTextureSample
 		      validate_WordCountMinimum(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3684,7 +3684,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleDref ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleDref
+		    case OpcodeEnum.OpTextureSampleDref
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3695,7 +3695,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleGrad ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleGrad
+		    case OpcodeEnum.OpTextureSampleGrad
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3706,7 +3706,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleGradOffset ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleGradOffset
+		    case OpcodeEnum.OpTextureSampleGradOffset
 		      validate_WordCountEqual(op, 8)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3720,7 +3720,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleLod ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleLod
+		    case OpcodeEnum.OpTextureSampleLod
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3731,7 +3731,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleLodOffset ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleLodOffset
+		    case OpcodeEnum.OpTextureSampleLodOffset
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3745,7 +3745,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleOffset ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleOffset
+		    case OpcodeEnum.OpTextureSampleOffset
 		      validate_WordCountMinimum(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3759,7 +3759,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleProj ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleProj
+		    case OpcodeEnum.OpTextureSampleProj
 		      validate_WordCountMinimum(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3772,7 +3772,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleProjGrad ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleProjGrad
+		    case OpcodeEnum.OpTextureSampleProjGrad
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3788,7 +3788,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleProjGradOffset ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleProjGradOffset
+		    case OpcodeEnum.OpTextureSampleProjGradOffset
 		      validate_WordCountEqual(op, 8)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3800,7 +3800,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleProjLod ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleProjLod
+		    case OpcodeEnum.OpTextureSampleProjLod
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3810,7 +3810,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleProjLodOffset ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleProjLodOffset
+		    case OpcodeEnum.OpTextureSampleProjLodOffset
 		      validate_WordCountEqual(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3821,7 +3821,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTextureSampleProjOffset ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTextureSampleProjOffset
+		    case OpcodeEnum.OpTextureSampleProjOffset
 		      validate_WordCountMinimum(op, 7)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3837,7 +3837,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTranspose ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTranspose
+		    case OpcodeEnum.OpTranspose
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -3848,7 +3848,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypeArray ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeArray
+		    case OpcodeEnum.OpTypeArray
 		      validate_WordCountEqual(op, 4)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Element Type ID out of bounds.", "Element Type ID not declared.")
@@ -3861,25 +3861,25 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypeBool ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeBool
+		    case OpcodeEnum.OpTypeBool
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpTypeDeviceEvent ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeDeviceEvent
+		    case OpcodeEnum.OpTypeDeviceEvent
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpTypeEvent ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeEvent
+		    case OpcodeEnum.OpTypeEvent
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpTypeFloat ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeFloat
+		    case OpcodeEnum.OpTypeFloat
 		      validate_WordCountEqual(op, 3)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if ModuleBinary.UInt32Value(op.Offset + 8) <= 0 then
@@ -3888,7 +3888,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypeFunction ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeFunction
+		    case OpcodeEnum.OpTypeFunction
 		      validate_WordCountMinimum(op, 3)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Return Type ID out of bounds.", "Return Type ID not declared.")
@@ -3903,7 +3903,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypeInt ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeInt
+		    case OpcodeEnum.OpTypeInt
 		      validate_WordCountEqual(op, 4)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if ModuleBinary.UInt32Value(op.Offset + 8) <= 0 then
@@ -3915,7 +3915,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypeMatrix ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeMatrix
+		    case OpcodeEnum.OpTypeMatrix
 		      validate_WordCountEqual(op, 4)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Column Type ID out of bounds.", "Column Type ID not declared.")
@@ -3928,7 +3928,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypeOpaque ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeOpaque
+		    case OpcodeEnum.OpTypeOpaque
 		      validate_WordCountMinimum(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if Trim(ModuleBinary.CString(op.Offset + 8)) = "" then
@@ -3937,7 +3937,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypePipe ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypePipe
+		    case OpcodeEnum.OpTypePipe
 		      validate_WordCountMinimum(op, 4)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Type ID out of bounds.", "Type ID not declared.")
@@ -3947,7 +3947,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypePointer ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypePointer
+		    case OpcodeEnum.OpTypePointer
 		      validate_WordCountEqual(op, 4)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      if ModuleBinary.UInt32Value(op.Offset + 8) > 10 then
@@ -3960,19 +3960,19 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypeQueue ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeQueue
+		    case OpcodeEnum.OpTypeQueue
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpTypeReserveId ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeReserveId
+		    case OpcodeEnum.OpTypeReserveId
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpTypeRuntimeArray ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeRuntimeArray
+		    case OpcodeEnum.OpTypeRuntimeArray
 		      validate_WordCountEqual(op, 3)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Element Type ID out of bounds.", "Element Type ID not declared.")
@@ -3982,7 +3982,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypeSampler ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeSampler
+		    case OpcodeEnum.OpTypeSampler
 		      validate_WordCountMinimum(op, 8)
 		      if op.WordCount > 9 then
 		        logError op, "Invalid word count."
@@ -4012,7 +4012,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypeStruct ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeStruct
+		    case OpcodeEnum.OpTypeStruct
 		      validate_WordCountMinimum(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      ub = op.Offset + (op.WordCount * 4)
@@ -4026,7 +4026,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypeVector ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeVector
+		    case OpcodeEnum.OpTypeVector
 		      validate_WordCountEqual(op, 4)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 8), "Component Type ID out of bounds.", "Component Type ID not declared.")
@@ -4039,13 +4039,13 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpTypeVoid ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpTypeVoid
+		    case OpcodeEnum.OpTypeVoid
 		      validate_WordCountEqual(op, 2)
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 4))
 		      
 		      ' ***** OpUConvert ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpUConvert
+		    case OpcodeEnum.OpUConvert
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4056,7 +4056,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpUDiv ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpUDiv
+		    case OpcodeEnum.OpUDiv
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4067,7 +4067,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpUGreaterThan ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpUGreaterThan
+		    case OpcodeEnum.OpUGreaterThan
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4077,7 +4077,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpUGreaterThanEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpUGreaterThanEqual
+		    case OpcodeEnum.OpUGreaterThanEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4087,7 +4087,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpULessThan ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpULessThan
+		    case OpcodeEnum.OpULessThan
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4097,7 +4097,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpULessThanEqual ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpULessThanEqual
+		    case OpcodeEnum.OpULessThanEqual
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4107,7 +4107,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpUMod ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpUMod
+		    case OpcodeEnum.OpUMod
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4118,14 +4118,14 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpUndef ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpUndef
+		    case OpcodeEnum.OpUndef
 		      validate_WordCountEqual(op, 3)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      
 		      ' ***** OpUnordered ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpUnordered
+		    case OpcodeEnum.OpUnordered
 		      validate_WordCountMinimum(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4136,13 +4136,13 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpUnreachable ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpUnreachable
+		    case OpcodeEnum.OpUnreachable
 		      validate_WordCountEqual(op, 1)
 		      // todo: This instruction must be the last instruction in a block.
 		      
 		      ' ***** OpVariable ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpVariable
+		    case OpcodeEnum.OpVariable
 		      validate_WordCountMinimum(op, 4)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4152,7 +4152,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpVariableArray ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpVariableArray
+		    case OpcodeEnum.OpVariableArray
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4162,7 +4162,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpVectorExtractDynamic ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpVectorExtractDynamic
+		    case OpcodeEnum.OpVectorExtractDynamic
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4173,7 +4173,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpVectorInsertDynamic ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpVectorInsertDynamic
+		    case OpcodeEnum.OpVectorInsertDynamic
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4183,7 +4183,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpVectorShuffle ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpVectorShuffle
+		    case OpcodeEnum.OpVectorShuffle
 		      validate_WordCountMinimum(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4194,7 +4194,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpVectorTimesMatrix ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpVectorTimesMatrix
+		    case OpcodeEnum.OpVectorTimesMatrix
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4206,7 +4206,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpVectorTimesScalar ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpVectorTimesScalar
+		    case OpcodeEnum.OpVectorTimesScalar
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4218,7 +4218,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpWaitGroupEvents ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpWaitGroupEvents
+		    case OpcodeEnum.OpWaitGroupEvents
 		      validate_WordCountEqual(op, 6)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
@@ -4235,7 +4235,7 @@ Protected Class VirtualMachine
 		      
 		      ' ***** OpWritePipe ***********************************************************************************
 		      
-		    case OpcodeTypeEnum.OpWritePipe
+		    case OpcodeEnum.OpWritePipe
 		      validate_WordCountEqual(op, 5)
 		      validate_typeId(op, ModuleBinary.UInt32Value(op.Offset + 4), "Result Type ID out of bounds.", "Result Type ID not declared.")
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
