@@ -265,9 +265,9 @@ End
 			if CurrentFile <> nil then
 			
 			spirvType.Name = "SPIR-V Binary Modules"
-			spirvType.MacType = "SPIRV;SPV"
-			spirvType.MacCreator = "spirv;spv"
-			spirvType.Extensions = ".spirv;.spv"
+			spirvType.MacType = "SPV"
+			spirvType.MacCreator = "spv"
+			spirvType.Extensions = ".spv"
 			
 			dlg.Filter = spirvType
 			
@@ -310,19 +310,19 @@ End
 		  Dim dlg As new OpenDialog
 		  Dim readStream As BinaryStream
 		  Dim allType As New FileType
-		  Dim Type As New FileType
+		  Dim spirvType As New FileType
 		  
 		  // configure file types
 		  
 		  allType.Name = "All files"
 		  allType.Extensions = ".*"
 		  
-		  Type.Name = "SPIR-V Binary Modules"
-		  Type.MacType = "SPIRV;SPV"
-		  Type.MacCreator = "spirv;spv"
-		  Type.Extensions = ".spirv;.spv"
+		  spirvType.Name = "SPIR-V Binary Modules"
+		  spirvType.MacType = "SPV"
+		  spirvType.MacCreator = "spv"
+		  spirvType.Extensions = ".spv"
 		  
-		  dlg.Filter = Type + allType
+		  dlg.Filter = spirvType + allType
 		  
 		  ' select file
 		  
