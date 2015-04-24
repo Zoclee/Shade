@@ -70,7 +70,7 @@ Protected Class SPIRVType
 			    
 			    ' ***** Array ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Array_
+			  case SPIRV.TypeEnum.Array_
 			    if VM.Types.HasKey(ElementTypeID) then
 			      typ = VM.Types.Value(ElementTypeID)
 			      result.Append typ.InstructionText
@@ -83,12 +83,12 @@ Protected Class SPIRVType
 			    
 			    ' ***** Bool ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Boolean
+			  case SPIRV.TypeEnum.Boolean
 			    result.Append "Bool"
 			    
 			    ' ***** Enum ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Integer
+			  case SPIRV.TypeEnum.Integer
 			    if Signed then
 			      result.Append "Int"
 			    else
@@ -98,18 +98,18 @@ Protected Class SPIRVType
 			    
 			    ' ***** Filter ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Filter
+			  case SPIRV.TypeEnum.Filter
 			    result.Append "Filter"
 			    
 			    ' ***** Float ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Float
+			  case SPIRV.TypeEnum.Float
 			    result.Append "Float"
 			    result.Append Str(Width)
 			    
 			    ' ***** Function_ ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Function_
+			  case SPIRV.TypeEnum.Function_
 			    if (ReturnTypeID <> ResultID) and VM.Types.HasKey(ReturnTypeID) then
 			      typ = VM.Types.Value(ReturnTypeID)
 			      result.Append typ.InstructionText
@@ -134,7 +134,7 @@ Protected Class SPIRVType
 			    
 			    ' ***** Matrix ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Matrix
+			  case SPIRV.TypeEnum.Matrix
 			    if (ColumnTypeID <> ResultID) and VM.Types.HasKey(ColumnTypeID) then
 			      typ = VM.Types.Value(ColumnTypeID)
 			      result.Append typ.InstructionText
@@ -148,7 +148,7 @@ Protected Class SPIRVType
 			    
 			    ' ***** Pointer ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Pointer
+			  case SPIRV.TypeEnum.Pointer
 			    if (TypeID <> ResultID) and VM.Types.HasKey(TypeID) then
 			      typ = VM.Types.Value(TypeID)
 			      result.Append "Ptr:"
@@ -159,7 +159,7 @@ Protected Class SPIRVType
 			    
 			    ' ***** RuntimeArray ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Array_
+			  case SPIRV.TypeEnum.Array_
 			    if VM.Types.HasKey(ElementTypeID) then
 			      typ = VM.Types.Value(ElementTypeID)
 			      result.Append typ.InstructionText
@@ -171,12 +171,12 @@ Protected Class SPIRVType
 			    
 			    ' ***** Sampler ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Sampler
+			  case SPIRV.TypeEnum.Sampler
 			    result.Append "Sampler"
 			    
 			    ' ***** Struct ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Struct
+			  case SPIRV.TypeEnum.Struct
 			    if App.VM.Names.HasKey(ResultID)  then
 			      result.Append App.VM.Names.Value(ResultID)
 			    else
@@ -185,7 +185,7 @@ Protected Class SPIRVType
 			    
 			    ' ***** Vector ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Vector
+			  case SPIRV.TypeEnum.Vector
 			    if (ComponentTypeID <> ResultID) and VM.Types.HasKey(ComponentTypeID) then
 			      typ = VM.Types.Value(ComponentTypeID)
 			      result.Append typ.InstructionText
@@ -199,7 +199,7 @@ Protected Class SPIRVType
 			    
 			    ' ***** Void ***********************************************************************************
 			    
-			  case SPIRVTypeEnum.Void
+			  case SPIRV.TypeEnum.Void
 			    result.Append "Void"
 			    
 			  case else
@@ -255,7 +255,7 @@ Protected Class SPIRVType
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Type As SPIRVTypeEnum
+		Type As SPIRV.TypeEnum
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

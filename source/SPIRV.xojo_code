@@ -2258,7 +2258,7 @@ Protected Module SPIRV
 		SpecConstant
 	#tag EndEnum
 
-	#tag Enum, Name = SPIRVTypeEnum, Type = Integer, Flags = &h0
+	#tag Enum, Name = TypeEnum, Type = Integer, Flags = &h0
 		Array_
 		  Boolean
 		  DeviceEvent

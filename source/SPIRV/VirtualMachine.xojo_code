@@ -101,19 +101,19 @@ Protected Class VirtualMachine
 		        case 8 // ***** OpTypeVoid ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeVoid)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Void
+		          typ.Type = SPIRV.TypeEnum.Void
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 9 // ***** OpTypeBool ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeBool)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Boolean
+		          typ.Type = SPIRV.TypeEnum.Boolean
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 10 // ***** OpTypeInt ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeInt)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Integer
+		          typ.Type = SPIRV.TypeEnum.Integer
 		          typ.Width = ModuleBinary.UInt32Value(ip + 8)
 		          if ModuleBinary.UInt32Value(ip + 12) = 0 then
 		            typ.Signed = false
@@ -125,14 +125,14 @@ Protected Class VirtualMachine
 		        case 11 // ***** OpTypeFloat ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeFloat)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Float
+		          typ.Type = SPIRV.TypeEnum.Float
 		          typ.Width = ModuleBinary.UInt32Value(ip + 8)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 12 // ***** OpTypeVector ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeVector)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Vector
+		          typ.Type = SPIRV.TypeEnum.Vector
 		          typ.ComponentTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.ComponentCount = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
@@ -140,7 +140,7 @@ Protected Class VirtualMachine
 		        case 13 // ***** OpTypeMatrix ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeMatrix)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Matrix
+		          typ.Type = SPIRV.TypeEnum.Matrix
 		          typ.ColumnTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.ColumnCount = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
@@ -148,7 +148,7 @@ Protected Class VirtualMachine
 		        case 14 // ***** OpTypeSampler ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeSampler)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Sampler
+		          typ.Type = SPIRV.TypeEnum.Sampler
 		          typ.SampledTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.Dimensionality = ModuleBinary.UInt32Value(ip + 12)
 		          typ.Content = ModuleBinary.UInt32Value(ip + 16)
@@ -165,13 +165,13 @@ Protected Class VirtualMachine
 		        case 15 // ***** OpTypeFilter ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeFilter)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Filter
+		          typ.Type = SPIRV.TypeEnum.Filter
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 16 // ***** OpTypeArray ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeArray)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Array_
+		          typ.Type = SPIRV.TypeEnum.Array_
 		          typ.ElementTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.Length = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
@@ -179,14 +179,14 @@ Protected Class VirtualMachine
 		        case 17 // ***** OpTypeRuntimeArray ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeRuntimeArray)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.RuntimeArray
+		          typ.Type = SPIRV.TypeEnum.RuntimeArray
 		          typ.ElementTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 18 // ***** OpTypeStruct ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeStruct)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Struct
+		          typ.Type = SPIRV.TypeEnum.Struct
 		          tempIP = ip + 8
 		          ub = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
 		          while tempIP < ub
@@ -198,14 +198,14 @@ Protected Class VirtualMachine
 		        case 19 // ***** OpTypeOpaque ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeOpaque)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Opaque
+		          typ.Type = SPIRV.TypeEnum.Opaque
 		          typ.Name = ModuleBinary.CString(ip + 8)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 20 // ***** OpTypePointer ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypePointer)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Pointer
+		          typ.Type = SPIRV.TypeEnum.Pointer
 		          typ.StorageClass = ModuleBinary.UInt32Value(ip + 8)
 		          typ.TypeID = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
@@ -213,7 +213,7 @@ Protected Class VirtualMachine
 		        case 21 // ***** OpTypeFunction ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeFunction)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Function_
+		          typ.Type = SPIRV.TypeEnum.Function_
 		          typ.ReturnTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          tempIP = ip + 12
 		          ub = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
@@ -226,31 +226,31 @@ Protected Class VirtualMachine
 		        case 22 // ***** OpTypeEvent ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeEvent)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Event_
+		          typ.Type = SPIRV.TypeEnum.Event_
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 23 // ***** OpTypeDeviceEvent ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeDeviceEvent)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.DeviceEvent
+		          typ.Type = SPIRV.TypeEnum.DeviceEvent
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 24 // ***** OpTypeReserveId ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeReserveId)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.ReservedId
+		          typ.Type = SPIRV.TypeEnum.ReservedId
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 25 // ***** OpTypeQueue ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypeQueue)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Queue
+		          typ.Type = SPIRV.TypeEnum.Queue
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 26 // ***** OpTypePipe ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpTypePipe)
 		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
-		          typ.Type = SPIRVTypeEnum.Pipe
+		          typ.Type = SPIRV.TypeEnum.Pipe
 		          typ.DataTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.AccessQualifier = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
@@ -279,9 +279,9 @@ Protected Class VirtualMachine
 		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
 		            typ = Types.Value(ModuleBinary.UInt32Value(ip + 4))
 		            select case typ.Type
-		            case SPIRVTypeEnum.Float
+		            case SPIRV.TypeEnum.Float
 		              cnst.Type = SPIRVConstantType.Float
-		            case SPIRVTypeEnum.Integer
+		            case SPIRV.TypeEnum.Integer
 		              cnst.Type = SPIRVConstantType.Integer
 		            end select
 		          end if
@@ -352,9 +352,9 @@ Protected Class VirtualMachine
 		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
 		            typ = Types.Value(ModuleBinary.UInt32Value(ip + 4))
 		            select case typ.Type
-		            case SPIRVTypeEnum.Float
+		            case SPIRV.TypeEnum.Float
 		              cnst.Type = SPIRVConstantType.Float
-		            case SPIRVTypeEnum.Integer
+		            case SPIRV.TypeEnum.Integer
 		              cnst.Type = SPIRVConstantType.Integer
 		            end select
 		          end if
@@ -1175,7 +1175,7 @@ Protected Class VirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Vector ID out of bounds.", "Vector ID not declared.")
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
 		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
-		        if typ.Type <> SPIRVTypeEnum.Boolean then
+		        if typ.Type <> SPIRV.TypeEnum.Boolean then
 		          logError op, "Result Type must be a Boolean scalar type."
 		        end if
 		      end if
@@ -1189,7 +1189,7 @@ Protected Class VirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 12), "Vector ID out of bounds.", "Vector ID not declared.")
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
 		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
-		        if typ.Type <> SPIRVTypeEnum.Boolean then
+		        if typ.Type <> SPIRV.TypeEnum.Boolean then
 		          logError op, "Result Type must be a Boolean scalar type."
 		        end if
 		      end if
@@ -1638,7 +1638,7 @@ Protected Class VirtualMachine
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
 		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
 		        select case typ.Type
-		        case SPIRVTypeEnum.Float, SPIRVTypeEnum.Integer
+		        case SPIRV.TypeEnum.Float, SPIRV.TypeEnum.Integer
 		          // do nothing
 		        case else
 		          logError op, "Invalid constant type. Expected integer or float."
@@ -1669,7 +1669,7 @@ Protected Class VirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
 		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
-		        if typ.Type <> SPIRVTypeEnum.Boolean then
+		        if typ.Type <> SPIRV.TypeEnum.Boolean then
 		          logError op, "Expected scalar Boolean type."
 		        end if
 		      end if
@@ -1712,7 +1712,7 @@ Protected Class VirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
 		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
-		        if typ.Type <> SPIRVTypeEnum.Boolean then
+		        if typ.Type <> SPIRV.TypeEnum.Boolean then
 		          logError op, "Expected scalar Boolean type."
 		        end if
 		      end if
@@ -3450,7 +3450,7 @@ Protected Class VirtualMachine
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
 		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
 		        select case typ.Type
-		        case SPIRVTypeEnum.Float, SPIRVTypeEnum.Integer
+		        case SPIRV.TypeEnum.Float, SPIRV.TypeEnum.Integer
 		          // do nothing
 		        case else
 		          logError op, "Invalid constant type. Expected integer or float."
@@ -3481,7 +3481,7 @@ Protected Class VirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
 		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
-		        if typ.Type <> SPIRVTypeEnum.Boolean then
+		        if typ.Type <> SPIRV.TypeEnum.Boolean then
 		          logError op, "Expected scalar Boolean type."
 		        end if
 		      end if
@@ -3494,7 +3494,7 @@ Protected Class VirtualMachine
 		      validate_ResultId(op, ModuleBinary.UInt32Value(op.Offset + 8))
 		      if Types.HasKey(ModuleBinary.UInt32Value(op.Offset + 4)) then
 		        typ = Types.Value(ModuleBinary.UInt32Value(op.Offset + 4))
-		        if typ.Type <> SPIRVTypeEnum.Boolean then
+		        if typ.Type <> SPIRV.TypeEnum.Boolean then
 		          logError op, "Expected scalar Boolean type."
 		        end if
 		      end if
