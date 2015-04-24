@@ -35,7 +35,7 @@ Protected Class VirtualMachine
 		  Dim tempIP As UInt32
 		  Dim ub As UInt32
 		  Dim ep As SPIRV.EntryPoint
-		  Dim dec As SPIRV.SPIRVDecoration
+		  Dim dec As SPIRV.Decoration
 		  Dim typ As SPIRV.SPIRVType
 		  Dim op As SPIRV.Opcode
 		  Dim cnst As SPIRV.SPIRVConstant
@@ -416,7 +416,7 @@ Protected Class VirtualMachine
 		        case 50 // ***** OpDecorate ***************************************************
 		          
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpDecorate)
-		          dec = new SPIRV.SPIRVDecoration
+		          dec = new SPIRV.Decoration
 		          dec.TargetID = ModuleBinary.UInt32Value(ip + 4)
 		          dec.Decoration = ModuleBinary.UInt32Value(ip + 8)
 		          select case dec.Decoration
@@ -4351,7 +4351,7 @@ Protected Class VirtualMachine
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Decorations() As SPIRV.SPIRVDecoration
+		Decorations() As SPIRV.Decoration
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

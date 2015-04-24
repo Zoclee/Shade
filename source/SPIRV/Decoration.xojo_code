@@ -1,5 +1,5 @@
 #tag Class
-Protected Class SPIRVDecoration
+Protected Class Decoration
 	#tag Property, Flags = &h0
 		Decoration As UInt32
 	#tag EndProperty
