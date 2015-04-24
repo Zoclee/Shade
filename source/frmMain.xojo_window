@@ -217,6 +217,15 @@ End
 		End Function
 	#tag EndMenuHandler
 
+	#tag MenuHandler
+		Function mnuStripDebugOpcodes() As Boolean Handles mnuStripDebugOpcodes.Action
+			break
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
 
 	#tag Method, Flags = &h0
 		Sub actionOpen()
@@ -356,6 +365,8 @@ End
 		    wend
 		    
 		    Self.Title = "{Zoclee}™ Shade v" + Str(App.MajorVersion) + "." + Str(App.MinorVersion)+ "." + Str(App.BugVersion) + " - " + CurrentFile.NativePath
+		    
+		    mnuStripDebugOpcodes.AutoEnable = True
 		    
 		  end if
 		End Sub

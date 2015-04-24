@@ -1,5 +1,19 @@
 #tag Menu
 Begin Menu mnuMain
+   Begin MenuItem mnuTools
+      SpecialMenu = 0
+      Text = "Tools"
+      Index = -2147483648
+      AutoEnable = True
+      Visible = True
+      Begin MenuItem mnuStripDebugOpcodes
+         SpecialMenu = 0
+         Text = "Strip Debug Opcodes"
+         Index = -2147483648
+         AutoEnable = False
+         Visible = True
+      End
+   End
    Begin MenuItem mnuHelp
       SpecialMenu = 0
       Text = "Help"
