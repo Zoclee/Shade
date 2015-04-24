@@ -14,7 +14,7 @@ The primary goal of [{Zoclee}™ Shade](http://www.zoclee.com/shade), is to prov
 * View SPIR-V instructions in a human-readable format.
 * Validate correctness of opcodes (e.g. missing types, out of bound indexes etc.).
 * Track error opcodes easily by clicking on error messages. 
-* Remove debug opcodes from SPIR-V binaries.
+* Remove debug instructions from SPIR-V binaries.
 
 ## Install
 
