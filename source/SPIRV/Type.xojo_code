@@ -1,5 +1,5 @@
 #tag Class
-Protected Class SPIRVType
+Protected Class Type
 	#tag Method, Flags = &h0
 		Sub Constructor(initVM As SPIRV.VirtualMachine, initResultID As UInt32)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
@@ -63,7 +63,7 @@ Protected Class SPIRVType
 			  ' www.zoclee.com/shade
 			  
 			  Dim result() As String
-			  Dim typ As SPIRV.SPIRVType
+			  Dim typ As SPIRV.Type
 			  Dim i As UInt32
 			  
 			  select case Type

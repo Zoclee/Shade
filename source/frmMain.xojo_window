@@ -229,7 +229,7 @@ End
 		  Dim i As Integer
 		  Dim readStream As BinaryStream
 		  Dim allType As New FileType
-		  Dim spirvType As New FileType
+		  Dim Type As New FileType
 		  Dim op As SPIRV.Opcode
 		  Dim tmpStr As String
 		  
@@ -238,12 +238,12 @@ End
 		  allType.Name = "All files"
 		  allType.Extensions = ".*"
 		  
-		  spirvType.Name = "SPIR-V Binary Modules"
-		  spirvType.MacType = "SPIRV;SPV"
-		  spirvType.MacCreator = "spirv;spv"
-		  spirvType.Extensions = ".spirv;.spv"
+		  Type.Name = "SPIR-V Binary Modules"
+		  Type.MacType = "SPIRV;SPV"
+		  Type.MacCreator = "spirv;spv"
+		  Type.Extensions = ".spirv;.spv"
 		  
-		  dlg.Filter = spirvType + allType
+		  dlg.Filter = Type + allType
 		  
 		  ' select file
 		  

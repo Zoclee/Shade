@@ -27,7 +27,7 @@ Protected Class Opcode
 		  ' www.zoclee.com/shade
 		  
 		  Dim result() As String
-		  Dim typ As SPIRV.SPIRVType
+		  Dim typ As SPIRV.Type
 		  
 		  result.Append Str(VM.ModuleBinary.UInt32Value(binOffset))
 		  result.Append "("
@@ -69,7 +69,7 @@ Protected Class Opcode
 			  ' www.zoclee.com/shade
 			  
 			  Dim result() As String
-			  Dim typ As SPIRV.SPIRVType
+			  Dim typ As SPIRV.Type
 			  Dim i As UInt32
 			  Dim ub As UInt32
 			  
