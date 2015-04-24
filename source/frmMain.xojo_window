@@ -373,9 +373,11 @@ End
 		    if op.ResultID > 0 then
 		      tmpStr = Str(op.ResultID)
 		      if App.VM.Names.HasKey(op.ResultID) then
-		        tmpStr = tmpStr + "("
-		        tmpStr = tmpStr + App.VM.Names.Value(op.ResultID)
-		        tmpStr = tmpStr + ")"
+		        if Trim(App.VM.Names.Value(op.ResultID)) <> "" then
+		          tmpStr = tmpStr + "("
+		          tmpStr = tmpStr + Trim(App.VM.Names.Value(op.ResultID))
+		          tmpStr = tmpStr + ")"
+		        end if
 		      end if
 		      tmpStr = tmpStr + ":"
 		      lstInstructions.Cell(lstInstructions.LastIndex, 1) = tmpStr
