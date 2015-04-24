@@ -34,11 +34,11 @@ Protected Class SPIRVVirtualMachine
 		  Dim moduleUB As Integer
 		  Dim tempIP As UInt32
 		  Dim ub As UInt32
-		  Dim ep As ZocleeShade.SPIRVEntryPoint
-		  Dim dec As ZocleeShade.SPIRVDecoration
-		  Dim typ As ZocleeShade.SPIRVType
-		  Dim op As ZocleeShade.SPIRVOpcode
-		  Dim cnst As ZocleeShade.SPIRVConstant
+		  Dim ep As SPIRV.SPIRVEntryPoint
+		  Dim dec As SPIRV.SPIRVDecoration
+		  Dim typ As SPIRV.SPIRVType
+		  Dim op As SPIRV.SPIRVOpcode
+		  Dim cnst As SPIRV.SPIRVConstant
 		  
 		  Clear()
 		  
@@ -67,52 +67,52 @@ Protected Class SPIRVVirtualMachine
 		        select case ModuleBinary.UInt16Value(ip)
 		          
 		        case 0 // ***** OpNop ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpNop)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpNop)
 		          
 		        case 1 // ***** OpSource ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSource)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSource)
 		          SourceLanguage = ModuleBinary.UInt32Value(ip + 4)
 		          SourceVersion = ModuleBinary.UInt32Value(ip + 8)
 		          
 		        case 2 // ***** OpSourceExtension ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSourceExtension)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSourceExtension)
 		          
 		        case 3 // ***** OpExtension ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtension)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtension)
 		          
 		        case 4 // ***** OpExtInstImport ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtInstImport)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtInstImport)
 		          
 		        case 5 // ***** OpMemoryModel ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemoryModel)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemoryModel)
 		          AddressingModel = ModuleBinary.UInt32Value(ip + 4)
 		          MemoryModel = ModuleBinary.UInt32Value(ip + 8)
 		          
 		        case 6 // ***** OpEntryPoint ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEntryPoint)
-		          ep = new ZocleeShade.SPIRVEntryPoint
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEntryPoint)
+		          ep = new SPIRV.SPIRVEntryPoint
 		          ep.ExecutionModel = ModuleBinary.UInt32Value(ip + 4)
 		          ep.EntryPointID = ModuleBinary.UInt32Value(ip + 8)
 		          EntryPoints.Value(ep.EntryPointID) = ep
 		          
 		        case 7 // ***** OpExecutionMode ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExecutionMode)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExecutionMode)
 		          
 		        case 8 // ***** OpTypeVoid ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeVoid)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeVoid)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Void
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 9 // ***** OpTypeBool ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeBool)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeBool)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Boolean
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 10 // ***** OpTypeInt ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeInt)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeInt)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Integer
 		          typ.Width = ModuleBinary.UInt32Value(ip + 8)
 		          if ModuleBinary.UInt32Value(ip + 12) = 0 then
@@ -123,31 +123,31 @@ Protected Class SPIRVVirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 11 // ***** OpTypeFloat ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeFloat)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeFloat)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Float
 		          typ.Width = ModuleBinary.UInt32Value(ip + 8)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 12 // ***** OpTypeVector ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeVector)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeVector)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Vector
 		          typ.ComponentTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.ComponentCount = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 13 // ***** OpTypeMatrix ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeMatrix)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeMatrix)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Matrix
 		          typ.ColumnTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.ColumnCount = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 14 // ***** OpTypeSampler ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeSampler)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeSampler)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Sampler
 		          typ.SampledTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.Dimensionality = ModuleBinary.UInt32Value(ip + 12)
@@ -163,29 +163,29 @@ Protected Class SPIRVVirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 15 // ***** OpTypeFilter ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeFilter)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeFilter)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Filter
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 16 // ***** OpTypeArray ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeArray)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeArray)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Array_
 		          typ.ElementTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.Length = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 17 // ***** OpTypeRuntimeArray ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeRuntimeArray)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeRuntimeArray)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.RuntimeArray
 		          typ.ElementTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 18 // ***** OpTypeStruct ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeStruct)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeStruct)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Struct
 		          tempIP = ip + 8
 		          ub = ip + (ModuleBinary.UInt16Value(ip + 2) * 4)
@@ -196,23 +196,23 @@ Protected Class SPIRVVirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 19 // ***** OpTypeOpaque ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeOpaque)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeOpaque)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Opaque
 		          typ.Name = ModuleBinary.CString(ip + 8)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 20 // ***** OpTypePointer ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypePointer)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypePointer)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Pointer
 		          typ.StorageClass = ModuleBinary.UInt32Value(ip + 8)
 		          typ.TypeID = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 21 // ***** OpTypeFunction ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeFunction)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeFunction)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Function_
 		          typ.ReturnTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          tempIP = ip + 12
@@ -224,57 +224,57 @@ Protected Class SPIRVVirtualMachine
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 22 // ***** OpTypeEvent ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeEvent)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeEvent)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Event_
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 23 // ***** OpTypeDeviceEvent ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeDeviceEvent)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeDeviceEvent)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.DeviceEvent
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 24 // ***** OpTypeReserveId ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeReserveId)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeReserveId)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.ReservedId
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 25 // ***** OpTypeQueue ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeQueue)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypeQueue)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Queue
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 26 // ***** OpTypePipe ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypePipe)
-		          typ = new ZocleeShade.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTypePipe)
+		          typ = new SPIRV.SPIRVType(self, ModuleBinary.UInt32Value(ip + 4))
 		          typ.Type = SPIRVTypeEnum.Pipe
 		          typ.DataTypeID = ModuleBinary.UInt32Value(ip + 8)
 		          typ.AccessQualifier = ModuleBinary.UInt32Value(ip + 12)
 		          Types.Value(ModuleBinary.UInt32Value(ip + 4)) = typ
 		          
 		        case 27 // ***** OpConstantTrue ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantTrue)
-		          cnst = new ZocleeShade.SPIRVConstant
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantTrue)
+		          cnst = new SPIRV.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.BooleanTrue
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 28 // ***** OpConstantFalse ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantFalse)
-		          cnst = new ZocleeShade.SPIRVConstant
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantFalse)
+		          cnst = new SPIRV.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.BooleanFalse
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 29 // ***** OpConstant ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstant)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstant)
 		          
-		          cnst = new ZocleeShade.SPIRVConstant
+		          cnst = new SPIRV.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.Constant
 		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
 		            typ = Types.Value(ModuleBinary.UInt32Value(ip + 4))
@@ -290,8 +290,8 @@ Protected Class SPIRVVirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 30 // ***** OpConstantComposite ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantComposite)
-		          cnst = new ZocleeShade.SPIRVConstant
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantComposite)
+		          cnst = new SPIRV.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.Composite
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
@@ -304,8 +304,8 @@ Protected Class SPIRVVirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 31 // ***** OpConstantSampler ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantSampler)
-		          cnst = new ZocleeShade.SPIRVConstant
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantSampler)
+		          cnst = new SPIRV.SPIRVConstant
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          cnst.Mode = ModuleBinary.UInt32Value(ip + 12)
@@ -314,40 +314,40 @@ Protected Class SPIRVVirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 32 // ***** OpConstantNullPointer ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantNullPointer)
-		          cnst = new ZocleeShade.SPIRVConstant
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantNullPointer)
+		          cnst = new SPIRV.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.NullPointer
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 33 // ***** OpConstantNullObject ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantNullObject)
-		          cnst = new ZocleeShade.SPIRVConstant
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConstantNullObject)
+		          cnst = new SPIRV.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.NullObject
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 34 // ***** OpSpecConstantTrue ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstantTrue)
-		          cnst = new ZocleeShade.SPIRVConstant
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstantTrue)
+		          cnst = new SPIRV.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.SpecBooleanTrue
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 35 // ***** OpSpecConstantFalse ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstantFalse)
-		          cnst = new ZocleeShade.SPIRVConstant
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstantFalse)
+		          cnst = new SPIRV.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.SpecBooleanFalse
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 36 // ***** OpSpecConstant ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstant)
-		          cnst = new ZocleeShade.SPIRVConstant
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstant)
+		          cnst = new SPIRV.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.SpecConstant
 		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
 		            typ = Types.Value(ModuleBinary.UInt32Value(ip + 4))
@@ -363,8 +363,8 @@ Protected Class SPIRVVirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 37 // ***** OpSpecConstantComposite ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstantComposite)
-		          cnst = new ZocleeShade.SPIRVConstant
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSpecConstantComposite)
+		          cnst = new SPIRV.SPIRVConstant
 		          cnst.Type = SPIRVConstantType.SpecComposite
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
@@ -377,46 +377,46 @@ Protected Class SPIRVVirtualMachine
 		          Constants.Value(cnst.ResultID) = cnst
 		          
 		        case 38 // ***** OpVariable ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVariable)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVariable)
 		          
 		        case 39 // ***** OpVariableArray ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVariableArray)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVariableArray)
 		          
 		        case 40 // ***** OpFunction ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunction)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunction)
 		          Functions.Value(ModuleBinary.UInt32Value(ip + 8)) = op
 		          
 		        case 41 // ***** OpFunctionParameter ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionParameter)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionParameter)
 		          
 		        case 42 // ***** OpFunctionEnd ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionEnd)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionEnd)
 		          
 		        case 43 // ***** OpFunctionCall ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionCall)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFunctionCall)
 		          
 		        case 44 // ***** OpExtInst ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtInst)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpExtInst)
 		          
 		        case 45 // ***** OpUndef ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUndef)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUndef)
 		          
 		        case 46 // ***** OpLoad ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoad)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoad)
 		          
 		        case 47 // ***** OpStore ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpStore)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpStore)
 		          
 		        case 48 // ***** OpPhi ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpPhi)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpPhi)
 		          
 		        case 49 // ***** OpDecorationGroup ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDecorationGroup)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDecorationGroup)
 		          
 		        case 50 // ***** OpDecorate ***************************************************
 		          
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDecorate)
-		          dec = new ZocleeShade.SPIRVDecoration
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDecorate)
+		          dec = new SPIRV.SPIRVDecoration
 		          dec.TargetID = ModuleBinary.UInt32Value(ip + 4)
 		          dec.Decoration = ModuleBinary.UInt32Value(ip + 8)
 		          select case dec.Decoration
@@ -433,656 +433,656 @@ Protected Class SPIRVVirtualMachine
 		          Decorations.Append dec
 		          
 		        case 51 // ***** OpMemberDecorate ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemberDecorate)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemberDecorate)
 		          
 		        case 52 // ***** OpGroupDecorate ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupDecorate)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupDecorate)
 		          
 		        case 53 // ***** OpGroupMemberDecorate ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupMemberDecorate)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupMemberDecorate)
 		          
 		        case 54 // ***** OpName ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpName)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpName)
 		          Names.Value(ModuleBinary.UInt32Value(ip + 4)) = ModuleBinary.CString(ip + 8)
 		          
 		        case 55 // ***** OpMemberName ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemberName)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemberName)
 		          
 		        case 56 // ***** OpString ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpString)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpString)
 		          
 		        case 57 // ***** OpLine ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLine)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLine)
 		          
 		        case 58 // ***** OpVectorExtractDynamic ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorExtractDynamic)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorExtractDynamic)
 		          
 		        case 59 // ***** OpVectorInsertDynamic ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorInsertDynamic)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorInsertDynamic)
 		          
 		        case 60 // ***** OpVectorShuffle ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorShuffle)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorShuffle)
 		          
 		        case 61 // ***** OpCompositeConstruct ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeConstruct)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeConstruct)
 		          
 		        case 62 // ***** OpCompositeExtract ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeExtract)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeExtract)
 		          
 		        case 63 // ***** OpCompositeInsert ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeInsert)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompositeInsert)
 		          
 		        case 64 // ***** OpCopyObject ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyObject)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyObject)
 		          
 		        case 65 // ***** OpCopyMemory ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyMemory)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyMemory)
 		          
 		        case 66 // ***** OpCopyMemorySized ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyMemorySized)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCopyMemorySized)
 		          
 		        case 67 // ***** OpSampler ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSampler)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSampler)
 		          
 		        case 68 // ***** OpTextureSample ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSample)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSample)
 		          
 		        case 69 // ***** OpTextureSampleDref ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleDref)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleDref)
 		          
 		        case 70 // ***** OpTextureSampleLod ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleLod)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleLod)
 		          
 		        case 71 // ***** OpTextureSampleProj ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProj)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProj)
 		          
 		        case 72 // ***** OpTextureSampleGrad ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleGrad)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleGrad)
 		          
 		        case 73 // ***** OpTextureSampleOffset ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleOffset)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleOffset)
 		          
 		        case 74 // ***** OpTextureSampleProjGrad ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad)
 		          
 		        case 75 // ***** OpTextureSampleProjLod ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjLod)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjLod)
 		          
 		        case 76 // ***** OpTextureSampleLodOffset ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleLodOffset)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleLodOffset)
 		          
 		        case 77 // ***** OpTextureSampleProjOffset ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjOffset)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjOffset)
 		          
 		        case 78 // ***** OpTextureSampleGradOffset ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset)
 		          
 		        case 79 // ***** OpTextureSampleProjLodOffset ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjLodOffset)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjLodOffset)
 		          
 		        case 80 // ***** OpTextureSampleProjGradOffset ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjGradOffset)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureSampleProjGradOffset)
 		          
 		        case 81 // ***** OpTextureFetchTexelLod ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchTexelLod)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchTexelLod)
 		          
 		        case 82 // ***** OpTextureFetchTexelOffset ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset)
 		          
 		        case 83 // ***** OpTextureFetchSample ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchSample)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchSample)
 		          
 		        case 84 // ***** OpTextureFetchTexel ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchTexel)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureFetchTexel)
 		          
 		        case 85 // ***** OpTextureGather ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureGather)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureGather)
 		          
 		        case 86 // ***** OpTextureGatherOffset ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureGatherOffset)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureGatherOffset)
 		          
 		        case 87 // ***** OpTextureGatherOffsets ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureGatherOffsets)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureGatherOffsets)
 		          
 		        case 88 // ***** OpTextureQuerySizeLod ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureQuerySizeLod)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureQuerySizeLod)
 		          
 		        case 89 // ***** OpTextureQuerySize ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureQuerySize)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureQuerySize)
 		          
 		        case 90 // ***** OpTextureQueryLod ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureQueryLod)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureQueryLod)
 		          
 		        case 91 // ***** OpTextureQueryLevels ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureQueryLevels)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureQueryLevels)
 		          
 		        case 92 // ***** OpTextureQuerySamples ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureQuerySamples)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTextureQuerySamples)
 		          
 		        case 93 // ***** OpAccessChain ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAccessChain)
 		          
 		        case 94 // ***** OpInBoundsAccessChain ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpInBoundsAccessChain)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpInBoundsAccessChain)
 		          
 		        case 95 // ***** OpSNegate ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSNegate)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSNegate)
 		          
 		        case 96 // ***** OpFNegate ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFNegate)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFNegate)
 		          
 		        case 97 // ***** OpNot ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpNot)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpNot)
 		          
 		        case 98 // ***** OpAny ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAny)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAny)
 		          
 		        case 99 // ***** OpAll ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAll)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAll)
 		          
 		        case 100 // ***** OpConvertFToU ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertFToU)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertFToU)
 		          
 		        case 101 // ***** OpConvertFToS ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertFToS)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertFToS)
 		          
 		        case 102 // ***** OpConvertSToF ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertSToF)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertSToF)
 		          
 		        case 103 // ***** OpConvertUToF ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertUToF)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertUToF)
 		          
 		        case 104 // ***** OpUConvert ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUConvert)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUConvert)
 		          
 		        case 105 // ***** OpSConvert ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSConvert)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSConvert)
 		          
 		        case 106 // ***** OpFConvert ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFConvert)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFConvert)
 		          
 		        case 107 // ***** OpConvertPtrToU ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertPtrToU)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertPtrToU)
 		          
 		        case 108 // ***** OpConvertUToPtr ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertUToPtr)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpConvertUToPtr)
 		          
 		        case 109 // ***** OpPtrCastToGeneric ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpPtrCastToGeneric)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpPtrCastToGeneric)
 		          
 		        case 110 // ***** OpGenericCastToPtr ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGenericCastToPtr)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGenericCastToPtr)
 		          
 		        case 111 // ***** OpBitcast ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitcast)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitcast)
 		          
 		        case 112 // ***** OpTranspose ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTranspose)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpTranspose)
 		          
 		        case 113 // ***** OpIsNan ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsNan)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsNan)
 		          
 		        case 114 // ***** OpIsInf ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsInf)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsInf)
 		          
 		        case 115 // ***** OpIsFinite ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsFinite)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsFinite)
 		          
 		        case 116 // ***** OpIsNormal ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsNormal)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsNormal)
 		          
 		        case 117 // ***** OpSignBitSet ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSignBitSet)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSignBitSet)
 		          
 		        case 118 // ***** OpLessOrGreater ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLessOrGreater)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLessOrGreater)
 		          
 		        case 119 // ***** OpOrdered ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpOrdered)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpOrdered)
 		          
 		        case 120 // ***** OpUnordered ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUnordered)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUnordered)
 		          
 		        case 121 // ***** OpArrayLength ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpArrayLength)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpArrayLength)
 		          
 		        case 122 // ***** OpIAdd ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIAdd)
 		          
 		        case 123 // ***** OpFAdd ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFAdd)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFAdd)
 		          
 		        case 124 // ***** OpISub ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpISub)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpISub)
 		          
 		        case 125 // ***** OpFSub ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFSub)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFSub)
 		          
 		        case 126 // ***** OpIMul ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIMul)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIMul)
 		          
 		        case 127 // ***** OpFMul ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFMul)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFMul)
 		          
 		        case 128 // ***** OpUDiv ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUDiv)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUDiv)
 		          
 		        case 129 // ***** OpSDiv ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSDiv)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSDiv)
 		          
 		        case 130 // ***** OpFDiv ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFDiv)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFDiv)
 		          
 		        case 131 // ***** OpUMod ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUMod)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUMod)
 		          
 		        case 132 // ***** OpSRem ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSRem)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSRem)
 		          
 		        case 133 // ***** OpSMod ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSMod)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSMod)
 		          
 		        case 134 // ***** OpFRem ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFRem)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFRem)
 		          
 		        case 135 // ***** OpFMul ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFMul)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFMul)
 		          
 		        case 136 // ***** OpVectorTimesScalar ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorTimesScalar)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorTimesScalar)
 		          
 		        case 137 // ***** OpMatrixTimesScalar ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMatrixTimesScalar)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMatrixTimesScalar)
 		          
 		        case 138 // ***** OpVectorTimesMatrix ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorTimesMatrix)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpVectorTimesMatrix)
 		          
 		        case 139 // ***** OpMatrixTimesVector ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMatrixTimesVector)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMatrixTimesVector)
 		          
 		        case 140 // ***** OpMatrixTimesMatrix ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMatrixTimesMatrix)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMatrixTimesMatrix)
 		          
 		        case 141 // ***** OpOuterProduct ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpOuterProduct)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpOuterProduct)
 		          
 		        case 142 // ***** OpDot ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDot)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDot)
 		          
 		        case 143 // ***** OpShiftRightLogical ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpShiftRightLogical)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpShiftRightLogical)
 		          
 		        case 144 // ***** OpShiftRightArithmetic ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpShiftRightArithmetic)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpShiftRightArithmetic)
 		          
 		        case 145 // ***** OpShiftLeftLogical ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpShiftLeftLogical)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpShiftLeftLogical)
 		          
 		        case 146 // ***** OpLogicalOr ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLogicalOr)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLogicalOr)
 		          
 		        case 147 // ***** OpLogicalXor ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLogicalXor)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLogicalXor)
 		          
 		        case 148 // ***** OpLogicalAnd ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLogicalAnd)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLogicalAnd)
 		          
 		        case 149 // ***** OpBitwiseOr ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitwiseOr)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitwiseOr)
 		          
 		        case 150 // ***** OpBitwiseXor ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitwiseXor)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitwiseXor)
 		          
 		        case 151 // ***** OpBitwiseAnd ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitwiseAnd)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBitwiseAnd)
 		          
 		        case 152 // ***** OpSelect ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSelect)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSelect)
 		          
 		        case 153 // ***** OpIEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIEqual)
 		          
 		        case 154 // ***** OpFOrdEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdEqual)
 		          
 		        case 155 // ***** OpFUnordEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordEqual)
 		          
 		        case 156 // ***** OpINotEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpINotEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpINotEqual)
 		          
 		        case 157 // ***** OpFOrdNotEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdNotEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdNotEqual)
 		          
 		        case 158 // ***** OpFUnordNotEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordNotEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordNotEqual)
 		          
 		        case 159 // ***** OpULessThan ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpULessThan)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpULessThan)
 		          
 		        case 160 // ***** OpSLessThan ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThan)
 		          
 		        case 161 // ***** OpFOrdLessThan ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdLessThan)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdLessThan)
 		          
 		        case 162 // ***** OpFUnordLessThan ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordLessThan)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordLessThan)
 		          
 		        case 163 // ***** OpUGreaterThan ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUGreaterThan)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUGreaterThan)
 		          
 		        case 164 // ***** OpSGreaterThan ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSGreaterThan)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSGreaterThan)
 		          
 		        case 165 // ***** OpFOrdGreaterThan ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdGreaterThan)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdGreaterThan)
 		          
 		        case 166 // ***** OpFUnordGreaterThan ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordGreaterThan)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordGreaterThan)
 		          
 		        case 167 // ***** OpULessThanEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpULessThanEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpULessThanEqual)
 		          
 		        case 168 // ***** OpSLessThanEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThanEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSLessThanEqual)
 		          
 		        case 169 // ***** OpFOrdLessThanEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdLessThanEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdLessThanEqual)
 		          
 		        case 170 // ***** OpFUnordLessThanEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordLessThanEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordLessThanEqual)
 		          
 		        case 171 // ***** OpUGreaterThanEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUGreaterThanEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUGreaterThanEqual)
 		          
 		        case 172 // ***** OpSGreaterThanEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSGreaterThanEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSGreaterThanEqual)
 		          
 		        case 173 // ***** OpFOrdGreaterThanEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdGreaterThanEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFOrdGreaterThanEqual)
 		          
 		        case 174 // ***** OpFUnordGreaterThanEqual ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordGreaterThanEqual)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFUnordGreaterThanEqual)
 		          
 		        case 175 // ***** OpDPdx ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdx)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdx)
 		          
 		        case 176 // ***** OpDPdy ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdy)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdy)
 		          
 		        case 177 // ***** OpFwidth ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFwidth)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFwidth)
 		          
 		        case 178 // ***** OpDPdxFine ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdxFine)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdxFine)
 		          
 		        case 179 // ***** OpDPdyFine ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdyFine)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdyFine)
 		          
 		        case 180 // ***** OpFwidthFine ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFwidthFine)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFwidthFine)
 		          
 		        case 181 // ***** OpDPdxCoarse ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdxCoarse)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdxCoarse)
 		          
 		        case 182 // ***** OpDPdyCoarse ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdyCoarse)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpDPdyCoarse)
 		          
 		        case 183 // ***** OpFwidthCoarse ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFwidthCoarse)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpFwidthCoarse)
 		          
 		        case 184 // ***** OpEmitVertex ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEmitVertex)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEmitVertex)
 		          
 		        case 185 // ***** OpEndPrimitive ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEndPrimitive)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEndPrimitive)
 		          
 		        case 186 // ***** OpEmitStreamVertex ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEmitStreamVertex)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEmitStreamVertex)
 		          
 		        case 187 // ***** OpEndStreamPrimitive ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEndStreamPrimitive)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEndStreamPrimitive)
 		          
 		        case 188 // ***** OpControlBarrier ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpControlBarrier)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpControlBarrier)
 		          
 		        case 189 // ***** OpMemoryBarrier ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemoryBarrier)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpMemoryBarrier)
 		          
 		        case 190 // ***** OpImagePointer ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpImagePointer)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpImagePointer)
 		          
 		        case 191 // ***** OpAtomicInit ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicInit)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicInit)
 		          
 		        case 192 // ***** OpAtomicLoad ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicLoad)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicLoad)
 		          
 		        case 193 // ***** OpAtomicStore ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicStore)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicStore)
 		          
 		        case 194 // ***** OpAtomicExchange ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicExchange)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicExchange)
 		          
 		        case 195 // ***** OpAtomicCompareExchange ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicCompareExchange)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicCompareExchange)
 		          
 		        case 196 // ***** OpAtomicCompareExchangeWeak ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicCompareExchangeWeak)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicCompareExchangeWeak)
 		          
 		        case 197 // ***** OpAtomicIIncrement ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicIIncrement)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicIIncrement)
 		          
 		        case 198 // ***** OpAtomicIDecrement ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicIDecrement)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicIDecrement)
 		          
 		        case 199 // ***** OpAtomicIAdd ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicIAdd)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicIAdd)
 		          
 		        case 200 // ***** OpAtomicISub ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicISub)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicISub)
 		          
 		        case 201 // ***** OpAtomicUMin ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicUMin)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicUMin)
 		          
 		        case 202 // ***** OpAtomicUMax ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicUMax)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicUMax)
 		          
 		        case 203 // ***** OpAtomicAnd ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicAnd)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicAnd)
 		          
 		        case 204 // ***** OpAtomicOr ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicOr)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicOr)
 		          
 		        case 205 // ***** OpAtomicXor ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicXor)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicXor)
 		          
 		        case 206 // ***** OpLoopMerge ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLoopMerge)
 		          
 		        case 207 // ***** OpSelectionMerge ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSelectionMerge)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSelectionMerge)
 		          
 		        case 208 // ***** OpLabel ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLabel)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLabel)
 		          
 		        case 209 // ***** OpBranch ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBranch)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBranch)
 		          
 		        case 210 // ***** OpBranchConditional ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBranchConditional)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBranchConditional)
 		          
 		        case 211 // ***** OpSwitch ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSwitch)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSwitch)
 		          
 		        case 212 // ***** OpKill ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpKill)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpKill)
 		          
 		        case 213 // ***** OpReturn ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReturn)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReturn)
 		          
 		        case 214 // ***** OpReturnValue ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReturnValue)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReturnValue)
 		          
 		        case 215 // ***** OpUnreachable ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUnreachable)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpUnreachable)
 		          
 		        case 216 // ***** OpLifetimeStart ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLifetimeStart)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLifetimeStart)
 		          
 		        case 217 // ***** OpLifetimeStop ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLifetimeStop)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpLifetimeStop)
 		          
 		        case 218 // ***** OpCompileFlag ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompileFlag)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCompileFlag)
 		          
 		        case 219 // ***** OpAsyncGroupCopy ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAsyncGroupCopy)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAsyncGroupCopy)
 		          
 		        case 220 // ***** OpWaitGroupEvents ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpWaitGroupEvents)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpWaitGroupEvents)
 		          
 		        case 221 // ***** OpGroupAll ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupAll)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupAll)
 		          
 		        case 222 // ***** OpGroupAny ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupAny)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupAny)
 		          
 		        case 223 // ***** OpGroupBroadcast ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupBroadcast)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupBroadcast)
 		          
 		        case 224 // ***** OpGroupIAdd ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupIAdd)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupIAdd)
 		          
 		        case 225 // ***** OpGroupFAdd ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupFAdd)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupFAdd)
 		          
 		        case 226 // ***** OpGroupFMin ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupFMin)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupFMin)
 		          
 		        case 227 // ***** OpGroupUMin ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupUMin)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupUMin)
 		          
 		        case 228 // ***** OpGroupSMin ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupSMin)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupSMin)
 		          
 		        case 229 // ***** OpGroupFMax ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupFMax)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupFMax)
 		          
 		        case 230 // ***** OpGroupUMax ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupUMax)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupUMax)
 		          
 		        case 231 // ***** OpGroupSMax ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupSMax)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupSMax)
 		          
 		        case 232 // ***** OpGenericCastToPtrExplicit ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit)
 		          
 		        case 233 // ***** OpGenericPtrMemSemantics ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics)
 		          
 		        case 234 // ***** OpReadPipe ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReadPipe)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReadPipe)
 		          
 		        case 235 // ***** OpWritePipe ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpWritePipe)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpWritePipe)
 		          
 		        case 236 // ***** OpReservedReadPipe ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReservedReadPipe)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReservedReadPipe)
 		          
 		        case 237 // ***** OpReservedWritePipe ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReservedWritePipe)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReservedWritePipe)
 		          
 		        case 238 // ***** OpReserveReadPipePackets ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReserveReadPipePackets)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReserveReadPipePackets)
 		          
 		        case 239 // ***** OpReserveWritePipePackets ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReserveWritePipePackets)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReserveWritePipePackets)
 		          
 		        case 240 // ***** OpCommitReadPipe ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCommitReadPipe)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCommitReadPipe)
 		          
 		        case 241 // ***** OpCommitWritePipe ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCommitWritePipe)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCommitWritePipe)
 		          
 		        case 242 // ***** OpIsValidReserveId ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsValidReserveId)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsValidReserveId)
 		          
 		        case 243 // ***** OpGetNumPipePackets ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetNumPipePackets)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetNumPipePackets)
 		          
 		        case 244 // ***** OpGetMaxPipePackets ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetMaxPipePackets)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetMaxPipePackets)
 		          
 		        case 245 // ***** OpGroupReserveReadPipePackets ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupReserveReadPipePackets)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupReserveReadPipePackets)
 		          
 		        case 246 // ***** OpGroupReserveWritePipePackets ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupReserveWritePipePackets)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupReserveWritePipePackets)
 		          
 		        case 247 // ***** OpGroupCommitReadPipe ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupCommitReadPipe)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupCommitReadPipe)
 		          
 		        case 248 // ***** OpGroupCommitWritePipe ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupCommitWritePipe)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGroupCommitWritePipe)
 		          
 		        case 249 // ***** OpEnqueueMarker ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEnqueueMarker)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEnqueueMarker)
 		          
 		        case 250 // ***** OpEnqueueKernel ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEnqueueKernel)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpEnqueueKernel)
 		          
 		        case 251 // ***** OpGetKernelNDrangeSubGroupCount ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount)
 		          
 		        case 252 // ***** OpGetKernelNDrangeMaxSubGroupSize ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize)
 		          
 		        case 253 // ***** OpGetKernelWorkGroupSize ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelWorkGroupSize)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelWorkGroupSize)
 		          
 		        case 254 // ***** OpGetKernelPreferredWorkGroupSizeMultiple ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple)
 		          
 		        case 255 // ***** OpRetainEvent ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpRetainEvent)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpRetainEvent)
 		          
 		        case 256 // ***** OpReleaseEvent ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReleaseEvent)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpReleaseEvent)
 		          
 		        case 257 // ***** OpCreateUserEvent ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCreateUserEvent)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCreateUserEvent)
 		          
 		        case 258 // ***** OpIsValidEvent ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsValidEvent)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpIsValidEvent)
 		          
 		        case 259 // ***** OpSetUserEventStatus ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSetUserEventStatus)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSetUserEventStatus)
 		          
 		        case 260 // ***** OpCaptureEventProfilingInfo ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCaptureEventProfilingInfo)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpCaptureEventProfilingInfo)
 		          
 		        case 261 // ***** OpGetDefaultQueue ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetDefaultQueue)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpGetDefaultQueue)
 		          
 		        case 262 // ***** OpBuildNDRange ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBuildNDRange)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpBuildNDRange)
 		          
 		        case 263 // ***** OpSatConvertSToU ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSatConvertSToU)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSatConvertSToU)
 		          
 		        case 264 // ***** OpSatConvertUToS ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSatConvertUToS)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpSatConvertUToS)
 		          
 		        case 265 // ***** OpAtomicIMin ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicIMin)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicIMin)
 		          
 		        case 266 // ***** OpAtomicIMax ***************************************************
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicIMax)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.OpAtomicIMax)
 		          
 		        case else
-		          op = new ZocleeShade.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
+		          op = new SPIRV.SPIRVOpcode(self, SPIRVOpcodeTypeEnum.Unknown)
 		          
 		          Errors.Append ("ERROR [" + Str(ip) + "]: Unknown opcode.")
 		          
@@ -1130,7 +1130,7 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub logError(op As ZocleeShade.SPIRVOpcode, errMsg As String)
+		Private Sub logError(op As SPIRV.SPIRVOpcode, errMsg As String)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -1148,8 +1148,8 @@ Protected Class SPIRVVirtualMachine
 		  Dim j As UInt32
 		  Dim k As Integer
 		  Dim ub As UInt32
-		  Dim op As ZocleeShade.SPIRVOpcode
-		  Dim typ As ZocleeShade.SPIRVType
+		  Dim op As SPIRV.SPIRVOpcode
+		  Dim typ As SPIRV.SPIRVType
 		  
 		  i = 0
 		  while i <= Opcodes.Ubound
@@ -4256,7 +4256,7 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub validate_functionId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
+		Private Sub validate_functionId(op As SPIRV.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -4271,7 +4271,7 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub validate_Id(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
+		Private Sub validate_Id(op As SPIRV.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -4286,7 +4286,7 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub validate_ResultId(op As ZocleeShade.SPIRVOpcode, id As UInt32)
+		Private Sub validate_ResultId(op As SPIRV.SPIRVOpcode, id As UInt32)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -4299,7 +4299,7 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub validate_typeId(op As ZocleeShade.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
+		Private Sub validate_typeId(op As SPIRV.SPIRVOpcode, id As UInt32, errMsgOutOfBounds As String, errMsgNotDeclared As String)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -4314,7 +4314,7 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub validate_WordCountEqual(op As ZocleeShade.SPIRVOpcode, cnt As UInt32)
+		Private Sub validate_WordCountEqual(op As SPIRV.SPIRVOpcode, cnt As UInt32)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -4326,7 +4326,7 @@ Protected Class SPIRVVirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub validate_WordCountMinimum(op As ZocleeShade.SPIRVOpcode, min As UInt32)
+		Private Sub validate_WordCountMinimum(op As SPIRV.SPIRVOpcode, min As UInt32)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -4351,7 +4351,7 @@ Protected Class SPIRVVirtualMachine
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Decorations() As ZocleeShade.SPIRVDecoration
+		Decorations() As SPIRV.SPIRVDecoration
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -4387,7 +4387,7 @@ Protected Class SPIRVVirtualMachine
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Opcodes() As ZocleeShade.SPIRVOpcode
+		Opcodes() As SPIRV.SPIRVOpcode
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

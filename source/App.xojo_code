@@ -3,14 +3,14 @@ Protected Class App
 Inherits Application
 	#tag Event
 		Sub Open()
-		  VM = new ZocleeShade.SPIRVVirtualMachine()
+		  VM = new SPIRV.SPIRVVirtualMachine()
 		  
 		End Sub
 	#tag EndEvent
 
 
 	#tag Property, Flags = &h0
-		VM As ZocleeShade.SPIRVVirtualMachine
+		VM As SPIRV.SPIRVVirtualMachine
 	#tag EndProperty
 
 

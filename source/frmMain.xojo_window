@@ -230,7 +230,7 @@ End
 		  Dim readStream As BinaryStream
 		  Dim allType As New FileType
 		  Dim spirvType As New FileType
-		  Dim op As ZocleeShade.SPIRVOpcode
+		  Dim op As SPIRV.SPIRVOpcode
 		  Dim tmpStr As String
 		  
 		  // configure file types
@@ -298,7 +298,7 @@ End
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Bound)
 		    
 		    lstInfo.AddRow "Source Language"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeSourceLanguage(App.VM.SourceLanguage)
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = SPIRV.SPIRVDescribeSourceLanguage(App.VM.SourceLanguage)
 		    
 		    lstInfo.AddRow "Source Version"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.SourceVersion)
@@ -307,10 +307,10 @@ End
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.EntryPoints.Count)
 		    
 		    lstInfo.AddRow "Addressing Model"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeAddressingModel(App.VM.AddressingModel)
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = SPIRV.SPIRVDescribeAddressingModel(App.VM.AddressingModel)
 		    
 		    lstInfo.AddRow "Memory Model"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = ZocleeShade.SPIRVDescribeMemoryModel(App.VM.MemoryModel)
+		    lstInfo.Cell(lstInfo.LastIndex, 1) = SPIRV.SPIRVDescribeMemoryModel(App.VM.MemoryModel)
 		    
 		    lstInfo.AddRow "Opcodes"
 		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Opcodes.Ubound + 1)
@@ -379,7 +379,7 @@ End
 		  Dim pos As Integer
 		  Dim offset As UInt32
 		  Dim i As Integer
-		  Dim op As ZocleeShade.SPIRVOpcode
+		  Dim op As SPIRV.SPIRVOpcode
 		  Dim found As Boolean
 		  
 		  if lstErrors.ListIndex >= 0 then
@@ -415,7 +415,7 @@ End
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
-		  Dim op As ZocleeShade.SPIRVOpcode
+		  Dim op As SPIRV.SPIRVOpcode
 		  
 		  op = Me.RowTag(row)
 		  

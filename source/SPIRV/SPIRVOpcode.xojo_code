@@ -27,7 +27,7 @@ Protected Class SPIRVOpcode
 		  ' www.zoclee.com/shade
 		  
 		  Dim result() As String
-		  Dim typ As ZocleeShade.SPIRVType
+		  Dim typ As SPIRV.SPIRVType
 		  
 		  result.Append Str(VM.ModuleBinary.UInt32Value(binOffset))
 		  result.Append "("
@@ -45,7 +45,7 @@ Protected Class SPIRVOpcode
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor(initVM As ZocleeShade.SPIRVVirtualMachine, initType As SPIRVOpcodeTypeEnum)
+		Sub Constructor(initVM As SPIRV.SPIRVVirtualMachine, initType As SPIRVOpcodeTypeEnum)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -69,7 +69,7 @@ Protected Class SPIRVOpcode
 			  ' www.zoclee.com/shade
 			  
 			  Dim result() As String
-			  Dim typ As ZocleeShade.SPIRVType
+			  Dim typ As SPIRV.SPIRVType
 			  Dim i As UInt32
 			  Dim ub As UInt32
 			  
@@ -3156,7 +3156,7 @@ Protected Class SPIRVOpcode
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		VM As ZocleeShade.SPIRVVirtualMachine
+		VM As SPIRV.SPIRVVirtualMachine
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
