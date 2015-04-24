@@ -29,7 +29,7 @@ Protected Class Constant
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Type As SPIRVConstantType
+		Type As ConstantTypeEnum
 	#tag EndProperty
 
 
