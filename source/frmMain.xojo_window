@@ -274,7 +274,27 @@ End
 		    
 		    mnuVacuumOpcodes.AutoEnable = True
 		    
+		    toolMain.Item(2).Enabled = true
+		    
 		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub actionSave()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim bs As BinaryStream
+		  
+		  if CurrentFile <> nil then
+		    
+		    bs = BinaryStream.Create(CurrentFile, True) // Overwrite if exists
+		    bs.Write(SPIRVModule)
+		    bs.Close
+		    
+		  end if
+		  
 		End Sub
 	#tag EndMethod
 
@@ -484,6 +504,9 @@ End
 		    
 		  case "toolOpen"
 		    actionOpen
+		    
+		  case "toolSave"
+		    actionSave
 		    
 		  end select
 		  

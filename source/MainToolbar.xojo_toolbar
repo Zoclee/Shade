@@ -6,5 +6,17 @@ Begin Toolbar MainToolbar
 		Style = 0
 		Icon = 1263134719
 	End
+	Begin ToolButton toolSep1
+		Caption = "Untitled"
+		HelpTag = ""
+		Style = 1
+	End
+	Begin ToolButton toolSave
+		Caption = "Save"
+		HelpTag = ""
+		Style = 0
+		Enabled = False
+		Icon = 1284722687
+	End
 End
 #tag EndToolbar
