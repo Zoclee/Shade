@@ -1970,7 +1970,7 @@ Protected Module SPIRV
 	#tag EndMethod
 
 
-	#tag Enum, Name = ConstantTypeEnum, Type = Integer, Flags = &h0
+	#tag Enum, Name = ConstantEnum, Type = Integer, Flags = &h0
 		Unknown
 		  Composite
 		  Constant

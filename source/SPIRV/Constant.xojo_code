@@ -29,7 +29,7 @@ Protected Class Constant
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Type As ConstantTypeEnum
+		Type As ConstantEnum
 	#tag EndProperty
 
 

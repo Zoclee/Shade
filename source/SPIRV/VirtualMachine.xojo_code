@@ -258,7 +258,7 @@ Protected Class VirtualMachine
 		        case 27 // ***** OpConstantTrue ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantTrue)
 		          cnst = new SPIRV.Constant
-		          cnst.Type = ConstantTypeEnum.BooleanTrue
+		          cnst.Type = ConstantEnum.BooleanTrue
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
@@ -266,7 +266,7 @@ Protected Class VirtualMachine
 		        case 28 // ***** OpConstantFalse ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantFalse)
 		          cnst = new SPIRV.Constant
-		          cnst.Type = ConstantTypeEnum.BooleanFalse
+		          cnst.Type = ConstantEnum.BooleanFalse
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
@@ -275,14 +275,14 @@ Protected Class VirtualMachine
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstant)
 		          
 		          cnst = new SPIRV.Constant
-		          cnst.Type = ConstantTypeEnum.Constant
+		          cnst.Type = ConstantEnum.Constant
 		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
 		            typ = Types.Value(ModuleBinary.UInt32Value(ip + 4))
 		            select case typ.Type
 		            case SPIRV.TypeEnum.Float
-		              cnst.Type = ConstantTypeEnum.Float
+		              cnst.Type = ConstantEnum.Float
 		            case SPIRV.TypeEnum.Integer
-		              cnst.Type = ConstantTypeEnum.Integer
+		              cnst.Type = ConstantEnum.Integer
 		            end select
 		          end if
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
@@ -292,7 +292,7 @@ Protected Class VirtualMachine
 		        case 30 // ***** OpConstantComposite ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantComposite)
 		          cnst = new SPIRV.Constant
-		          cnst.Type = ConstantTypeEnum.Composite
+		          cnst.Type = ConstantEnum.Composite
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          tempIP = ip + 12
@@ -316,7 +316,7 @@ Protected Class VirtualMachine
 		        case 32 // ***** OpConstantNullPointer ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantNullPointer)
 		          cnst = new SPIRV.Constant
-		          cnst.Type = ConstantTypeEnum.NullPointer
+		          cnst.Type = ConstantEnum.NullPointer
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
@@ -324,7 +324,7 @@ Protected Class VirtualMachine
 		        case 33 // ***** OpConstantNullObject ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantNullObject)
 		          cnst = new SPIRV.Constant
-		          cnst.Type = ConstantTypeEnum.NullObject
+		          cnst.Type = ConstantEnum.NullObject
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
@@ -332,7 +332,7 @@ Protected Class VirtualMachine
 		        case 34 // ***** OpSpecConstantTrue ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstantTrue)
 		          cnst = new SPIRV.Constant
-		          cnst.Type = ConstantTypeEnum.SpecBooleanTrue
+		          cnst.Type = ConstantEnum.SpecBooleanTrue
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
@@ -340,7 +340,7 @@ Protected Class VirtualMachine
 		        case 35 // ***** OpSpecConstantFalse ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstantFalse)
 		          cnst = new SPIRV.Constant
-		          cnst.Type = ConstantTypeEnum.SpecBooleanFalse
+		          cnst.Type = ConstantEnum.SpecBooleanFalse
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          Constants.Value(cnst.ResultID) = cnst
@@ -348,14 +348,14 @@ Protected Class VirtualMachine
 		        case 36 // ***** OpSpecConstant ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstant)
 		          cnst = new SPIRV.Constant
-		          cnst.Type = ConstantTypeEnum.SpecConstant
+		          cnst.Type = ConstantEnum.SpecConstant
 		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
 		            typ = Types.Value(ModuleBinary.UInt32Value(ip + 4))
 		            select case typ.Type
 		            case SPIRV.TypeEnum.Float
-		              cnst.Type = ConstantTypeEnum.Float
+		              cnst.Type = ConstantEnum.Float
 		            case SPIRV.TypeEnum.Integer
-		              cnst.Type = ConstantTypeEnum.Integer
+		              cnst.Type = ConstantEnum.Integer
 		            end select
 		          end if
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
@@ -365,7 +365,7 @@ Protected Class VirtualMachine
 		        case 37 // ***** OpSpecConstantComposite ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstantComposite)
 		          cnst = new SPIRV.Constant
-		          cnst.Type = ConstantTypeEnum.SpecComposite
+		          cnst.Type = ConstantEnum.SpecComposite
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          tempIP = ip + 12
