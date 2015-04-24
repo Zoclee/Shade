@@ -272,10 +272,6 @@ End
 		    
 		    readStream.Close
 		    
-		    ' these lines are used for testing
-		    'm = SPIRVTestModule1()
-		    'm = SPIRVTestModule2()
-		    
 		    Self.Title = "{Zoclee}™ Shade v" + Str(App.MajorVersion) + "." + Str(App.MinorVersion)+ "." + Str(App.BugVersion) + " - " + CurrentFile.NativePath
 		    
 		    refreshModule()
