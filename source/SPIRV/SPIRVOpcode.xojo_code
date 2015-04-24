@@ -45,7 +45,7 @@ Protected Class SPIRVOpcode
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor(initVM As SPIRV.SPIRVVirtualMachine, initType As SPIRVOpcodeTypeEnum)
+		Sub Constructor(initVM As SPIRV.VirtualMachine, initType As SPIRVOpcodeTypeEnum)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -3156,7 +3156,7 @@ Protected Class SPIRVOpcode
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		VM As SPIRV.SPIRVVirtualMachine
+		VM As SPIRV.VirtualMachine
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0

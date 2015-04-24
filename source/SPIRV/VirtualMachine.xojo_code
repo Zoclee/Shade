@@ -1,5 +1,5 @@
 #tag Class
-Protected Class SPIRVVirtualMachine
+Protected Class VirtualMachine
 	#tag Method, Flags = &h0
 		Sub Clear()
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.

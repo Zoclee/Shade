@@ -3,14 +3,14 @@ Protected Class App
 Inherits Application
 	#tag Event
 		Sub Open()
-		  VM = new SPIRV.SPIRVVirtualMachine()
+		  VM = new SPIRV.VirtualMachine()
 		  
 		End Sub
 	#tag EndEvent
 
 
 	#tag Property, Flags = &h0
-		VM As SPIRV.SPIRVVirtualMachine
+		VM As SPIRV.VirtualMachine
 	#tag EndProperty
 
 
