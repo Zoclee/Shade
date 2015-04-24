@@ -1,13 +1,17 @@
 #tag Module
 Protected Module SPIRVUtil
 	#tag Method, Flags = &h0
-		Sub RemoveDebugInstructions(moduleBinary As MemoryBlock)
+		Sub RemoveDebugInstructions(ByRef moduleBinary As MemoryBlock)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
 		  Dim reduceSize As UInt32
 		  Dim ip As UInt32
 		  Dim moduleUB As UInt32
+		  Dim cleanBinary As MemoryBlock
+		  Dim ipClean As UInt32
+		  Dim opSize As UInt32
+		  Dim j As UInt32
 		  
 		  reduceSize = 0
 		  moduleUB = moduleBinary.Size - 1
@@ -48,12 +52,65 @@ Protected Module SPIRVUtil
 		    end if
 		  wend
 		  
-		  // todo
-		  break
+		  cleanBinary = new MemoryBlock(moduleBinary.Size - reduceSize)
+		  ip = 0
+		  while ip < 20
+		    cleanBinary.Byte(ip) = moduleBinary.Byte(ip)
+		    ip = ip + 1
+		  wend
 		  
 		  if reduceSize > 0 then
-		    break
+		    
+		    ip = 20
+		    ipClean = 20
+		    while ip <= moduleUB
+		      
+		      select case ModuleBinary.UInt16Value(ip)
+		        
+		      case 1 // ***** OpSource ***************************************************
+		        // do nothing
+		        
+		      case 2 // ***** OpSourceExtension ***************************************************
+		        // do nothing
+		        
+		      case 54 // ***** OpName ***************************************************
+		        // do nothing
+		        
+		      case 55 // ***** OpMemberName ***************************************************
+		        // do nothing
+		        
+		      case 56 // ***** OpString ***************************************************
+		        // do nothing
+		        
+		      case 57 // ***** OpLine ***************************************************
+		        // do nothing
+		        
+		      case else
+		        opSize = moduleBinary.UInt16Value(ip + 2) * 4
+		        j = 0 
+		        while j < opSize
+		          cleanBinary.Byte(ipClean + j) = moduleBinary.Byte(ip + j)
+		          j = j + 1
+		        wend
+		        ipClean = ipClean + opSize
+		        
+		      end select
+		      
+		      if (ip + 2) >= moduleBinary.Size then
+		        ip = moduleUB + 1
+		      elseif moduleBinary.UInt16Value(ip + 2) = 0 then
+		        ip = moduleUB + 1
+		      else
+		        ip = ip + (moduleBinary.UInt16Value(ip + 2) * 4)
+		      end if
+		      
+		    wend
+		    
+		    moduleBinary = cleanBinary
+		    
 		  end if
+		  
+		  
 		End Sub
 	#tag EndMethod
 

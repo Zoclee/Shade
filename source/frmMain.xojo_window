@@ -258,10 +258,6 @@ End
 		    
 		    CurrentFile = f
 		    
-		    lstErrors.DeleteAllRows
-		    lstInfo.DeleteAllRows
-		    lstInstructions.DeleteAllRows
-		    
 		    ' read file into memoryblock
 		    
 		    readStream = BinaryStream.Open(f)
@@ -301,6 +297,10 @@ End
 		  Dim i As Integer
 		  Dim op As SPIRV.Opcode
 		  Dim tmpStr As String
+		  
+		  lstErrors.DeleteAllRows
+		  lstInfo.DeleteAllRows
+		  lstInstructions.DeleteAllRows
 		  
 		  App.VM.LoadModule(SPIRVModule)
 		  
