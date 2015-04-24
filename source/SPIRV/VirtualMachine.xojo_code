@@ -34,7 +34,7 @@ Protected Class VirtualMachine
 		  Dim moduleUB As Integer
 		  Dim tempIP As UInt32
 		  Dim ub As UInt32
-		  Dim ep As SPIRV.SPIRVEntryPoint
+		  Dim ep As SPIRV.EntryPoint
 		  Dim dec As SPIRV.SPIRVDecoration
 		  Dim typ As SPIRV.SPIRVType
 		  Dim op As SPIRV.Opcode
@@ -90,7 +90,7 @@ Protected Class VirtualMachine
 		          
 		        case 6 // ***** OpEntryPoint ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpEntryPoint)
-		          ep = new SPIRV.SPIRVEntryPoint
+		          ep = new SPIRV.EntryPoint
 		          ep.ExecutionModel = ModuleBinary.UInt32Value(ip + 4)
 		          ep.EntryPointID = ModuleBinary.UInt32Value(ip + 8)
 		          EntryPoints.Value(ep.EntryPointID) = ep

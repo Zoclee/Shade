@@ -1,5 +1,5 @@
 #tag Class
-Protected Class SPIRVEntryPoint
+Protected Class EntryPoint
 	#tag Property, Flags = &h0
 		EntryPointID As UInt32
 	#tag EndProperty
