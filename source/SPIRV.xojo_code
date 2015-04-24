@@ -1970,24 +1970,7 @@ Protected Module SPIRV
 	#tag EndMethod
 
 
-	#tag Enum, Name = SPIRVConstantType, Type = Integer, Flags = &h0
-		Unknown
-		  Composite
-		  Constant
-		  BooleanFalse
-		  BooleanTrue
-		  Float
-		  Integer
-		  NullObject
-		  NullPointer
-		  Sampler
-		  SpecBooleanTrue
-		  SpecBooleanFalse
-		  SpecComposite
-		SpecConstant
-	#tag EndEnum
-
-	#tag Enum, Name = SPIRVOpcodeTypeEnum, Type = Integer, Flags = &h0
+	#tag Enum, Name = OpcodeTypeEnum, Type = Integer, Flags = &h0
 		Unknown
 		  OpAccessChain
 		  OpAll
@@ -2256,6 +2239,23 @@ Protected Module SPIRV
 		  OpVectorTimesScalar
 		  OpWaitGroupEvents
 		OpWritePipe
+	#tag EndEnum
+
+	#tag Enum, Name = SPIRVConstantType, Type = Integer, Flags = &h0
+		Unknown
+		  Composite
+		  Constant
+		  BooleanFalse
+		  BooleanTrue
+		  Float
+		  Integer
+		  NullObject
+		  NullPointer
+		  Sampler
+		  SpecBooleanTrue
+		  SpecBooleanFalse
+		  SpecComposite
+		SpecConstant
 	#tag EndEnum
 
 	#tag Enum, Name = SPIRVTypeEnum, Type = Integer, Flags = &h0

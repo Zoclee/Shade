@@ -230,7 +230,7 @@ End
 		  Dim readStream As BinaryStream
 		  Dim allType As New FileType
 		  Dim spirvType As New FileType
-		  Dim op As SPIRV.SPIRVOpcode
+		  Dim op As SPIRV.Opcode
 		  Dim tmpStr As String
 		  
 		  // configure file types
@@ -379,7 +379,7 @@ End
 		  Dim pos As Integer
 		  Dim offset As UInt32
 		  Dim i As Integer
-		  Dim op As SPIRV.SPIRVOpcode
+		  Dim op As SPIRV.Opcode
 		  Dim found As Boolean
 		  
 		  if lstErrors.ListIndex >= 0 then
@@ -415,7 +415,7 @@ End
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
-		  Dim op As SPIRV.SPIRVOpcode
+		  Dim op As SPIRV.Opcode
 		  
 		  op = Me.RowTag(row)
 		  

@@ -1,5 +1,5 @@
 #tag Class
-Protected Class SPIRVOpcode
+Protected Class Opcode
 	#tag Method, Flags = &h21
 		Private Function compose_id(binOffset As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
@@ -45,7 +45,7 @@ Protected Class SPIRVOpcode
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor(initVM As SPIRV.VirtualMachine, initType As SPIRVOpcodeTypeEnum)
+		Sub Constructor(initVM As SPIRV.VirtualMachine, initType As OpcodeTypeEnum)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -77,7 +77,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAccessChain *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAccessChain
+			  case OpcodeTypeEnum.OpAccessChain
 			    result.Append "AccessChain"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -92,21 +92,21 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAll *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAll
+			  case OpcodeTypeEnum.OpAll
 			    result.Append "All"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpAny *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAny
+			  case OpcodeTypeEnum.OpAny
 			    result.Append "Any"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpArrayLength *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpArrayLength
+			  case OpcodeTypeEnum.OpArrayLength
 			    result.Append "ArrayLength"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -115,7 +115,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAsyncGroupCopy *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAsyncGroupCopy
+			  case OpcodeTypeEnum.OpAsyncGroupCopy
 			    result.Append "AsyncGroupCopy"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -132,7 +132,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicAnd *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicAnd
+			  case OpcodeTypeEnum.OpAtomicAnd
 			    result.Append "AtomicAnd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -145,7 +145,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicCompareExchange *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicCompareExchange
+			  case OpcodeTypeEnum.OpAtomicCompareExchange
 			    result.Append "AtomicCompareExchange"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -160,7 +160,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicCompareExchangeWeak *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicCompareExchangeWeak
+			  case OpcodeTypeEnum.OpAtomicCompareExchangeWeak
 			    result.Append "AtomicCompareExchangeWeak"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -175,7 +175,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicExchange *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicExchange
+			  case OpcodeTypeEnum.OpAtomicExchange
 			    result.Append "AtomicExchange"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -186,7 +186,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicIAdd *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicIAdd
+			  case OpcodeTypeEnum.OpAtomicIAdd
 			    result.Append "AtomicIAdd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -199,7 +199,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicIDecrement *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicIDecrement
+			  case OpcodeTypeEnum.OpAtomicIDecrement
 			    result.Append "AtomicIDecrement"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -210,7 +210,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicIIncrement *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicIIncrement
+			  case OpcodeTypeEnum.OpAtomicIIncrement
 			    result.Append "AtomicIIncrement"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -221,7 +221,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicIMax *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicIMax
+			  case OpcodeTypeEnum.OpAtomicIMax
 			    result.Append "AtomicIMax"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -234,7 +234,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicIMin *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicIMin
+			  case OpcodeTypeEnum.OpAtomicIMin
 			    result.Append "AtomicIMin"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -247,7 +247,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicISub *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicISub
+			  case OpcodeTypeEnum.OpAtomicISub
 			    result.Append "AtomicISub"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -260,7 +260,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicInit *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicInit
+			  case OpcodeTypeEnum.OpAtomicInit
 			    result.Append "AtomicInit"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -269,7 +269,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicLoad *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicLoad
+			  case OpcodeTypeEnum.OpAtomicLoad
 			    result.Append "AtomicLoad"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -282,7 +282,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicOr *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicOr
+			  case OpcodeTypeEnum.OpAtomicOr
 			    result.Append "AtomicOr"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -295,7 +295,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicStore *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicStore
+			  case OpcodeTypeEnum.OpAtomicStore
 			    result.Append "AtomicStore"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -308,7 +308,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicUMax *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicUMax
+			  case OpcodeTypeEnum.OpAtomicUMax
 			    result.Append "AtomicUMax"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -321,7 +321,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicUMin *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicUMin
+			  case OpcodeTypeEnum.OpAtomicUMin
 			    result.Append "AtomicUMin"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -334,7 +334,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpAtomicXor *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpAtomicXor
+			  case OpcodeTypeEnum.OpAtomicXor
 			    result.Append "OpAtomicXor"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -347,14 +347,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpBitcast *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpBitcast
+			  case OpcodeTypeEnum.OpBitcast
 			    result.Append "Bitcast"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpBitwiseAnd *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpBitwiseAnd
+			  case OpcodeTypeEnum.OpBitwiseAnd
 			    result.Append "BitwiseAnd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -363,7 +363,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpBitwiseOr *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpBitwiseOr
+			  case OpcodeTypeEnum.OpBitwiseOr
 			    result.Append "BitwiseOr"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -372,7 +372,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpBitwiseXor *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpBitwiseXor
+			  case OpcodeTypeEnum.OpBitwiseXor
 			    result.Append "BitwiseXor"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -381,14 +381,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpBranch *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpBranch
+			  case OpcodeTypeEnum.OpBranch
 			    result.Append "Branch"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpBranchConditional *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpBranchConditional
+			  case OpcodeTypeEnum.OpBranchConditional
 			    result.Append "BranchConditional"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -406,7 +406,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpBuildNDRange *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpBuildNDRange
+			  case OpcodeTypeEnum.OpBuildNDRange
 			    result.Append "BuildNDRange"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -417,7 +417,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpCaptureEventProfilingInfo *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpCaptureEventProfilingInfo
+			  case OpcodeTypeEnum.OpCaptureEventProfilingInfo
 			    result.Append "CaptureEventProfilingInfo"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -428,7 +428,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpCommitReadPipe *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpCommitReadPipe
+			  case OpcodeTypeEnum.OpCommitReadPipe
 			    result.Append "CommitReadPipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -437,7 +437,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpCommitWritePipe *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpCommitWritePipe
+			  case OpcodeTypeEnum.OpCommitWritePipe
 			    result.Append "CommitWritePipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -446,7 +446,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpCompileFlag ************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpCompileFlag
+			  case OpcodeTypeEnum.OpCompileFlag
 			    result.Append "CompileFlag"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 4)
@@ -454,7 +454,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpCompositeConstruct *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpCompositeConstruct
+			  case OpcodeTypeEnum.OpCompositeConstruct
 			    result.Append "CompositeConstruct"
 			    ub = offset + WordCount * 4
 			    i = Offset + 12
@@ -466,7 +466,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpCompositeExtract *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpCompositeExtract
+			  case OpcodeTypeEnum.OpCompositeExtract
 			    result.Append "CompositeExtract"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -480,7 +480,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpCompositeInsert *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpCompositeInsert
+			  case OpcodeTypeEnum.OpCompositeInsert
 			    result.Append "CompositeInsert"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -496,14 +496,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpConstant *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConstant
+			  case OpcodeTypeEnum.OpConstant
 			    result.Append "Constant"
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
 			    // ***** OpConstantComposite *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConstantComposite
+			  case OpcodeTypeEnum.OpConstantComposite
 			    result.Append "ConstantComposite"
 			    ub = offset + WordCount * 4
 			    i = Offset + 12
@@ -515,22 +515,22 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpConstantFalse *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConstantFalse
+			  case OpcodeTypeEnum.OpConstantFalse
 			    result.Append "ConstantFalse"
 			    
 			    // ***** OpConstantNullObject *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConstantNullObject
+			  case OpcodeTypeEnum.OpConstantNullObject
 			    result.Append "ConstantNullObject"
 			    
 			    // ***** OpConstantNullPointer *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConstantNullPointer
+			  case OpcodeTypeEnum.OpConstantNullPointer
 			    result.Append "ConstantNullPointer"
 			    
 			    // ***** OpConstantSampler *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConstantSampler
+			  case OpcodeTypeEnum.OpConstantSampler
 			    result.Append "ConstantSampler"
 			    result.Append " "
 			    result.Append SPIRVDescribeSamplerAddressingMode(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -541,61 +541,61 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpConstantTrue *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConstantTrue
+			  case OpcodeTypeEnum.OpConstantTrue
 			    result.Append "ConstantTrue"
 			    
 			    // ***** OpControlBarrier *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpControlBarrier
+			  case OpcodeTypeEnum.OpControlBarrier
 			    result.Append "ControlBarrier"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
 			    
 			    // ***** OpConvertFToS *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConvertFToS
+			  case OpcodeTypeEnum.OpConvertFToS
 			    result.Append "ConvertFToS"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpConvertFToU *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConvertFToU
+			  case OpcodeTypeEnum.OpConvertFToU
 			    result.Append "ConvertFToU"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpConvertPtrToU *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConvertPtrToU
+			  case OpcodeTypeEnum.OpConvertPtrToU
 			    result.Append "ConvertPtrToU"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpConvertSToF *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConvertSToF
+			  case OpcodeTypeEnum.OpConvertSToF
 			    result.Append "ConvertSToF"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpConvertUToF *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConvertUToF
+			  case OpcodeTypeEnum.OpConvertUToF
 			    result.Append "ConvertUToF"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** ConvertUToPtr *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpConvertUToPtr
+			  case OpcodeTypeEnum.OpConvertUToPtr
 			    result.Append "ConvertUToPtr"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpCopyMemory *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpCopyMemory
+			  case OpcodeTypeEnum.OpCopyMemory
 			    result.Append "CopyMemory"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -611,7 +611,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpCopyMemorySized *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpCopyMemorySized
+			  case OpcodeTypeEnum.OpCopyMemorySized
 			    result.Append "CopyMemorySized"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -629,19 +629,19 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpCopyObject *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpCopyObject
+			  case OpcodeTypeEnum.OpCopyObject
 			    result.Append "CopyObject"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpCreateUserEvent *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpCreateUserEvent
+			  case OpcodeTypeEnum.OpCreateUserEvent
 			    result.Append "CreateUserEvent"
 			    
 			    // ***** OpDecorate *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpDecorate
+			  case OpcodeTypeEnum.OpDecorate
 			    result.Append "Decorate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -700,12 +700,12 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpDecorationGroup *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpDecorationGroup
+			  case OpcodeTypeEnum.OpDecorationGroup
 			    result.Append "DecorationGroup"
 			    
 			    // ***** OpDot *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpDot
+			  case OpcodeTypeEnum.OpDot
 			    result.Append "Dot"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -714,73 +714,73 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpDPdx *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpDPdx
+			  case OpcodeTypeEnum.OpDPdx
 			    result.Append "DPdx"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpDPdxCoarse *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpDPdxCoarse
+			  case OpcodeTypeEnum.OpDPdxCoarse
 			    result.Append "DPdxCoarse"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpDPdxFine *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpDPdxFine
+			  case OpcodeTypeEnum.OpDPdxFine
 			    result.Append "DPdxFine"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpDPdy *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpDPdy
+			  case OpcodeTypeEnum.OpDPdy
 			    result.Append "DPdy"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpDPdyCoarse *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpDPdyCoarse
+			  case OpcodeTypeEnum.OpDPdyCoarse
 			    result.Append "DPdyCoarse"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpDPdyFine *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpDPdyFine
+			  case OpcodeTypeEnum.OpDPdyFine
 			    result.Append "DPdyFine"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpEmitStreamVertex *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpEmitStreamVertex
+			  case OpcodeTypeEnum.OpEmitStreamVertex
 			    result.Append "EmitStreamVertex"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpEndStreamPrimitive *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpEndStreamPrimitive
+			  case OpcodeTypeEnum.OpEndStreamPrimitive
 			    result.Append "EndStreamPrimitive"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpEmitVertex *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpEmitVertex
+			  case OpcodeTypeEnum.OpEmitVertex
 			    result.Append "EmitVertex"
 			    
 			    // ***** OpEndPrimitive *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpEndPrimitive
+			  case OpcodeTypeEnum.OpEndPrimitive
 			    result.Append "EndPrimitive"
 			    
 			    // ***** OpEnqueueKernel *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpEnqueueKernel
+			  case OpcodeTypeEnum.OpEnqueueKernel
 			    result.Append "EnqueueKernel"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -812,7 +812,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpEnqueueMarker *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpEnqueueMarker
+			  case OpcodeTypeEnum.OpEnqueueMarker
 			    result.Append "EnqueueMarker"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -825,7 +825,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpEntryPoint *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpEntryPoint
+			  case OpcodeTypeEnum.OpEntryPoint
 			    result.Append "EntryPoint"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionModel(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -834,7 +834,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpExecutionMode *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpExecutionMode
+			  case OpcodeTypeEnum.OpExecutionMode
 			    result.Append "ExecutionMode"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -868,7 +868,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpExtension *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpExtension
+			  case OpcodeTypeEnum.OpExtension
 			    result.Append "Extension"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 4)
@@ -876,7 +876,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpExtInst *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpExtInst
+			  case OpcodeTypeEnum.OpExtInst
 			    result.Append "ExtInst"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -892,7 +892,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpExtInstImport *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpExtInstImport
+			  case OpcodeTypeEnum.OpExtInstImport
 			    result.Append "ExtInstImport"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
@@ -900,7 +900,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFAdd *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFAdd
+			  case OpcodeTypeEnum.OpFAdd
 			    result.Append "FAdd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -909,14 +909,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFConvert *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFConvert
+			  case OpcodeTypeEnum.OpFConvert
 			    result.Append "FConvert"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpFDiv *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFDiv
+			  case OpcodeTypeEnum.OpFDiv
 			    result.Append "FDiv"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -925,7 +925,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFMod *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFMod
+			  case OpcodeTypeEnum.OpFMod
 			    result.Append "FMod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -934,7 +934,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFMul *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFMul
+			  case OpcodeTypeEnum.OpFMul
 			    result.Append "FMul"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -943,14 +943,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFNegate *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFNegate
+			  case OpcodeTypeEnum.OpFNegate
 			    result.Append "FNegate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpFOrdEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFOrdEqual
+			  case OpcodeTypeEnum.OpFOrdEqual
 			    result.Append "FOrdEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -959,7 +959,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFOrdGreaterThan *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFOrdGreaterThan
+			  case OpcodeTypeEnum.OpFOrdGreaterThan
 			    result.Append "FOrdGreaterThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -968,7 +968,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFOrdGreaterThanEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFOrdGreaterThanEqual
+			  case OpcodeTypeEnum.OpFOrdGreaterThanEqual
 			    result.Append "FOrdGreaterThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -978,7 +978,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFOrdLessThan *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFOrdLessThan
+			  case OpcodeTypeEnum.OpFOrdLessThan
 			    result.Append "FOrdLessThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -987,7 +987,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFOrdLessThanEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFOrdLessThanEqual
+			  case OpcodeTypeEnum.OpFOrdLessThanEqual
 			    result.Append "FOrdLessThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -996,7 +996,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFOrdNotEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFOrdNotEqual
+			  case OpcodeTypeEnum.OpFOrdNotEqual
 			    result.Append "FOrdNotEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1005,7 +1005,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFRem *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFRem
+			  case OpcodeTypeEnum.OpFRem
 			    result.Append "FRem"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1014,7 +1014,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFSub *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFSub
+			  case OpcodeTypeEnum.OpFSub
 			    result.Append "FSub"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1023,7 +1023,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFunction *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFunction
+			  case OpcodeTypeEnum.OpFunction
 			    result.Append "Function"
 			    result.Append " "
 			    result.Append SPIRVDescribeFunctionControlMask(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1032,7 +1032,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFunctionCall *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFunctionCall
+			  case OpcodeTypeEnum.OpFunctionCall
 			    result.Append "FunctionCall"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1046,17 +1046,17 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFunctionEnd *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFunctionEnd
+			  case OpcodeTypeEnum.OpFunctionEnd
 			    result.Append "FunctionEnd"
 			    
 			    // ***** OpFunctionParameter *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFunctionParameter
+			  case OpcodeTypeEnum.OpFunctionParameter
 			    result.Append "FunctionParameter"
 			    
 			    // ***** OpFUnordEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFUnordEqual
+			  case OpcodeTypeEnum.OpFUnordEqual
 			    result.Append "FUnordEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1065,7 +1065,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFUnordGreaterThan *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFUnordGreaterThan
+			  case OpcodeTypeEnum.OpFUnordGreaterThan
 			    result.Append "FUnordGreaterThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1074,7 +1074,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFUnordGreaterThanEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFUnordGreaterThanEqual
+			  case OpcodeTypeEnum.OpFUnordGreaterThanEqual
 			    result.Append "FUnordGreaterThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1083,7 +1083,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFUnordLessThan *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFUnordLessThan
+			  case OpcodeTypeEnum.OpFUnordLessThan
 			    result.Append "FUnordLessThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1092,7 +1092,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFUnordLessThanEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFUnordLessThanEqual
+			  case OpcodeTypeEnum.OpFUnordLessThanEqual
 			    result.Append "FUnordLessThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1101,7 +1101,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFUnordNotEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFUnordNotEqual
+			  case OpcodeTypeEnum.OpFUnordNotEqual
 			    result.Append "FUnordNotEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1110,35 +1110,35 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpFwidth *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFwidth
+			  case OpcodeTypeEnum.OpFwidth
 			    result.Append "Fwidth"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpFwidthCoarse *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFwidthCoarse
+			  case OpcodeTypeEnum.OpFwidthCoarse
 			    result.Append "FwidthCoarse"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpFwidthFine *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpFwidthFine
+			  case OpcodeTypeEnum.OpFwidthFine
 			    result.Append "FwidthFine"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGenericCastToPtr *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGenericCastToPtr
+			  case OpcodeTypeEnum.OpGenericCastToPtr
 			    result.Append "GenericCastToPtr"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGenericCastToPtrExplicit *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit
+			  case OpcodeTypeEnum.OpGenericCastToPtrExplicit
 			    result.Append "GenericCastToPtrExplicit"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1147,19 +1147,19 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGenericPtrMemSemantics *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics
+			  case OpcodeTypeEnum.OpGenericPtrMemSemantics
 			    result.Append "GenericPtrMemSemantics"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGetDefaultQueue *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGetDefaultQueue
+			  case OpcodeTypeEnum.OpGetDefaultQueue
 			    result.Append "GetDefaultQueue"
 			    
 			    // ***** OpGetKernelNDrangeMaxSubGroupSize *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize
+			  case OpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize
 			    result.Append "GetKernelNDrangeMaxSubGroupSize"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1168,7 +1168,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGetKernelNDrangeSubGroupCount *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount
+			  case OpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount
 			    result.Append "GetKernelNDrangeSubGroupCount"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1177,35 +1177,35 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGetKernelPreferredWorkGroupSizeMultiple *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple
+			  case OpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple
 			    result.Append "GetKernelPreferredWorkGroupSizeMultiple"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGetKernelWorkGroupSize *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGetKernelWorkGroupSize
+			  case OpcodeTypeEnum.OpGetKernelWorkGroupSize
 			    result.Append "GetKernelWorkGroupSize"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGetMaxPipePackets *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGetMaxPipePackets
+			  case OpcodeTypeEnum.OpGetMaxPipePackets
 			    result.Append "GetMaxPipePackets"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGetNumPipePackets *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGetNumPipePackets
+			  case OpcodeTypeEnum.OpGetNumPipePackets
 			    result.Append "GetNumPipePackets"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpGroupAll *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupAll
+			  case OpcodeTypeEnum.OpGroupAll
 			    result.Append "GroupAll"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1214,7 +1214,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupAll *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupAny
+			  case OpcodeTypeEnum.OpGroupAny
 			    result.Append "GroupAny"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1223,7 +1223,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupBroadcast *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupBroadcast
+			  case OpcodeTypeEnum.OpGroupBroadcast
 			    result.Append "GroupBroadcast"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1234,7 +1234,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupCommitReadPipe *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupCommitReadPipe
+			  case OpcodeTypeEnum.OpGroupCommitReadPipe
 			    result.Append "GroupCommitReadPipe"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -1245,7 +1245,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupCommitWritePipe *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupCommitWritePipe
+			  case OpcodeTypeEnum.OpGroupCommitWritePipe
 			    result.Append "GroupCommitWritePipe"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -1256,7 +1256,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupDecorate *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupDecorate
+			  case OpcodeTypeEnum.OpGroupDecorate
 			    result.Append "GroupDecorate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1270,7 +1270,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupFAdd *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupFAdd
+			  case OpcodeTypeEnum.OpGroupFAdd
 			    result.Append "GroupFAdd"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1281,7 +1281,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupFMax *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupFMax
+			  case OpcodeTypeEnum.OpGroupFMax
 			    result.Append "GroupFMax"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1292,7 +1292,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupFMin *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupFMin
+			  case OpcodeTypeEnum.OpGroupFMin
 			    result.Append "GroupFMin"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1303,7 +1303,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupIAdd *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupIAdd
+			  case OpcodeTypeEnum.OpGroupIAdd
 			    result.Append "GroupIAdd"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1314,7 +1314,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupReserveReadPipePackets *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupReserveReadPipePackets
+			  case OpcodeTypeEnum.OpGroupReserveReadPipePackets
 			    result.Append "GroupReserveReadPipePackets"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1325,7 +1325,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupReserveWritePipePackets *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupReserveWritePipePackets
+			  case OpcodeTypeEnum.OpGroupReserveWritePipePackets
 			    result.Append "GroupReserveWritePipePackets"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1336,7 +1336,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupSMax *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupSMax
+			  case OpcodeTypeEnum.OpGroupSMax
 			    result.Append "GroupSMax"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1347,7 +1347,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupSMin *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupSMin
+			  case OpcodeTypeEnum.OpGroupSMin
 			    result.Append "GroupSMin"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1359,7 +1359,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupUMax *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupUMax
+			  case OpcodeTypeEnum.OpGroupUMax
 			    result.Append "GroupUMax"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1370,7 +1370,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupUMin *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupUMin
+			  case OpcodeTypeEnum.OpGroupUMin
 			    result.Append "GroupUMin"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -1381,7 +1381,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpGroupMemberDecorate *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpGroupMemberDecorate
+			  case OpcodeTypeEnum.OpGroupMemberDecorate
 			    result.Append "GroupMemberDecorate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1395,7 +1395,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpIAdd *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpIAdd
+			  case OpcodeTypeEnum.OpIAdd
 			    result.Append "IAdd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1404,7 +1404,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpIEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpIEqual
+			  case OpcodeTypeEnum.OpIEqual
 			    result.Append "IEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1413,7 +1413,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpImagePointer *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpImagePointer
+			  case OpcodeTypeEnum.OpImagePointer
 			    result.Append "ImagePointer"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1424,7 +1424,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpIMul *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpIMul
+			  case OpcodeTypeEnum.OpIMul
 			    result.Append "IMul"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1433,7 +1433,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpInBoundsAccessChain *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpInBoundsAccessChain
+			  case OpcodeTypeEnum.OpInBoundsAccessChain
 			    result.Append "InBoundsAccessChain"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1447,7 +1447,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpINotEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpINotEqual
+			  case OpcodeTypeEnum.OpINotEqual
 			    result.Append "INotEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1456,35 +1456,35 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpIsFinite *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpIsFinite
+			  case OpcodeTypeEnum.OpIsFinite
 			    result.Append "IsFinite"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpIsInf *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpIsInf
+			  case OpcodeTypeEnum.OpIsInf
 			    result.Append "IsInf"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpIsNan *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpIsNan
+			  case OpcodeTypeEnum.OpIsNan
 			    result.Append "IsNan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpIsNormal *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpIsNormal
+			  case OpcodeTypeEnum.OpIsNormal
 			    result.Append "IsNormal"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpISub *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpISub
+			  case OpcodeTypeEnum.OpISub
 			    result.Append "ISub"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1493,31 +1493,31 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpIsValidEvent *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpIsValidEvent
+			  case OpcodeTypeEnum.OpIsValidEvent
 			    result.Append "IsValidEvent"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpIsValidReserveId *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpIsValidReserveId
+			  case OpcodeTypeEnum.OpIsValidReserveId
 			    result.Append "IsValidReserveId"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpKill *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpKill
+			  case OpcodeTypeEnum.OpKill
 			    result.Append "Kill"
 			    
 			    // ***** OpLabel *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpLabel
+			  case OpcodeTypeEnum.OpLabel
 			    result.Append "Label"
 			    
 			    // ***** OpLessOrGreater *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpLessOrGreater
+			  case OpcodeTypeEnum.OpLessOrGreater
 			    result.Append "LessOrGreater"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1526,7 +1526,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpLifetimeStart *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpLifetimeStart
+			  case OpcodeTypeEnum.OpLifetimeStart
 			    result.Append "LifetimeStart"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1535,7 +1535,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpLifetimeStop *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpLifetimeStop
+			  case OpcodeTypeEnum.OpLifetimeStop
 			    result.Append "LifetimeStop"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1544,7 +1544,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpLine *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpLine
+			  case OpcodeTypeEnum.OpLine
 			    result.Append "Line"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1557,14 +1557,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpLoad *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpLoad
+			  case OpcodeTypeEnum.OpLoad
 			    result.Append "Load"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpLogicalAnd *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpLogicalAnd
+			  case OpcodeTypeEnum.OpLogicalAnd
 			    result.Append "LogicalAnd"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1573,7 +1573,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpLogicalOr *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpLogicalOr
+			  case OpcodeTypeEnum.OpLogicalOr
 			    result.Append "LogicalOr"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1582,7 +1582,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpLogicalXor *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpLogicalXor
+			  case OpcodeTypeEnum.OpLogicalXor
 			    result.Append "LogicalXor"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1591,7 +1591,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpLoopMerge *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpLoopMerge
+			  case OpcodeTypeEnum.OpLoopMerge
 			    result.Append "LoopMerge"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1600,7 +1600,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpMatrixTimesMatrix *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpMatrixTimesMatrix
+			  case OpcodeTypeEnum.OpMatrixTimesMatrix
 			    result.Append "MatrixTimesMatrix"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1609,7 +1609,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpMatrixTimesScalar *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpMatrixTimesScalar
+			  case OpcodeTypeEnum.OpMatrixTimesScalar
 			    result.Append "MatrixTimesScalar"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1618,7 +1618,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpMatrixTimesVector *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpMatrixTimesVector
+			  case OpcodeTypeEnum.OpMatrixTimesVector
 			    result.Append "MatrixTimesVector"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1627,7 +1627,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpMemberDecorate *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpMemberDecorate
+			  case OpcodeTypeEnum.OpMemberDecorate
 			    result.Append "MemberDecorate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1678,7 +1678,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpMemberName *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpMemberName
+			  case OpcodeTypeEnum.OpMemberName
 			    result.Append "MemberName"
 			    result.Append " "
 			    result.Append compose_type(Offset + 4)
@@ -1690,7 +1690,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpMemoryBarrier *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpMemoryBarrier
+			  case OpcodeTypeEnum.OpMemoryBarrier
 			    result.Append "MemoryBarrier"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -1699,7 +1699,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpMemoryModel *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpMemoryModel
+			  case OpcodeTypeEnum.OpMemoryModel
 			    result.Append "MemoryModel"
 			    result.Append " "
 			    result.Append SPIRVDescribeAddressingModel(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -1708,7 +1708,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpName *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpName
+			  case OpcodeTypeEnum.OpName
 			    result.Append "Name"
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -1718,18 +1718,18 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpNop *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpNop
+			  case OpcodeTypeEnum.OpNop
 			    result.Append "Nop"
 			    
 			    // ***** OpNot *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpNot
+			  case OpcodeTypeEnum.OpNot
 			    result.Append "Not "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpOrdered *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpOrdered
+			  case OpcodeTypeEnum.OpOrdered
 			    result.Append "Ordered"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1738,7 +1738,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpOuterProduct *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpOuterProduct
+			  case OpcodeTypeEnum.OpOuterProduct
 			    result.Append "OuterProduct"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1747,7 +1747,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpPhi *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpPhi
+			  case OpcodeTypeEnum.OpPhi
 			    result.Append "Phi"
 			    ub = offset + WordCount * 4
 			    i = Offset + 12
@@ -1759,14 +1759,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpPtrCastToGeneric *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpPtrCastToGeneric
+			  case OpcodeTypeEnum.OpPtrCastToGeneric
 			    result.Append "PtrCastToGeneric"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpReadPipe *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpReadPipe
+			  case OpcodeTypeEnum.OpReadPipe
 			    result.Append "ReadPipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1775,14 +1775,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpReleaseEvent *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpReleaseEvent
+			  case OpcodeTypeEnum.OpReleaseEvent
 			    result.Append "ReleaseEvent"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpReservedReadPipe *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpReservedReadPipe
+			  case OpcodeTypeEnum.OpReservedReadPipe
 			    result.Append "ReservedReadPipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1795,7 +1795,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpReservedWritePipe *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpReservedWritePipe
+			  case OpcodeTypeEnum.OpReservedWritePipe
 			    result.Append "ReservedWritePipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1808,7 +1808,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpReserveReadPipePackets *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpReserveReadPipePackets
+			  case OpcodeTypeEnum.OpReserveReadPipePackets
 			    result.Append "ReserveReadPipePackets"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1817,7 +1817,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpReserveWritePipePackets *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpReserveWritePipePackets
+			  case OpcodeTypeEnum.OpReserveWritePipePackets
 			    result.Append "ReserveWritePipePackets"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1826,26 +1826,26 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpRetainEvent *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpRetainEvent
+			  case OpcodeTypeEnum.OpRetainEvent
 			    result.Append "RetainEvent"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpReturn *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpReturn
+			  case OpcodeTypeEnum.OpReturn
 			    result.Append "Return"
 			    
 			    // ***** OpReturnValue *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpReturnValue
+			  case OpcodeTypeEnum.OpReturnValue
 			    result.Append "ReturnValue"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
 			    
 			    // ***** OpSampler *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSampler
+			  case OpcodeTypeEnum.OpSampler
 			    result.Append "Sampler"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1854,28 +1854,28 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSatConvertSToU *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSatConvertSToU
+			  case OpcodeTypeEnum.OpSatConvertSToU
 			    result.Append "SatConvertSToU"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpSatConvertUToS *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSatConvertUToS
+			  case OpcodeTypeEnum.OpSatConvertUToS
 			    result.Append "SatConvertUToS"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpSConvert *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSConvert
+			  case OpcodeTypeEnum.OpSConvert
 			    result.Append "SConvert"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpSDiv *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSDiv
+			  case OpcodeTypeEnum.OpSDiv
 			    result.Append "SDiv"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1884,7 +1884,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSelect *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSelect
+			  case OpcodeTypeEnum.OpSelect
 			    result.Append "Select"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1895,7 +1895,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSelectionMerge *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSelectionMerge
+			  case OpcodeTypeEnum.OpSelectionMerge
 			    result.Append "SelectionMerge"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1904,7 +1904,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSetUserEventStatus *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSetUserEventStatus
+			  case OpcodeTypeEnum.OpSetUserEventStatus
 			    result.Append "SetUserEventStatus"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -1913,7 +1913,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSGreaterThan *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSGreaterThan
+			  case OpcodeTypeEnum.OpSGreaterThan
 			    result.Append "SGreaterThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1922,7 +1922,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSGreaterThanEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSGreaterThanEqual
+			  case OpcodeTypeEnum.OpSGreaterThanEqual
 			    result.Append "SGreaterThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1931,7 +1931,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpShiftLeftLogical *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpShiftLeftLogical
+			  case OpcodeTypeEnum.OpShiftLeftLogical
 			    result.Append "ShiftLeftLogical"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1940,7 +1940,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpShiftRightArithmetic *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpShiftRightArithmetic
+			  case OpcodeTypeEnum.OpShiftRightArithmetic
 			    result.Append "ShiftRightArithmetic"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1949,7 +1949,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpShiftRightLogical *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpShiftRightLogical
+			  case OpcodeTypeEnum.OpShiftRightLogical
 			    result.Append "ShiftRightLogical"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1958,14 +1958,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSignBitSet *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSignBitSet
+			  case OpcodeTypeEnum.OpSignBitSet
 			    result.Append "SignBitSet"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpSLessThan *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSLessThan
+			  case OpcodeTypeEnum.OpSLessThan
 			    result.Append "SLessThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1974,7 +1974,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSLessThanEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSLessThanEqual
+			  case OpcodeTypeEnum.OpSLessThanEqual
 			    result.Append "SLessThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1983,7 +1983,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSMod *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSMod
+			  case OpcodeTypeEnum.OpSMod
 			    result.Append "SMod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -1992,14 +1992,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSNegate *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSNegate
+			  case OpcodeTypeEnum.OpSNegate
 			    result.Append "SNegate"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpSource *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSource
+			  case OpcodeTypeEnum.OpSource
 			    result.Append "Source"
 			    result.Append " "
 			    result.Append SPIRVDescribeSourceLanguage(VM.ModuleBinary.UInt32Value(Offset + 4))
@@ -2008,7 +2008,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSourceExtension *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSourceExtension
+			  case OpcodeTypeEnum.OpSourceExtension
 			    result.Append "SourceExtension"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 4)
@@ -2016,14 +2016,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSpecConstant *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSpecConstant
+			  case OpcodeTypeEnum.OpSpecConstant
 			    result.Append "SpecConstant"
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 12))
 			    
 			    // ***** OpSpecConstantComposite *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSpecConstantComposite
+			  case OpcodeTypeEnum.OpSpecConstantComposite
 			    result.Append "SpecConstantComposite"
 			    ub = offset + WordCount * 4
 			    i = Offset + 12
@@ -2035,17 +2035,17 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSpecConstantFalse *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSpecConstantFalse
+			  case OpcodeTypeEnum.OpSpecConstantFalse
 			    result.Append "SpecConstantFalse"
 			    
 			    // ***** OpSpecConstantTrue *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSpecConstantTrue
+			  case OpcodeTypeEnum.OpSpecConstantTrue
 			    result.Append "SpecConstantTrue"
 			    
 			    // ***** OpSRem *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSRem
+			  case OpcodeTypeEnum.OpSRem
 			    result.Append "SRem"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2054,7 +2054,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpStore *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpStore
+			  case OpcodeTypeEnum.OpStore
 			    result.Append "Store"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -2070,7 +2070,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpString *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpString
+			  case OpcodeTypeEnum.OpString
 			    result.Append "String"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
@@ -2078,7 +2078,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpSwitch *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpSwitch
+			  case OpcodeTypeEnum.OpSwitch
 			    result.Append "Switch"
 			    result.Append " "
 			    result.Append compose_id(Offset + 4)
@@ -2097,7 +2097,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureFetchSample *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureFetchSample
+			  case OpcodeTypeEnum.OpTextureFetchSample
 			    result.Append "TextureFetchSample"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2108,7 +2108,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureFetchTexel *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureFetchTexel
+			  case OpcodeTypeEnum.OpTextureFetchTexel
 			    result.Append "TextureFetchTexel"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2117,7 +2117,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureFetchTexelLod *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureFetchTexelLod
+			  case OpcodeTypeEnum.OpTextureFetchTexelLod
 			    result.Append "TextureFetchTexelLod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2128,7 +2128,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureFetchTexel *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset
+			  case OpcodeTypeEnum.OpTextureFetchTexelOffset
 			    result.Append "TextureFetchTexelOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2139,7 +2139,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureGather *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureGather
+			  case OpcodeTypeEnum.OpTextureGather
 			    result.Append "TextureGather"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2150,7 +2150,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureGatherOffset *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureGatherOffset
+			  case OpcodeTypeEnum.OpTextureGatherOffset
 			    result.Append "TextureGatherOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2163,7 +2163,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureGatherOffsets *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureGatherOffsets
+			  case OpcodeTypeEnum.OpTextureGatherOffsets
 			    result.Append "TextureGatherOffsets"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2176,14 +2176,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureQueryLevels *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureQueryLevels
+			  case OpcodeTypeEnum.OpTextureQueryLevels
 			    result.Append "TextureQueryLevels"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpTextureQueryLod *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureQueryLod
+			  case OpcodeTypeEnum.OpTextureQueryLod
 			    result.Append "TextureQueryLod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2192,21 +2192,21 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureQuerySamples *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureQuerySamples
+			  case OpcodeTypeEnum.OpTextureQuerySamples
 			    result.Append "TextureQuerySamples"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpTextureQuerySize *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureQuerySize
+			  case OpcodeTypeEnum.OpTextureQuerySize
 			    result.Append "TextureQuerySize"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpTextureQuerySizeLod *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureQuerySizeLod
+			  case OpcodeTypeEnum.OpTextureQuerySizeLod
 			    result.Append "TextureQuerySizeLod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2215,7 +2215,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSample *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSample
+			  case OpcodeTypeEnum.OpTextureSample
 			    result.Append "TextureSample"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2228,7 +2228,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleDref *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleDref
+			  case OpcodeTypeEnum.OpTextureSampleDref
 			    result.Append "TextureSampleDref"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2239,7 +2239,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleGrad *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleGrad
+			  case OpcodeTypeEnum.OpTextureSampleGrad
 			    result.Append "TextureSampleGrad"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2252,7 +2252,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleGradOffset *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset
+			  case OpcodeTypeEnum.OpTextureSampleGradOffset
 			    result.Append "TextureSampleGradOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2267,7 +2267,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleLod *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleLod
+			  case OpcodeTypeEnum.OpTextureSampleLod
 			    result.Append "TextureSampleLod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2278,7 +2278,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleLodOffset *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleLodOffset
+			  case OpcodeTypeEnum.OpTextureSampleLodOffset
 			    result.Append "TextureSampleLodOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2291,7 +2291,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleOffset *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleOffset
+			  case OpcodeTypeEnum.OpTextureSampleOffset
 			    result.Append "TextureSampleOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2306,7 +2306,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleProj *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProj
+			  case OpcodeTypeEnum.OpTextureSampleProj
 			    result.Append "TextureSampleProj"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2319,7 +2319,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleProjGrad *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad
+			  case OpcodeTypeEnum.OpTextureSampleProjGrad
 			    result.Append "TextureSampleProjGrad"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2332,7 +2332,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleProjGradOffset *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjGradOffset
+			  case OpcodeTypeEnum.OpTextureSampleProjGradOffset
 			    result.Append "TextureSampleProjGradOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2347,7 +2347,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleProjLod *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjLod
+			  case OpcodeTypeEnum.OpTextureSampleProjLod
 			    result.Append "TextureSampleProjLod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2358,7 +2358,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleProjLodOffset *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjLodOffset
+			  case OpcodeTypeEnum.OpTextureSampleProjLodOffset
 			    result.Append "TextureSampleProjLodOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2371,7 +2371,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTextureSampleProjOffset *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTextureSampleProjOffset
+			  case OpcodeTypeEnum.OpTextureSampleProjOffset
 			    result.Append "TextureSampleProjOffset"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2386,14 +2386,14 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTranspose *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTranspose
+			  case OpcodeTypeEnum.OpTranspose
 			    result.Append "Transpose"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpTypeArray *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeArray
+			  case OpcodeTypeEnum.OpTypeArray
 			    result.Append "TypeArray"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2402,34 +2402,34 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeBool *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeBool
+			  case OpcodeTypeEnum.OpTypeBool
 			    result.Append "TypeBool"
 			    
 			    // ***** OpTypeDeviceEvent *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeDeviceEvent
+			  case OpcodeTypeEnum.OpTypeDeviceEvent
 			    result.Append "TypeDeviceEvent"
 			    
 			    // ***** OpTypeEvent *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeEvent
+			  case OpcodeTypeEnum.OpTypeEvent
 			    result.Append "TypeEvent"
 			    
 			    // ***** OpTypeFilter *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeFilter
+			  case OpcodeTypeEnum.OpTypeFilter
 			    result.Append "TypeFilter"
 			    
 			    // ***** OpTypeFloat *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeFloat
+			  case OpcodeTypeEnum.OpTypeFloat
 			    result.Append "TypeFloat"
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
 			    
 			    // ***** OpTypeFunction *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeFunction
+			  case OpcodeTypeEnum.OpTypeFunction
 			    result.Append "TypeFunction"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2443,7 +2443,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeInt *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeInt
+			  case OpcodeTypeEnum.OpTypeInt
 			    result.Append "TypeInt"
 			    result.Append " "
 			    result.Append Str(VM.ModuleBinary.UInt32Value(Offset + 8))
@@ -2455,7 +2455,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeMatrix *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeMatrix
+			  case OpcodeTypeEnum.OpTypeMatrix
 			    result.Append "TypeMatrix"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2464,7 +2464,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeOpaque *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeOpaque
+			  case OpcodeTypeEnum.OpTypeOpaque
 			    result.Append "TypeOpaque"
 			    result.Append " """
 			    result.Append VM.ModuleBinary.CString(Offset + 8)
@@ -2472,7 +2472,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypePipe *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypePipe
+			  case OpcodeTypeEnum.OpTypePipe
 			    result.Append "TypePipe"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2481,7 +2481,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypePointer *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypePointer
+			  case OpcodeTypeEnum.OpTypePointer
 			    result.Append "TypePointer"
 			    result.Append " "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 8))
@@ -2490,24 +2490,24 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeQueue *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeQueue
+			  case OpcodeTypeEnum.OpTypeQueue
 			    result.Append "TypeQueue"
 			    
 			    // ***** OpTypeReserveId *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeReserveId
+			  case OpcodeTypeEnum.OpTypeReserveId
 			    result.Append "TypeReserveId"
 			    
 			    // ***** OpTypeRuntimeArray *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeRuntimeArray
+			  case OpcodeTypeEnum.OpTypeRuntimeArray
 			    result.Append "TypeRuntimeArray"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
 			    
 			    // ***** OpTypeSampler *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeSampler
+			  case OpcodeTypeEnum.OpTypeSampler
 			    result.Append "TypeSampler"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2530,7 +2530,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeStruct *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeStruct
+			  case OpcodeTypeEnum.OpTypeStruct
 			    result.Append "TypeStruct"
 			    result.Append " "
 			    ub = offset + WordCount * 4
@@ -2543,7 +2543,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeVector *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeVector
+			  case OpcodeTypeEnum.OpTypeVector
 			    result.Append "TypeVector"
 			    result.Append " "
 			    result.Append compose_type(Offset + 8)
@@ -2552,19 +2552,19 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpTypeVoid *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpTypeVoid
+			  case OpcodeTypeEnum.OpTypeVoid
 			    result.Append "TypeVoid"
 			    
 			    // ***** OpUConvert *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpUConvert
+			  case OpcodeTypeEnum.OpUConvert
 			    result.Append "UConvert"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
 			    
 			    // ***** OpUDiv *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpUDiv
+			  case OpcodeTypeEnum.OpUDiv
 			    result.Append "UDiv"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2573,7 +2573,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpUGreaterThan *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpUGreaterThan
+			  case OpcodeTypeEnum.OpUGreaterThan
 			    result.Append "UGreaterThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2582,7 +2582,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpUGreaterThanEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpUGreaterThanEqual
+			  case OpcodeTypeEnum.OpUGreaterThanEqual
 			    result.Append "UGreaterThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2591,7 +2591,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpULessThan *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpULessThan
+			  case OpcodeTypeEnum.OpULessThan
 			    result.Append "ULessThan"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2600,7 +2600,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpULessThanEqual *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpULessThanEqual
+			  case OpcodeTypeEnum.OpULessThanEqual
 			    result.Append "ULessThanEqual"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2609,7 +2609,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpUMod *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpUMod
+			  case OpcodeTypeEnum.OpUMod
 			    result.Append "UMod"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2618,12 +2618,12 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpUndef *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpUndef
+			  case OpcodeTypeEnum.OpUndef
 			    result.Append "Undef"
 			    
 			    // ***** OpUnordered *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpUnordered
+			  case OpcodeTypeEnum.OpUnordered
 			    result.Append "Unordered"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2632,12 +2632,12 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpUnreachable *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpUnreachable
+			  case OpcodeTypeEnum.OpUnreachable
 			    result.Append "Unreachable"
 			    
 			    // ***** OpVariable *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpVariable
+			  case OpcodeTypeEnum.OpVariable
 			    result.Append "Variable"
 			    result.Append " "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -2647,7 +2647,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpVariableArray *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpVariableArray
+			  case OpcodeTypeEnum.OpVariableArray
 			    result.Append "VariableArray"
 			    result.Append " "
 			    result.Append SPIRVDescribeStorageClass(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -2656,7 +2656,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpVectorExtractDynamic *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpVectorExtractDynamic
+			  case OpcodeTypeEnum.OpVectorExtractDynamic
 			    result.Append "VectorExtractDynamic"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2665,7 +2665,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpVectorInsertDynamic *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpVectorInsertDynamic
+			  case OpcodeTypeEnum.OpVectorInsertDynamic
 			    result.Append "VectorInsertDynamic"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2676,7 +2676,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpVectorShuffle *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpVectorShuffle
+			  case OpcodeTypeEnum.OpVectorShuffle
 			    result.Append "VectorShuffle"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2692,7 +2692,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpVectorTimesScalar *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpVectorTimesScalar
+			  case OpcodeTypeEnum.OpVectorTimesScalar
 			    result.Append "VectorTimesScalar"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2701,7 +2701,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpVectorTimesMatrix *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpVectorTimesMatrix
+			  case OpcodeTypeEnum.OpVectorTimesMatrix
 			    result.Append "VectorTimesMatrix"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2710,7 +2710,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpWaitGroupEvents *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpWaitGroupEvents
+			  case OpcodeTypeEnum.OpWaitGroupEvents
 			    result.Append "WaitGroupEvents"
 			    result.Append " "
 			    result.Append SPIRVDescribeExecutionScope(VM.ModuleBinary.UInt32Value(Offset + 12))
@@ -2721,7 +2721,7 @@ Protected Class SPIRVOpcode
 			    
 			    // ***** OpWritePipe *************************************************
 			    
-			  case SPIRVOpcodeTypeEnum.OpWritePipe
+			  case OpcodeTypeEnum.OpWritePipe
 			    result.Append "WritePipe"
 			    result.Append " "
 			    result.Append compose_id(Offset + 12)
@@ -2755,191 +2755,191 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
-			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAll, _
-			    SPIRVOpcodeTypeEnum.OpAny, _
-			    SPIRVOpcodeTypeEnum.OpArrayLength, _
-			    SPIRVOpcodeTypeEnum.OpAsyncGroupCopy, _
-			    SPIRVOpcodeTypeEnum.OpAtomicAnd, _
-			    SPIRVOpcodeTypeEnum.OpAtomicCompareExchange, SPIRVOpcodeTypeEnum.OpAtomicCompareExchangeWeak, _
-			    SPIRVOpcodeTypeEnum.OpAtomicExchange, _
-			    SPIRVOpcodeTypeEnum.OpAtomicIAdd, _
-			    SPIRVOpcodeTypeEnum.OpAtomicIDecrement, SPIRVOpcodeTypeEnum.OpAtomicIIncrement, _
-			    SPIRVOpcodeTypeEnum.OpAtomicIMax, _
-			    SPIRVOpcodeTypeEnum.OpAtomicIMin, _
-			    SPIRVOpcodeTypeEnum.OpAtomicISub, _
-			    SPIRVOpcodeTypeEnum.OpAtomicLoad, _
-			    SPIRVOpcodeTypeEnum.OpAtomicOr, _
-			    SPIRVOpcodeTypeEnum.OpAtomicUMax, _
-			    SPIRVOpcodeTypeEnum.OpAtomicUMin, _
-			    SPIRVOpcodeTypeEnum.OpAtomicXor, _
-			    SPIRVOpcodeTypeEnum.OpBitcast, _
-			    SPIRVOpcodeTypeEnum.OpBitwiseAnd, _
-			    SPIRVOpcodeTypeEnum.OpBitwiseOr, _
-			    SPIRVOpcodeTypeEnum.OpBitwiseXor, _
-			    SPIRVOpcodeTypeEnum.OpBuildNDRange, _
-			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, _
-			    SPIRVOpcodeTypeEnum.OpCompositeExtract, SPIRVOpcodeTypeEnum.OpCompositeInsert, _
-			    SPIRVOpcodeTypeEnum.OpConstant, SPIRVOpcodeTypeEnum.OpConstantComposite, _
-			    SPIRVOpcodeTypeEnum.OpConstantFalse, SPIRVOpcodeTypeEnum.OpConstantNullObject, _
-			    SPIRVOpcodeTypeEnum.OpConstantNullPointer, _
-			    SPIRVOpcodeTypeEnum.OpConstantSampler, SPIRVOpcodeTypeEnum.OpConstantTrue, _
-			    SPIRVOpcodeTypeEnum.OpConvertFToS, _
-			    SPIRVOpcodeTypeEnum.OpConvertFToU, _
-			    SPIRVOpcodeTypeEnum.OpConvertPtrToU, _
-			    SPIRVOpcodeTypeEnum.OpConvertSToF, _
-			    SPIRVOpcodeTypeEnum.OpConvertUToF, _
-			    SPIRVOpcodeTypeEnum.OpConvertUToPtr, _
-			    SPIRVOpcodeTypeEnum.OpCopyObject, _
-			    SPIRVOpcodeTypeEnum.OpCreateUserEvent, _
-			    SPIRVOpcodeTypeEnum.OpDot, _
-			    SPIRVOpcodeTypeEnum.OpDPdx, SPIRVOpcodeTypeEnum.OpDPdxCoarse, _
-			    SPIRVOpcodeTypeEnum.OpDPdxFine, _
-			    SPIRVOpcodeTypeEnum.OpDPdy, SPIRVOpcodeTypeEnum.OpDPdyCoarse, _
-			    SPIRVOpcodeTypeEnum.OpDPdyFine, _
-			    SPIRVOpcodeTypeEnum.OpEnqueueKernel, _
-			    SPIRVOpcodeTypeEnum.OpEnqueueMarker, _
-			    SPIRVOpcodeTypeEnum.OpExtInst, _
-			    SPIRVOpcodeTypeEnum.OpFAdd, SPIRVOpcodeTypeEnum.OpFConvert, _
-			    SPIRVOpcodeTypeEnum.OpFDiv, _
-			    SPIRVOpcodeTypeEnum.OpFMod, _
-			    SPIRVOpcodeTypeEnum.OpFMul, _
-			    SPIRVOpcodeTypeEnum.OpFNegate, _
-			    SPIRVOpcodeTypeEnum.OpFOrdEqual, _
-			    SPIRVOpcodeTypeEnum.OpFOrdGreaterThan, _
-			    SPIRVOpcodeTypeEnum.OpFOrdGreaterThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpFOrdLessThan, _
-			    SPIRVOpcodeTypeEnum.OpFOrdLessThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpFOrdNotEqual, _
-			    SPIRVOpcodeTypeEnum.OpFRem, _
-			    SPIRVOpcodeTypeEnum.OpFSub, SPIRVOpcodeTypeEnum.OpFunction, _
-			    SPIRVOpcodeTypeEnum.OpFunctionCall, SPIRVOpcodeTypeEnum.OpFunctionParameter, _
-			    SPIRVOpcodeTypeEnum.OpFUnordEqual, _
-			    SPIRVOpcodeTypeEnum.OpFUnordGreaterThan, _
-			    SPIRVOpcodeTypeEnum.OpFUnordGreaterThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpFUnordLessThan, _
-			    SPIRVOpcodeTypeEnum.OpFUnordLessThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpFUnordNotEqual, _
-			    SPIRVOpcodeTypeEnum.OpFwidth, SPIRVOpcodeTypeEnum.OpFwidthCoarse, _
-			    SPIRVOpcodeTypeEnum.OpFwidthFine, _
-			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
-			    SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit, _
-			    SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics, _
-			    SPIRVOpcodeTypeEnum.OpGetDefaultQueue, _
-			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
-			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount, _
-			    SPIRVOpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple, _
-			    SPIRVOpcodeTypeEnum.OpGetKernelWorkGroupSize, _
-			    SPIRVOpcodeTypeEnum.OpGetMaxPipePackets, _
-			    SPIRVOpcodeTypeEnum.OpGetNumPipePackets, _
-			    SPIRVOpcodeTypeEnum.OpGroupAll, _
-			    SPIRVOpcodeTypeEnum.OpGroupAny, _
-			    SPIRVOpcodeTypeEnum.OpGroupBroadcast, _
-			    SPIRVOpcodeTypeEnum.OpGroupFAdd, _
-			    SPIRVOpcodeTypeEnum.OpGroupFMax, _
-			    SPIRVOpcodeTypeEnum.OpGroupFMin, _
-			    SPIRVOpcodeTypeEnum.OpGroupIAdd, _
-			    SPIRVOpcodeTypeEnum.OpGroupReserveReadPipePackets, _
-			    SPIRVOpcodeTypeEnum.OpGroupReserveWritePipePackets, _
-			    SPIRVOpcodeTypeEnum.OpGroupSMax, _
-			    SPIRVOpcodeTypeEnum.OpGroupSMin, _
-			    SPIRVOpcodeTypeEnum.OpGroupUMax, _
-			    SPIRVOpcodeTypeEnum.OpGroupUMin, _
-			    SPIRVOpcodeTypeEnum.OpIAdd, _
-			    SPIRVOpcodeTypeEnum.OpIEqual, _
-			    SPIRVOpcodeTypeEnum.OpImagePointer, _
-			    SPIRVOpcodeTypeEnum.OpIMul, _
-			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, _
-			    SPIRVOpcodeTypeEnum.OpINotEqual, _
-			    SPIRVOpcodeTypeEnum.OpIsFinite, _
-			    SPIRVOpcodeTypeEnum.OpIsInf, _
-			    SPIRVOpcodeTypeEnum.OpIsNan, _
-			    SPIRVOpcodeTypeEnum.OpIsNormal, _
-			    SPIRVOpcodeTypeEnum.OpISub, _
-			    SPIRVOpcodeTypeEnum.OpIsValidEvent, _
-			    SPIRVOpcodeTypeEnum.OpIsValidReserveId, _
-			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
-			    SPIRVOpcodeTypeEnum.OpLoad, _
-			    SPIRVOpcodeTypeEnum.OpLogicalAnd, _
-			    SPIRVOpcodeTypeEnum.OpLogicalOr, _
-			    SPIRVOpcodeTypeEnum.OpLogicalXor, _
-			    SPIRVOpcodeTypeEnum.OpMatrixTimesMatrix, _
-			    SPIRVOpcodeTypeEnum.OpMatrixTimesScalar, _
-			    SPIRVOpcodeTypeEnum.OpMatrixTimesVector, _
-			    SPIRVOpcodeTypeEnum.OpNot, _
-			    SPIRVOpcodeTypeEnum.OpOrdered, _
-			    SPIRVOpcodeTypeEnum.OpOuterProduct, _
-			    SPIRVOpcodeTypeEnum.OpPhi, _
-			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
-			    SPIRVOpcodeTypeEnum.OpReadPipe, _
-			    SPIRVOpcodeTypeEnum.OpReservedReadPipe, _
-			    SPIRVOpcodeTypeEnum.OpReservedWritePipe, _
-			    SPIRVOpcodeTypeEnum.OpReserveReadPipePackets, _
-			    SPIRVOpcodeTypeEnum.OpReserveWritePipePackets, _
-			    SPIRVOpcodeTypeEnum.OpSampler, _
-			    SPIRVOpcodeTypeEnum.OpSatConvertSToU, _
-			    SPIRVOpcodeTypeEnum.OpSatConvertUToS, _
-			    SPIRVOpcodeTypeEnum.OpSConvert, _
-			    SPIRVOpcodeTypeEnum.OpSDiv, _
-			    SPIRVOpcodeTypeEnum.OpSelect, _
-			    SPIRVOpcodeTypeEnum.OpShiftLeftLogical, _
-			    SPIRVOpcodeTypeEnum.OpShiftRightArithmetic, _
-			    SPIRVOpcodeTypeEnum.OpShiftRightLogical, _
-			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
-			    SPIRVOpcodeTypeEnum.OpSGreaterThan, _
-			    SPIRVOpcodeTypeEnum.OpSGreaterThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpSLessThan, _
-			    SPIRVOpcodeTypeEnum.OpSLessThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpSMod, _
-			    SPIRVOpcodeTypeEnum.OpSNegate, _
-			    SPIRVOpcodeTypeEnum.OpSpecConstant, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
-			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
-			    SPIRVOpcodeTypeEnum.OpSRem, _
-			    SPIRVOpcodeTypeEnum.OpTextureFetchSample, _
-			    SPIRVOpcodeTypeEnum.OpTextureFetchTexel, _
-			    SPIRVOpcodeTypeEnum.OpTextureFetchTexelLod, SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureGather, SPIRVOpcodeTypeEnum.OpTextureGatherOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureGatherOffsets, SPIRVOpcodeTypeEnum.OpTextureQueryLevels, _
-			    SPIRVOpcodeTypeEnum.OpTextureQueryLod, SPIRVOpcodeTypeEnum.OpTextureQuerySamples, _
-			    SPIRVOpcodeTypeEnum.OpTextureQuerySize, SPIRVOpcodeTypeEnum.OpTextureQuerySizeLod, _
-			    SPIRVOpcodeTypeEnum.OpTextureSample, SPIRVOpcodeTypeEnum.OpTextureSampleDref, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleGrad, SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleLod, SPIRVOpcodeTypeEnum.OpTextureSampleLodOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleOffset, SPIRVOpcodeTypeEnum.OpTextureSampleProj, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad, SPIRVOpcodeTypeEnum.OpTextureSampleProjGradOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleProjLod, SPIRVOpcodeTypeEnum.OpTextureSampleProjLodOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleProjOffset, SPIRVOpcodeTypeEnum.OpTranspose, _
-			    SPIRVOpcodeTypeEnum.OpUConvert, _
-			    SPIRVOpcodeTypeEnum.OpUDiv, _
-			    SPIRVOpcodeTypeEnum.OpUGreaterThan, _
-			    SPIRVOpcodeTypeEnum.OpUGreaterThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpULessThan, _
-			    SPIRVOpcodeTypeEnum.OpULessThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpUMod, _
-			    SPIRVOpcodeTypeEnum.OpUndef, _
-			    SPIRVOpcodeTypeEnum.OpUnordered, _
-			    SPIRVOpcodeTypeEnum.OpVariable, SPIRVOpcodeTypeEnum.OpVariableArray, _
-			    SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, _
-			    SPIRVOpcodeTypeEnum.OpVectorShuffle, _
-			    SPIRVOpcodeTypeEnum.OpVectorTimesMatrix, _
-			    SPIRVOpcodeTypeEnum.OpVectorTimesScalar, _
-			    SPIRVOpcodeTypeEnum.OpWaitGroupEvents, _
-			    SPIRVOpcodeTypeEnum.OpWritePipe
+			  case OpcodeTypeEnum.OpAccessChain, OpcodeTypeEnum.OpAll, _
+			    OpcodeTypeEnum.OpAny, _
+			    OpcodeTypeEnum.OpArrayLength, _
+			    OpcodeTypeEnum.OpAsyncGroupCopy, _
+			    OpcodeTypeEnum.OpAtomicAnd, _
+			    OpcodeTypeEnum.OpAtomicCompareExchange, OpcodeTypeEnum.OpAtomicCompareExchangeWeak, _
+			    OpcodeTypeEnum.OpAtomicExchange, _
+			    OpcodeTypeEnum.OpAtomicIAdd, _
+			    OpcodeTypeEnum.OpAtomicIDecrement, OpcodeTypeEnum.OpAtomicIIncrement, _
+			    OpcodeTypeEnum.OpAtomicIMax, _
+			    OpcodeTypeEnum.OpAtomicIMin, _
+			    OpcodeTypeEnum.OpAtomicISub, _
+			    OpcodeTypeEnum.OpAtomicLoad, _
+			    OpcodeTypeEnum.OpAtomicOr, _
+			    OpcodeTypeEnum.OpAtomicUMax, _
+			    OpcodeTypeEnum.OpAtomicUMin, _
+			    OpcodeTypeEnum.OpAtomicXor, _
+			    OpcodeTypeEnum.OpBitcast, _
+			    OpcodeTypeEnum.OpBitwiseAnd, _
+			    OpcodeTypeEnum.OpBitwiseOr, _
+			    OpcodeTypeEnum.OpBitwiseXor, _
+			    OpcodeTypeEnum.OpBuildNDRange, _
+			    OpcodeTypeEnum.OpCompositeConstruct, _
+			    OpcodeTypeEnum.OpCompositeExtract, OpcodeTypeEnum.OpCompositeInsert, _
+			    OpcodeTypeEnum.OpConstant, OpcodeTypeEnum.OpConstantComposite, _
+			    OpcodeTypeEnum.OpConstantFalse, OpcodeTypeEnum.OpConstantNullObject, _
+			    OpcodeTypeEnum.OpConstantNullPointer, _
+			    OpcodeTypeEnum.OpConstantSampler, OpcodeTypeEnum.OpConstantTrue, _
+			    OpcodeTypeEnum.OpConvertFToS, _
+			    OpcodeTypeEnum.OpConvertFToU, _
+			    OpcodeTypeEnum.OpConvertPtrToU, _
+			    OpcodeTypeEnum.OpConvertSToF, _
+			    OpcodeTypeEnum.OpConvertUToF, _
+			    OpcodeTypeEnum.OpConvertUToPtr, _
+			    OpcodeTypeEnum.OpCopyObject, _
+			    OpcodeTypeEnum.OpCreateUserEvent, _
+			    OpcodeTypeEnum.OpDot, _
+			    OpcodeTypeEnum.OpDPdx, OpcodeTypeEnum.OpDPdxCoarse, _
+			    OpcodeTypeEnum.OpDPdxFine, _
+			    OpcodeTypeEnum.OpDPdy, OpcodeTypeEnum.OpDPdyCoarse, _
+			    OpcodeTypeEnum.OpDPdyFine, _
+			    OpcodeTypeEnum.OpEnqueueKernel, _
+			    OpcodeTypeEnum.OpEnqueueMarker, _
+			    OpcodeTypeEnum.OpExtInst, _
+			    OpcodeTypeEnum.OpFAdd, OpcodeTypeEnum.OpFConvert, _
+			    OpcodeTypeEnum.OpFDiv, _
+			    OpcodeTypeEnum.OpFMod, _
+			    OpcodeTypeEnum.OpFMul, _
+			    OpcodeTypeEnum.OpFNegate, _
+			    OpcodeTypeEnum.OpFOrdEqual, _
+			    OpcodeTypeEnum.OpFOrdGreaterThan, _
+			    OpcodeTypeEnum.OpFOrdGreaterThanEqual, _
+			    OpcodeTypeEnum.OpFOrdLessThan, _
+			    OpcodeTypeEnum.OpFOrdLessThanEqual, _
+			    OpcodeTypeEnum.OpFOrdNotEqual, _
+			    OpcodeTypeEnum.OpFRem, _
+			    OpcodeTypeEnum.OpFSub, OpcodeTypeEnum.OpFunction, _
+			    OpcodeTypeEnum.OpFunctionCall, OpcodeTypeEnum.OpFunctionParameter, _
+			    OpcodeTypeEnum.OpFUnordEqual, _
+			    OpcodeTypeEnum.OpFUnordGreaterThan, _
+			    OpcodeTypeEnum.OpFUnordGreaterThanEqual, _
+			    OpcodeTypeEnum.OpFUnordLessThan, _
+			    OpcodeTypeEnum.OpFUnordLessThanEqual, _
+			    OpcodeTypeEnum.OpFUnordNotEqual, _
+			    OpcodeTypeEnum.OpFwidth, OpcodeTypeEnum.OpFwidthCoarse, _
+			    OpcodeTypeEnum.OpFwidthFine, _
+			    OpcodeTypeEnum.OpGenericCastToPtr, _
+			    OpcodeTypeEnum.OpGenericCastToPtrExplicit, _
+			    OpcodeTypeEnum.OpGenericPtrMemSemantics, _
+			    OpcodeTypeEnum.OpGetDefaultQueue, _
+			    OpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
+			    OpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount, _
+			    OpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple, _
+			    OpcodeTypeEnum.OpGetKernelWorkGroupSize, _
+			    OpcodeTypeEnum.OpGetMaxPipePackets, _
+			    OpcodeTypeEnum.OpGetNumPipePackets, _
+			    OpcodeTypeEnum.OpGroupAll, _
+			    OpcodeTypeEnum.OpGroupAny, _
+			    OpcodeTypeEnum.OpGroupBroadcast, _
+			    OpcodeTypeEnum.OpGroupFAdd, _
+			    OpcodeTypeEnum.OpGroupFMax, _
+			    OpcodeTypeEnum.OpGroupFMin, _
+			    OpcodeTypeEnum.OpGroupIAdd, _
+			    OpcodeTypeEnum.OpGroupReserveReadPipePackets, _
+			    OpcodeTypeEnum.OpGroupReserveWritePipePackets, _
+			    OpcodeTypeEnum.OpGroupSMax, _
+			    OpcodeTypeEnum.OpGroupSMin, _
+			    OpcodeTypeEnum.OpGroupUMax, _
+			    OpcodeTypeEnum.OpGroupUMin, _
+			    OpcodeTypeEnum.OpIAdd, _
+			    OpcodeTypeEnum.OpIEqual, _
+			    OpcodeTypeEnum.OpImagePointer, _
+			    OpcodeTypeEnum.OpIMul, _
+			    OpcodeTypeEnum.OpInBoundsAccessChain, _
+			    OpcodeTypeEnum.OpINotEqual, _
+			    OpcodeTypeEnum.OpIsFinite, _
+			    OpcodeTypeEnum.OpIsInf, _
+			    OpcodeTypeEnum.OpIsNan, _
+			    OpcodeTypeEnum.OpIsNormal, _
+			    OpcodeTypeEnum.OpISub, _
+			    OpcodeTypeEnum.OpIsValidEvent, _
+			    OpcodeTypeEnum.OpIsValidReserveId, _
+			    OpcodeTypeEnum.OpLessOrGreater, _
+			    OpcodeTypeEnum.OpLoad, _
+			    OpcodeTypeEnum.OpLogicalAnd, _
+			    OpcodeTypeEnum.OpLogicalOr, _
+			    OpcodeTypeEnum.OpLogicalXor, _
+			    OpcodeTypeEnum.OpMatrixTimesMatrix, _
+			    OpcodeTypeEnum.OpMatrixTimesScalar, _
+			    OpcodeTypeEnum.OpMatrixTimesVector, _
+			    OpcodeTypeEnum.OpNot, _
+			    OpcodeTypeEnum.OpOrdered, _
+			    OpcodeTypeEnum.OpOuterProduct, _
+			    OpcodeTypeEnum.OpPhi, _
+			    OpcodeTypeEnum.OpPtrCastToGeneric, _
+			    OpcodeTypeEnum.OpReadPipe, _
+			    OpcodeTypeEnum.OpReservedReadPipe, _
+			    OpcodeTypeEnum.OpReservedWritePipe, _
+			    OpcodeTypeEnum.OpReserveReadPipePackets, _
+			    OpcodeTypeEnum.OpReserveWritePipePackets, _
+			    OpcodeTypeEnum.OpSampler, _
+			    OpcodeTypeEnum.OpSatConvertSToU, _
+			    OpcodeTypeEnum.OpSatConvertUToS, _
+			    OpcodeTypeEnum.OpSConvert, _
+			    OpcodeTypeEnum.OpSDiv, _
+			    OpcodeTypeEnum.OpSelect, _
+			    OpcodeTypeEnum.OpShiftLeftLogical, _
+			    OpcodeTypeEnum.OpShiftRightArithmetic, _
+			    OpcodeTypeEnum.OpShiftRightLogical, _
+			    OpcodeTypeEnum.OpSignBitSet, _
+			    OpcodeTypeEnum.OpSGreaterThan, _
+			    OpcodeTypeEnum.OpSGreaterThanEqual, _
+			    OpcodeTypeEnum.OpSLessThan, _
+			    OpcodeTypeEnum.OpSLessThanEqual, _
+			    OpcodeTypeEnum.OpSMod, _
+			    OpcodeTypeEnum.OpSNegate, _
+			    OpcodeTypeEnum.OpSpecConstant, OpcodeTypeEnum.OpSpecConstantFalse, _
+			    OpcodeTypeEnum.OpSpecConstantComposite, OpcodeTypeEnum.OpSpecConstantTrue, _
+			    OpcodeTypeEnum.OpSRem, _
+			    OpcodeTypeEnum.OpTextureFetchSample, _
+			    OpcodeTypeEnum.OpTextureFetchTexel, _
+			    OpcodeTypeEnum.OpTextureFetchTexelLod, OpcodeTypeEnum.OpTextureFetchTexelOffset, _
+			    OpcodeTypeEnum.OpTextureGather, OpcodeTypeEnum.OpTextureGatherOffset, _
+			    OpcodeTypeEnum.OpTextureGatherOffsets, OpcodeTypeEnum.OpTextureQueryLevels, _
+			    OpcodeTypeEnum.OpTextureQueryLod, OpcodeTypeEnum.OpTextureQuerySamples, _
+			    OpcodeTypeEnum.OpTextureQuerySize, OpcodeTypeEnum.OpTextureQuerySizeLod, _
+			    OpcodeTypeEnum.OpTextureSample, OpcodeTypeEnum.OpTextureSampleDref, _
+			    OpcodeTypeEnum.OpTextureSampleGrad, OpcodeTypeEnum.OpTextureSampleGradOffset, _
+			    OpcodeTypeEnum.OpTextureSampleLod, OpcodeTypeEnum.OpTextureSampleLodOffset, _
+			    OpcodeTypeEnum.OpTextureSampleOffset, OpcodeTypeEnum.OpTextureSampleProj, _
+			    OpcodeTypeEnum.OpTextureSampleProjGrad, OpcodeTypeEnum.OpTextureSampleProjGradOffset, _
+			    OpcodeTypeEnum.OpTextureSampleProjLod, OpcodeTypeEnum.OpTextureSampleProjLodOffset, _
+			    OpcodeTypeEnum.OpTextureSampleProjOffset, OpcodeTypeEnum.OpTranspose, _
+			    OpcodeTypeEnum.OpUConvert, _
+			    OpcodeTypeEnum.OpUDiv, _
+			    OpcodeTypeEnum.OpUGreaterThan, _
+			    OpcodeTypeEnum.OpUGreaterThanEqual, _
+			    OpcodeTypeEnum.OpULessThan, _
+			    OpcodeTypeEnum.OpULessThanEqual, _
+			    OpcodeTypeEnum.OpUMod, _
+			    OpcodeTypeEnum.OpUndef, _
+			    OpcodeTypeEnum.OpUnordered, _
+			    OpcodeTypeEnum.OpVariable, OpcodeTypeEnum.OpVariableArray, _
+			    OpcodeTypeEnum.OpVectorExtractDynamic, OpcodeTypeEnum.OpVectorInsertDynamic, _
+			    OpcodeTypeEnum.OpVectorShuffle, _
+			    OpcodeTypeEnum.OpVectorTimesMatrix, _
+			    OpcodeTypeEnum.OpVectorTimesScalar, _
+			    OpcodeTypeEnum.OpWaitGroupEvents, _
+			    OpcodeTypeEnum.OpWritePipe
 			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 8)
 			    
 			    
-			  case SPIRVOpcodeTypeEnum.OpDecorationGroup, SPIRVOpcodeTypeEnum.OpExtInstImport, _
-			    SPIRVOpcodeTypeEnum.OpLabel, SPIRVOpcodeTypeEnum.OpString, _
-			    SPIRVOpcodeTypeEnum.OpTypeArray, SPIRVOpcodeTypeEnum.OpTypeBool, _
-			    SPIRVOpcodeTypeEnum.OpTypeDeviceEvent, SPIRVOpcodeTypeEnum.OpTypeEvent, _
-			    SPIRVOpcodeTypeEnum.OpTypeFilter, SPIRVOpcodeTypeEnum.OpTypeFloat, _
-			    SPIRVOpcodeTypeEnum.OpTypeFunction, SPIRVOpcodeTypeEnum.OpTypeInt, _
-			    SPIRVOpcodeTypeEnum.OpTypeMatrix, SPIRVOpcodeTypeEnum.OpTypeOpaque, _
-			    SPIRVOpcodeTypeEnum.OpTypePipe, SPIRVOpcodeTypeEnum.OpTypePointer, _
-			    SPIRVOpcodeTypeEnum.OpTypeQueue, SPIRVOpcodeTypeEnum.OpTypeReserveId, _
-			    SPIRVOpcodeTypeEnum.OpTypeRuntimeArray, SPIRVOpcodeTypeEnum.OpTypeSampler, _
-			    SPIRVOpcodeTypeEnum.OpTypeStruct, SPIRVOpcodeTypeEnum.OpTypeVector, _
-			    SPIRVOpcodeTypeEnum.OpTypeVoid
+			  case OpcodeTypeEnum.OpDecorationGroup, OpcodeTypeEnum.OpExtInstImport, _
+			    OpcodeTypeEnum.OpLabel, OpcodeTypeEnum.OpString, _
+			    OpcodeTypeEnum.OpTypeArray, OpcodeTypeEnum.OpTypeBool, _
+			    OpcodeTypeEnum.OpTypeDeviceEvent, OpcodeTypeEnum.OpTypeEvent, _
+			    OpcodeTypeEnum.OpTypeFilter, OpcodeTypeEnum.OpTypeFloat, _
+			    OpcodeTypeEnum.OpTypeFunction, OpcodeTypeEnum.OpTypeInt, _
+			    OpcodeTypeEnum.OpTypeMatrix, OpcodeTypeEnum.OpTypeOpaque, _
+			    OpcodeTypeEnum.OpTypePipe, OpcodeTypeEnum.OpTypePointer, _
+			    OpcodeTypeEnum.OpTypeQueue, OpcodeTypeEnum.OpTypeReserveId, _
+			    OpcodeTypeEnum.OpTypeRuntimeArray, OpcodeTypeEnum.OpTypeSampler, _
+			    OpcodeTypeEnum.OpTypeStruct, OpcodeTypeEnum.OpTypeVector, _
+			    OpcodeTypeEnum.OpTypeVoid
 			    
 			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
 			    
@@ -2965,180 +2965,180 @@ Protected Class SPIRVOpcode
 			  
 			  select case Type
 			    
-			  case SPIRVOpcodeTypeEnum.OpAccessChain, SPIRVOpcodeTypeEnum.OpAll, _
-			    SPIRVOpcodeTypeEnum.OpAny, _
-			    SPIRVOpcodeTypeEnum.OpArrayLength, _
-			    SPIRVOpcodeTypeEnum.OpAsyncGroupCopy, _
-			    SPIRVOpcodeTypeEnum.OpAtomicAnd, _
-			    SPIRVOpcodeTypeEnum.OpAtomicCompareExchange, SPIRVOpcodeTypeEnum.OpAtomicCompareExchangeWeak, _
-			    SPIRVOpcodeTypeEnum.OpAtomicExchange, _
-			    SPIRVOpcodeTypeEnum.OpAtomicIAdd, _
-			    SPIRVOpcodeTypeEnum.OpAtomicIDecrement, SPIRVOpcodeTypeEnum.OpAtomicIIncrement, _
-			    SPIRVOpcodeTypeEnum.OpAtomicIMax, _
-			    SPIRVOpcodeTypeEnum.OpAtomicIMin, _
-			    SPIRVOpcodeTypeEnum.OpAtomicISub, _
-			    SPIRVOpcodeTypeEnum.OpAtomicLoad, _
-			    SPIRVOpcodeTypeEnum.OpAtomicOr, _
-			    SPIRVOpcodeTypeEnum.OpAtomicUMax, _
-			    SPIRVOpcodeTypeEnum.OpAtomicUMin, _
-			    SPIRVOpcodeTypeEnum.OpAtomicXor, _
-			    SPIRVOpcodeTypeEnum.OpBitcast, _
-			    SPIRVOpcodeTypeEnum.OpBitwiseAnd, _
-			    SPIRVOpcodeTypeEnum.OpBitwiseOr, _
-			    SPIRVOpcodeTypeEnum.OpBitwiseXor, _
-			    SPIRVOpcodeTypeEnum.OpBuildNDRange, _
-			    SPIRVOpcodeTypeEnum.OpCompositeConstruct, SPIRVOpcodeTypeEnum.OpCompositeExtract, _
-			    SPIRVOpcodeTypeEnum.OpCompositeInsert, _
-			    SPIRVOpcodeTypeEnum.OpConstant, _
-			    SPIRVOpcodeTypeEnum.OpConstantComposite, SPIRVOpcodeTypeEnum.OpConstantFalse, _
-			    SPIRVOpcodeTypeEnum.OpConstantNullObject, SPIRVOpcodeTypeEnum.OpConstantNullPointer, _
-			    SPIRVOpcodeTypeEnum.OpConstantSampler, SPIRVOpcodeTypeEnum.OpConstantTrue, _
-			    SPIRVOpcodeTypeEnum.OpConvertFToS, _
-			    SPIRVOpcodeTypeEnum.OpConvertFToU, _
-			    SPIRVOpcodeTypeEnum.OpConvertPtrToU, _
-			    SPIRVOpcodeTypeEnum.OpConvertSToF, _
-			    SPIRVOpcodeTypeEnum.OpConvertUToF, _
-			    SPIRVOpcodeTypeEnum.OpConvertUToPtr, _
-			    SPIRVOpcodeTypeEnum.OpCopyObject, _
-			    SPIRVOpcodeTypeEnum.OpCreateUserEvent, _
-			    SPIRVOpcodeTypeEnum.OpDot, _
-			    SPIRVOpcodeTypeEnum.OpDPdx, SPIRVOpcodeTypeEnum.OpDPdxCoarse, _
-			    SPIRVOpcodeTypeEnum.OpDPdxFine, _
-			    SPIRVOpcodeTypeEnum.OpDPdy, SPIRVOpcodeTypeEnum.OpDPdyCoarse, _
-			    SPIRVOpcodeTypeEnum.OpDPdyFine, _
-			    SPIRVOpcodeTypeEnum.OpEnqueueKernel, _
-			    SPIRVOpcodeTypeEnum.OpEnqueueMarker, _
-			    SPIRVOpcodeTypeEnum.OpExtInst, _
-			    SPIRVOpcodeTypeEnum.OpFAdd, _
-			    SPIRVOpcodeTypeEnum.OpFConvert, _
-			    SPIRVOpcodeTypeEnum.OpFDiv, _
-			    SPIRVOpcodeTypeEnum.OpFMod, _
-			    SPIRVOpcodeTypeEnum.OpFMul, _
-			    SPIRVOpcodeTypeEnum.OpFNegate, _
-			    SPIRVOpcodeTypeEnum.OpFOrdEqual, _
-			    SPIRVOpcodeTypeEnum.OpFOrdGreaterThan, _
-			    SPIRVOpcodeTypeEnum.OpFOrdGreaterThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpFOrdLessThan, _
-			    SPIRVOpcodeTypeEnum.OpFOrdLessThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpFOrdNotEqual, _
-			    SPIRVOpcodeTypeEnum.OpFRem, _
-			    SPIRVOpcodeTypeEnum.OpFSub, _
-			    SPIRVOpcodeTypeEnum.OpFunction, SPIRVOpcodeTypeEnum.OpFunctionCall, _
-			    SPIRVOpcodeTypeEnum.OpFunctionParameter, _
-			    SPIRVOpcodeTypeEnum.OpFUnordEqual, _
-			    SPIRVOpcodeTypeEnum.OpFUnordGreaterThan, _
-			    SPIRVOpcodeTypeEnum.OpFUnordGreaterThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpFUnordLessThan, _
-			    SPIRVOpcodeTypeEnum.OpFUnordLessThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpFUnordNotEqual, _
-			    SPIRVOpcodeTypeEnum.OpFwidth, SPIRVOpcodeTypeEnum.OpFwidthCoarse, _
-			    SPIRVOpcodeTypeEnum.OpFwidthFine, _
-			    SPIRVOpcodeTypeEnum.OpGenericCastToPtr, _
-			    SPIRVOpcodeTypeEnum.OpGenericCastToPtrExplicit, _
-			    SPIRVOpcodeTypeEnum.OpGenericPtrMemSemantics, _
-			    SPIRVOpcodeTypeEnum.OpGetDefaultQueue, _
-			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount, _
-			    SPIRVOpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
-			    SPIRVOpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple, _
-			    SPIRVOpcodeTypeEnum.OpGetKernelWorkGroupSize, _
-			    SPIRVOpcodeTypeEnum.OpGetMaxPipePackets, _
-			    SPIRVOpcodeTypeEnum.OpGetNumPipePackets, _
-			    SPIRVOpcodeTypeEnum.OpGroupAll, _
-			    SPIRVOpcodeTypeEnum.OpGroupAny, _
-			    SPIRVOpcodeTypeEnum.OpGroupBroadcast, _
-			    SPIRVOpcodeTypeEnum.OpGroupFAdd, _
-			    SPIRVOpcodeTypeEnum.OpGroupFMax, _
-			    SPIRVOpcodeTypeEnum.OpGroupFMin, _
-			    SPIRVOpcodeTypeEnum.OpGroupIAdd, _
-			    SPIRVOpcodeTypeEnum.OpGroupReserveReadPipePackets, _
-			    SPIRVOpcodeTypeEnum.OpGroupReserveWritePipePackets, _
-			    SPIRVOpcodeTypeEnum.OpGroupSMax, _
-			    SPIRVOpcodeTypeEnum.OpGroupSMin, _
-			    SPIRVOpcodeTypeEnum.OpGroupUMax, _
-			    SPIRVOpcodeTypeEnum.OpGroupUMin, _
-			    SPIRVOpcodeTypeEnum.OpIAdd, _
-			    SPIRVOpcodeTypeEnum.OpIEqual, _
-			    SPIRVOpcodeTypeEnum.OpImagePointer, _
-			    SPIRVOpcodeTypeEnum.OpIMul, _
-			    SPIRVOpcodeTypeEnum.OpInBoundsAccessChain, _
-			    SPIRVOpcodeTypeEnum.OpINotEqual, _
-			    SPIRVOpcodeTypeEnum.OpIsFinite, _
-			    SPIRVOpcodeTypeEnum.OpIsInf, _
-			    SPIRVOpcodeTypeEnum.OpIsNan, _
-			    SPIRVOpcodeTypeEnum.OpIsNormal, _
-			    SPIRVOpcodeTypeEnum.OpISub, _
-			    SPIRVOpcodeTypeEnum.OpIsValidEvent, _
-			    SPIRVOpcodeTypeEnum.OpIsValidReserveId, _
-			    SPIRVOpcodeTypeEnum.OpLessOrGreater, _
-			    SPIRVOpcodeTypeEnum.OpLoad, _
-			    SPIRVOpcodeTypeEnum.OpLogicalAnd, _
-			    SPIRVOpcodeTypeEnum.OpLogicalOr, _
-			    SPIRVOpcodeTypeEnum.OpLogicalXor, _
-			    SPIRVOpcodeTypeEnum.OpMatrixTimesMatrix, _
-			    SPIRVOpcodeTypeEnum.OpMatrixTimesScalar, _
-			    SPIRVOpcodeTypeEnum.OpMatrixTimesVector, _
-			    SPIRVOpcodeTypeEnum.OpNot, _
-			    SPIRVOpcodeTypeEnum.OpOrdered, _
-			    SPIRVOpcodeTypeEnum.OpOuterProduct, _
-			    SPIRVOpcodeTypeEnum.OpPhi, _
-			    SPIRVOpcodeTypeEnum.OpPtrCastToGeneric, _
-			    SPIRVOpcodeTypeEnum.OpReadPipe, _
-			    SPIRVOpcodeTypeEnum.OpReservedReadPipe, _
-			    SPIRVOpcodeTypeEnum.OpReservedWritePipe, _
-			    SPIRVOpcodeTypeEnum.OpReserveReadPipePackets, _
-			    SPIRVOpcodeTypeEnum.OpReserveWritePipePackets, _
-			    SPIRVOpcodeTypeEnum.OpSampler, _
-			    SPIRVOpcodeTypeEnum.OpSatConvertSToU, _
-			    SPIRVOpcodeTypeEnum.OpSatConvertUToS, _
-			    SPIRVOpcodeTypeEnum.OpSConvert, _
-			    SPIRVOpcodeTypeEnum.OpSDiv, _
-			    SPIRVOpcodeTypeEnum.OpSelect, _
-			    SPIRVOpcodeTypeEnum.OpShiftLeftLogical, _
-			    SPIRVOpcodeTypeEnum.OpShiftRightArithmetic, _
-			    SPIRVOpcodeTypeEnum.OpShiftRightLogical, _
-			    SPIRVOpcodeTypeEnum.OpSignBitSet, _
-			    SPIRVOpcodeTypeEnum.OpSGreaterThan, _
-			    SPIRVOpcodeTypeEnum.OpSGreaterThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpSLessThan, _
-			    SPIRVOpcodeTypeEnum.OpSLessThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpSMod, _
-			    SPIRVOpcodeTypeEnum.OpSNegate, _
-			    SPIRVOpcodeTypeEnum.OpSpecConstant, _
-			    SPIRVOpcodeTypeEnum.OpSpecConstantComposite, SPIRVOpcodeTypeEnum.OpSpecConstantFalse, _
-			    SPIRVOpcodeTypeEnum.OpSpecConstantTrue, _
-			    SPIRVOpcodeTypeEnum.OpSRem, _
-			    SPIRVOpcodeTypeEnum.OpTextureFetchSample, _
-			    SPIRVOpcodeTypeEnum.OpTextureFetchTexel, _
-			    SPIRVOpcodeTypeEnum.OpTextureFetchTexelLod, SPIRVOpcodeTypeEnum.OpTextureFetchTexelOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureGather, SPIRVOpcodeTypeEnum.OpTextureGatherOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureGatherOffsets, SPIRVOpcodeTypeEnum.OpTextureQueryLevels, _
-			    SPIRVOpcodeTypeEnum.OpTextureQueryLod, SPIRVOpcodeTypeEnum.OpTextureQuerySamples, _
-			    SPIRVOpcodeTypeEnum.OpTextureQuerySize, SPIRVOpcodeTypeEnum.OpTextureQuerySizeLod, _
-			    SPIRVOpcodeTypeEnum.OpTextureSample, SPIRVOpcodeTypeEnum.OpTextureSampleDref, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleGrad, SPIRVOpcodeTypeEnum.OpTextureSampleGradOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleLod, SPIRVOpcodeTypeEnum.OpTextureSampleLodOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleProj, SPIRVOpcodeTypeEnum.OpTextureSampleProjGrad, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleProjGradOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleProjLod, SPIRVOpcodeTypeEnum.OpTextureSampleProjLodOffset, _
-			    SPIRVOpcodeTypeEnum.OpTextureSampleProjOffset, _
-			    SPIRVOpcodeTypeEnum.OpTranspose, _
-			    SPIRVOpcodeTypeEnum.OpUConvert, _
-			    SPIRVOpcodeTypeEnum.OpUDiv, _
-			    SPIRVOpcodeTypeEnum.OpUGreaterThan, _
-			    SPIRVOpcodeTypeEnum.OpUGreaterThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpULessThan, _
-			    SPIRVOpcodeTypeEnum.OpULessThanEqual, _
-			    SPIRVOpcodeTypeEnum.OpUMod, _
-			    SPIRVOpcodeTypeEnum.OpUndef, _
-			    SPIRVOpcodeTypeEnum.OpUnordered, _
-			    SPIRVOpcodeTypeEnum.OpVariable, _
-			    SPIRVOpcodeTypeEnum.OpVariableArray, SPIRVOpcodeTypeEnum.OpVectorExtractDynamic, _
-			    SPIRVOpcodeTypeEnum.OpVectorInsertDynamic, SPIRVOpcodeTypeEnum.OpVectorShuffle, _
-			    SPIRVOpcodeTypeEnum.OpVectorTimesMatrix, _
-			    SPIRVOpcodeTypeEnum.OpVectorTimesScalar, _
-			    SPIRVOpcodeTypeEnum.OpWaitGroupEvents, _
-			    SPIRVOpcodeTypeEnum.OpWritePipe
+			  case OpcodeTypeEnum.OpAccessChain, OpcodeTypeEnum.OpAll, _
+			    OpcodeTypeEnum.OpAny, _
+			    OpcodeTypeEnum.OpArrayLength, _
+			    OpcodeTypeEnum.OpAsyncGroupCopy, _
+			    OpcodeTypeEnum.OpAtomicAnd, _
+			    OpcodeTypeEnum.OpAtomicCompareExchange, OpcodeTypeEnum.OpAtomicCompareExchangeWeak, _
+			    OpcodeTypeEnum.OpAtomicExchange, _
+			    OpcodeTypeEnum.OpAtomicIAdd, _
+			    OpcodeTypeEnum.OpAtomicIDecrement, OpcodeTypeEnum.OpAtomicIIncrement, _
+			    OpcodeTypeEnum.OpAtomicIMax, _
+			    OpcodeTypeEnum.OpAtomicIMin, _
+			    OpcodeTypeEnum.OpAtomicISub, _
+			    OpcodeTypeEnum.OpAtomicLoad, _
+			    OpcodeTypeEnum.OpAtomicOr, _
+			    OpcodeTypeEnum.OpAtomicUMax, _
+			    OpcodeTypeEnum.OpAtomicUMin, _
+			    OpcodeTypeEnum.OpAtomicXor, _
+			    OpcodeTypeEnum.OpBitcast, _
+			    OpcodeTypeEnum.OpBitwiseAnd, _
+			    OpcodeTypeEnum.OpBitwiseOr, _
+			    OpcodeTypeEnum.OpBitwiseXor, _
+			    OpcodeTypeEnum.OpBuildNDRange, _
+			    OpcodeTypeEnum.OpCompositeConstruct, OpcodeTypeEnum.OpCompositeExtract, _
+			    OpcodeTypeEnum.OpCompositeInsert, _
+			    OpcodeTypeEnum.OpConstant, _
+			    OpcodeTypeEnum.OpConstantComposite, OpcodeTypeEnum.OpConstantFalse, _
+			    OpcodeTypeEnum.OpConstantNullObject, OpcodeTypeEnum.OpConstantNullPointer, _
+			    OpcodeTypeEnum.OpConstantSampler, OpcodeTypeEnum.OpConstantTrue, _
+			    OpcodeTypeEnum.OpConvertFToS, _
+			    OpcodeTypeEnum.OpConvertFToU, _
+			    OpcodeTypeEnum.OpConvertPtrToU, _
+			    OpcodeTypeEnum.OpConvertSToF, _
+			    OpcodeTypeEnum.OpConvertUToF, _
+			    OpcodeTypeEnum.OpConvertUToPtr, _
+			    OpcodeTypeEnum.OpCopyObject, _
+			    OpcodeTypeEnum.OpCreateUserEvent, _
+			    OpcodeTypeEnum.OpDot, _
+			    OpcodeTypeEnum.OpDPdx, OpcodeTypeEnum.OpDPdxCoarse, _
+			    OpcodeTypeEnum.OpDPdxFine, _
+			    OpcodeTypeEnum.OpDPdy, OpcodeTypeEnum.OpDPdyCoarse, _
+			    OpcodeTypeEnum.OpDPdyFine, _
+			    OpcodeTypeEnum.OpEnqueueKernel, _
+			    OpcodeTypeEnum.OpEnqueueMarker, _
+			    OpcodeTypeEnum.OpExtInst, _
+			    OpcodeTypeEnum.OpFAdd, _
+			    OpcodeTypeEnum.OpFConvert, _
+			    OpcodeTypeEnum.OpFDiv, _
+			    OpcodeTypeEnum.OpFMod, _
+			    OpcodeTypeEnum.OpFMul, _
+			    OpcodeTypeEnum.OpFNegate, _
+			    OpcodeTypeEnum.OpFOrdEqual, _
+			    OpcodeTypeEnum.OpFOrdGreaterThan, _
+			    OpcodeTypeEnum.OpFOrdGreaterThanEqual, _
+			    OpcodeTypeEnum.OpFOrdLessThan, _
+			    OpcodeTypeEnum.OpFOrdLessThanEqual, _
+			    OpcodeTypeEnum.OpFOrdNotEqual, _
+			    OpcodeTypeEnum.OpFRem, _
+			    OpcodeTypeEnum.OpFSub, _
+			    OpcodeTypeEnum.OpFunction, OpcodeTypeEnum.OpFunctionCall, _
+			    OpcodeTypeEnum.OpFunctionParameter, _
+			    OpcodeTypeEnum.OpFUnordEqual, _
+			    OpcodeTypeEnum.OpFUnordGreaterThan, _
+			    OpcodeTypeEnum.OpFUnordGreaterThanEqual, _
+			    OpcodeTypeEnum.OpFUnordLessThan, _
+			    OpcodeTypeEnum.OpFUnordLessThanEqual, _
+			    OpcodeTypeEnum.OpFUnordNotEqual, _
+			    OpcodeTypeEnum.OpFwidth, OpcodeTypeEnum.OpFwidthCoarse, _
+			    OpcodeTypeEnum.OpFwidthFine, _
+			    OpcodeTypeEnum.OpGenericCastToPtr, _
+			    OpcodeTypeEnum.OpGenericCastToPtrExplicit, _
+			    OpcodeTypeEnum.OpGenericPtrMemSemantics, _
+			    OpcodeTypeEnum.OpGetDefaultQueue, _
+			    OpcodeTypeEnum.OpGetKernelNDrangeSubGroupCount, _
+			    OpcodeTypeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
+			    OpcodeTypeEnum.OpGetKernelPreferredWorkGroupSizeMultiple, _
+			    OpcodeTypeEnum.OpGetKernelWorkGroupSize, _
+			    OpcodeTypeEnum.OpGetMaxPipePackets, _
+			    OpcodeTypeEnum.OpGetNumPipePackets, _
+			    OpcodeTypeEnum.OpGroupAll, _
+			    OpcodeTypeEnum.OpGroupAny, _
+			    OpcodeTypeEnum.OpGroupBroadcast, _
+			    OpcodeTypeEnum.OpGroupFAdd, _
+			    OpcodeTypeEnum.OpGroupFMax, _
+			    OpcodeTypeEnum.OpGroupFMin, _
+			    OpcodeTypeEnum.OpGroupIAdd, _
+			    OpcodeTypeEnum.OpGroupReserveReadPipePackets, _
+			    OpcodeTypeEnum.OpGroupReserveWritePipePackets, _
+			    OpcodeTypeEnum.OpGroupSMax, _
+			    OpcodeTypeEnum.OpGroupSMin, _
+			    OpcodeTypeEnum.OpGroupUMax, _
+			    OpcodeTypeEnum.OpGroupUMin, _
+			    OpcodeTypeEnum.OpIAdd, _
+			    OpcodeTypeEnum.OpIEqual, _
+			    OpcodeTypeEnum.OpImagePointer, _
+			    OpcodeTypeEnum.OpIMul, _
+			    OpcodeTypeEnum.OpInBoundsAccessChain, _
+			    OpcodeTypeEnum.OpINotEqual, _
+			    OpcodeTypeEnum.OpIsFinite, _
+			    OpcodeTypeEnum.OpIsInf, _
+			    OpcodeTypeEnum.OpIsNan, _
+			    OpcodeTypeEnum.OpIsNormal, _
+			    OpcodeTypeEnum.OpISub, _
+			    OpcodeTypeEnum.OpIsValidEvent, _
+			    OpcodeTypeEnum.OpIsValidReserveId, _
+			    OpcodeTypeEnum.OpLessOrGreater, _
+			    OpcodeTypeEnum.OpLoad, _
+			    OpcodeTypeEnum.OpLogicalAnd, _
+			    OpcodeTypeEnum.OpLogicalOr, _
+			    OpcodeTypeEnum.OpLogicalXor, _
+			    OpcodeTypeEnum.OpMatrixTimesMatrix, _
+			    OpcodeTypeEnum.OpMatrixTimesScalar, _
+			    OpcodeTypeEnum.OpMatrixTimesVector, _
+			    OpcodeTypeEnum.OpNot, _
+			    OpcodeTypeEnum.OpOrdered, _
+			    OpcodeTypeEnum.OpOuterProduct, _
+			    OpcodeTypeEnum.OpPhi, _
+			    OpcodeTypeEnum.OpPtrCastToGeneric, _
+			    OpcodeTypeEnum.OpReadPipe, _
+			    OpcodeTypeEnum.OpReservedReadPipe, _
+			    OpcodeTypeEnum.OpReservedWritePipe, _
+			    OpcodeTypeEnum.OpReserveReadPipePackets, _
+			    OpcodeTypeEnum.OpReserveWritePipePackets, _
+			    OpcodeTypeEnum.OpSampler, _
+			    OpcodeTypeEnum.OpSatConvertSToU, _
+			    OpcodeTypeEnum.OpSatConvertUToS, _
+			    OpcodeTypeEnum.OpSConvert, _
+			    OpcodeTypeEnum.OpSDiv, _
+			    OpcodeTypeEnum.OpSelect, _
+			    OpcodeTypeEnum.OpShiftLeftLogical, _
+			    OpcodeTypeEnum.OpShiftRightArithmetic, _
+			    OpcodeTypeEnum.OpShiftRightLogical, _
+			    OpcodeTypeEnum.OpSignBitSet, _
+			    OpcodeTypeEnum.OpSGreaterThan, _
+			    OpcodeTypeEnum.OpSGreaterThanEqual, _
+			    OpcodeTypeEnum.OpSLessThan, _
+			    OpcodeTypeEnum.OpSLessThanEqual, _
+			    OpcodeTypeEnum.OpSMod, _
+			    OpcodeTypeEnum.OpSNegate, _
+			    OpcodeTypeEnum.OpSpecConstant, _
+			    OpcodeTypeEnum.OpSpecConstantComposite, OpcodeTypeEnum.OpSpecConstantFalse, _
+			    OpcodeTypeEnum.OpSpecConstantTrue, _
+			    OpcodeTypeEnum.OpSRem, _
+			    OpcodeTypeEnum.OpTextureFetchSample, _
+			    OpcodeTypeEnum.OpTextureFetchTexel, _
+			    OpcodeTypeEnum.OpTextureFetchTexelLod, OpcodeTypeEnum.OpTextureFetchTexelOffset, _
+			    OpcodeTypeEnum.OpTextureGather, OpcodeTypeEnum.OpTextureGatherOffset, _
+			    OpcodeTypeEnum.OpTextureGatherOffsets, OpcodeTypeEnum.OpTextureQueryLevels, _
+			    OpcodeTypeEnum.OpTextureQueryLod, OpcodeTypeEnum.OpTextureQuerySamples, _
+			    OpcodeTypeEnum.OpTextureQuerySize, OpcodeTypeEnum.OpTextureQuerySizeLod, _
+			    OpcodeTypeEnum.OpTextureSample, OpcodeTypeEnum.OpTextureSampleDref, _
+			    OpcodeTypeEnum.OpTextureSampleGrad, OpcodeTypeEnum.OpTextureSampleGradOffset, _
+			    OpcodeTypeEnum.OpTextureSampleLod, OpcodeTypeEnum.OpTextureSampleLodOffset, _
+			    OpcodeTypeEnum.OpTextureSampleOffset, _
+			    OpcodeTypeEnum.OpTextureSampleProj, OpcodeTypeEnum.OpTextureSampleProjGrad, _
+			    OpcodeTypeEnum.OpTextureSampleProjGradOffset, _
+			    OpcodeTypeEnum.OpTextureSampleProjLod, OpcodeTypeEnum.OpTextureSampleProjLodOffset, _
+			    OpcodeTypeEnum.OpTextureSampleProjOffset, _
+			    OpcodeTypeEnum.OpTranspose, _
+			    OpcodeTypeEnum.OpUConvert, _
+			    OpcodeTypeEnum.OpUDiv, _
+			    OpcodeTypeEnum.OpUGreaterThan, _
+			    OpcodeTypeEnum.OpUGreaterThanEqual, _
+			    OpcodeTypeEnum.OpULessThan, _
+			    OpcodeTypeEnum.OpULessThanEqual, _
+			    OpcodeTypeEnum.OpUMod, _
+			    OpcodeTypeEnum.OpUndef, _
+			    OpcodeTypeEnum.OpUnordered, _
+			    OpcodeTypeEnum.OpVariable, _
+			    OpcodeTypeEnum.OpVariableArray, OpcodeTypeEnum.OpVectorExtractDynamic, _
+			    OpcodeTypeEnum.OpVectorInsertDynamic, OpcodeTypeEnum.OpVectorShuffle, _
+			    OpcodeTypeEnum.OpVectorTimesMatrix, _
+			    OpcodeTypeEnum.OpVectorTimesScalar, _
+			    OpcodeTypeEnum.OpWaitGroupEvents, _
+			    OpcodeTypeEnum.OpWritePipe
 			    
 			    result = compose_type(Offset + 4)
 			    
@@ -3152,7 +3152,7 @@ Protected Class SPIRVOpcode
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0
-		Type As SPIRVOpcodeTypeEnum
+		Type As OpcodeTypeEnum
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
