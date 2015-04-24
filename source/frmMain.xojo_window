@@ -278,7 +278,7 @@ End
 		    
 		    Self.Title = "{Zoclee}™ Shade v" + Str(App.MajorVersion) + "." + Str(App.MinorVersion)+ "." + Str(App.BugVersion) + " - " + CurrentFile.NativePath
 		    
-		    loadModule()
+		    refreshModule()
 		    
 		    mnuStripDebugOpcodes.AutoEnable = True
 		    
@@ -287,7 +287,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub loadModule()
+		Sub refreshModule()
 		  Dim i As Integer
 		  Dim op As SPIRV.Opcode
 		  Dim tmpStr As String
