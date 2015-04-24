@@ -62,7 +62,7 @@ Protected Class VirtualMachine
 		      //  instructions
 		      
 		      ip = 20
-		      while ip < moduleUB
+		      while ip <= moduleUB
 		        
 		        select case ModuleBinary.UInt16Value(ip)
 		          

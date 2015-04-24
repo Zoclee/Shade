@@ -219,7 +219,7 @@ End
 
 	#tag MenuHandler
 		Function mnuVacuumOpcodes() As Boolean Handles mnuVacuumOpcodes.Action
-			break
+			actionVacuumOpcodes()
 			
 			Return True
 			
@@ -283,7 +283,21 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub actionVacuumOpcodes()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  SPIRVUtil.RemoveDebugInstructions(SPIRVModule)
+		  refreshModule()
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub refreshModule()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim i As Integer
 		  Dim op As SPIRV.Opcode
 		  Dim tmpStr As String
