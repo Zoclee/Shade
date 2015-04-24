@@ -38,7 +38,7 @@ Protected Class VirtualMachine
 		  Dim dec As SPIRV.Decoration
 		  Dim typ As SPIRV.SPIRVType
 		  Dim op As SPIRV.Opcode
-		  Dim cnst As SPIRV.SPIRVConstant
+		  Dim cnst As SPIRV.Constant
 		  
 		  Clear()
 		  
@@ -257,7 +257,7 @@ Protected Class VirtualMachine
 		          
 		        case 27 // ***** OpConstantTrue ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantTrue)
-		          cnst = new SPIRV.SPIRVConstant
+		          cnst = new SPIRV.Constant
 		          cnst.Type = SPIRVConstantType.BooleanTrue
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
@@ -265,7 +265,7 @@ Protected Class VirtualMachine
 		          
 		        case 28 // ***** OpConstantFalse ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantFalse)
-		          cnst = new SPIRV.SPIRVConstant
+		          cnst = new SPIRV.Constant
 		          cnst.Type = SPIRVConstantType.BooleanFalse
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
@@ -274,7 +274,7 @@ Protected Class VirtualMachine
 		        case 29 // ***** OpConstant ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstant)
 		          
-		          cnst = new SPIRV.SPIRVConstant
+		          cnst = new SPIRV.Constant
 		          cnst.Type = SPIRVConstantType.Constant
 		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
 		            typ = Types.Value(ModuleBinary.UInt32Value(ip + 4))
@@ -291,7 +291,7 @@ Protected Class VirtualMachine
 		          
 		        case 30 // ***** OpConstantComposite ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantComposite)
-		          cnst = new SPIRV.SPIRVConstant
+		          cnst = new SPIRV.Constant
 		          cnst.Type = SPIRVConstantType.Composite
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
@@ -305,7 +305,7 @@ Protected Class VirtualMachine
 		          
 		        case 31 // ***** OpConstantSampler ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantSampler)
-		          cnst = new SPIRV.SPIRVConstant
+		          cnst = new SPIRV.Constant
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
 		          cnst.Mode = ModuleBinary.UInt32Value(ip + 12)
@@ -315,7 +315,7 @@ Protected Class VirtualMachine
 		          
 		        case 32 // ***** OpConstantNullPointer ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantNullPointer)
-		          cnst = new SPIRV.SPIRVConstant
+		          cnst = new SPIRV.Constant
 		          cnst.Type = SPIRVConstantType.NullPointer
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
@@ -323,7 +323,7 @@ Protected Class VirtualMachine
 		          
 		        case 33 // ***** OpConstantNullObject ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpConstantNullObject)
-		          cnst = new SPIRV.SPIRVConstant
+		          cnst = new SPIRV.Constant
 		          cnst.Type = SPIRVConstantType.NullObject
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
@@ -331,7 +331,7 @@ Protected Class VirtualMachine
 		          
 		        case 34 // ***** OpSpecConstantTrue ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstantTrue)
-		          cnst = new SPIRV.SPIRVConstant
+		          cnst = new SPIRV.Constant
 		          cnst.Type = SPIRVConstantType.SpecBooleanTrue
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
@@ -339,7 +339,7 @@ Protected Class VirtualMachine
 		          
 		        case 35 // ***** OpSpecConstantFalse ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstantFalse)
-		          cnst = new SPIRV.SPIRVConstant
+		          cnst = new SPIRV.Constant
 		          cnst.Type = SPIRVConstantType.SpecBooleanFalse
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)
@@ -347,7 +347,7 @@ Protected Class VirtualMachine
 		          
 		        case 36 // ***** OpSpecConstant ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstant)
-		          cnst = new SPIRV.SPIRVConstant
+		          cnst = new SPIRV.Constant
 		          cnst.Type = SPIRVConstantType.SpecConstant
 		          if Types.HasKey(ModuleBinary.UInt32Value(ip + 4)) then
 		            typ = Types.Value(ModuleBinary.UInt32Value(ip + 4))
@@ -364,7 +364,7 @@ Protected Class VirtualMachine
 		          
 		        case 37 // ***** OpSpecConstantComposite ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeTypeEnum.OpSpecConstantComposite)
-		          cnst = new SPIRV.SPIRVConstant
+		          cnst = new SPIRV.Constant
 		          cnst.Type = SPIRVConstantType.SpecComposite
 		          cnst.ResultID = ModuleBinary.UInt32Value(ip + 8)
 		          cnst.ResultTypeID = ModuleBinary.UInt32Value(ip + 4)

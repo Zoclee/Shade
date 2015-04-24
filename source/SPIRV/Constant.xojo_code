@@ -1,5 +1,5 @@
 #tag Class
-Protected Class SPIRVConstant
+Protected Class Constant
 	#tag Property, Flags = &h0
 		Constituents() As UInt32
 	#tag EndProperty
