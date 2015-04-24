@@ -7,6 +7,7 @@ Window=frmAbout;frmAbout.xojo_window;&h375B97FF;&h0;false
 Window=frmMain;frmMain.xojo_window;&h55621FFF;&h0;false
 BuildSteps=Build Automation;Build Automation.xojo_code;&h465DFFF;&h0;false
 Module=SPIRV;SPIRV.xojo_code;&h41215FFF;&h0;false
+Module=SPIRVUtil;SPIRVUtil.xojo_code;&h7ADDCFFF;&h0;false
 Folder=Images;images;&h4CCAD7FF;&h0;false
 Picture=imgShade;images/imgShade.png;&h48899FFF;&h4CCAD7FF;false;0;&h0
 Class=EntryPoint;SPIRV/EntryPoint.xojo_code;&h3EBB3FFF;&h41215FFF;false
