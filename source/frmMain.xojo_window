@@ -234,13 +234,9 @@ End
 		  
 		  Dim f As FolderItem
 		  Dim dlg As new OpenDialog
-		  Dim m As MemoryBlock
-		  Dim i As Integer
 		  Dim readStream As BinaryStream
 		  Dim allType As New FileType
 		  Dim Type As New FileType
-		  Dim op As SPIRV.Opcode
-		  Dim tmpStr As String
 		  
 		  // configure file types
 		  
@@ -271,8 +267,8 @@ End
 		    readStream = BinaryStream.Open(f)
 		    readStream.LittleEndian = True
 		    
-		    m = new MemoryBlock(f.Length)
-		    m = readStream.Read(f.Length)
+		    SPIRVModule = new MemoryBlock(f.Length)
+		    SPIRVModule = readStream.Read(f.Length)
 		    
 		    readStream.Close
 		    
@@ -280,91 +276,9 @@ End
 		    'm = SPIRVTestModule1()
 		    'm = SPIRVTestModule2()
 		    
-		    App.VM.LoadModule(m)
-		    
-		    // display errors
-		    
-		    if App.VM.Errors.Ubound >= 0 then
-		      i = 0
-		      while i <= App.VM.Errors.Ubound
-		        lstErrors.AddRow App.VM.Errors(i)
-		        i = i + 1
-		      wend
-		    end if
-		    
-		    // display info
-		    
-		    lstInfo.AddRow "Errors"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Errors.Ubound + 1)
-		    
-		    lstInfo.AddRow "SPIR-V Version Number"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Version)
-		    
-		    lstInfo.AddRow "Generator Magic Number"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.GeneratorMagicNumber)
-		    
-		    lstInfo.AddRow "Bound"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Bound)
-		    
-		    lstInfo.AddRow "Source Language"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = SPIRV.SPIRVDescribeSourceLanguage(App.VM.SourceLanguage)
-		    
-		    lstInfo.AddRow "Source Version"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.SourceVersion)
-		    
-		    lstInfo.AddRow "Entry Points"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.EntryPoints.Count)
-		    
-		    lstInfo.AddRow "Addressing Model"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = SPIRV.SPIRVDescribeAddressingModel(App.VM.AddressingModel)
-		    
-		    lstInfo.AddRow "Memory Model"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = SPIRV.SPIRVDescribeMemoryModel(App.VM.MemoryModel)
-		    
-		    lstInfo.AddRow "Opcodes"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Opcodes.Ubound + 1)
-		    
-		    lstInfo.AddRow "Names"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Names.Keys.Ubound + 1)
-		    
-		    lstInfo.AddRow "Decorations"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Decorations.Ubound + 1)
-		    
-		    lstInfo.AddRow "Types"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Types.Keys.Ubound + 1)
-		    
-		    lstInfo.AddRow "Constants"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Constants.Keys.Ubound + 1)
-		    
-		    lstInfo.AddRow "Functions"
-		    lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Functions.Keys.Ubound + 1)
-		    
-		    // display instructions
-		    
-		    lstInstructions.ColumnAlignment(0) = Listbox.AlignRight
-		    lstInstructions.ColumnAlignment(1) = Listbox.AlignRight
-		    
-		    i = 0
-		    while i <= App.VM.Opcodes.Ubound
-		      op = App.VM.Opcodes(i)
-		      lstInstructions.AddRow Str(op.Offset)
-		      if op.ResultID > 0 then
-		        tmpStr = Str(op.ResultID)
-		        if App.VM.Names.HasKey(op.ResultID) then
-		          tmpStr = tmpStr + "("
-		          tmpStr = tmpStr + App.VM.Names.Value(op.ResultID)
-		          tmpStr = tmpStr + ")"
-		        end if
-		        tmpStr = tmpStr + ":"
-		        lstInstructions.Cell(lstInstructions.LastIndex, 1) = tmpStr
-		      end if
-		      lstInstructions.Cell(lstInstructions.LastIndex, 2) = op.ResultType
-		      lstInstructions.Cell(lstInstructions.LastIndex, 3) = op.InstructionText
-		      lstInstructions.RowTag(lstInstructions.LastIndex) = op
-		      i = i + 1
-		    wend
-		    
 		    Self.Title = "{Zoclee}™ Shade v" + Str(App.MajorVersion) + "." + Str(App.MinorVersion)+ "." + Str(App.BugVersion) + " - " + CurrentFile.NativePath
+		    
+		    loadModule()
 		    
 		    mnuStripDebugOpcodes.AutoEnable = True
 		    
@@ -372,9 +286,105 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub loadModule()
+		  Dim i As Integer
+		  Dim op As SPIRV.Opcode
+		  Dim tmpStr As String
+		  
+		  App.VM.LoadModule(SPIRVModule)
+		  
+		  // display errors
+		  
+		  if App.VM.Errors.Ubound >= 0 then
+		    i = 0
+		    while i <= App.VM.Errors.Ubound
+		      lstErrors.AddRow App.VM.Errors(i)
+		      i = i + 1
+		    wend
+		  end if
+		  
+		  // display info
+		  
+		  lstInfo.AddRow "Errors"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Errors.Ubound + 1)
+		  
+		  lstInfo.AddRow "SPIR-V Version Number"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Version)
+		  
+		  lstInfo.AddRow "Generator Magic Number"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.GeneratorMagicNumber)
+		  
+		  lstInfo.AddRow "Bound"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Bound)
+		  
+		  lstInfo.AddRow "Source Language"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = SPIRV.SPIRVDescribeSourceLanguage(App.VM.SourceLanguage)
+		  
+		  lstInfo.AddRow "Source Version"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.SourceVersion)
+		  
+		  lstInfo.AddRow "Entry Points"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.EntryPoints.Count)
+		  
+		  lstInfo.AddRow "Addressing Model"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = SPIRV.SPIRVDescribeAddressingModel(App.VM.AddressingModel)
+		  
+		  lstInfo.AddRow "Memory Model"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = SPIRV.SPIRVDescribeMemoryModel(App.VM.MemoryModel)
+		  
+		  lstInfo.AddRow "Opcodes"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Opcodes.Ubound + 1)
+		  
+		  lstInfo.AddRow "Names"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Names.Keys.Ubound + 1)
+		  
+		  lstInfo.AddRow "Decorations"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Decorations.Ubound + 1)
+		  
+		  lstInfo.AddRow "Types"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Types.Keys.Ubound + 1)
+		  
+		  lstInfo.AddRow "Constants"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Constants.Keys.Ubound + 1)
+		  
+		  lstInfo.AddRow "Functions"
+		  lstInfo.Cell(lstInfo.LastIndex, 1) = Str(App.VM.Functions.Keys.Ubound + 1)
+		  
+		  // display instructions
+		  
+		  lstInstructions.ColumnAlignment(0) = Listbox.AlignRight
+		  lstInstructions.ColumnAlignment(1) = Listbox.AlignRight
+		  
+		  i = 0
+		  while i <= App.VM.Opcodes.Ubound
+		    op = App.VM.Opcodes(i)
+		    lstInstructions.AddRow Str(op.Offset)
+		    if op.ResultID > 0 then
+		      tmpStr = Str(op.ResultID)
+		      if App.VM.Names.HasKey(op.ResultID) then
+		        tmpStr = tmpStr + "("
+		        tmpStr = tmpStr + App.VM.Names.Value(op.ResultID)
+		        tmpStr = tmpStr + ")"
+		      end if
+		      tmpStr = tmpStr + ":"
+		      lstInstructions.Cell(lstInstructions.LastIndex, 1) = tmpStr
+		    end if
+		    lstInstructions.Cell(lstInstructions.LastIndex, 2) = op.ResultType
+		    lstInstructions.Cell(lstInstructions.LastIndex, 3) = op.InstructionText
+		    lstInstructions.RowTag(lstInstructions.LastIndex) = op
+		    i = i + 1
+		  wend
+		End Sub
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h0
 		CurrentFile As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		SPIRVModule As MemoryBlock
 	#tag EndProperty
 
 

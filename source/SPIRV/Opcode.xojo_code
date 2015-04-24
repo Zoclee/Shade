@@ -69,7 +69,6 @@ Protected Class Opcode
 			  ' www.zoclee.com/shade
 			  
 			  Dim result() As String
-			  Dim typ As SPIRV.Type
 			  Dim i As UInt32
 			  Dim ub As UInt32
 			  
