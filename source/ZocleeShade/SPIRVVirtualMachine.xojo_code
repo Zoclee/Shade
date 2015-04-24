@@ -3780,6 +3780,11 @@ Protected Class SPIRVVirtualMachine
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 16), "Coordinate ID out of bounds.", "Coordinate ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 20), "dx ID out of bounds.", "dx ID not found.")
 		      validate_Id(op, ModuleBinary.UInt32Value(op.Offset + 24), "dy ID out of bounds.", "dy ID not found.")
+		      // todo: Result Type’s component type must be the same as Sampled Type of Sampler’s type.
+		      // todo: Result Type must be scalar if the Sampler’s type sets depth-comparison, and must be a vector of four components if the Sampler’s type does not set depth-comparison.
+		      // todo: Sampler must be an object of a type made by OpTypeSampler. Its type must have its Content operand set to 2, indicating both a texture and a filter.
+		      // todo: Coordinate is a floating-point vector of four components
+		      // todo: dx and dy - The number of components of each must equal the number of components in Coordinate, minus the array layer component, if present.
 		      
 		      ' ***** OpTextureSampleProjGradOffset ***********************************************************************************
 		      
