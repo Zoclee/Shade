@@ -73,6 +73,11 @@ Protected Class SPIRVConstant
 			InitialValue="0"
 			Type="Integer"
 		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Type"
+			Group="Behavior"
+			Type="SPIRVConstantType"
+		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
 #tag EndClass

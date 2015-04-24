@@ -1,5 +1,5 @@
 #tag Module
-Protected Module ZocleeShade
+Protected Module SPIRV
 	#tag Method, Flags = &h0
 		Function SPIRVDescribeAccessQualifier(value As UInt32) As String
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
