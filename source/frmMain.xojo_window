@@ -218,7 +218,7 @@ End
 	#tag EndMenuHandler
 
 	#tag MenuHandler
-		Function mnuStripDebugOpcodes() As Boolean Handles mnuStripDebugOpcodes.Action
+		Function mnuVacuumOpcodes() As Boolean Handles mnuVacuumOpcodes.Action
 			break
 			
 			Return True
@@ -276,7 +276,7 @@ End
 		    
 		    refreshModule()
 		    
-		    mnuStripDebugOpcodes.AutoEnable = True
+		    mnuVacuumOpcodes.AutoEnable = True
 		    
 		  end if
 		End Sub

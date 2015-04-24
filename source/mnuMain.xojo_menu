@@ -6,9 +6,9 @@ Begin Menu mnuMain
       Index = -2147483648
       AutoEnable = True
       Visible = True
-      Begin MenuItem mnuStripDebugOpcodes
+      Begin MenuItem mnuVacuumOpcodes
          SpecialMenu = 0
-         Text = "Strip Debug Opcodes"
+         Text = "Vacuum Opcodes"
          Index = -2147483648
          AutoEnable = False
          Visible = True
