@@ -49,6 +49,20 @@ Begin Menu mnuMain
          Visible = True
       End
    End
+   Begin MenuItem mnuEdit
+      SpecialMenu = 0
+      Text = "Edit"
+      Index = -2147483648
+      AutoEnable = True
+      Visible = True
+      Begin MenuItem mnuUndo
+         SpecialMenu = 0
+         Text = "Undo"
+         Index = -2147483648
+         AutoEnable = False
+         Visible = True
+      End
+   End
    Begin MenuItem mnuTools
       SpecialMenu = 0
       Text = "Tools"

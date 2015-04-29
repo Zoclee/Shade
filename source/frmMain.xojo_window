@@ -289,6 +289,18 @@ End
 	#tag EndMenuHandler
 
 	#tag MenuHandler
+		Function mnuUndo() As Boolean Handles mnuUndo.Action
+			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			' www.zoclee.com/shade
+			
+			actionUndo()
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
 		Function mnuVacuumOpcodes() As Boolean Handles mnuVacuumOpcodes.Action
 			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 			' www.zoclee.com/shade
@@ -348,6 +360,7 @@ End
 		    
 		    mnuSave.AutoEnable = True
 		    mnuSaveAs.AutoEnable = True
+		    mnuUndo.AutoEnable = False
 		    mnuVacuumOpcodes.AutoEnable = True
 		    toolMain.Item(2).Enabled = true
 		    
@@ -374,11 +387,39 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub actionUndo()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  if UndoStack.Ubound >= 0 then
+		    SPIRVModule = UndoStack(UndoStack.Ubound)
+		    UndoStack.Remove(UndoStack.Ubound)
+		    refreshModule()
+		  end if
+		  
+		  if UndoStack.Ubound < 0 then
+		    mnuUndo.AutoEnable = False
+		  end if
+		  
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub actionVacuumOpcodes()
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
+		  Dim prevMod As MemoryBlock
+		  
+		  prevMod = SPIRVModule.Copy()
+		  
 		  SPIRVUtil.RemoveDebugInstructions(SPIRVModule)
+		  if (prevMod.Size <> SPIRVModule.Size) then
+		    UndoStack.Append prevMod
+		    mnuUndo.AutoEnable = True
+		  end if
 		  refreshModule()
 		  
 		End Sub
@@ -492,6 +533,10 @@ End
 
 	#tag Property, Flags = &h0
 		SPIRVModule As MemoryBlock
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		UndoStack() As MemoryBlock
 	#tag EndProperty
 
 
