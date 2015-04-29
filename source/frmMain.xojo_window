@@ -230,6 +230,19 @@ End
 	#tag EndMenuHandler
 
 	#tag MenuHandler
+		Function mnuFind() As Boolean Handles mnuFind.Action
+			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			' www.zoclee.com/shade
+			
+			frmFind.Show()
+			frmFind.txtFind.SetFocus()
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
 		Function mnuOpen() As Boolean Handles mnuOpen.Action
 			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 			' www.zoclee.com/shade
@@ -358,11 +371,12 @@ End
 		    
 		    refreshModule()
 		    
+		    mnuFind.AutoEnable = True
 		    mnuSave.AutoEnable = True
 		    mnuSaveAs.AutoEnable = True
 		    mnuUndo.AutoEnable = False
 		    mnuVacuumOpcodes.AutoEnable = True
-		    toolMain.Item(2).Enabled = true
+		    toolMain.Item(2).Enabled = True
 		    
 		  end if
 		End Sub

@@ -62,6 +62,23 @@ Begin Menu mnuMain
          AutoEnable = False
          Visible = True
       End
+      Begin MenuItem mnuEditSep1
+         SpecialMenu = 0
+         Text = "-"
+         Index = -2147483648
+         AutoEnable = True
+         Visible = True
+      End
+      Begin MenuItem mnuFind
+         SpecialMenu = 0
+         Text = "Find..."
+         Index = -2147483648
+         ShortcutKey = "F"
+         Shortcut = "Cmd+F"
+         MenuModifier = True
+         AutoEnable = False
+         Visible = True
+      End
    End
    Begin MenuItem mnuTools
       SpecialMenu = 0
