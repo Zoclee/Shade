@@ -22,7 +22,7 @@ Begin Window frmAbout
    MinimizeButton  =   False
    MinWidth        =   64
    Placement       =   1
-   Resizeable      =   True
+   Resizeable      =   False
    Title           =   "About {Zoclee}™ Shade"
    Visible         =   True
    Width           =   508
@@ -188,6 +188,15 @@ End
 #tag EndWindow
 
 #tag WindowCode
+	#tag Event
+		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Self.Close
+		End Function
+	#tag EndEvent
+
 	#tag Event
 		Sub Open()
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
