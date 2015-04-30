@@ -7,6 +7,7 @@ MenuBar=mnuMain;mnuMain.xojo_menu;&h5CC547FF;&h0;false
 Window=frmAbout;frmAbout.xojo_window;&h375B97FF;&h0;false
 Window=frmFind;frmFind.xojo_window;&h5E273FFF;&h0;false
 Window=frmMain;frmMain.xojo_window;&h55621FFF;&h0;false
+Window=frmReleaseNotes;frmReleaseNotes.xojo_window;&h37641FFF;&h0;false
 Module=MemoryBlockUtil;MemoryBlockUtil.xojo_code;&h48CFC7FF;&h0;false
 BuildSteps=Build Automation;Build Automation.xojo_code;&h465DFFF;&h0;false
 Module=SPIRV;SPIRV.xojo_code;&h41215FFF;&h0;false

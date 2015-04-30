@@ -100,6 +100,20 @@ Begin Menu mnuMain
       Index = -2147483648
       AutoEnable = True
       Visible = True
+      Begin MenuItem mnuReleaseNotes
+         SpecialMenu = 0
+         Text = "Release Notes"
+         Index = -2147483648
+         AutoEnable = True
+         Visible = True
+      End
+      Begin MenuItem mnuHelpSep1
+         SpecialMenu = 0
+         Text = "-"
+         Index = -2147483648
+         AutoEnable = True
+         Visible = True
+      End
       Begin MenuItem mnuAbout
          SpecialMenu = 0
          Text = "About..."

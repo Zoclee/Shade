@@ -2,11 +2,14 @@
 Protected Module MemoryBlockUtil
 	#tag Method, Flags = &h0
 		Function Copy(Extends mb As MemoryBlock) As MemoryBlock
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim result As MemoryBlock
 		  Dim i As Integer
 		  
 		  result = new MemoryBlock(mb.Size)
-		  i = 0 
+		  i = 0
 		  while i < mb.Size
 		    result.Byte(i) = mb.Byte(i)
 		    i = i + 1
