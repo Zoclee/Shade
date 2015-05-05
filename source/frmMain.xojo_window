@@ -255,6 +255,18 @@ End
 	#tag EndMenuHandler
 
 	#tag MenuHandler
+		Function mnuReleaseNotes() As Boolean Handles mnuReleaseNotes.Action
+			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			' www.zoclee.com/shade
+			
+			frmReleaseNotes.ShowModal()
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
 		Function mnuSave() As Boolean Handles mnuSave.Action
 			' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 			' www.zoclee.com/shade

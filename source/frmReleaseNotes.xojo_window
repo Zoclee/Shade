@@ -5,7 +5,7 @@ Begin Window frmReleaseNotes
    CloseButton     =   True
    Compatibility   =   ""
    Composite       =   False
-   Frame           =   0
+   Frame           =   1
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
@@ -23,7 +23,7 @@ Begin Window frmReleaseNotes
    MinWidth        =   64
    Placement       =   0
    Resizeable      =   True
-   Title           =   "Release Notes"
+   Title           =   "{Zoclee}™ Shade Release Notes"
    Visible         =   True
    Width           =   496
    Begin TextArea txtReleaseNotes
@@ -56,13 +56,13 @@ Begin Window frmReleaseNotes
       Multiline       =   True
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
+      ScrollbarHorizontal=   True
       ScrollbarVertical=   True
       Styled          =   True
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   ""
+      Text            =   "------------------------------------------------------------------------------------------------\r\nVersion 0.1.0 (First release) - 5 May 2015\r\n------------------------------------------------------------------------------------------------\r\n[New] Open SPIR-V binary files.\r\n[New] View SPIR-V instructions in a human-readable format.\r\n[New] Validate correctness of opcodes (e.g. missing types, out of bound indexes etc.).\r\n[New] Track error opcodes easily by clicking on error messages.\r\n[New] Remove debug instructions from SPIR-V binaries.\r\n[New] Undo changes made to binary.\r\n[New] Search SPIR-V instruction text."
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
