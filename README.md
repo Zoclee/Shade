@@ -22,9 +22,9 @@ The primary goal of [{Zoclee}™ Shade](http://www.zoclee.com/shade), is to prov
 
 You can obtain the latest [{Zoclee}™ Shade](http://www.zoclee.com/shade) binaries at the following locations:
 
-Windows: https://github.com/Zoclee/Shade/tree/master/setup/windows<br />
-OS X (Intel): https://github.com/Zoclee/Shade/tree/master/setup/osx<br />
-Linux (32-bit): https://github.com/Zoclee/Shade/tree/master/setup/linux_32bit<br />
+Windows: http://www.zoclee.com/shade/setup/windows<br />
+OS X (Intel): http://www.zoclee.com/shade/setup/osx<br />
+Linux (32-bit): http://www.zoclee.com/shade/setup/linux_32bit<br />
 
 ## License
 
