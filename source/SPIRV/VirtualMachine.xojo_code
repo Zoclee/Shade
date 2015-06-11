@@ -502,11 +502,11 @@ Protected Class VirtualMachine
 		        case 73 // ***** OpTextureSampleOffset ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleOffset)
 		          
-		        case 74 // ***** OpTextureSampleProjGrad ***************************************************
-		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleProjGrad)
-		          
-		        case 75 // ***** OpTextureSampleProjLod ***************************************************
+		        case 74 // ***** OpTextureSampleProjLod ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleProjLod)
+		          
+		        case 75 // ***** OpTextureSampleProjGrad ***************************************************
+		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleProjGrad)
 		          
 		        case 76 // ***** OpTextureSampleLodOffset ***************************************************
 		          op = new SPIRV.Opcode(self, OpcodeEnum.OpTextureSampleLodOffset)
