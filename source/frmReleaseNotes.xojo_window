@@ -25,7 +25,7 @@ Begin Window frmReleaseNotes
    Resizeable      =   True
    Title           =   "{Zoclee}™ Shade Release Notes"
    Visible         =   True
-   Width           =   496
+   Width           =   546
    Begin TextArea txtReleaseNotes
       AcceptTabs      =   False
       Alignment       =   0
@@ -62,7 +62,7 @@ Begin Window frmReleaseNotes
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "------------------------------------------------------------------------------------------------\r\nVersion 0.1.1 - Pending\r\n\r\n[Fix] Fixed incorrect opcode used for TextureSampleProjGrad.\r\n\r\n------------------------------------------------------------------------------------------------\r\nVersion 0.1.0 (First release) - 5 May 2015\r\n\r\n[New] Open SPIR-V binary files.\r\n[New] View SPIR-V instructions in a human-readable format.\r\n[New] Validate correctness of opcodes (e.g. missing types, out of bound indexes etc.).\r\n[New] Track error opcodes easily by clicking on error messages.\r\n[New] Remove debug instructions from SPIR-V binaries.\r\n[New] Undo changes made to binary.\r\n[New] Search SPIR-V instruction text."
+      Text            =   "------------------------------------------------------------------------------------------------\r\nVersion 0.1.1 - 11 Jun 2015\r\n------------------------------------------------------------------------------------------------\r\n\r\n[Fix] Fixed incorrect opcode used for TextureSampleProjGrad.\r\n\r\n------------------------------------------------------------------------------------------------\r\nVersion 0.1.0 (First release) - 5 May 2015\r\n------------------------------------------------------------------------------------------------\r\n\r\n[New] Open SPIR-V binary files.\r\n[New] View SPIR-V instructions in a human-readable format.\r\n[New] Validate correctness of opcodes (e.g. missing types, out of bound indexes etc.).\r\n[New] Track error opcodes easily by clicking on error messages.\r\n[New] Remove debug instructions from SPIR-V binaries.\r\n[New] Undo changes made to binary.\r\n[New] Search SPIR-V instruction text."
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
@@ -71,7 +71,7 @@ Begin Window frmReleaseNotes
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
-      Width           =   496
+      Width           =   546
    End
    Begin PushButton cmdDone
       AutoDeactivate  =   True
@@ -86,11 +86,11 @@ Begin Window frmReleaseNotes
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   396
+      Left            =   446
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
+      LockLeft        =   False
+      LockRight       =   True
       LockTop         =   True
       Scope           =   0
       TabIndex        =   1
