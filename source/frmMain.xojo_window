@@ -400,7 +400,22 @@ End
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
-		  break
+		  Dim n As Integer
+		  Dim ep As SPIRV.EntryPoint
+		  
+		  if App.VM.EntryPoints.Count <= 0 then
+		    n = MsgBox("No entry points found in module.", 16, "Play Module")
+		    
+		  elseif App.VM.EntryPoints.Count = 1 then
+		    // start with only available entry point
+		    ep = App.VM.EntryPoints.Value(App.VM.EntryPoints.Key(0))
+		    App.VM.Play(ep.EntryPointID)
+		    
+		  else
+		    // TODO: select entry point 
+		    break
+		    
+		  end if
 		  
 		End Sub
 	#tag EndMethod
