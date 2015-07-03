@@ -388,9 +388,20 @@ End
 		    mnuSaveAs.AutoEnable = True
 		    mnuUndo.AutoEnable = False
 		    mnuVacuumOpcodes.AutoEnable = True
-		    toolMain.Item(2).Enabled = True
+		    toolMain.Item(2).Enabled = True // enable save menu
+		    toolMain.Item(4).Enabled = True // enable play menu
 		    
 		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub actionPlay()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  break
+		  
 		End Sub
 	#tag EndMethod
 
@@ -650,6 +661,9 @@ End
 		    
 		  case "toolOpen"
 		    actionOpen
+		    
+		  case "toolPlay"
+		    actionPlay
 		    
 		  case "toolSave"
 		    actionSave
