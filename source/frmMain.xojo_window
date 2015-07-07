@@ -402,16 +402,17 @@ End
 		  
 		  Dim n As Integer
 		  Dim ep As SPIRV.EntryPoint
+		  Dim parmList As Dictionary
+		  Dim data As Dictionary
 		  
 		  if App.VM.EntryPoints.Count <= 0 then
 		    n = MsgBox("No entry points found in module.", 16, "Run Module")
 		    
 		  elseif App.VM.EntryPoints.Count = 1 then
-		    // start with only available entry point
-		    ep = App.VM.EntryPoints.Value(App.VM.EntryPoints.Key(0))
-		    App.VM.Run(ep.EntryPointID)
 		    
-		    displayErrors()
+		    // start with only available entry point
+		    
+		    ep = App.VM.EntryPoints.Value(App.VM.EntryPoints.Key(0))
 		    
 		  else
 		    // TODO: select entry point
@@ -419,6 +420,21 @@ End
 		    
 		  end if
 		  
+		  // did we find a valid entrypoint?
+		  if ep <> nil then
+		    
+		    // collect parameter data if needed
+		    
+		    parmList = ep.GetFunctionParameters(App.VM)
+		    
+		    // invoke entrypoint
+		    
+		    App.VM.Run(ep.EntryPointID, data)
+		    
+		    // display errors 
+		    
+		    displayErrors()
+		  end if
 		End Sub
 	#tag EndMethod
 

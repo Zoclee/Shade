@@ -25,6 +25,15 @@ Protected Class VirtualMachine
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub executeKernel(ep As SPIRV.EntryPoint)
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub LoadModule(binary As MemoryBlock)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
@@ -1092,6 +1101,7 @@ Protected Class VirtualMachine
 		        
 		        op.Offset = ip
 		        Opcodes.Append op
+		        op.Index = Opcodes.Ubound
 		        
 		        // check for duplicate result id, and store in lookup table if necessary
 		        
@@ -1140,7 +1150,7 @@ Protected Class VirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Run(entryPointID As Integer)
+		Sub Run(entryPointID As Integer, parameters As Dictionary = nil)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -4421,8 +4431,8 @@ Protected Class VirtualMachine
 		Names As Dictionary
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private OpcodeLookup As Dictionary
+	#tag Property, Flags = &h0
+		OpcodeLookup As Dictionary
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

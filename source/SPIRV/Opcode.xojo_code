@@ -62,6 +62,10 @@ Protected Class Opcode
 		HasErrors As Boolean
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		Index As UInt32
+	#tag EndProperty
+
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
@@ -3225,7 +3229,7 @@ Protected Class Opcode
 		#tag ViewProperty
 			Name="Type"
 			Group="Behavior"
-			Type="SPIRVOpcodeTypeEnum"
+			Type="OpcodeEnum"
 			EditorType="Enum"
 			#tag EnumValues
 				"0 - Unknown"
