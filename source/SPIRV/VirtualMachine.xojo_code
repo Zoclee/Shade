@@ -1149,7 +1149,28 @@ Protected Class VirtualMachine
 		  Redim Errors(-1)
 		  
 		  if EntryPoints.HasKey(entryPointID) then
-		    break
+		    
+		    ep = EntryPoints.Value(entryPointID)
+		    
+		    select case ep.ExecutionModel
+		    case 0
+		      Errors.Append "ERROR: Vertex execution model not yet supported."
+		    case 1
+		      Errors.Append "ERROR: TessellationControl execution model not yet supported."
+		    case 2
+		      Errors.Append "ERROR: TessellationEvaluation execution model not yet supported."
+		    case 3
+		      Errors.Append "ERROR: Geometry execution model not yet supported."
+		    case 4
+		      Errors.Append "ERROR: Fragment execution model not yet supported."
+		    case 5
+		      Errors.Append "ERROR: GLCompute execution model not yet supported."
+		    case 6
+		      Errors.Append "ERROR: Kernel execution model not yet supported."
+		    case else
+		      Errors.Append "ERROR: Unknown execution model " + Str(ep.ExecutionModel) + "."
+		    end select
+		    
 		  else
 		    Errors.Append "ERROR: Entry point ID " + Str(entryPointID) + " not found."
 		  end if
