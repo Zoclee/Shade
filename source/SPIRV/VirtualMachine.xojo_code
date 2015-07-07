@@ -30,7 +30,6 @@ Protected Class VirtualMachine
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
-		  
 		End Sub
 	#tag EndMethod
 
@@ -1164,19 +1163,19 @@ Protected Class VirtualMachine
 		    
 		    select case ep.ExecutionModel
 		    case 0
-		      Errors.Append "ERROR: Vertex execution model not yet supported."
+		      Errors.Append "ERROR: Vertex execution model not yet implemented."
 		    case 1
-		      Errors.Append "ERROR: TessellationControl execution model not yet supported."
+		      Errors.Append "ERROR: TessellationControl execution model not yet implemented."
 		    case 2
-		      Errors.Append "ERROR: TessellationEvaluation execution model not yet supported."
+		      Errors.Append "ERROR: TessellationEvaluation execution model not yet implemented."
 		    case 3
-		      Errors.Append "ERROR: Geometry execution model not yet supported."
+		      Errors.Append "ERROR: Geometry execution model not yet implemented."
 		    case 4
-		      Errors.Append "ERROR: Fragment execution model not yet supported."
+		      Errors.Append "ERROR: Fragment execution model not yet implemented."
 		    case 5
-		      Errors.Append "ERROR: GLCompute execution model not yet supported."
+		      Errors.Append "ERROR: GLCompute execution model not yet implemented."
 		    case 6
-		      Errors.Append "ERROR: Kernel execution model not yet supported."
+		      Errors.Append "ERROR: Kernel execution model not yet implemented."
 		    case else
 		      Errors.Append "ERROR: Unknown execution model " + Str(ep.ExecutionModel) + "."
 		    end select
