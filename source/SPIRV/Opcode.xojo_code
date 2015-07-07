@@ -3154,6 +3154,204 @@ Protected Class Opcode
 		ResultType As String
 	#tag EndComputedProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+			  ' www.zoclee.com/shade
+			  
+			  Dim result As UInt32
+			  
+			  result = 0
+			  
+			  select case Type
+			    
+			  case OpcodeEnum.OpAccessChain, OpcodeEnum.OpAll, _
+			    OpcodeEnum.OpAny, _
+			    OpcodeEnum.OpArrayLength, _
+			    OpcodeEnum.OpAsyncGroupCopy, _
+			    OpcodeEnum.OpAtomicAnd, _
+			    OpcodeEnum.OpAtomicCompareExchange, OpcodeEnum.OpAtomicCompareExchangeWeak, _
+			    OpcodeEnum.OpAtomicExchange, _
+			    OpcodeEnum.OpAtomicIAdd, _
+			    OpcodeEnum.OpAtomicIDecrement, OpcodeEnum.OpAtomicIIncrement, _
+			    OpcodeEnum.OpAtomicIMax, _
+			    OpcodeEnum.OpAtomicIMin, _
+			    OpcodeEnum.OpAtomicISub, _
+			    OpcodeEnum.OpAtomicLoad, _
+			    OpcodeEnum.OpAtomicOr, _
+			    OpcodeEnum.OpAtomicUMax, _
+			    OpcodeEnum.OpAtomicUMin, _
+			    OpcodeEnum.OpAtomicXor, _
+			    OpcodeEnum.OpBitcast, _
+			    OpcodeEnum.OpBitwiseAnd, _
+			    OpcodeEnum.OpBitwiseOr, _
+			    OpcodeEnum.OpBitwiseXor, _
+			    OpcodeEnum.OpBuildNDRange, _
+			    OpcodeEnum.OpCompositeConstruct, OpcodeEnum.OpCompositeExtract, _
+			    OpcodeEnum.OpCompositeInsert, _
+			    OpcodeEnum.OpConstant, _
+			    OpcodeEnum.OpConstantComposite, OpcodeEnum.OpConstantFalse, _
+			    OpcodeEnum.OpConstantNullObject, OpcodeEnum.OpConstantNullPointer, _
+			    OpcodeEnum.OpConstantSampler, OpcodeEnum.OpConstantTrue, _
+			    OpcodeEnum.OpConvertFToS, _
+			    OpcodeEnum.OpConvertFToU, _
+			    OpcodeEnum.OpConvertPtrToU, _
+			    OpcodeEnum.OpConvertSToF, _
+			    OpcodeEnum.OpConvertUToF, _
+			    OpcodeEnum.OpConvertUToPtr, _
+			    OpcodeEnum.OpCopyObject, _
+			    OpcodeEnum.OpCreateUserEvent, _
+			    OpcodeEnum.OpDot, _
+			    OpcodeEnum.OpDPdx, OpcodeEnum.OpDPdxCoarse, _
+			    OpcodeEnum.OpDPdxFine, _
+			    OpcodeEnum.OpDPdy, OpcodeEnum.OpDPdyCoarse, _
+			    OpcodeEnum.OpDPdyFine, _
+			    OpcodeEnum.OpEnqueueKernel, _
+			    OpcodeEnum.OpEnqueueMarker, _
+			    OpcodeEnum.OpExtInst, _
+			    OpcodeEnum.OpFAdd, _
+			    OpcodeEnum.OpFConvert, _
+			    OpcodeEnum.OpFDiv, _
+			    OpcodeEnum.OpFMod, _
+			    OpcodeEnum.OpFMul, _
+			    OpcodeEnum.OpFNegate, _
+			    OpcodeEnum.OpFOrdEqual, _
+			    OpcodeEnum.OpFOrdGreaterThan, _
+			    OpcodeEnum.OpFOrdGreaterThanEqual, _
+			    OpcodeEnum.OpFOrdLessThan, _
+			    OpcodeEnum.OpFOrdLessThanEqual, _
+			    OpcodeEnum.OpFOrdNotEqual, _
+			    OpcodeEnum.OpFRem, _
+			    OpcodeEnum.OpFSub, _
+			    OpcodeEnum.OpFunction, OpcodeEnum.OpFunctionCall, _
+			    OpcodeEnum.OpFunctionParameter, _
+			    OpcodeEnum.OpFUnordEqual, _
+			    OpcodeEnum.OpFUnordGreaterThan, _
+			    OpcodeEnum.OpFUnordGreaterThanEqual, _
+			    OpcodeEnum.OpFUnordLessThan, _
+			    OpcodeEnum.OpFUnordLessThanEqual, _
+			    OpcodeEnum.OpFUnordNotEqual, _
+			    OpcodeEnum.OpFwidth, OpcodeEnum.OpFwidthCoarse, _
+			    OpcodeEnum.OpFwidthFine, _
+			    OpcodeEnum.OpGenericCastToPtr, _
+			    OpcodeEnum.OpGenericCastToPtrExplicit, _
+			    OpcodeEnum.OpGenericPtrMemSemantics, _
+			    OpcodeEnum.OpGetDefaultQueue, _
+			    OpcodeEnum.OpGetKernelNDrangeSubGroupCount, _
+			    OpcodeEnum.OpGetKernelNDrangeMaxSubGroupSize, _
+			    OpcodeEnum.OpGetKernelPreferredWorkGroupSizeMultiple, _
+			    OpcodeEnum.OpGetKernelWorkGroupSize, _
+			    OpcodeEnum.OpGetMaxPipePackets, _
+			    OpcodeEnum.OpGetNumPipePackets, _
+			    OpcodeEnum.OpGroupAll, _
+			    OpcodeEnum.OpGroupAny, _
+			    OpcodeEnum.OpGroupBroadcast, _
+			    OpcodeEnum.OpGroupFAdd, _
+			    OpcodeEnum.OpGroupFMax, _
+			    OpcodeEnum.OpGroupFMin, _
+			    OpcodeEnum.OpGroupIAdd, _
+			    OpcodeEnum.OpGroupReserveReadPipePackets, _
+			    OpcodeEnum.OpGroupReserveWritePipePackets, _
+			    OpcodeEnum.OpGroupSMax, _
+			    OpcodeEnum.OpGroupSMin, _
+			    OpcodeEnum.OpGroupUMax, _
+			    OpcodeEnum.OpGroupUMin, _
+			    OpcodeEnum.OpIAdd, _
+			    OpcodeEnum.OpIEqual, _
+			    OpcodeEnum.OpImagePointer, _
+			    OpcodeEnum.OpIMul, _
+			    OpcodeEnum.OpInBoundsAccessChain, _
+			    OpcodeEnum.OpINotEqual, _
+			    OpcodeEnum.OpIsFinite, _
+			    OpcodeEnum.OpIsInf, _
+			    OpcodeEnum.OpIsNan, _
+			    OpcodeEnum.OpIsNormal, _
+			    OpcodeEnum.OpISub, _
+			    OpcodeEnum.OpIsValidEvent, _
+			    OpcodeEnum.OpIsValidReserveId, _
+			    OpcodeEnum.OpLessOrGreater, _
+			    OpcodeEnum.OpLoad, _
+			    OpcodeEnum.OpLogicalAnd, _
+			    OpcodeEnum.OpLogicalOr, _
+			    OpcodeEnum.OpLogicalXor, _
+			    OpcodeEnum.OpMatrixTimesMatrix, _
+			    OpcodeEnum.OpMatrixTimesScalar, _
+			    OpcodeEnum.OpMatrixTimesVector, _
+			    OpcodeEnum.OpNot, _
+			    OpcodeEnum.OpOrdered, _
+			    OpcodeEnum.OpOuterProduct, _
+			    OpcodeEnum.OpPhi, _
+			    OpcodeEnum.OpPtrCastToGeneric, _
+			    OpcodeEnum.OpReadPipe, _
+			    OpcodeEnum.OpReservedReadPipe, _
+			    OpcodeEnum.OpReservedWritePipe, _
+			    OpcodeEnum.OpReserveReadPipePackets, _
+			    OpcodeEnum.OpReserveWritePipePackets, _
+			    OpcodeEnum.OpSampler, _
+			    OpcodeEnum.OpSatConvertSToU, _
+			    OpcodeEnum.OpSatConvertUToS, _
+			    OpcodeEnum.OpSConvert, _
+			    OpcodeEnum.OpSDiv, _
+			    OpcodeEnum.OpSelect, _
+			    OpcodeEnum.OpShiftLeftLogical, _
+			    OpcodeEnum.OpShiftRightArithmetic, _
+			    OpcodeEnum.OpShiftRightLogical, _
+			    OpcodeEnum.OpSignBitSet, _
+			    OpcodeEnum.OpSGreaterThan, _
+			    OpcodeEnum.OpSGreaterThanEqual, _
+			    OpcodeEnum.OpSLessThan, _
+			    OpcodeEnum.OpSLessThanEqual, _
+			    OpcodeEnum.OpSMod, _
+			    OpcodeEnum.OpSNegate, _
+			    OpcodeEnum.OpSpecConstant, _
+			    OpcodeEnum.OpSpecConstantComposite, OpcodeEnum.OpSpecConstantFalse, _
+			    OpcodeEnum.OpSpecConstantTrue, _
+			    OpcodeEnum.OpSRem, _
+			    OpcodeEnum.OpTextureFetchSample, _
+			    OpcodeEnum.OpTextureFetchTexel, _
+			    OpcodeEnum.OpTextureFetchTexelLod, OpcodeEnum.OpTextureFetchTexelOffset, _
+			    OpcodeEnum.OpTextureGather, OpcodeEnum.OpTextureGatherOffset, _
+			    OpcodeEnum.OpTextureGatherOffsets, OpcodeEnum.OpTextureQueryLevels, _
+			    OpcodeEnum.OpTextureQueryLod, OpcodeEnum.OpTextureQuerySamples, _
+			    OpcodeEnum.OpTextureQuerySize, OpcodeEnum.OpTextureQuerySizeLod, _
+			    OpcodeEnum.OpTextureSample, OpcodeEnum.OpTextureSampleDref, _
+			    OpcodeEnum.OpTextureSampleGrad, OpcodeEnum.OpTextureSampleGradOffset, _
+			    OpcodeEnum.OpTextureSampleLod, OpcodeEnum.OpTextureSampleLodOffset, _
+			    OpcodeEnum.OpTextureSampleOffset, _
+			    OpcodeEnum.OpTextureSampleProj, OpcodeEnum.OpTextureSampleProjGrad, _
+			    OpcodeEnum.OpTextureSampleProjGradOffset, _
+			    OpcodeEnum.OpTextureSampleProjLod, OpcodeEnum.OpTextureSampleProjLodOffset, _
+			    OpcodeEnum.OpTextureSampleProjOffset, _
+			    OpcodeEnum.OpTranspose, _
+			    OpcodeEnum.OpUConvert, _
+			    OpcodeEnum.OpUDiv, _
+			    OpcodeEnum.OpUGreaterThan, _
+			    OpcodeEnum.OpUGreaterThanEqual, _
+			    OpcodeEnum.OpULessThan, _
+			    OpcodeEnum.OpULessThanEqual, _
+			    OpcodeEnum.OpUMod, _
+			    OpcodeEnum.OpUndef, _
+			    OpcodeEnum.OpUnordered, _
+			    OpcodeEnum.OpVariable, _
+			    OpcodeEnum.OpVariableArray, OpcodeEnum.OpVectorExtractDynamic, _
+			    OpcodeEnum.OpVectorInsertDynamic, OpcodeEnum.OpVectorShuffle, _
+			    OpcodeEnum.OpVectorTimesMatrix, _
+			    OpcodeEnum.OpVectorTimesScalar, _
+			    OpcodeEnum.OpWaitGroupEvents, _
+			    OpcodeEnum.OpWritePipe
+			    
+			    result = VM.ModuleBinary.UInt32Value(Offset + 4)
+			    
+			  end select
+			  
+			  return result
+			  
+			End Get
+		#tag EndGetter
+		ResultTypeID As UInt32
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h0
 		Type As OpcodeEnum
 	#tag EndProperty
@@ -3185,7 +3383,6 @@ Protected Class Opcode
 			Name="Index"
 			Visible=true
 			Group="ID"
-			InitialValue="-2147483648"
 			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
