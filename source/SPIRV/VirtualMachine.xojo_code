@@ -1140,7 +1140,7 @@ Protected Class VirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Play(entryPointID As Integer)
+		Sub Run(entryPointID As Integer)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  

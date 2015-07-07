@@ -23,8 +23,8 @@ Begin Toolbar MainToolbar
 		HelpTag = ""
 		Style = 1
 	End
-	Begin ToolButton toolPlay
-		Caption = "Play"
+	Begin ToolButton toolRun
+		Caption = "Run"
 		HelpTag = ""
 		Style = 0
 		Enabled = False

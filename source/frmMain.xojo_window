@@ -389,14 +389,14 @@ End
 		    mnuUndo.AutoEnable = False
 		    mnuVacuumOpcodes.AutoEnable = True
 		    toolMain.Item(2).Enabled = True // enable save menu
-		    toolMain.Item(4).Enabled = True // enable play menu
+		    toolMain.Item(4).Enabled = True // enable run menu
 		    
 		  end if
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub actionPlay()
+		Sub actionRun()
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
@@ -404,15 +404,15 @@ End
 		  Dim ep As SPIRV.EntryPoint
 		  
 		  if App.VM.EntryPoints.Count <= 0 then
-		    n = MsgBox("No entry points found in module.", 16, "Play Module")
+		    n = MsgBox("No entry points found in module.", 16, "Run Module")
 		    
 		  elseif App.VM.EntryPoints.Count = 1 then
 		    // start with only available entry point
 		    ep = App.VM.EntryPoints.Value(App.VM.EntryPoints.Key(0))
-		    App.VM.Play(ep.EntryPointID)
+		    App.VM.Run(ep.EntryPointID)
 		    
 		  else
-		    // TODO: select entry point 
+		    // TODO: select entry point
 		    break
 		    
 		  end if
@@ -677,8 +677,8 @@ End
 		  case "toolOpen"
 		    actionOpen
 		    
-		  case "toolPlay"
-		    actionPlay
+		  case "toolRun"
+		    actionRun
 		    
 		  case "toolSave"
 		    actionSave
