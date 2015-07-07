@@ -411,6 +411,8 @@ End
 		    ep = App.VM.EntryPoints.Value(App.VM.EntryPoints.Key(0))
 		    App.VM.Run(ep.EntryPointID)
 		    
+		    displayErrors()
+		    
 		  else
 		    // TODO: select entry point
 		    break
@@ -478,6 +480,24 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub displayErrors()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim i As Integer
+		  
+		  lstErrors.DeleteAllRows()
+		  
+		  i = 0
+		  while i <= App.VM.Errors.Ubound
+		    lstErrors.AddRow App.VM.Errors(i)
+		    i = i + 1
+		  wend
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub refreshModule()
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -494,13 +514,7 @@ End
 		  
 		  // display errors
 		  
-		  if App.VM.Errors.Ubound >= 0 then
-		    i = 0
-		    while i <= App.VM.Errors.Ubound
-		      lstErrors.AddRow App.VM.Errors(i)
-		      i = i + 1
-		    wend
-		  end if
+		  displayErrors()
 		  
 		  // display info
 		  

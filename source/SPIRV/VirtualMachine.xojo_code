@@ -1144,7 +1144,16 @@ Protected Class VirtualMachine
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
-		  break
+		  Dim ep As SPIRV.EntryPoint
+		  
+		  Redim Errors(-1)
+		  
+		  if EntryPoints.HasKey(entryPointID) then
+		    break
+		  else
+		    Errors.Append "ERROR: Entry point ID " + Str(entryPointID) + " not found."
+		  end if
+		  
 		End Sub
 	#tag EndMethod
 
