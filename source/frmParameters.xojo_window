@@ -144,6 +144,9 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Open()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  App.WindowResult = "cancel"
 		End Sub
 	#tag EndEvent
@@ -151,6 +154,9 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub displayParameters()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  Dim i As Integer
 		  Dim parmName As String
 		  Dim typeID As Integer
@@ -215,6 +221,9 @@ End
 #tag Events cmdCancel
 	#tag Event
 		Sub Action()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  App.WindowResult = "cancel"
 		  
 		  Self.Close
@@ -224,6 +233,9 @@ End
 #tag Events cmdRun
 	#tag Event
 		Sub Action()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
 		  App.WindowResult = ""
 		  
 		  Self.Close()
