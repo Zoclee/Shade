@@ -428,10 +428,12 @@ End
 		    // collect parameter data if needed
 		    
 		    parmList = ep.GetFunctionParameters(App.VM)
-		    if parmList.Count > 0 then
-		      frmParameters.VM = App.VM
-		      frmParameters.ParameterList = parmList
-		      frmParameters.ShowModal()
+		    if parmList <> nil then
+		      if parmList.Count > 0 then
+		        frmParameters.VM = App.VM
+		        frmParameters.ParameterList = parmList
+		        frmParameters.ShowModal()
+		      end if
 		    end if
 		    
 		    if App.WindowResult <> "cancel" then
