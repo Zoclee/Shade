@@ -403,7 +403,7 @@ End
 		  Dim n As Integer
 		  Dim ep As SPIRV.EntryPoint
 		  Dim parmList As Dictionary
-		  Dim data As Dictionary
+		  Dim data As MemoryBlock
 		  
 		  if App.VM.EntryPoints.Count <= 0 then
 		    n = MsgBox("No entry points found in module.", 16, "Run Module")
@@ -431,7 +431,7 @@ End
 		    
 		    App.VM.Run(ep.EntryPointID, data)
 		    
-		    // display errors 
+		    // display errors
 		    
 		    displayErrors()
 		  end if

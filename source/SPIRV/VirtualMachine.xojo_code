@@ -1149,7 +1149,7 @@ Protected Class VirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Run(entryPointID As Integer, parameters As Dictionary = nil)
+		Sub Run(entryPointID As Integer, data As MemoryBlock)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
