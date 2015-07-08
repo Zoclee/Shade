@@ -423,18 +423,31 @@ End
 		  // did we find a valid entrypoint?
 		  if ep <> nil then
 		    
+		    App.WindowResult = ""
+		    
 		    // collect parameter data if needed
 		    
 		    parmList = ep.GetFunctionParameters(App.VM)
+		    if parmList.Count > 0 then
+		      frmParameters.VM = App.VM
+		      frmParameters.ParameterList = parmList
+		      frmParameters.ShowModal()
+		    end if
 		    
-		    // invoke entrypoint
+		    if App.WindowResult <> "cancel" then
+		      
+		      // invoke entrypoint
+		      
+		      App.VM.Run(ep.EntryPointID, data)
+		      
+		      // display errors
+		      
+		      displayErrors()
+		      
+		    end if
 		    
-		    App.VM.Run(ep.EntryPointID, data)
-		    
-		    // display errors
-		    
-		    displayErrors()
 		  end if
+		  
 		End Sub
 	#tag EndMethod
 

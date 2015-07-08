@@ -13,6 +13,10 @@ Inherits Application
 		VM As SPIRV.VirtualMachine
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		WindowResult As String
+	#tag EndProperty
+
 
 	#tag Constant, Name = kEditClear, Type = String, Dynamic = False, Default = \"&Delete", Scope = Public
 		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"&Delete"
