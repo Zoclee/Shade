@@ -173,10 +173,14 @@ End
 		      typeID = mParameterList.Value(parmName)
 		      lstParameters.AddRow(parmName)
 		      lstParameters.Cell(lstParameters.LastIndex, 1) = typeDesc
+		      lstParameters.CellType(lstParameters.LastIndex, 2) = Listbox.TypeEditableTextField
 		      i = i + 1
 		    wend
 		  end if
 		  
+		  if lstParameters.ListCount >= 1 then
+		    lstParameters.ListIndex = 0
+		  end if
 		End Sub
 	#tag EndMethod
 
