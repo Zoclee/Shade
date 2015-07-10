@@ -1,6 +1,20 @@
 #tag Class
 Protected Class VirtualMachine
 	#tag Method, Flags = &h0
+		Function AllocateMemory(type As SPIRV.Type) As UInt32
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  select case type.Type
+		    
+		  case else
+		    Errors.Append "ERROR: Memory allocation not yet implemented for " + type.InstructionText + "."
+		    
+		  end select
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub Clear()
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -13,12 +27,14 @@ Protected Class VirtualMachine
 		  Redim Errors(-1)
 		  Functions = new Dictionary()
 		  GeneratorMagicNumber = 0
+		  Memory = new MemoryBlock(1024 * 4)
 		  MemoryModel = 0 // Simple
 		  Names = new Dictionary()
 		  OpcodeLookup = new Dictionary()
 		  Redim Opcodes(-1)
 		  SourceLanguage = 0 // Unknown
 		  SourceVersion = 0
+		  Redim Stack(-1)
 		  Types = new Dictionary()
 		  Version = 99
 		  
@@ -1149,13 +1165,11 @@ Protected Class VirtualMachine
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Run(entryPointID As Integer, data As MemoryBlock)
+		Sub Run(entryPointID As Integer)
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
 		  Dim ep As SPIRV.EntryPoint
-		  
-		  Redim Errors(-1)
 		  
 		  if EntryPoints.HasKey(entryPointID) then
 		    
@@ -4419,6 +4433,10 @@ Protected Class VirtualMachine
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		Memory As MemoryBlock
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		MemoryModel As UInt32
 	#tag EndProperty
 
@@ -4444,6 +4462,10 @@ Protected Class VirtualMachine
 
 	#tag Property, Flags = &h0
 		SourceVersion As UInt32
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Stack() As MemoryBlock
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

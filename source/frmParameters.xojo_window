@@ -153,6 +153,36 @@ End
 
 
 	#tag Method, Flags = &h21
+		Private Sub configureMemory()
+		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
+		  ' www.zoclee.com/shade
+		  
+		  Dim i As Integer
+		  Dim typeID As Integer
+		  Dim type As SPIRV.Type
+		  Dim valuePtr As UInt32
+		  Dim parmName As String
+		  
+		  if mParameterList <> nil then
+		    i = 0
+		    while i <= mParameterList.Keys.Ubound
+		      parmName = mParameterList.Key(i)
+		      typeID = mParameterList.Value(parmName)
+		      if VM.Types.HasKey(typeID) then
+		        type = VM.Types.Value(typeID)
+		        valuePtr = VM.AllocateMemory(type)
+		      else
+		        break
+		      end if
+		      
+		      i = i + 1
+		    wend
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub displayParameters()
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
@@ -166,7 +196,7 @@ End
 		  lstParameters.DeleteAllRows()
 		  
 		  if mParameterList <> nil then
-		    i = 0 
+		    i = 0
 		    while i <= mParameterList.Keys.Ubound
 		      parmName = mParameterList.Key(i)
 		      typeID = mParameterList.Value(parmName)
@@ -204,6 +234,7 @@ End
 		#tag Setter
 			Set
 			  mParameterList = value
+			  configureMemory
 			  displayParameters
 			  
 			End Set
