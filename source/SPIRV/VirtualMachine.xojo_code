@@ -5,13 +5,20 @@ Protected Class VirtualMachine
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
+		  Dim resultPtr As UInt32
+		  
 		  select case type.Type
 		    
+		  case SPIRV.TypeEnum.Integer
+		    resultPtr = mMemoryUsed
+		    mMemoryUsed = mMemoryUsed + Ceil(type.Width / 8)
+		    
 		  case else
-		    Errors.Append "ERROR: Memory allocation for " + Str(type.Type) + "(" + type.InstructionText + ") not yet implemented."
+		    Errors.Append "ERROR: Memory allocation for " + type.InstructionText + " not yet implemented."
 		    
 		  end select
 		  
+		  return resultPtr
 		End Function
 	#tag EndMethod
 
@@ -30,6 +37,7 @@ Protected Class VirtualMachine
 		  GeneratorMagicNumber = 0
 		  Memory = new MemoryBlock(1024 * 4)
 		  MemoryModel = 0 // Simple
+		  mMemoryUsed = 0
 		  Names = new Dictionary()
 		  OpcodeLookup = new Dictionary()
 		  Redim Opcodes(-1)
@@ -4439,6 +4447,19 @@ Protected Class VirtualMachine
 
 	#tag Property, Flags = &h0
 		MemoryModel As UInt32
+	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mMemoryUsed
+			End Get
+		#tag EndGetter
+		MemoryUsed As Integer
+	#tag EndComputedProperty
+
+	#tag Property, Flags = &h21
+		Private mMemoryUsed As UInt32
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
