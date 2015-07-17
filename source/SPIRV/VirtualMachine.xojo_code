@@ -8,7 +8,7 @@ Protected Class VirtualMachine
 		  select case type.Type
 		    
 		  case else
-		    Errors.Append "ERROR: Memory allocation not yet implemented for " + Str(type.Type) + "(" + type.InstructionText + ")."
+		    Errors.Append "ERROR: Memory allocation for " + Str(type.Type) + "(" + type.InstructionText + ") not yet implemented."
 		    
 		  end select
 		  
