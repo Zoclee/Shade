@@ -162,7 +162,7 @@ End
 		  Dim typeID As Integer
 		  Dim type As SPIRV.Type
 		  Dim typeDesc As String
-		  Dim valuePtr As UInt32
+		  Dim valuePtr As SPIRV.MemoryPointer
 		  
 		  lstParameters.DeleteAllRows()
 		  
@@ -244,6 +244,21 @@ End
 		Sub Action()
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
+		  
+		  Dim i As Integer
+		  Dim valuePtr As SPIRV.MemoryPointer
+		  
+		  ' initialize memory with given parameter values
+		  
+		  i = 0
+		  while i < lstParameters.ListCount
+		    
+		    valuePtr = lstParameters.RowTag(i)
+		    
+		    break ' todo: store given value in memory
+		    
+		    i = i + 1
+		  wend
 		  
 		  App.WindowResult = ""
 		  

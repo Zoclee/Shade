@@ -1,16 +1,18 @@
 #tag Class
 Protected Class VirtualMachine
 	#tag Method, Flags = &h0
-		Function AllocateMemory(type As SPIRV.Type) As UInt32
+		Function AllocateMemory(type As SPIRV.Type) As SPIRV.MemoryPointer
 		  ' {Zoclee}™ Shade is an open source initiative by {Zoclee}™.
 		  ' www.zoclee.com/shade
 		  
-		  Dim resultPtr As UInt32
+		  Dim resultPtr As SPIRV.MemoryPointer
 		  
 		  select case type.Type
 		    
 		  case SPIRV.TypeEnum.Integer
-		    resultPtr = mMemoryUsed
+		    resultPtr = new SPIRV.MemoryPointer()
+		    resultPtr.Type = type
+		    resultPtr.Pointer = mMemoryUsed
 		    mMemoryUsed = mMemoryUsed + Ceil(type.Width / 8)
 		    
 		  case else
